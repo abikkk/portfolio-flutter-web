@@ -1,5 +1,7 @@
-class PageRoutes {
-  static const String HomeScreen = '/HomeContainer';
-  static const String ConfigurationScreen = '/ConfigurationScreen';
-  static const String DashboardScreen = '/DashboardScreen';
+class PAGEROUTES {
+  static const String HOMESCREEN = '/HomeContainer';
+  static const String CONFIGURATIONSCREEN = '/ConfigurationScreen';
+  static const String DASHBOARD = '/DashboardScreen';
+  static const String SOCIALSCREEN = '/SocialsScreen';
+  static const String SETTINGS = '/SocialsScreen';
 }
