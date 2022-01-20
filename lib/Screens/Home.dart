@@ -19,7 +19,7 @@ class _HomeContainerState extends State<HomeContainer> {
         onNotification: (v) {
           if (v is ScrollUpdateNotification) {
             setState(() {
-              bgTop = bgTop - v.scrollDelta! / 7;
+              // bgTop = bgTop - v.scrollDelta! / 7;
             });
           }
           return true;
@@ -102,7 +102,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                   'Hi there!',
                                                                   style: TextStyle(
                                                                       fontFamily:
-                                                                          'RedactedScript',
+                                                                          'Quicksand',
                                                                       fontSize:
                                                                           20),
                                                                 ),
@@ -112,12 +112,16 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                       TextAlign
                                                                           .end,
                                                                   style: TextStyle(
+                                                                      fontFamily:
+                                                                          'Quicksand',
                                                                       fontSize:
                                                                           80),
                                                                 ),
                                                                 Text(
                                                                   'Flutter Developer',
                                                                   style: TextStyle(
+                                                                      fontFamily:
+                                                                          'Quicksand',
                                                                       fontSize:
                                                                           20),
                                                                 ),
@@ -145,6 +149,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                                         child: Text(
                                                           'About',
                                                           style: TextStyle(
+                                                              fontFamily:
+                                                                  'Quicksand',
                                                               fontSize: 80),
                                                         ),
                                                       ),
@@ -163,6 +169,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                                               .ellipsis,
                                                           maxLines: 3,
                                                           style: TextStyle(
+                                                              fontFamily:
+                                                                  'Quicksand',
                                                               fontSize: 20,
                                                               // color: Colors.grey[700],
                                                               fontWeight:
