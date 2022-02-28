@@ -104,7 +104,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                       fontFamily:
                                                                           'Quicksand',
                                                                       fontSize:
-                                                                          20),
+                                                                          48),
                                                                 ),
                                                                 Text(
                                                                   'Abik Vaidhya',
