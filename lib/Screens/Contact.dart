@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class ContactContainer extends StatefulWidget {
-  const ContactContainer({ Key? key }) : super(key: key);
+  const ContactContainer({Key? key}) : super(key: key);
 
   @override
   _ContactContainerState createState() => _ContactContainerState();
@@ -10,9 +10,11 @@ class ContactContainer extends StatefulWidget {
 class _ContactContainerState extends State<ContactContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Text('Contact Me'),
+      ],
     );
   }
 }
