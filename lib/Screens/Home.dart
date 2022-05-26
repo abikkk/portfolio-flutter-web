@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_porfolio/Screens/About.dart';
+import 'package:my_porfolio/Screens/Gallery.dart';
 import 'package:my_porfolio/Screens/Coding.dart';
 import 'package:my_porfolio/Screens/Contact.dart';
 import 'package:my_porfolio/Screens/Gaming.dart';
@@ -17,13 +17,13 @@ class HomeContainer extends StatefulWidget {
 
 class _HomeContainerState extends State<HomeContainer> {
   double bgTop = 0, headerTop = 0;
-  int _navIndex = 3;
+  int _navIndex = 0;
   List<Widget> _pages = [
+    HomeScreen(),
+    CodingScreen(),
     GamingScreen(),
     MusicScreen(),
-    CodingScreen(),
-    HomeScreen(),
-    AboutScreen(),
+    // GalleryScreen(),
     SocialsContainer(),
     ContactContainer()
   ];
@@ -63,6 +63,14 @@ class _HomeContainerState extends State<HomeContainer> {
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             destinations: [
               NavigationDestination(
+                  selectedIcon: Icon(Icons.home_rounded),
+                  icon: Icon(Icons.home_outlined),
+                  label: 'home'),
+              NavigationDestination(
+                  selectedIcon: Icon(Icons.list_rounded),
+                  icon: Icon(Icons.list_outlined),
+                  label: 'coding'),
+              NavigationDestination(
                   selectedIcon: Icon(Icons.games_rounded),
                   icon: Icon(Icons.games_outlined),
                   label: 'gaming'),
@@ -70,18 +78,10 @@ class _HomeContainerState extends State<HomeContainer> {
                   selectedIcon: Icon(Icons.music_note_rounded),
                   icon: Icon(Icons.music_note_outlined),
                   label: 'music'),
-              NavigationDestination(
-                  selectedIcon: Icon(Icons.list_rounded),
-                  icon: Icon(Icons.list_outlined),
-                  label: 'coding'),
-              NavigationDestination(
-                  selectedIcon: Icon(Icons.home_rounded),
-                  icon: Icon(Icons.home_outlined),
-                  label: 'home'),
-              NavigationDestination(
-                  selectedIcon: Icon(Icons.description_rounded),
-                  icon: Icon(Icons.description_outlined),
-                  label: 'about'),
+              // NavigationDestination(
+              //     selectedIcon: Icon(Icons.description_rounded),
+              //     icon: Icon(Icons.description_outlined),
+              //     label: 'gallery'),
               NavigationDestination(
                   selectedIcon: Icon(Icons.person_rounded),
                   icon: Icon(Icons.person_outline),

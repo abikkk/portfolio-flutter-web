@@ -41,9 +41,6 @@ class _BaseContainerState extends State<BaseContainer> {
       defaultTransition: Transition.fadeIn,
       getPages: [
         GetPage(name: PAGEROUTES.HOMECONTAINER, page: () => HomeContainer()),
-        GetPage(name: PAGEROUTES.HOMESCREEN, page: () => HomeContainer()),
-        GetPage(name: PAGEROUTES.SOCIALSCREEN, page: () => SocialsContainer()),
-        GetPage(name: PAGEROUTES.SETTINGS, page: () => SettingsScreen()),
         GetPage(
             name: PAGEROUTES.NOTFOUND,
             page: () => UnknownPage()), // 404 not found
