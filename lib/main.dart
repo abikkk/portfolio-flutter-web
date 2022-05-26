@@ -49,6 +49,33 @@ class _BaseContainerState extends State<BaseContainer> {
             page: () => UnknownPage()), // 404 not found
         // GetPage(name: "/loading", page: () => loading()),
       ],
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        // brightness: Brightness.dark,
+        primaryColor: Colors.grey[100],
+
+        // Define the default font family.
+        fontFamily: 'Quicksand',
+
+        // Define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 80.0,
+            fontWeight: FontWeight.bold,
+          ),
+          headline6: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 48.0,
+            fontStyle: FontStyle.italic,
+          ),
+          bodyText2: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 17.0,
+          ),
+        ),
+      ),
       home: HomeContainer(),
     );
   }

@@ -33,10 +33,6 @@ class _HomeContainerState extends State<HomeContainer> {
     super.initState();
   }
 
-  changeTab() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -55,7 +51,7 @@ class _HomeContainerState extends State<HomeContainer> {
       return SafeArea(
         child: Scaffold(
           bottomNavigationBar: NavigationBar(
-            height: MediaQuery.of(context).size.height * 0.07,
+            height: MediaQuery.of(context).size.height * 0.1,
             backgroundColor: Colors.white.withOpacity(0.05),
             animationDuration: Duration(milliseconds: 150),
             selectedIndex: _navIndex,

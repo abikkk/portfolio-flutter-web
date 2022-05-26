@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:my_porfolio/Utils/UiUtils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SocialsContainer extends StatefulWidget {
@@ -12,373 +13,328 @@ class SocialsContainer extends StatefulWidget {
 class _SocialsContainerState extends State<SocialsContainer> {
   bool fbClicked = false,
       igClicked = false,
-      twitchClicked = false,
-      ytClicked = false,
       twitterClicked = false,
       linkdClicked = false;
+  double fbScale = 0,
+      igScale = 0,
+      twitterScale = 0,
+      linkdScale = 0,
+      fbPad = 50,
+      igPad = 50,
+      twitterPad = 50,
+      linkdPad = 50;
+  Color fbBorder = Colors.transparent,
+      ig = Colors.transparent,
+      linkdBorder = Colors.transparent,
+      twitterBorder = Colors.transparent;
 
-  openLink(type) async {
-    switch (type) {
-      case 'fb':
-        {
-          if (!await launchUrl(
-              Uri.parse("https://www.facebook.com/abik.vaidhya")))
-            throw 'Could not launch Facebook Link!';
-          break;
-        }
-      case 'ig':
-        {
-          if (!await launchUrl(
-              Uri.parse('https://www.instagram.com/_abik.vaidhya_/')))
-            throw 'Could not launch Instagram Link!';
-        }
-        break;
-      case 'twitch':
-        {
-          if (!await launchUrl(Uri.parse('https://www.twitch.tv/oogiebuugie')))
-            throw 'Could not launch Twitch Link!';
-        }
-        break;
-      case 'yt':
-        {
-          if (!await launchUrl(Uri.parse(
-              'https://www.youtube.com/channel/UCaPj2jBIWUN7nZQWfyRr1pg')))
-            throw 'Could not launch YouTube Link!';
-        }
-        break;
-      case 'twitter':
-        {
-          if (!await launchUrl(
-              Uri.parse('https://www.facebook.com/abik.vaidhya')))
-            throw 'Could not launch Twitter Link!';
-        }
-        break;
-      case 'linkd':
-        {
-          if (!await launchUrl(
-              Uri.parse('https://www.linkedin.com/in/abik-vaidhya-b9550520b')))
-            throw 'Could not launch LinkedIn Link!';
-        }
-        break;
-      case 'email':
-        {
-          if (!await launchUrl(
-              Uri.parse('https://www.facebook.com/abik.vaidhya')))
-            throw 'Could not launch facebook Link!';
-        }
-    }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 2,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      fbClicked = !fbClicked;
-                      openLink('fb');
-                    });
+    return Container(
+      height: (MediaQuery.of(context).size.height / 1.11) - 10,
+      child: Column(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(
+                'connect with me',
+                style: TextStyle(fontSize: 48),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: MouseRegion(
+                    onEnter: (a) {
+                      setState(() {
+                        fbScale = MediaQuery.of(context).size.height * .14;
+                      });
+                    },
+                    onExit: (a) {
+                      setState(() {
+                        fbScale = MediaQuery.of(context).size.height * .12;
+                      });
+                    },
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          fbClicked = !fbClicked;
+                          openLink('fb');
+                        });
 
-                    // delay
-                    Future.delayed(const Duration(milliseconds: 150), () {
-                      setState(() {
-                        fbClicked = !fbClicked;
-                      });
-                      openLink('fb');
-                    });
-                  },
-                  child: Wrap(
-                    children: [
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 100),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: !fbClicked
-                                ? [
-                                    BoxShadow(
-                                        color: Colors.grey[500]!,
-                                        offset: Offset(4, 4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-4, -4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1)
-                                  ]
-                                : null),
-                        child: Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Image.asset(
-                            'assets/images/fb.png',
-                            scale: 5,
+                        // delay
+                        Future.delayed(const Duration(milliseconds: 150), () {
+                          setState(() {
+                            fbClicked = !fbClicked;
+                          });
+                          openLink('fb');
+                        });
+                      },
+                      child: Wrap(
+                        children: [
+                          AnimatedContainer(
+                            duration: Duration(milliseconds: 100),
+                            curve: Curves.fastOutSlowIn,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: !fbClicked
+                                    ? [
+                                        BoxShadow(
+                                            color: Colors.grey[500]!,
+                                            offset: Offset(4, 4),
+                                            blurRadius: 15,
+                                            spreadRadius: 1),
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            offset: Offset(-4, -4),
+                                            blurRadius: 15,
+                                            spreadRadius: 1)
+                                      ]
+                                    : null),
+                            child: Padding(
+                              padding: EdgeInsets.all(fbPad),
+                              child: AnimatedContainer(
+                                curve: Curves.easeIn,
+                                height: fbScale != 0.0
+                                    ? fbScale
+                                    : MediaQuery.of(context).size.height * .12,
+                                duration: Duration(milliseconds: 150),
+                                child: Image.asset(
+                                  'assets/images/fb.png',
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      igClicked = !igClicked;
-                    });
-                    Future.delayed(const Duration(milliseconds: 150), () {
-                      setState(() {
-                        igClicked = !igClicked;
-                      });
-                      openLink('ig');
-                    });
-                  },
-                  child: Wrap(
-                    children: [
-                      AnimatedContainer(
-                        // height: 100,
-                        // width: 100,
-                        duration: Duration(milliseconds: 100),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: !igClicked
-                                ? [
-                                    BoxShadow(
-                                        color: Colors.grey[500]!,
-                                        offset: Offset(4, 4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-4, -4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1)
-                                  ]
-                                : null),
-                        child: Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Image.asset(
-                            'assets/images/ig.png',
-                            scale: 5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      twitchClicked = !twitchClicked;
-                    });
-                    Future.delayed(const Duration(milliseconds: 150), () {
-                      setState(() {
-                        twitchClicked = !twitchClicked;
-                      });
-                      openLink('twitch');
-                    });
-                  },
-                  child: Wrap(
-                    children: [
-                      AnimatedContainer(
-                        // height: 100,
-                        // width: 100,
-                        duration: Duration(milliseconds: 100),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: !twitchClicked
-                                ? [
-                                    BoxShadow(
-                                        color: Colors.grey[500]!,
-                                        offset: Offset(4, 4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-4, -4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1)
-                                  ]
-                                : null),
-                        child: Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Image.asset(
-                            'assets/images/twitch.png',
-                            scale: 5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      ytClicked = !ytClicked;
-                    });
-                    Future.delayed(const Duration(milliseconds: 150), () {
-                      setState(() {
-                        ytClicked = !ytClicked;
-                      });
-                      openLink('yt');
-                    });
-                  },
-                  child: Wrap(
-                    children: [
-                      AnimatedContainer(
-                        // height: 100,
-                        // width: 100,
-                        duration: Duration(milliseconds: 100),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: !ytClicked
-                                ? [
-                                    BoxShadow(
-                                        color: Colors.grey[500]!,
-                                        offset: Offset(4, 4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-4, -4),
-                                        blurRadius: 15,
-                                        spreadRadius: 1)
-                                  ]
-                                : null),
-                        child: Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Image.asset(
-                            'assets/images/yt.png',
-                            scale: 5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 2,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      twitterClicked = !twitterClicked;
-                    });
-                    Future.delayed(const Duration(milliseconds: 150), () {
-                      setState(() {
-                        twitterClicked = !twitterClicked;
-                      });
-                      openLink('twitter');
-                    });
-                  },
-                  child: AnimatedContainer(
-                    // height: 100,
-                    // width: 100,
-                    duration: Duration(milliseconds: 100),
-                    decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: !twitterClicked
-                            ? [
-                                BoxShadow(
-                                    color: Colors.grey[500]!,
-                                    offset: Offset(4, 4),
-                                    blurRadius: 15,
-                                    spreadRadius: 1),
-                                BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4, -4),
-                                    blurRadius: 15,
-                                    spreadRadius: 1)
-                              ]
-                            : null),
-                    child: Padding(
-                      padding: const EdgeInsets.all(50.0),
-                      child: Image.asset(
-                        'assets/images/twitter.png',
-                        scale: 5,
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      linkdClicked = !linkdClicked;
-                    });
-                    Future.delayed(const Duration(milliseconds: 150), () {
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: MouseRegion(
+                    onEnter: (a) {
                       setState(() {
-                        linkdClicked = !linkdClicked;
+                        igScale = MediaQuery.of(context).size.height * .14;
+                        // igPad = 45;
                       });
-                      openLink('linkd');
-                    });
-                  },
-                  child: AnimatedContainer(
-                    // height: 100,
-                    // width: 100,
-                    duration: Duration(milliseconds: 100),
-                    decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: !linkdClicked
-                            ? [
-                                BoxShadow(
-                                    color: Colors.grey[500]!,
-                                    offset: Offset(4, 4),
-                                    blurRadius: 15,
-                                    spreadRadius: 1),
-                                BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4, -4),
-                                    blurRadius: 15,
-                                    spreadRadius: 1)
-                              ]
-                            : null),
-                    child: Padding(
-                      padding: const EdgeInsets.all(50.0),
-                      child: Image.asset(
-                        'assets/images/linkd.png',
-                        scale: 5,
+                    },
+                    onExit: (a) {
+                      setState(() {
+                        igScale = MediaQuery.of(context).size.height * .12;
+                        // igPad = 50;
+                      });
+                    },
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          igClicked = !igClicked;
+                        });
+                        Future.delayed(const Duration(milliseconds: 150), () {
+                          setState(() {
+                            igClicked = !igClicked;
+                          });
+                          openLink('ig');
+                        });
+                      },
+                      child: Wrap(
+                        children: [
+                          AnimatedContainer(
+                            // height: 100,
+                            // width: 100,
+                            duration: Duration(milliseconds: 100),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: !igClicked
+                                    ? [
+                                        BoxShadow(
+                                            color: Colors.grey[500]!,
+                                            offset: Offset(4, 4),
+                                            blurRadius: 15,
+                                            spreadRadius: 1),
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            offset: Offset(-4, -4),
+                                            blurRadius: 15,
+                                            spreadRadius: 1)
+                                      ]
+                                    : null),
+                            child: Padding(
+                              padding: EdgeInsets.all(igPad),
+                              child: AnimatedContainer(
+                                curve: Curves.easeIn,
+                                height: igScale != 0.0
+                                    ? igScale
+                                    : MediaQuery.of(context).size.height * .12,
+                                duration: Duration(milliseconds: 150),
+                                child: Image.asset(
+                                  'assets/images/ig.png',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+          Expanded(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: MouseRegion(
+                    onEnter: (a) {
+                      setState(() {
+                        twitterScale = MediaQuery.of(context).size.height * .14;
+                        // twitterPad = 45;
+                      });
+                    },
+                    onExit: (a) {
+                      setState(() {
+                        twitterScale = MediaQuery.of(context).size.height * .12;
+                        // twitterPad = 50;
+                      });
+                    },
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          twitterClicked = !twitterClicked;
+                        });
+                        Future.delayed(const Duration(milliseconds: 150), () {
+                          setState(() {
+                            twitterClicked = !twitterClicked;
+                          });
+                          openLink('twitter');
+                        });
+                      },
+                      child: AnimatedContainer(
+                        // height: 100,
+                        // width: 100,
+                        duration: Duration(milliseconds: 100),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: !twitterClicked
+                                ? [
+                                    BoxShadow(
+                                        color: Colors.grey[500]!,
+                                        offset: Offset(4, 4),
+                                        blurRadius: 15,
+                                        spreadRadius: 1),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-4, -4),
+                                        blurRadius: 15,
+                                        spreadRadius: 1)
+                                  ]
+                                : null),
+                        child: Padding(
+                          padding: EdgeInsets.all(twitterPad),
+                          child: AnimatedContainer(
+                            curve: Curves.easeIn,
+                            height: twitterScale != 0.0
+                                ? twitterScale
+                                : MediaQuery.of(context).size.height * .12,
+                            duration: Duration(milliseconds: 150),
+                            child: Image.asset(
+                              'assets/images/twitter.png',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: MouseRegion(
+                    onEnter: (a) {
+                      setState(() {
+                        linkdScale = MediaQuery.of(context).size.height * .14;
+                        // linkdPad = 45;
+                      });
+                    },
+                    onExit: (a) {
+                      setState(() {
+                        linkdScale = MediaQuery.of(context).size.height * .12;
+                        // linkdPad = 50;
+                      });
+                    },
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          linkdClicked = !linkdClicked;
+                        });
+                        Future.delayed(const Duration(milliseconds: 150), () {
+                          setState(() {
+                            linkdClicked = !linkdClicked;
+                          });
+                          openLink('linkd');
+                        });
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 100),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: !linkdClicked
+                                ? [
+                                    BoxShadow(
+                                        color: Colors.grey[500]!,
+                                        offset: Offset(4, 4),
+                                        blurRadius: 15,
+                                        spreadRadius: 1),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-4, -4),
+                                        blurRadius: 15,
+                                        spreadRadius: 1)
+                                  ]
+                                : null),
+                        child: Padding(
+                          padding: EdgeInsets.all(linkdPad),
+                          child: AnimatedContainer(
+                            curve: Curves.easeIn,
+                            height: linkdScale != 0.0
+                                ? linkdScale
+                                : MediaQuery.of(context).size.height * .12,
+                            duration: Duration(milliseconds: 150),
+                            child: Image.asset(
+                              'assets/images/linkd.png',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
