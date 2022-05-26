@@ -1,61 +1,82 @@
-// import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_porfolio/Screens/Login.dart';
+import 'package:get/get.dart';
+import 'package:my_porfolio/Screens/Home.dart';
+import 'package:my_porfolio/Screens/Settings.dart';
+import 'package:my_porfolio/Screens/Socials.dart';
+import 'package:my_porfolio/Screens/UnknownPage.dart';
+import 'package:my_porfolio/Utils/Consntants.dart';
+import 'Utils/PageRoutes.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    theme: ThemeData(
+      fontFamily: CONSTANTS.appFont,
+    ),
+    home: BaseContainer(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return appLogin();
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class BaseContainer extends StatefulWidget {
+  const BaseContainer({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _BaseContainerState createState() => _BaseContainerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+class _BaseContainerState extends State<BaseContainer> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setTheme();
   }
 
+  setTheme() {}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+    // INITIALIZING THE ROUTES
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.fadeIn,
+      getPages: [
+        GetPage(name: PAGEROUTES.HOMECONTAINER, page: () => HomeContainer()),
+        GetPage(name: PAGEROUTES.HOMESCREEN, page: () => HomeContainer()),
+        GetPage(name: PAGEROUTES.SOCIALSCREEN, page: () => SocialsContainer()),
+        GetPage(name: PAGEROUTES.SETTINGS, page: () => SettingsScreen()),
+        GetPage(
+            name: PAGEROUTES.NOTFOUND,
+            page: () => UnknownPage()), // 404 not found
+        // GetPage(name: "/loading", page: () => loading()),
+      ],
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        // brightness: Brightness.dark,
+        primaryColor: Colors.grey[100],
+
+        // Define the default font family.
+        fontFamily: 'Quicksand',
+
+        // Define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 80.0,
+            fontWeight: FontWeight.bold,
+          ),
+          headline6: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 48.0,
+            fontStyle: FontStyle.italic,
+          ),
+          bodyText2: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 17.0,
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: HomeContainer(),
     );
   }
 }
