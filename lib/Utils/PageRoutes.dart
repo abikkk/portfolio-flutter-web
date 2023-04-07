@@ -5,5 +5,6 @@ class PAGEROUTES {
   static const String DASHBOARDSCREEN = '/DashboardScreen';
   static const String SOCIALSCREEN = '/SocialsScreen';
   static const String SETTINGS = '/SocialsScreen';
+  static const String GALLERYSCREEN = '/GalleryScreen';
   static const String NOTFOUND = '/UnknownPage';
 }
