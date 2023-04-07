@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Screens/Home.dart';
-import 'package:my_porfolio/Screens/Settings.dart';
-import 'package:my_porfolio/Screens/Socials.dart';
 import 'package:my_porfolio/Screens/UnknownPage.dart';
 import 'package:my_porfolio/Utils/Consntants.dart';
 import 'Utils/PageRoutes.dart';
