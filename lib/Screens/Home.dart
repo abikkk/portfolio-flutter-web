@@ -106,20 +106,38 @@ class _HomeContainerState extends State<HomeContainer> {
           ),
         );
       } else if (sizingInformation.deviceScreenType ==
-          DeviceScreenType.tablet) {
+              DeviceScreenType.tablet ||
+          sizingInformation.deviceScreenType == DeviceScreenType.mobile) {
         print('>> Device is a tablet.');
-        return SingleChildScrollView(
-          child: Container(
-              color: Colors.yellow, child: Center(child: Text('tablet'))),
+        return SafeArea(
+          child: Scaffold(
+            body: SingleChildScrollView(
+              child: ResponsiveBuilder(
+                builder: (context, sizingInformation) => Column(
+                  children: [
+                    // _loadTabletPages(),
+                    _pages[0],
+                    _pages[1],
+                    _pages[2],
+                    _pages[3],
+                    _pages[4],
+                    _pages[5],
+                  ],
+                ),
+              ),
+            ),
+          ),
         );
-      } else if (sizingInformation.deviceScreenType ==
-          DeviceScreenType.mobile) {
-        print('>> Device is a phone.');
-        return SingleChildScrollView(
-          child:
-              Container(color: Colors.red, child: Center(child: Text('phone'))),
-        );
-      } else if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {
+      }
+      // else if (sizingInformation.deviceScreenType ==
+      //     DeviceScreenType.mobile) {
+      //   print('>> Device is a phone.');
+      //   return SingleChildScrollView(
+      //     child:
+      //         Container(color: Colors.red, child: Center(child: Text('phone'))),
+      //   );
+      // }
+      else if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {
         print('>> Device is a watch.');
         return SingleChildScrollView(
           child: Container(
@@ -131,4 +149,13 @@ class _HomeContainerState extends State<HomeContainer> {
         return Text("hello world!");
     });
   }
+
+  // Widget _loadTabletPages() {
+  //   _pages.forEach(
+  //     (element) {
+  //       return element;
+  //     },
+  //   );
+  //   return Text('hello world!');
+  // }
 }

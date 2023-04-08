@@ -12,15 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Positioned(
-        //   top: -200,
-        //   child: Image.asset(
-        //     'assets/images/bg.jpg',
-        //     width: MediaQuery.of(context).size.width,
-        //   ),
-        // ),
         Container(
-          // margin: EdgeInsets.symmetric(horizontal: 15),
           height: (MediaQuery.of(context).size.height / 1.11) - 10,
           child: Center(
             child: Column(

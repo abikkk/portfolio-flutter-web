@@ -40,7 +40,7 @@ openLink(type) async {
     case 'linkd':
       {
         if (!await launchUrl(
-            Uri.parse('https://www.linkedin.com/in/abik-vaidhya-b9550520b')))
+            Uri.parse('https://www.linkedin.com/in/abik-vaidhya-ab9015168/')))
           throw 'Could not launch LinkedIn Link!';
         break;
       }

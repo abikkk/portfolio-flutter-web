@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Screens/Home.dart';
 import 'package:my_porfolio/Screens/UnknownPage.dart';
-import 'package:my_porfolio/Utils/Consntants.dart';
+import 'package:my_porfolio/Utils/Constants.dart';
 import 'Utils/PageRoutes.dart';
 
 void main() {
