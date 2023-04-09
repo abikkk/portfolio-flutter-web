@@ -39,459 +39,17 @@ class _CodingScreenState extends State<CodingScreen> {
           ),
           Expanded(
             flex: 4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                skillBox(0),
-                skillBox(1),
-                skillBox(2),
-                skillBox(3),
-                // Center(
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(15.0),
-                //     child: InkWell(
-                //       onLongPress: () {
-                //         Get.defaultDialog(
-                //             title: "vue.js",
-                //             titleStyle: TextStyle(fontStyle: FontStyle.normal),
-                //             radius: 15,
-                //             content: Wrap(
-                //               children: [
-                //                 Container(
-                //                   padding: EdgeInsets.symmetric(
-                //                       horizontal: 30, vertical: 5),
-                //                   child: Column(
-                //                     children: [
-                //                       Padding(
-                //                         padding: const EdgeInsets.symmetric(
-                //                             vertical: 5.0),
-                //                         child: Text(" experience: 6+ months "),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ],
-                //             ));
-                //       },
-                //       child: Card(
-                //         child: MouseRegion(
-                //           onEnter: (a) {
-                //             setState(() {
-                //               vueDetails = true;
-                //               vueScale =
-                //                   MediaQuery.of(context).size.height * .28;
-                //               vuePad = 0;
-                //             });
-                //           },
-                //           onExit: (a) {
-                //             setState(() {
-                //               vueDetails = false;
-                //               vueScale =
-                //                   MediaQuery.of(context).size.height * .2;
-                //               vuePad = 5;
-                //             });
-                //           },
-                //           child: Wrap(
-                //             children: [
-                //               AnimatedContainer(
-                //                 duration: Duration(milliseconds: 100),
-                //                 decoration: BoxDecoration(
-                //                     color: Colors.white,
-                //                     borderRadius: BorderRadius.circular(15),
-                //                     boxShadow: [
-                //                       BoxShadow(
-                //                           color: Colors.grey[500]!,
-                //                           offset: Offset(4, 4),
-                //                           blurRadius: 15,
-                //                           spreadRadius: 1),
-                //                       BoxShadow(
-                //                           color: Colors.white,
-                //                           offset: Offset(-4, -4),
-                //                           blurRadius: 15,
-                //                           spreadRadius: 1)
-                //                     ]),
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.all(50.0),
-                //                   child: Column(
-                //                     children: [
-                //                       AnimatedContainer(
-                //                         padding: EdgeInsets.symmetric(
-                //                             vertical: vuePad),
-                //                         height: vueScale != 0.0
-                //                             ? vueScale
-                //                             : MediaQuery.of(context)
-                //                                     .size
-                //                                     .height *
-                //                                 .2,
-                //                         duration: Duration(milliseconds: 150),
-                //                         child: Image.asset(
-                //                           'images/vue.png',
-                //                         ),
-                //                       ),
-                //                       Stack(
-                //                         children: [
-                //                           AnimatedOpacity(
-                //                               opacity: !vueDetails ? 1 : 0,
-                //                               duration:
-                //                                   Duration(milliseconds: 150),
-                //                               child: Center(
-                //                                   child: Text('vue.js'))),
-                //                           AnimatedOpacity(
-                //                             opacity: vueDetails ? 1 : 0,
-                //                             duration:
-                //                                 Duration(milliseconds: 150),
-                //                             child: Padding(
-                //                               padding:
-                //                                   const EdgeInsets.symmetric(
-                //                                       vertical: 8.0),
-                //                               child: Column(
-                //                                 children: [
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                           child: Text(
-                //                                         " personal projects: 2 ",
-                //                                         textAlign:
-                //                                             TextAlign.center,
-                //                                       )),
-                //                                     ],
-                //                                   ),
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                           child: Text(
-                //                                         " work projects: n/a ",
-                //                                         textAlign:
-                //                                             TextAlign.center,
-                //                                       )),
-                //                                     ],
-                //                                   ),
-                //                                   // Row(
-                //                                   //   children: [
-                //                                   //     Expanded(
-                //                                   //         child: Text(
-                //                                   //       " experience: 6+ months ",
-                //                                   //       textAlign: TextAlign.center,
-                //                                   //     )),
-                //                                   //   ],
-                //                                   // ),
-                //                                 ],
-                //                               ),
-                //                             ),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // Center(
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(15.0),
-                //     child: InkWell(
-                //       onLongPress: () {
-                //         Get.defaultDialog(
-                //             title: "react.js",
-                //             titleStyle: TextStyle(fontStyle: FontStyle.normal),
-                //             radius: 15,
-                //             content: Wrap(
-                //               children: [
-                //                 Container(
-                //                   padding: EdgeInsets.symmetric(
-                //                       horizontal: 30, vertical: 5),
-                //                   child: Column(
-                //                     children: [
-                //                       Padding(
-                //                         padding: const EdgeInsets.symmetric(
-                //                             vertical: 5.0),
-                //                         child: Text(" experience: 3+ months "),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ],
-                //             ));
-                //       },
-                //       child: Card(
-                //         child: MouseRegion(
-                //           onEnter: (a) {
-                //             setState(() {
-                //               reactDetails = true;
-                //               reactScale =
-                //                   MediaQuery.of(context).size.height * .28;
-                //               reactPad = 0;
-                //             });
-                //           },
-                //           onExit: (a) {
-                //             setState(() {
-                //               reactDetails = false;
-                //               reactScale =
-                //                   MediaQuery.of(context).size.height * .2;
-                //               reactPad = 0;
-                //             });
-                //           },
-                //           child: Wrap(
-                //             children: [
-                //               AnimatedContainer(
-                //                 duration: Duration(milliseconds: 100),
-                //                 decoration: BoxDecoration(
-                //                     color: Colors.white,
-                //                     borderRadius: BorderRadius.circular(15),
-                //                     boxShadow: [
-                //                       BoxShadow(
-                //                           color: Colors.grey[500]!,
-                //                           offset: Offset(4, 4),
-                //                           blurRadius: 15,
-                //                           spreadRadius: 1),
-                //                       BoxShadow(
-                //                           color: Colors.white,
-                //                           offset: Offset(-4, -4),
-                //                           blurRadius: 15,
-                //                           spreadRadius: 1)
-                //                     ]),
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.all(50.0),
-                //                   child: Column(
-                //                     children: [
-                //                       AnimatedContainer(
-                //                         padding: EdgeInsets.symmetric(
-                //                             vertical: reactPad),
-                //                         height: reactScale != 0.0
-                //                             ? reactScale
-                //                             : MediaQuery.of(context)
-                //                                     .size
-                //                                     .height *
-                //                                 .2,
-                //                         duration: Duration(milliseconds: 150),
-                //                         child: Image.asset(
-                //                           'images/react.png',
-                //                         ),
-                //                       ),
-                //                       Stack(
-                //                         children: [
-                //                           AnimatedOpacity(
-                //                               opacity: !reactDetails ? 1 : 0,
-                //                               duration:
-                //                                   Duration(milliseconds: 150),
-                //                               child: Center(
-                //                                   child: Text('react.js'))),
-                //                           AnimatedOpacity(
-                //                             opacity: reactDetails ? 1 : 0,
-                //                             duration:
-                //                                 Duration(milliseconds: 150),
-                //                             child: Padding(
-                //                               padding:
-                //                                   const EdgeInsets.symmetric(
-                //                                       vertical: 8.0),
-                //                               child: Column(
-                //                                 children: [
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                           child: Text(
-                //                                         " personal projects: 2 ",
-                //                                         textAlign:
-                //                                             TextAlign.center,
-                //                                       )),
-                //                                     ],
-                //                                   ),
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                           child: Text(
-                //                                         " work projects: n/a ",
-                //                                         textAlign:
-                //                                             TextAlign.center,
-                //                                       )),
-                //                                     ],
-                //                                   ),
-                //                                   // Row(
-                //                                   //   children: [
-                //                                   //     Expanded(
-                //                                   //         child: Text(
-                //                                   //       " experience: 3+ months ",
-                //                                   //       textAlign: TextAlign.center,
-                //                                   //     )),
-                //                                   //   ],
-                //                                   // ),
-                //                                 ],
-                //                               ),
-                //                             ),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // Center(
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(15.0),
-                //     child: InkWell(
-                //       onLongPress: () {
-                //         Get.defaultDialog(
-                //             title: ".net, c#",
-                //             titleStyle: TextStyle(fontStyle: FontStyle.normal),
-                //             radius: 15,
-                //             content: Wrap(
-                //               children: [
-                //                 Container(
-                //                   padding: EdgeInsets.symmetric(
-                //                       horizontal: 30, vertical: 5),
-                //                   child: Column(
-                //                     children: [
-                //                       Padding(
-                //                         padding: const EdgeInsets.symmetric(
-                //                             vertical: 5.0),
-                //                         child: Text(" experience: 6+ months "),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ],
-                //             ));
-                //       },
-                //       child: Card(
-                //         child: MouseRegion(
-                //           onEnter: (a) {
-                //             setState(() {
-                //               dnetDetails = true;
-                //               dnetScale =
-                //                   MediaQuery.of(context).size.height * .28;
-                //               dnetPad = 0;
-                //             });
-                //           },
-                //           onExit: (a) {
-                //             setState(() {
-                //               dnetDetails = false;
-                //               dnetScale =
-                //                   MediaQuery.of(context).size.height * .2;
-                //               dnetPad = 0;
-                //             });
-                //           },
-                //           child: Wrap(
-                //             children: [
-                //               AnimatedContainer(
-                //                 duration: Duration(milliseconds: 100),
-                //                 decoration: BoxDecoration(
-                //                     color: Colors.white,
-                //                     borderRadius: BorderRadius.circular(15),
-                //                     boxShadow: [
-                //                       BoxShadow(
-                //                           color: Colors.grey[500]!,
-                //                           offset: Offset(4, 4),
-                //                           blurRadius: 15,
-                //                           spreadRadius: 1),
-                //                       BoxShadow(
-                //                           color: Colors.white,
-                //                           offset: Offset(-4, -4),
-                //                           blurRadius: 15,
-                //                           spreadRadius: 1)
-                //                     ]),
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.all(50.0),
-                //                   child: Column(
-                //                     children: [
-                //                       AnimatedContainer(
-                //                         padding: EdgeInsets.symmetric(
-                //                             vertical: dnetPad),
-                //                         height: dnetScale != 0.0
-                //                             ? dnetScale
-                //                             : MediaQuery.of(context)
-                //                                     .size
-                //                                     .height *
-                //                                 .2,
-                //                         duration: Duration(milliseconds: 150),
-                //                         child: Row(
-                //                           children: [
-                //                             Expanded(
-                //                               child: Image.asset(
-                //                                 'images/dotnet.png',
-                //                                 // scale: 5,
-                //                               ),
-                //                             ),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       Stack(
-                //                         children: [
-                //                           AnimatedOpacity(
-                //                               opacity: !dnetDetails ? 1 : 0,
-                //                               duration:
-                //                                   Duration(milliseconds: 150),
-                //                               child: Center(
-                //                                   child: Text('.net / c#'))),
-                //                           AnimatedOpacity(
-                //                             opacity: dnetDetails ? 1 : 0,
-                //                             duration:
-                //                                 Duration(milliseconds: 150),
-                //                             child: Padding(
-                //                               padding:
-                //                                   const EdgeInsets.symmetric(
-                //                                       vertical: 8.0),
-                //                               child: Column(
-                //                                 children: [
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                           child: Text(
-                //                                         " personal projects: 5 ",
-                //                                         textAlign:
-                //                                             TextAlign.center,
-                //                                       )),
-                //                                     ],
-                //                                   ),
-                //                                   Row(
-                //                                     children: [
-                //                                       Expanded(
-                //                                           child: Text(
-                //                                         " work projects: n/a ",
-                //                                         textAlign:
-                //                                             TextAlign.center,
-                //                                       )),
-                //                                     ],
-                //                                   ),
-                //                                   // Row(
-                //                                   //   children: [
-                //                                   //     Expanded(
-                //                                   //         child: Text(
-                //                                   //       " experience: 5+ months ",
-                //                                   //       textAlign: TextAlign.center,
-                //                                   //     )),
-                //                                   //   ],
-                //                                   // ),
-                //                                 ],
-                //                               ),
-                //                             ),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  skillBox(0),
+                  skillBox(1),
+                  skillBox(2),
+                  skillBox(3),
+                ],
+              ),
             ),
           ),
         ],
@@ -584,7 +142,7 @@ class _CodingScreenState extends State<CodingScreen> {
         scale = flutterScale;
         break;
       case 1:
-        title = 'react.js';
+        title = 'react';
         exp = "1 year.";
         personal = "2";
         professional = "1";
@@ -594,7 +152,7 @@ class _CodingScreenState extends State<CodingScreen> {
         scale = reactScale;
         break;
       case 2:
-        title = "vue.js";
+        title = "vue";
         exp = "1 year.";
         personal = "2";
         professional = "0";
@@ -672,8 +230,7 @@ class _CodingScreenState extends State<CodingScreen> {
                         child: Column(
                           children: [
                             AnimatedContainer(
-                              padding:
-                                  EdgeInsets.symmetric(vertical: flutterPad),
+                              padding: EdgeInsets.symmetric(vertical: pad),
                               height: scale != 0.0
                                   ? scale
                                   : MediaQuery.of(context).size.height * .2,
@@ -685,9 +242,33 @@ class _CodingScreenState extends State<CodingScreen> {
                             Stack(
                               children: [
                                 AnimatedOpacity(
-                                    opacity: !detail ? 1 : 0,
-                                    duration: Duration(milliseconds: 150),
-                                    child: Center(child: Text(title))),
+                                  opacity: !detail ? 1 : 0,
+                                  duration: Duration(milliseconds: 150),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              title,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              " experience : $exp ",
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                                 AnimatedOpacity(
                                   opacity: detail ? 1 : 0,
                                   duration: Duration(milliseconds: 150),
