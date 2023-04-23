@@ -54,8 +54,10 @@ class _GamingScreenState extends State<GamingScreen> {
         Expanded(
           child: Row(
             children: [
-              Expanded(child: streamCard(0)), Expanded(child: streamCard(1)),
+              Expanded(child: streamCard(0)),
+              Expanded(child: streamCard(1)),
               Expanded(child: streamCard(2))
+              
               // Expanded(
               //   child: Padding(
               //     padding: const EdgeInsets.all(15.0),
