@@ -37,7 +37,7 @@ class _SocialsContainerState extends State<SocialsContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: (MediaQuery.of(context).size.height / 1.11) - 10,
+      height: (MediaQuery.of(context).size.height),
       child: Column(
         children: [
           Expanded(
@@ -72,7 +72,6 @@ class _SocialsContainerState extends State<SocialsContainer> {
                       onTap: () async {
                         setState(() {
                           fbClicked = !fbClicked;
-                          openLink('fb');
                         });
 
                         // delay

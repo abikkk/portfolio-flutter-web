@@ -17,7 +17,14 @@ class _GamingScreenState extends State<GamingScreen> {
       valorantClicked = false,
       apexClicked = false,
       pubgClicked = false,
-      gtavClicked = false;
+      gtavClicked = false,
+      twitchDetails = false,
+      discordDetails = false,
+      ytDetails = false,
+      valorantDetails = false,
+      apexDetails = false,
+      pubgDetails = false,
+      gtavDetails = false;
 
   double discordScale = 0,
       twitchScale = 0,
@@ -31,7 +38,7 @@ class _GamingScreenState extends State<GamingScreen> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20.0),
-      height: (MediaQuery.of(context).size.height / 1.2),
+      height: (MediaQuery.of(context).size.height),
       child: Column(children: [
         // games
         Expanded(
@@ -57,7 +64,7 @@ class _GamingScreenState extends State<GamingScreen> {
               Expanded(child: streamCard(0)),
               Expanded(child: streamCard(1)),
               Expanded(child: streamCard(2))
-              
+
               // Expanded(
               //   child: Padding(
               //     padding: const EdgeInsets.all(15.0),
@@ -292,16 +299,19 @@ class _GamingScreenState extends State<GamingScreen> {
     switch (card) {
       case 0:
         setState(() {
+          valorantDetails = true;
           valorantScale = MediaQuery.of(context).size.height * .24;
         });
         break;
       case 1:
         setState(() {
+          apexDetails = true;
           apexScale = MediaQuery.of(context).size.height * .24;
         });
         break;
       case 2:
         setState(() {
+          gtavDetails = true;
           gtavScale = MediaQuery.of(context).size.height * .24;
         });
         break;
@@ -312,16 +322,19 @@ class _GamingScreenState extends State<GamingScreen> {
     switch (card) {
       case 0:
         setState(() {
+          valorantDetails = false;
           valorantScale = MediaQuery.of(context).size.height * .2;
         });
         break;
       case 1:
         setState(() {
+          apexDetails = false;
           apexScale = MediaQuery.of(context).size.height * .2;
         });
         break;
       case 2:
         setState(() {
+          gtavDetails = false;
           gtavScale = MediaQuery.of(context).size.height * .2;
         });
         break;
@@ -330,7 +343,7 @@ class _GamingScreenState extends State<GamingScreen> {
 
   Widget gameCard(int game) {
     late String title, exp, agent, rank, image;
-    late bool clicked;
+    late bool clicked, detail;
     late double pad, scale;
 
     switch (game) {
@@ -342,6 +355,7 @@ class _GamingScreenState extends State<GamingScreen> {
         image = "valorant";
         clicked = valorantClicked;
         scale = valorantScale;
+        detail = valorantDetails;
         break;
       case 1:
         title = 'apex legengs';
@@ -351,6 +365,7 @@ class _GamingScreenState extends State<GamingScreen> {
         image = "apex";
         clicked = apexClicked;
         scale = apexScale;
+        detail = apexDetails;
         break;
       case 2:
         title = "gta v";
@@ -360,6 +375,7 @@ class _GamingScreenState extends State<GamingScreen> {
         image = "gtav";
         clicked = gtavClicked;
         scale = gtavScale;
+        detail = gtavDetails;
         break;
     }
 
@@ -451,8 +467,9 @@ class _GamingScreenState extends State<GamingScreen> {
                               'images/${image}.png',
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          AnimatedOpacity(
+                            opacity: detail ? 1 : 0,
+                            duration: Duration(milliseconds: 150),
                             child: Row(
                               children: [
                                 Expanded(
@@ -480,16 +497,19 @@ class _GamingScreenState extends State<GamingScreen> {
     switch (card) {
       case 0:
         setState(() {
+          twitchDetails = true;
           twitchScale = MediaQuery.of(context).size.height * .24;
         });
         break;
       case 1:
         setState(() {
+          discordDetails = true;
           discordScale = MediaQuery.of(context).size.height * .24;
         });
         break;
       case 2:
         setState(() {
+          ytDetails = true;
           ytScale = MediaQuery.of(context).size.height * .24;
         });
         break;
@@ -500,16 +520,19 @@ class _GamingScreenState extends State<GamingScreen> {
     switch (card) {
       case 0:
         setState(() {
+          twitchDetails = false;
           twitchScale = MediaQuery.of(context).size.height * .2;
         });
         break;
       case 1:
         setState(() {
+          discordDetails = false;
           discordScale = MediaQuery.of(context).size.height * .2;
         });
         break;
       case 2:
         setState(() {
+          ytDetails = false;
           ytScale = MediaQuery.of(context).size.height * .2;
         });
         break;
@@ -518,7 +541,7 @@ class _GamingScreenState extends State<GamingScreen> {
 
   Widget streamCard(int type) {
     late String title, site, agent, image, subTitle, link;
-    late bool clicked;
+    late bool clicked, detail;
     late double pad, scale;
 
     switch (type) {
@@ -530,6 +553,8 @@ class _GamingScreenState extends State<GamingScreen> {
         scale = twitchScale;
         subTitle = "i stream as much as i can";
         link = "twitch";
+        detail = twitchDetails;
+
         break;
       case 1:
         site = 'discord';
@@ -537,8 +562,9 @@ class _GamingScreenState extends State<GamingScreen> {
         image = "discord";
         clicked = discordClicked;
         scale = discordScale;
-        subTitle = "i am very active on discord";
+        subTitle = "add me on discord";
         link = "discord";
+        detail = discordDetails;
         break;
       case 2:
         site = "youtube";
@@ -546,8 +572,9 @@ class _GamingScreenState extends State<GamingScreen> {
         image = "yt";
         clicked = ytClicked;
         scale = ytScale;
-        subTitle = "i put my clips from my gameplays";
+        subTitle = "clips from my gameplays and streams";
         link = "yt";
+        detail = ytDetails;
         break;
     }
 
@@ -555,36 +582,6 @@ class _GamingScreenState extends State<GamingScreen> {
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: InkWell(
-          // onLongPress: () {
-          // Get.defaultDialog(
-          //     title: title,
-          //     titleStyle: TextStyle(fontStyle: FontStyle.normal),
-          //     radius: 15,
-          //     content: Wrap(
-          //       children: [
-          //         Container(
-          //           padding:
-          //               EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-          //           child: Column(
-          //             children: [
-          //               Padding(
-          //                 padding: const EdgeInsets.only(bottom: 5.0),
-          //                 child: Text(" main agent(s): ${agent} "),
-          //               ),
-          //               Padding(
-          //                 padding: const EdgeInsets.symmetric(vertical: 5.0),
-          //                 child: Text(" hours played: ${exp} "),
-          //               ),
-          //               Padding(
-          //                 padding: const EdgeInsets.symmetric(vertical: 5.0),
-          //                 child: Text(" latest rank: ${rank} "),
-          //               )
-          //             ],
-          //           ),
-          //         ),
-          //       ],
-          //     ));
-          // },
           onTap: () async {
             setState(() {
               clicked = !clicked;
@@ -651,17 +648,21 @@ class _GamingScreenState extends State<GamingScreen> {
                                 'images/${image}.png',
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                    " ${subTitle} ",
-                                    textAlign: TextAlign.center,
-                                  )),
-                                ],
+                            AnimatedOpacity(
+                              opacity: detail ? 1 : 0,
+                              duration: Duration(milliseconds: 150),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: Text(
+                                      " ${subTitle} ",
+                                      textAlign: TextAlign.center,
+                                    )),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

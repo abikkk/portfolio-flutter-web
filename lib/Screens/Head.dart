@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Stack(
       children: [
         Container(
-          height: (MediaQuery.of(context).size.height / 1.11) - 10,
+          height: (MediaQuery.of(context).size.height),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        ' flutter developer ',
+                        ' frontend developer ',
                         style: TextStyle(fontSize: 20),
                       ),
                       VerticalDivider(

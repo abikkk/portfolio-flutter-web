@@ -19,7 +19,7 @@ openLink(type) async {
       break;
     case 'twitch':
       {
-        if (!await launchUrl(Uri.parse('https://www.twitch.tv/oogiebuugie')))
+        if (!await launchUrl(Uri.parse('https://www.twitch.tv/uugiebuugie')))
           throw 'Could not launch Twitch Link!';
       }
       break;
@@ -32,8 +32,7 @@ openLink(type) async {
       break;
     case 'twitter':
       {
-        if (!await launchUrl(
-            Uri.parse('https://www.facebook.com/abik.vaidhya')))
+        if (!await launchUrl(Uri.parse('https://twitter.com/u_serious_dafuq')))
           throw 'Could not launch Twitter Link!';
       }
       break;

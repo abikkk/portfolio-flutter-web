@@ -108,7 +108,7 @@ class _HomeContainerState extends State<HomeContainer> {
       } else if (sizingInformation.deviceScreenType ==
               DeviceScreenType.tablet ||
           sizingInformation.deviceScreenType == DeviceScreenType.mobile) {
-        print('>> Device is a tablet.');
+        print('>> Device is a tablet/mobile');
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(

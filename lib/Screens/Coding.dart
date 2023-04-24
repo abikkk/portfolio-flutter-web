@@ -26,7 +26,7 @@ class _CodingScreenState extends State<CodingScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: (MediaQuery.of(context).size.height / 1.11) - 10,
+      height: (MediaQuery.of(context).size.height),
       child: Column(
         children: [
           Expanded(
@@ -194,7 +194,18 @@ class _CodingScreenState extends State<CodingScreen> {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 5.0),
-                              child: Text(" experience: $exp "),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    " work projects: $professional ",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Text(
+                                    " personal projects: $personal ",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -242,7 +253,7 @@ class _CodingScreenState extends State<CodingScreen> {
                             Stack(
                               children: [
                                 AnimatedOpacity(
-                                  opacity: !detail ? 1 : 0,
+                                  opacity: detail ? 1 : 0,
                                   duration: Duration(milliseconds: 150),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -261,34 +272,6 @@ class _CodingScreenState extends State<CodingScreen> {
                                           children: [
                                             Text(
                                               " experience : $exp ",
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                AnimatedOpacity(
-                                  opacity: detail ? 1 : 0,
-                                  duration: Duration(milliseconds: 150),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              " personal projects: $personal ",
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              " work projects: $professional ",
                                               textAlign: TextAlign.center,
                                             ),
                                           ],
