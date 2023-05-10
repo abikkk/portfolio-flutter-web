@@ -37,6 +37,11 @@ dependencies:
   animated_text_kit: ^4.2.2
   mailto: ^2.0.0
   email_validator: ^2.0.1
+  path_provider: ^2.0.14
+  image_picker: ^0.8.7+4
+  flutter_email_sender: ^5.2.0
+  # fluttertoast:
+  # pinch_zoom_release_unzoom:
   
 dev_dependencies:
   flutter_test:
