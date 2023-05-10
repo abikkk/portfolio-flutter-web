@@ -1,4 +1,3 @@
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Screens/Home.dart';
@@ -37,41 +36,40 @@ class _BaseContainerState extends State<BaseContainer> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fadeIn,
-      getPages: [
-        GetPage(name: PAGEROUTES.HOMECONTAINER, page: () => HomeContainer()),
-        GetPage(
-            name: PAGEROUTES.NOTFOUND,
-            page: () => UnknownPage()), // 404 not found
-        // GetPage(name: "/loading", page: () => loading()),
-      ],
+      // getPages: [
+      //   GetPage(
+      //       name: PAGEROUTES.HOMECONTAINER,
+      //       page: () => HomeContainer(
+      //             navIndex: 0,
+      //           )),
+      //   GetPage(
+      //       name: PAGEROUTES.NOTFOUND,
+      //       page: () => UnknownPage()), // 404 not found
+      //   // GetPage(name: "/loading", page: () => loading()),
+      // ],
       theme: ThemeData(
-        // Define the default brightness and colors.
-        // brightness: Brightness.dark,
         primaryColor: Colors.grey[100],
-
-        // Define the default font family.
         fontFamily: 'Quicksand',
-
-        // Define the default `TextTheme`. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
         textTheme: const TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             fontFamily: 'Quicksand',
             fontSize: 80.0,
             fontWeight: FontWeight.bold,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             fontFamily: 'Quicksand',
             fontSize: 48.0,
             fontStyle: FontStyle.italic,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             fontFamily: 'Quicksand',
             fontSize: 17.0,
           ),
         ),
       ),
-      home: HomeContainer(),
+      home: HomeContainer(
+        navIndex: 0,
+      ),
     );
   }
 }

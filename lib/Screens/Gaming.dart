@@ -37,13 +37,11 @@ class _GamingScreenState extends State<GamingScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20.0),
-      height: (MediaQuery.of(context).size.height),
+      // padding: const EdgeInsets.all(20.0),
+      // height: (MediaQuery.of(context).size.height),
       child: Column(children: [
         // games
-        Expanded(
-            // flex: 2,
-            child: Row(
+        Row(
           children: [
             Expanded(
               child: gameCard(0),
@@ -55,241 +53,239 @@ class _GamingScreenState extends State<GamingScreen> {
               child: gameCard(2),
             ),
           ],
-        )),
+        ),
 
         // twitch discord youtube
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(child: streamCard(0)),
-              Expanded(child: streamCard(1)),
-              Expanded(child: streamCard(2))
+        Row(
+          children: [
+            Expanded(child: streamCard(0)),
+            Expanded(child: streamCard(1)),
+            Expanded(child: streamCard(2))
 
-              // Expanded(
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(15.0),
-              //     child: InkWell(
-              //       onTap: () async {
-              //         setState(() {
-              //           twitchClicked = !twitchClicked;
-              //         });
-              //         Future.delayed(const Duration(milliseconds: 150), () {
-              //           setState(() {
-              //             twitchClicked = !twitchClicked;
-              //           });
-              //           openLink('twitch');
-              //         });
-              //       },
-              //       child: Card(
-              //         child: MouseRegion(
-              //           onEnter: (a) {
-              //             setState(() {
-              //               twitchScale =
-              //                   MediaQuery.of(context).size.height * .24;
-              //             });
-              //           },
-              //           onExit: (a) {
-              //             setState(() {
-              //               twitchScale =
-              //                   MediaQuery.of(context).size.height * .2;
-              //             });
-              //           },
-              //           child: Wrap(
-              //             children: [
-              //               AnimatedContainer(
-              //                 duration: Duration(milliseconds: 100),
-              //                 decoration: BoxDecoration(
-              //                     color: Colors.white,
-              //                     borderRadius: BorderRadius.circular(15),
-              //                     boxShadow: !twitchClicked
-              //                         ? [
-              //                             BoxShadow(
-              //                                 color: Colors.grey[500]!,
-              //                                 offset: Offset(4, 4),
-              //                                 blurRadius: 15,
-              //                                 spreadRadius: 1),
-              //                             BoxShadow(
-              //                                 color: Colors.white,
-              //                                 offset: Offset(-4, -4),
-              //                                 blurRadius: 15,
-              //                                 spreadRadius: 1)
-              //                           ]
-              //                         : null),
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(50.0),
-              //                   child: Column(
-              //                     children: [
-              //                       AnimatedContainer(
-              //                         curve: Curves.easeIn,
-              //                         height: twitchScale != 0.0
-              //                             ? twitchScale
-              //                             : MediaQuery.of(context).size.height *
-              //                                 .2,
-              //                         duration: Duration(milliseconds: 150),
-              //                         child: Image.asset(
-              //                           'images/twitch.png',
-              //                         ),
-              //                       ),
-              //                       Text('i stream games on my leisure time.')
-              //                     ],
-              //                   ),
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Expanded(
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(15.0),
-              //     child: MouseRegion(
-              //       onEnter: (a) {
-              //         setState(() {
-              //           discordScale = MediaQuery.of(context).size.height * .24;
-              //         });
-              //       },
-              //       onExit: (a) {
-              //         setState(() {
-              //           discordScale = MediaQuery.of(context).size.height * .2;
-              //         });
-              //       },
-              //       child: InkWell(
-              //         onTap: () async {
-              //           setState(() {
-              //             discordClicked = !discordClicked;
-              //           });
-              //           Future.delayed(const Duration(milliseconds: 150), () {
-              //             setState(() {
-              //               discordClicked = !discordClicked;
-              //             });
-              //             openLink('discord');
-              //           });
-              //         },
-              //         child: Wrap(
-              //           children: [
-              //             AnimatedContainer(
-              //               duration: Duration(milliseconds: 100),
-              //               decoration: BoxDecoration(
-              //                   color: Colors.white,
-              //                   borderRadius: BorderRadius.circular(15),
-              //                   boxShadow: !twitchClicked
-              //                       ? [
-              //                           BoxShadow(
-              //                               color: Colors.grey[500]!,
-              //                               offset: Offset(4, 4),
-              //                               blurRadius: 15,
-              //                               spreadRadius: 1),
-              //                           BoxShadow(
-              //                               color: Colors.white,
-              //                               offset: Offset(-4, -4),
-              //                               blurRadius: 15,
-              //                               spreadRadius: 1)
-              //                         ]
-              //                       : null),
-              //               child: Padding(
-              //                 padding: const EdgeInsets.all(50.0),
-              //                 child: Column(
-              //                   children: [
-              //                     AnimatedContainer(
-              //                       curve: Curves.easeIn,
-              //                       height: discordScale != 0.0
-              //                           ? discordScale
-              //                           : MediaQuery.of(context).size.height *
-              //                               .2,
-              //                       duration: Duration(milliseconds: 150),
-              //                       child: Image.asset(
-              //                         'images/discord.png',
-              //                       ),
-              //                     ),
-              //                     Text(' OogieBoogie#1416 ')
-              //                   ],
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Expanded(
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(15.0),
-              //     child: MouseRegion(
-              //       onEnter: (a) {
-              //         setState(() {
-              //           ytScale = MediaQuery.of(context).size.height * .24;
-              //         });
-              //       },
-              //       onExit: (a) {
-              //         setState(() {
-              //           ytScale = MediaQuery.of(context).size.height * .2;
-              //         });
-              //       },
-              //       child: InkWell(
-              //         onTap: () async {
-              //           setState(() {
-              //             ytClicked = !ytClicked;
-              //           });
-              //           Future.delayed(const Duration(milliseconds: 150), () {
-              //             setState(() {
-              //               ytClicked = !ytClicked;
-              //             });
-              //             openLink('yt');
-              //           });
-              //         },
-              //         child: Wrap(
-              //           children: [
-              //             AnimatedContainer(
-              //               duration: Duration(milliseconds: 100),
-              //               decoration: BoxDecoration(
-              //                   color: Colors.white,
-              //                   borderRadius: BorderRadius.circular(15),
-              //                   boxShadow: !ytClicked
-              //                       ? [
-              //                           BoxShadow(
-              //                               color: Colors.grey[500]!,
-              //                               offset: Offset(4, 4),
-              //                               blurRadius: 15,
-              //                               spreadRadius: 1),
-              //                           BoxShadow(
-              //                               color: Colors.white,
-              //                               offset: Offset(-4, -4),
-              //                               blurRadius: 15,
-              //                               spreadRadius: 1)
-              //                         ]
-              //                       : null),
-              //               child: Padding(
-              //                 padding: const EdgeInsets.all(50.0),
-              //                 child: Column(
-              //                   children: [
-              //                     AnimatedContainer(
-              //                       curve: Curves.easeIn,
-              //                       height: ytScale != 0.0
-              //                           ? ytScale
-              //                           : MediaQuery.of(context).size.height *
-              //                               .2,
-              //                       duration: Duration(milliseconds: 150),
-              //                       child: Image.asset(
-              //                         'assets/images/yt.png',
-              //                       ),
-              //                     ),
-              //                     Text('i put clips from my twitch live stream')
-              //                   ],
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
+            // Expanded(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(15.0),
+            //     child: InkWell(
+            //       onTap: () async {
+            //         setState(() {
+            //           twitchClicked = !twitchClicked;
+            //         });
+            //         Future.delayed(const Duration(milliseconds: 150), () {
+            //           setState(() {
+            //             twitchClicked = !twitchClicked;
+            //           });
+            //           openLink('twitch');
+            //         });
+            //       },
+            //       child: Card(
+            //         child: MouseRegion(
+            //           onEnter: (a) {
+            //             setState(() {
+            //               twitchScale =
+            //                   MediaQuery.of(context).size.height * .24;
+            //             });
+            //           },
+            //           onExit: (a) {
+            //             setState(() {
+            //               twitchScale =
+            //                   MediaQuery.of(context).size.height * .2;
+            //             });
+            //           },
+            //           child: Wrap(
+            //             children: [
+            //               AnimatedContainer(
+            //                 duration: Duration(milliseconds: 100),
+            //                 decoration: BoxDecoration(
+            //                     color: Colors.white,
+            //                     borderRadius: BorderRadius.circular(15),
+            //                     boxShadow: !twitchClicked
+            //                         ? [
+            //                             BoxShadow(
+            //                                 color: Colors.grey[500]!,
+            //                                 offset: Offset(4, 4),
+            //                                 blurRadius: 15,
+            //                                 spreadRadius: 1),
+            //                             BoxShadow(
+            //                                 color: Colors.white,
+            //                                 offset: Offset(-4, -4),
+            //                                 blurRadius: 15,
+            //                                 spreadRadius: 1)
+            //                           ]
+            //                         : null),
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.all(50.0),
+            //                   child: Column(
+            //                     children: [
+            //                       AnimatedContainer(
+            //                         curve: Curves.easeIn,
+            //                         height: twitchScale != 0.0
+            //                             ? twitchScale
+            //                             : MediaQuery.of(context).size.height *
+            //                                 .2,
+            //                         duration: Duration(milliseconds: 150),
+            //                         child: Image.asset(
+            //                           'images/twitch.png',
+            //                         ),
+            //                       ),
+            //                       Text('i stream games on my leisure time.')
+            //                     ],
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Expanded(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(15.0),
+            //     child: MouseRegion(
+            //       onEnter: (a) {
+            //         setState(() {
+            //           discordScale = MediaQuery.of(context).size.height * .24;
+            //         });
+            //       },
+            //       onExit: (a) {
+            //         setState(() {
+            //           discordScale = MediaQuery.of(context).size.height * .2;
+            //         });
+            //       },
+            //       child: InkWell(
+            //         onTap: () async {
+            //           setState(() {
+            //             discordClicked = !discordClicked;
+            //           });
+            //           Future.delayed(const Duration(milliseconds: 150), () {
+            //             setState(() {
+            //               discordClicked = !discordClicked;
+            //             });
+            //             openLink('discord');
+            //           });
+            //         },
+            //         child: Wrap(
+            //           children: [
+            //             AnimatedContainer(
+            //               duration: Duration(milliseconds: 100),
+            //               decoration: BoxDecoration(
+            //                   color: Colors.white,
+            //                   borderRadius: BorderRadius.circular(15),
+            //                   boxShadow: !twitchClicked
+            //                       ? [
+            //                           BoxShadow(
+            //                               color: Colors.grey[500]!,
+            //                               offset: Offset(4, 4),
+            //                               blurRadius: 15,
+            //                               spreadRadius: 1),
+            //                           BoxShadow(
+            //                               color: Colors.white,
+            //                               offset: Offset(-4, -4),
+            //                               blurRadius: 15,
+            //                               spreadRadius: 1)
+            //                         ]
+            //                       : null),
+            //               child: Padding(
+            //                 padding: const EdgeInsets.all(50.0),
+            //                 child: Column(
+            //                   children: [
+            //                     AnimatedContainer(
+            //                       curve: Curves.easeIn,
+            //                       height: discordScale != 0.0
+            //                           ? discordScale
+            //                           : MediaQuery.of(context).size.height *
+            //                               .2,
+            //                       duration: Duration(milliseconds: 150),
+            //                       child: Image.asset(
+            //                         'images/discord.png',
+            //                       ),
+            //                     ),
+            //                     Text(' OogieBoogie#1416 ')
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Expanded(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(15.0),
+            //     child: MouseRegion(
+            //       onEnter: (a) {
+            //         setState(() {
+            //           ytScale = MediaQuery.of(context).size.height * .24;
+            //         });
+            //       },
+            //       onExit: (a) {
+            //         setState(() {
+            //           ytScale = MediaQuery.of(context).size.height * .2;
+            //         });
+            //       },
+            //       child: InkWell(
+            //         onTap: () async {
+            //           setState(() {
+            //             ytClicked = !ytClicked;
+            //           });
+            //           Future.delayed(const Duration(milliseconds: 150), () {
+            //             setState(() {
+            //               ytClicked = !ytClicked;
+            //             });
+            //             openLink('yt');
+            //           });
+            //         },
+            //         child: Wrap(
+            //           children: [
+            //             AnimatedContainer(
+            //               duration: Duration(milliseconds: 100),
+            //               decoration: BoxDecoration(
+            //                   color: Colors.white,
+            //                   borderRadius: BorderRadius.circular(15),
+            //                   boxShadow: !ytClicked
+            //                       ? [
+            //                           BoxShadow(
+            //                               color: Colors.grey[500]!,
+            //                               offset: Offset(4, 4),
+            //                               blurRadius: 15,
+            //                               spreadRadius: 1),
+            //                           BoxShadow(
+            //                               color: Colors.white,
+            //                               offset: Offset(-4, -4),
+            //                               blurRadius: 15,
+            //                               spreadRadius: 1)
+            //                         ]
+            //                       : null),
+            //               child: Padding(
+            //                 padding: const EdgeInsets.all(50.0),
+            //                 child: Column(
+            //                   children: [
+            //                     AnimatedContainer(
+            //                       curve: Curves.easeIn,
+            //                       height: ytScale != 0.0
+            //                           ? ytScale
+            //                           : MediaQuery.of(context).size.height *
+            //                               .2,
+            //                       duration: Duration(milliseconds: 150),
+            //                       child: Image.asset(
+            //                         'assets/images/yt.png',
+            //                       ),
+            //                     ),
+            //                     Text('i put clips from my twitch live stream')
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
       ]),
     );
@@ -351,17 +347,17 @@ class _GamingScreenState extends State<GamingScreen> {
         title = 'valorant';
         exp = "40+ hours";
         agent = "omen, chamber";
-        rank = "diamond 3";
+        rank = "last act rank : diamond 3";
         image = "valorant";
         clicked = valorantClicked;
         scale = valorantScale;
         detail = valorantDetails;
         break;
       case 1:
-        title = 'apex legengs';
+        title = 'apex legends';
         exp = "80+ hours";
         agent = "wraith, ash";
-        rank = "bronze 2";
+        rank = "last act rank : bronze 2";
         image = "apex";
         clicked = apexClicked;
         scale = apexScale;
@@ -420,7 +416,6 @@ class _GamingScreenState extends State<GamingScreen> {
             Future.delayed(const Duration(milliseconds: 150), () {
               setState(() {
                 clicked = !clicked;
-                scale = MediaQuery.of(context).size.height * .2;
               });
               openLink(title);
             });
@@ -437,6 +432,7 @@ class _GamingScreenState extends State<GamingScreen> {
                 children: [
                   AnimatedContainer(
                     duration: Duration(milliseconds: 100),
+                    curve: Curves.fastOutSlowIn,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15),
@@ -455,10 +451,11 @@ class _GamingScreenState extends State<GamingScreen> {
                               ]
                             : null),
                     child: Padding(
-                      padding: const EdgeInsets.all(50.0),
+                      padding: const EdgeInsets.all(30.0),
                       child: Column(
                         children: [
                           AnimatedContainer(
+                            curve: Curves.easeIn,
                             height: scale != 0.0
                                 ? scale
                                 : MediaQuery.of(context).size.height * .2,
@@ -474,7 +471,7 @@ class _GamingScreenState extends State<GamingScreen> {
                               children: [
                                 Expanded(
                                     child: Text(
-                                  " last act rank: ${rank} ",
+                                  "${rank} ",
                                   textAlign: TextAlign.center,
                                 )),
                               ],
@@ -583,16 +580,16 @@ class _GamingScreenState extends State<GamingScreen> {
         padding: const EdgeInsets.all(15.0),
         child: InkWell(
           onTap: () async {
-            setState(() {
-              clicked = !clicked;
-            });
-            Future.delayed(const Duration(milliseconds: 150), () {
-              setState(() {
-                clicked = !clicked;
-                scale = MediaQuery.of(context).size.height * .2;
-              });
-              openLink(title);
-            });
+            // setState(() {
+            //   clicked = !clicked;
+            // });
+            // Future.delayed(const Duration(milliseconds: 150), () {
+            //   setState(() {
+            //     clicked = !clicked;
+            //     scale = MediaQuery.of(context).size.height * .2;
+            //   });
+            //   openLink(title);
+            // });
           },
           child: Card(
             child: MouseRegion(
@@ -606,15 +603,19 @@ class _GamingScreenState extends State<GamingScreen> {
                 children: [
                   InkWell(
                     onTap: () async {
+                      debugPrint('${clicked.toString()}');
                       setState(() {
                         clicked = !clicked;
                       });
+                      debugPrint('${clicked.toString()}');
                       Future.delayed(const Duration(milliseconds: 150), () {
                         setState(() {
                           clicked = !clicked;
+                          debugPrint('${clicked.toString()}');
                         });
                         openLink(link);
                       });
+                      debugPrint('checkpoint');
                     },
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 100),
@@ -636,7 +637,7 @@ class _GamingScreenState extends State<GamingScreen> {
                                 ]
                               : null),
                       child: Padding(
-                        padding: const EdgeInsets.all(50.0),
+                        padding: const EdgeInsets.all(30.0),
                         child: Column(
                           children: [
                             AnimatedContainer(

@@ -25,35 +25,27 @@ class _CodingScreenState extends State<CodingScreen> {
       dnetPad = 5;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: (MediaQuery.of(context).size.height),
-      child: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: Text(
-                'my skills',
-                style: TextStyle(fontSize: 48),
-              ),
-            ),
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            'my skills',
+            style: TextStyle(fontSize: 48),
           ),
-          Expanded(
-            flex: 4,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  skillBox(0),
-                  skillBox(1),
-                  skillBox(2),
-                  skillBox(3),
-                ],
-              ),
-            ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              skillBox(0),
+              skillBox(1),
+              skillBox(2),
+              skillBox(3),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -127,7 +119,7 @@ class _CodingScreenState extends State<CodingScreen> {
 
   Widget skillBox(int skill) {
     late String title, exp, personal, professional, image;
-    late bool detail;
+    late bool detail, clicked;
     late double pad, scale;
 
     switch (skill) {
@@ -142,7 +134,7 @@ class _CodingScreenState extends State<CodingScreen> {
         scale = flutterScale;
         break;
       case 1:
-        title = 'react';
+        title = 'react.js';
         exp = "1 year.";
         personal = "2";
         professional = "1";
@@ -152,7 +144,7 @@ class _CodingScreenState extends State<CodingScreen> {
         scale = reactScale;
         break;
       case 2:
-        title = "vue";
+        title = "vue.js";
         exp = "1 year.";
         personal = "2";
         professional = "0";
@@ -174,7 +166,7 @@ class _CodingScreenState extends State<CodingScreen> {
     }
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Padding(
           padding: const EdgeInsets.all(15.0),
@@ -222,26 +214,28 @@ class _CodingScreenState extends State<CodingScreen> {
                     AnimatedContainer(
                       duration: Duration(milliseconds: 100),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: detail ? Colors.white : Colors.transparent,
                           borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey[500]!,
-                                offset: Offset(4, 4),
-                                blurRadius: 15,
-                                spreadRadius: 1),
-                            BoxShadow(
-                                color: Colors.white,
-                                offset: Offset(-4, -4),
-                                blurRadius: 15,
-                                spreadRadius: 1)
-                          ]),
+                          boxShadow: detail
+                              ? [
+                                  BoxShadow(
+                                      color: Colors.grey[500]!,
+                                      offset: Offset(4, 4),
+                                      blurRadius: 15,
+                                      spreadRadius: 1),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-4, -4),
+                                      blurRadius: 15,
+                                      spreadRadius: 1)
+                                ]
+                              : null),
                       child: Padding(
-                        padding: const EdgeInsets.all(50.0),
+                        padding: const EdgeInsets.all(30.0),
                         child: Column(
                           children: [
                             AnimatedContainer(
-                              padding: EdgeInsets.symmetric(vertical: pad),
+                              padding: EdgeInsets.all(pad),
                               height: scale != 0.0
                                   ? scale
                                   : MediaQuery.of(context).size.height * .2,

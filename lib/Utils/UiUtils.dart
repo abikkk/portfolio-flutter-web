@@ -50,7 +50,7 @@ openLink(type) async {
           throw 'Could not launch Valorant stats Link!';
         break;
       }
-    case 'apex':
+    case 'apex legends':
       {
         if (!await launchUrl(Uri.parse(
             'https://apex.tracker.gg/apex/profile/origin/TheOogieBoogie/overview')))
@@ -64,7 +64,7 @@ openLink(type) async {
           throw 'Could not launch PUBG stats Link!';
         break;
       }
-    case 'gtav':
+    case 'gta v':
       {
         if (!await launchUrl(Uri.parse(
             'https://socialclub.rockstargames.com/member/thepepepopoman/')))

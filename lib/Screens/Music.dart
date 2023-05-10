@@ -223,153 +223,136 @@ class _MusicScreenState extends State<MusicScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: (MediaQuery.of(context).size.height),
-      child: Column(
-        children: [
-          Expanded(
-            // flex: 2,
-            child: Center(
-              child: Text(
-                'listen to my music',
-                style: TextStyle(fontSize: 48),
-              ),
-            ),
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            'listen to my music',
+            style: TextStyle(fontSize: 48),
           ),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: InkWell(
-                        onTap: () async {
-                          openLink('soundcloud');
-                        },
-                        child: MouseRegion(
-                          onEnter: (a) {
-                            setState(() {
-                              scScale = MediaQuery.of(context).size.height * .2;
-                            });
-                          },
-                          onExit: (a) {
-                            setState(() {
-                              scScale =
-                                  MediaQuery.of(context).size.height * .18;
-                            });
-                          },
-                          child: Card(
-                            child: Wrap(
-                              children: [
-                                AnimatedContainer(
-                                  duration: Duration(milliseconds: 100),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      boxShadow: !scClicked
-                                          ? [
-                                              BoxShadow(
-                                                  color: Colors.grey[500]!,
-                                                  offset: Offset(4, 4),
-                                                  blurRadius: 15,
-                                                  spreadRadius: 1),
-                                              BoxShadow(
-                                                  color: Colors.white,
-                                                  offset: Offset(-4, -4),
-                                                  blurRadius: 15,
-                                                  spreadRadius: 1)
-                                            ]
-                                          : null),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: AnimatedContainer(
-                                      height: scScale != 0.0
-                                          ? scScale
-                                          : MediaQuery.of(context).size.height *
-                                              .18,
-                                      duration: Duration(milliseconds: 150),
-                                      child: Image.asset(
-                                        'images/soundcloud.png',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: InkWell(
+                onTap: () async {
+                  openLink('soundcloud');
+                },
+                child: MouseRegion(
+                  onEnter: (a) {
+                    setState(() {
+                      scScale = MediaQuery.of(context).size.height * .2;
+                    });
+                  },
+                  onExit: (a) {
+                    setState(() {
+                      scScale = MediaQuery.of(context).size.height * .18;
+                    });
+                  },
+                  child: Card(
+                    child: Wrap(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 100),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: !scClicked
+                                  ? [
+                                      BoxShadow(
+                                          color: Colors.grey[500]!,
+                                          offset: Offset(4, 4),
+                                          blurRadius: 15,
+                                          spreadRadius: 1),
+                                      BoxShadow(
+                                          color: Colors.white,
+                                          offset: Offset(-4, -4),
+                                          blurRadius: 15,
+                                          spreadRadius: 1)
+                                    ]
+                                  : null),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: AnimatedContainer(
+                              height: scScale != 0.0
+                                  ? scScale
+                                  : MediaQuery.of(context).size.height * .18,
+                              duration: Duration(milliseconds: 150),
+                              child: Image.asset(
+                                'images/soundcloud.png',
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Center(
-                      child: InkWell(
-                        onTap: () async {
-                          openLink('bandlabs');
-                        },
-                        child: MouseRegion(
-                          onEnter: (a) {
-                            setState(() {
-                              bdScale = MediaQuery.of(context).size.height * .2;
-                            });
-                          },
-                          onExit: (a) {
-                            setState(() {
-                              bdScale =
-                                  MediaQuery.of(context).size.height * .18;
-                            });
-                          },
-                          child: Card(
-                            child: Wrap(
-                              children: [
-                                AnimatedContainer(
-                                  duration: Duration(milliseconds: 100),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      boxShadow: !blClicked
-                                          ? [
-                                              BoxShadow(
-                                                  color: Colors.grey[500]!,
-                                                  offset: Offset(4, 4),
-                                                  blurRadius: 15,
-                                                  spreadRadius: 1),
-                                              BoxShadow(
-                                                  color: Colors.white,
-                                                  offset: Offset(-4, -4),
-                                                  blurRadius: 15,
-                                                  spreadRadius: 1)
-                                            ]
-                                          : null),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: AnimatedContainer(
-                                      height: bdScale != 0.0
-                                          ? bdScale
-                                          : MediaQuery.of(context).size.height *
-                                              .18,
-                                      duration: Duration(milliseconds: 150),
-                                      child: Image.asset(
-                                        'images/bandlab.png',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: InkWell(
+                onTap: () async {
+                  openLink('bandlabs');
+                },
+                child: MouseRegion(
+                  onEnter: (a) {
+                    setState(() {
+                      bdScale = MediaQuery.of(context).size.height * .2;
+                    });
+                  },
+                  onExit: (a) {
+                    setState(() {
+                      bdScale = MediaQuery.of(context).size.height * .18;
+                    });
+                  },
+                  child: Card(
+                    child: Wrap(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 100),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: !blClicked
+                                  ? [
+                                      BoxShadow(
+                                          color: Colors.grey[500]!,
+                                          offset: Offset(4, 4),
+                                          blurRadius: 15,
+                                          spreadRadius: 1),
+                                      BoxShadow(
+                                          color: Colors.white,
+                                          offset: Offset(-4, -4),
+                                          blurRadius: 15,
+                                          spreadRadius: 1)
+                                    ]
+                                  : null),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: AnimatedContainer(
+                              height: bdScale != 0.0
+                                  ? bdScale
+                                  : MediaQuery.of(context).size.height * .18,
+                              duration: Duration(milliseconds: 150),
+                              child: Image.asset(
+                                'images/bandlab.png',
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      ],
     );
   }
 
