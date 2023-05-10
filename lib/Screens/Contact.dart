@@ -1,12 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import '../Controllers/MainController.dart';
 
 class ContactContainer extends StatefulWidget {
-  const ContactContainer({Key? key}) : super(key: key);
+   ContactContainer({Key? key}) : super(key: key);
 
   @override
   _ContactContainerState createState() => _ContactContainerState();
@@ -14,6 +15,7 @@ class ContactContainer extends StatefulWidget {
 
 class _ContactContainerState extends State<ContactContainer> {
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController emailController = new TextEditingController(),
       messageController = new TextEditingController();
   bool submitClicked = false, isHTML = false;
@@ -48,6 +50,7 @@ class _ContactContainerState extends State<ContactContainer> {
       ),
     );
   }
+
   void _openImagePicker() async {
     final picker = ImagePicker();
     PickedFile? pick = await picker.getImage(source: ImageSource.gallery);
@@ -90,7 +93,7 @@ class _ContactContainerState extends State<ContactContainer> {
       children: [
         Text(
           'contact me',
-          style: TextStyle(fontSize: 48),
+          // style: TextStyle(fontSize: 48),
         ),
         Form(
           key: _formKey,
@@ -214,14 +217,6 @@ class _ContactContainerState extends State<ContactContainer> {
           ),
         ),
       ],
-    );
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
-        ),
-      ),
     );
   }
 }

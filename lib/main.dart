@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:my_porfolio/Screens/Home.dart';
-import 'package:my_porfolio/Screens/UnknownPage.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
-import 'Utils/PageRoutes.dart';
+import 'Controllers/MainController.dart';
 
-void main() {
+main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // initController();
   runApp(MaterialApp(
     theme: ThemeData(
       fontFamily: CONSTANTS.appFont,
@@ -14,39 +14,17 @@ void main() {
   ));
 }
 
-class BaseContainer extends StatefulWidget {
-  const BaseContainer({Key? key}) : super(key: key);
+// Future<void> initController() async {
+//   Get.put(MainController());
+// }
 
-  @override
-  _BaseContainerState createState() => _BaseContainerState();
-}
+class BaseContainer extends StatelessWidget {
+  BaseContainer({Key? key}) : super(key: key);
 
-class _BaseContainerState extends State<BaseContainer> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setTheme();
-  }
-
-  setTheme() {}
   @override
   Widget build(BuildContext context) {
-    // INITIALIZING THE ROUTES
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.fadeIn,
-      // getPages: [
-      //   GetPage(
-      //       name: PAGEROUTES.HOMECONTAINER,
-      //       page: () => HomeContainer(
-      //             navIndex: 0,
-      //           )),
-      //   GetPage(
-      //       name: PAGEROUTES.NOTFOUND,
-      //       page: () => UnknownPage()), // 404 not found
-      //   // GetPage(name: "/loading", page: () => loading()),
-      // ],
       theme: ThemeData(
         primaryColor: Colors.grey[100],
         fontFamily: 'Quicksand',
@@ -67,9 +45,7 @@ class _BaseContainerState extends State<BaseContainer> {
           ),
         ),
       ),
-      home: HomeContainer(
-        navIndex: 0,
-      ),
+      home: HomeContainer(),
     );
   }
 }

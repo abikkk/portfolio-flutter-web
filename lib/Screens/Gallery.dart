@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class GalleryScreen extends StatefulWidget {
+class GalleryScreen extends StatelessWidget {
   const GalleryScreen({Key? key}) : super(key: key);
 
-  @override
-  State<GalleryScreen> createState() => _GalleryScreenState();
-}
-
-class _GalleryScreenState extends State<GalleryScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
