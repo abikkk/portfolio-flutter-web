@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_porfolio/main.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
 import '../Utils/FloatingNavBar.dart';

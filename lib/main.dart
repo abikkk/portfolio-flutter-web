@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_porfolio/Screens/Home.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
-import 'Controllers/MainController.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // initController();
   runApp(MaterialApp(
     theme: ThemeData(
       fontFamily: CONSTANTS.appFont,
@@ -13,10 +11,6 @@ main() {
     home: BaseContainer(),
   ));
 }
-
-// Future<void> initController() async {
-//   Get.put(MainController());
-// }
 
 class BaseContainer extends StatelessWidget {
   BaseContainer({Key? key}) : super(key: key);

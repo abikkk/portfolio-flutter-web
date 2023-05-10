@@ -48,6 +48,12 @@ class UiUtils {
             throw 'Could not launch LinkedIn Link!';
           break;
         }
+      case 'discord':
+        {
+          if (!await launchUrl(Uri.parse('https://discord.gg/949XfbfzpA')))
+            throw 'Could not launch Discord Link!';
+          break;
+        }
       case 'valorant':
         {
           if (!await launchUrl(Uri.parse(
@@ -132,8 +138,8 @@ class WidgetUtils {
                     !mainController
                         .codingMorphButtons[buttonType].isClicked.value;
 
-                // UiUtils.openLink(
-                //     mainController.codingMorphButtons[buttonType].link);
+                UiUtils.openLink(
+                    mainController.codingMorphButtons[buttonType].link);
               });
             },
             child: Wrap(
@@ -211,8 +217,8 @@ class WidgetUtils {
                     !mainController
                         .gamingMorphButtons[buttonType].isClicked.value;
 
-                // UiUtils.openLink(
-                //     mainController.gamingMorphButtons[buttonType].link);
+                UiUtils.openLink(
+                    mainController.gamingMorphButtons[buttonType].link);
               });
             },
             child: Wrap(
@@ -290,8 +296,8 @@ class WidgetUtils {
                     !mainController
                         .socialMorphButtons[buttonType].isClicked.value;
 
-                // UiUtils.openLink(
-                //     mainController.gamingMorphButtons[buttonType].link);
+                UiUtils.openLink(
+                    mainController.gamingMorphButtons[buttonType].link);
               });
             },
             child: Wrap(
@@ -368,8 +374,8 @@ class WidgetUtils {
                     !mainController
                         .musicMorphButtons[buttonType].isClicked.value;
 
-                // UiUtils.openLink(
-                //     mainController.gamingMorphButtons[buttonType].link);
+                UiUtils.openLink(
+                    mainController.gamingMorphButtons[buttonType].link);
               });
             },
             child: Wrap(

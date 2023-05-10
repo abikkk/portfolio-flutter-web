@@ -13,14 +13,6 @@ class MainController extends GetxController {
   final PageController pageController = PageController(
     initialPage: 0,
   );
-  // final RxList<Widget> pages = [
-  //   HomeScreen(),
-  //   CodingScreen(),
-  //   GamingScreen(),
-  //   MusicScreen(),
-  //   SocialsContainer(),
-  //   ContactContainer()
-  // ].obs;
 
   // navigation bar
   final RxInt hoverID = 0.obs, navIndex = 0.obs, navIconID = 0.obs;
