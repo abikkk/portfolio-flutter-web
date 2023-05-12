@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_porfolio/Screens/Home.dart';
+import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(
       fontFamily: CONSTANTS.appFont,
     ),
@@ -19,26 +21,7 @@ class BaseContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.grey[100],
-        fontFamily: 'Quicksand',
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontFamily: 'Quicksand',
-            fontSize: 80.0,
-            fontWeight: FontWeight.bold,
-          ),
-          titleLarge: TextStyle(
-            fontFamily: 'Quicksand',
-            fontSize: 48.0,
-            fontStyle: FontStyle.italic,
-          ),
-          bodyMedium: TextStyle(
-            fontFamily: 'Quicksand',
-            fontSize: 17.0,
-          ),
-        ),
-      ),
+      theme: AppThemeData.appThemeData,
       home: HomeContainer(),
     );
   }

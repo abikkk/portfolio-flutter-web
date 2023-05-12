@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import '../Controllers/MainController.dart';
 
-class MusicScreen extends StatelessWidget {
-  MusicScreen({Key? key, required this.mainController}) : super(key: key);
+class DesktopMusicScreen extends StatelessWidget {
+  DesktopMusicScreen({Key? key, required this.mainController})
+      : super(key: key);
 
   final MainController mainController;
 
@@ -33,5 +34,15 @@ class MusicScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class MusicScreen extends StatelessWidget {
+  const MusicScreen({Key? key,required this.mainController}) : super(key: key);
+  final MainController mainController;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

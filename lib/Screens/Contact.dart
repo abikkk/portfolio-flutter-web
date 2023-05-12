@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import '../Controllers/MainController.dart';
 
 class ContactContainer extends StatefulWidget {
-   ContactContainer({Key? key}) : super(key: key);
+  ContactContainer({Key? key}) : super(key: key);
 
   @override
   _ContactContainerState createState() => _ContactContainerState();
@@ -207,7 +205,7 @@ class _ContactContainerState extends State<ContactContainer> {
                                 ]
                               : null),
                       child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Text('submit')),
                     ),
                   ),

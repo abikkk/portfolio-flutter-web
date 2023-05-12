@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_porfolio/Controllers/MainController.dart';
+import 'package:my_porfolio/Utils/AppThemeData.dart';
+import 'package:my_porfolio/Utils/UiUtils.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+class DesktopHomeScreen extends StatelessWidget {
+  DesktopHomeScreen({Key? key, required this.mainController}) : super(key: key);
 
+  final MainController mainController;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -25,39 +30,44 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text(
                 'hi there!',
-                style: TextStyle(fontSize: 48),
+                style: AppThemeData.appThemeData.textTheme.headlineSmall,
               ),
               Text(
                 'abik vaidhya',
-                style: TextStyle(fontSize: 85),
+                style: AppThemeData.appThemeData.textTheme.headlineLarge,
               ),
-              IntrinsicHeight(
-                child: FittedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        ' frontend developer ',
-                        style: TextStyle(fontSize: 20),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width / 2.4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: subtitleTexts(
+                        mainController: mainController,
+                        label: 'frontend developer',
+                        id: 0,
                       ),
-                      VerticalDivider(
-                        color: Colors.grey,
-                        thickness: 1,
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: subtitleTexts(
+                          mainController: mainController,
+                          label: 'gamer',
+                          id: 1,
+                        ),
                       ),
-                      Text(
-                        ' gamer ',
-                        style: TextStyle(fontSize: 20),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: subtitleTexts(
+                          mainController: mainController,
+                          label: 'musician',
+                          id: 2,
+                        ),
                       ),
-                      VerticalDivider(
-                        color: Colors.grey,
-                        thickness: 1,
-                      ),
-                      Text(
-                        ' musician ',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -65,5 +75,79 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class subtitleTexts extends StatelessWidget {
+  const subtitleTexts(
+      {Key? key,
+      required this.mainController,
+      required this.label,
+      required this.id})
+      : super(key: key);
+
+  final MainController mainController;
+  final String label;
+  final int id;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (v) {
+        switch (id) {
+          case 0:
+            mainController.subtitle_1.value = true;
+            break;
+          case 1:
+            mainController.subtitle_2.value = true;
+            break;
+          case 2:
+            mainController.subtitle_3.value = true;
+            break;
+        }
+      },
+      onExit: (v) {
+        switch (id) {
+          case 0:
+            mainController.subtitle_1.value = false;
+            break;
+          case 1:
+            mainController.subtitle_2.value = false;
+            break;
+          case 2:
+            mainController.subtitle_3.value = false;
+            break;
+        }
+      },
+      child: Obx(
+        () => AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 200),
+          style: !((id == 0)
+                  ? mainController.subtitle_1.value
+                  : (id == 1)
+                      ? mainController.subtitle_2.value
+                      : mainController.subtitle_3.value)
+              ? AppThemeData.appThemeData.textTheme.displaySmall!
+              : AppThemeData.appThemeData.textTheme.titleSmall!,
+          child: InkWell(
+            onTap: () {
+              UiUtils.navigate(id + 2, mainController);
+            },
+            child: Text(
+              '${label}',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Models/MorphButton.dart';
-// import '../Screens/Coding.dart';
-// import '../Screens/Contact.dart';
-// import '../Screens/Gaming.dart';
-// import '../Screens/Head.dart';
-// import '../Screens/Music.dart';
-// import '../Screens/Socials.dart';
+import 'package:my_porfolio/Utils/Constants.dart';
 
 class MainController extends GetxController {
-  // main
+  // page controller
   final PageController pageController = PageController(
+    initialPage: 0,
+  );
+  final PageController codingController = PageController(
+    initialPage: 0,
+  );
+  final PageController streamController = PageController(
+    initialPage: 0,
+  );
+  final PageController musicController = PageController(
+    initialPage: 0,
+  );
+  final PageController socialsController = PageController(
     initialPage: 0,
   );
 
@@ -21,101 +28,275 @@ class MainController extends GetxController {
       headerTop = 0.0.obs,
       pad = 50.0.obs,
       scale = 0.0.obs;
+  final RxBool showScrollDownBtn = false.obs;
+
+// home screen
+  final RxBool subtitle_1 = false.obs,
+      subtitle_2 = false.obs,
+      subtitle_3 = false.obs;
+
+  // coding screen
+  final RxBool flutter = false.obs, react = false.obs, vue = false.obs;
+  final RxDouble vsOpa = 0.0.obs, asOpa = 0.0.obs;
+  final RxDouble vsValue = CONSTANTS.vscodePoints.obs,
+      asValue = CONSTANTS.androidStudioPoints.obs;
+  final Map<String, double> projectMap = {
+    "Flutter": CONSTANTS.flutterProjects,
+    "React": CONSTANTS.reactProjects,
+    "Vue": CONSTANTS.vueProjects
+  };
+  final Map<String, double> usageFlutter = {
+    "VS Code": 55,
+    "Android Studio": 45,
+  };
+  final Map<String, double> usageReact = {
+    "VS Code": 100,
+    "Android Studio": 0,
+  };
+  final Map<String, double> usageVue = {
+    "VS Code": 100,
+    "Android Studio": 0,
+  };
+  final skillsGradientList = <List<Color>>[
+    [
+      Color.fromRGBO(41, 71, 236, 1),
+      Color.fromRGBO(93, 147, 247, 1),
+    ],
+    [
+      Color.fromRGBO(5, 111, 160, 1),
+      Color.fromRGBO(12, 181, 248, 1),
+    ],
+    [
+      Color.fromRGBO(14, 180, 116, 1),
+      Color.fromRGBO(124, 238, 143, 1),
+    ]
+  ];
+  final ideGradientList = <List<Color>>[
+    [
+      Color.fromRGBO(5, 111, 160, 1),
+      Color.fromRGBO(12, 181, 248, 1),
+    ],
+    [
+      Color.fromRGBO(124, 238, 143, 1),
+      Color.fromRGBO(14, 180, 116, 1),
+    ]
+  ];
+
+  // gaming screen
+  final RxBool ytHover = false.obs,
+      twitchHover = false.obs,
+      discordHover = false.obs;
+  final gameGradientList = <List<Color>>[
+    [
+      Color.fromRGBO(212, 30, 30, 1),
+      Color.fromRGBO(247, 83, 83, 1),
+    ],
+    [
+      Color.fromRGBO(143, 38, 38, 1),
+      Color.fromRGBO(235, 24, 24, 1),
+    ],
+    [
+      Color.fromRGBO(14, 180, 116, 1),
+      Color.fromRGBO(124, 238, 143, 1),
+    ]
+  ];
+  final streamGradientList = <List<Color>>[
+    [
+      Color.fromRGBO(212, 30, 30, 1),
+      Color.fromRGBO(247, 83, 83, 1),
+    ],
+    [
+      Color.fromRGBO(176, 3, 245, 1),
+      Color.fromRGBO(224, 82, 243, 1),
+    ],
+    [
+      Color.fromRGBO(6, 118, 247, 1),
+      Color.fromRGBO(73, 141, 243, 1),
+    ]
+  ];
+
+  // socials screen
+  final socialGradientList = <List<Color>>[
+    [
+      Color.fromRGBO(73, 141, 243, 1),
+      Color.fromRGBO(6, 118, 247, 1),
+    ],
+    [
+      Color.fromRGBO(238, 155, 61, 1),
+      Color.fromRGBO(202, 15, 93, 1),
+    ],
+    [
+      Color.fromRGBO(101, 160, 236, 1),
+      Color.fromRGBO(38, 156, 235, 1),
+    ],
+    [
+      Color.fromRGBO(6, 118, 247, 1),
+      Color.fromRGBO(73, 141, 243, 1),
+    ],
+  ];
+
+  // music screen
+  final musicGradientList = <List<Color>>[
+    [
+      Color.fromRGBO(238, 65, 21, 1),
+      Color.fromRGBO(241, 115, 77, 1),
+    ],
+    [
+      Color.fromRGBO(238, 46, 46, 1),
+      Color.fromRGBO(247, 83, 83, 1),
+    ],
+  ];
 
 // morphic buttons
   RxList<MorphButton> codingMorphButtons = [
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'flutter'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'react'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'vue'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs)
       ].obs,
+      codeIDEMorphButtons = [
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'vscode'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'vscode'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'android_studio'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'android_studio'.obs),
+      ].obs,
       gamingMorphButtons = [
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'valorant'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'valorant'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'apex'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'apex legends'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'gtav'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'gta v'.obs),
       ].obs,
-      socialMorphButtons = [
+      streamMorphButtons = [
         MorphButton(
             isClicked: false.obs,
-            image: 'fb'.obs,
-            pad: 50.0.obs,
-            scale: 0.0.obs,
-            link: 'fb'.obs),
-        MorphButton(
-            isClicked: false.obs,
-            image: 'ig'.obs,
-            pad: 50.0.obs,
-            scale: 0.0.obs,
-            link: 'ig'.obs),
-        MorphButton(
-            isClicked: false.obs,
-            image: 'twitter'.obs,
-            pad: 50.0.obs,
-            scale: 0.0.obs,
-            link: 'twitter'.obs),
-        MorphButton(
-            isClicked: false.obs,
-            image: 'linkd'.obs,
-            pad: 50.0.obs,
-            scale: 0.0.obs,
-            link: 'linkd'.obs),
-        MorphButton(
-            isClicked: false.obs,
+            showDetails: false.obs,
             image: 'yt'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'yt'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'twitch'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'twitch'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'discord'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'discord'.obs),
       ].obs,
+      socialMorphButtons = [
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'fb'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'fb'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'ig'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'ig'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'twitter'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'twitter'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'linkd'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'linkd'.obs),
+      ].obs,
+      jobSocialsMorphButtons = [
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'linkd'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'linkd'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'github'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'github'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            image: 'gitlab'.obs,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'gitlab'.obs),
+      ].obs,
       musicMorphButtons = [
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'soundCloud'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'soundcloud'.obs),
         MorphButton(
             isClicked: false.obs,
+            showDetails: false.obs,
             image: 'bandlab'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,

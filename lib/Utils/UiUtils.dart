@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'AppThemeData.dart';
 
 class UiUtils {
   // web page launcher
@@ -94,6 +97,10 @@ class UiUtils {
             throw 'Could not launch GitHub Link!';
           break;
         }
+      default:
+        {
+          throw '${type}';
+        }
     }
   }
 
@@ -121,10 +128,14 @@ class WidgetUtils {
           onEnter: (a) {
             mainController.codingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .14;
+            mainController.codingMorphButtons[buttonType].showDetails.value =
+                true;
           },
           onExit: (a) {
             mainController.codingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .12;
+            mainController.codingMorphButtons[buttonType].showDetails.value =
+                false;
           },
           child: InkWell(
             onTap: () async {
@@ -132,14 +143,18 @@ class WidgetUtils {
                   !mainController
                       .codingMorphButtons[buttonType].isClicked.value;
 
+              mainController.codingController.animateToPage((buttonType + 1),
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeInOut);
+
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
                 mainController.codingMorphButtons[buttonType].isClicked.value =
                     !mainController
                         .codingMorphButtons[buttonType].isClicked.value;
 
-                UiUtils.openLink(
-                    mainController.codingMorphButtons[buttonType].link);
+                // mainController
+                //     .codingMorphButtons[buttonType].showDetails.value = true;
               });
             },
             child: Wrap(
@@ -149,6 +164,12 @@ class WidgetUtils {
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
                       color: Colors.white,
+                      gradient: (mainController
+                              .codingMorphButtons[buttonType].showDetails.value)
+                          ? LinearGradient(
+                              colors:
+                                  mainController.skillsGradientList[buttonType])
+                          : null,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: !mainController
                               .codingMorphButtons[buttonType].isClicked.value
@@ -178,7 +199,7 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/${mainController.codingMorphButtons[buttonType].image}.png',
+                        'assets/images/icons/${mainController.codingMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -200,16 +221,24 @@ class WidgetUtils {
           onEnter: (a) {
             mainController.gamingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .14;
+            mainController.gamingMorphButtons[buttonType].showDetails.value =
+                true;
           },
           onExit: (a) {
             mainController.gamingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .12;
+            mainController.gamingMorphButtons[buttonType].showDetails.value =
+                false;
           },
           child: InkWell(
             onTap: () async {
               mainController.gamingMorphButtons[buttonType].isClicked.value =
                   !mainController
                       .gamingMorphButtons[buttonType].isClicked.value;
+
+              // mainController.gamingController.animateToPage(buttonType + 1,
+              //     duration: Duration(milliseconds: 200),
+              //     curve: Curves.easeInOut);
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
@@ -218,7 +247,7 @@ class WidgetUtils {
                         .gamingMorphButtons[buttonType].isClicked.value;
 
                 UiUtils.openLink(
-                    mainController.gamingMorphButtons[buttonType].link);
+                    mainController.gamingMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -229,6 +258,12 @@ class WidgetUtils {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      gradient: (mainController
+                              .gamingMorphButtons[buttonType].showDetails.value)
+                          ? LinearGradient(
+                              colors:
+                                  mainController.gameGradientList[buttonType])
+                          : null,
                       boxShadow: !mainController
                               .gamingMorphButtons[buttonType].isClicked.value
                           ? [
@@ -257,7 +292,100 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/${mainController.gamingMorphButtons[buttonType].image}.png',
+                        'assets/images/icons/${mainController.gamingMorphButtons[buttonType].image}.png',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget streamMorphButtons(
+      BuildContext context, MainController mainController, int buttonType) {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: MouseRegion(
+          onEnter: (a) {
+            mainController.streamMorphButtons[buttonType].scale.value =
+                MediaQuery.of(context).size.height * .14;
+            mainController.streamMorphButtons[buttonType].showDetails.value =
+                true;
+          },
+          onExit: (a) {
+            mainController.streamMorphButtons[buttonType].scale.value =
+                MediaQuery.of(context).size.height * .12;
+            mainController.streamMorphButtons[buttonType].showDetails.value =
+                false;
+          },
+          child: InkWell(
+            onTap: () async {
+              mainController.streamMorphButtons[buttonType].isClicked.value =
+                  !mainController
+                      .streamMorphButtons[buttonType].isClicked.value;
+
+              mainController.streamController.animateToPage(buttonType,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeInOut);
+
+              // delay
+              Future.delayed(const Duration(milliseconds: 150), () {
+                mainController.streamMorphButtons[buttonType].isClicked.value =
+                    !mainController
+                        .streamMorphButtons[buttonType].isClicked.value;
+
+                // UiUtils.openLink(
+                //     mainController.streamMorphButtons[buttonType].link.value);
+              });
+            },
+            child: Wrap(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 100),
+                  curve: Curves.fastOutSlowIn,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: (mainController
+                              .streamMorphButtons[buttonType].showDetails.value)
+                          ? LinearGradient(
+                              colors:
+                                  mainController.streamGradientList[buttonType])
+                          : null,
+                      boxShadow: !mainController
+                              .streamMorphButtons[buttonType].isClicked.value
+                          ? [
+                              BoxShadow(
+                                  color: Colors.grey[500]!,
+                                  offset: Offset(4, 4),
+                                  blurRadius: 15,
+                                  spreadRadius: 1),
+                              BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(-4, -4),
+                                  blurRadius: 15,
+                                  spreadRadius: 1)
+                            ]
+                          : null),
+                  child: Padding(
+                    padding: EdgeInsets.all(mainController
+                        .streamMorphButtons[buttonType].pad.value),
+                    child: AnimatedContainer(
+                      curve: Curves.easeIn,
+                      height: mainController
+                                  .streamMorphButtons[buttonType].scale.value !=
+                              0.0
+                          ? mainController
+                              .streamMorphButtons[buttonType].scale.value
+                          : MediaQuery.of(context).size.height * .12,
+                      duration: Duration(milliseconds: 150),
+                      child: Image.asset(
+                        'assets/images/icons/${mainController.streamMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -279,16 +407,24 @@ class WidgetUtils {
           onEnter: (a) {
             mainController.socialMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .14;
+            mainController.socialMorphButtons[buttonType].showDetails.value =
+                true;
           },
           onExit: (a) {
             mainController.socialMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .12;
+            mainController.socialMorphButtons[buttonType].showDetails.value =
+                false;
           },
           child: InkWell(
             onTap: () async {
               mainController.socialMorphButtons[buttonType].isClicked.value =
                   !mainController
                       .socialMorphButtons[buttonType].isClicked.value;
+
+              // mainController.socialsController.animateToPage(buttonType,
+              //     duration: Duration(milliseconds: 200),
+              //     curve: Curves.easeInOut);
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
@@ -297,7 +433,7 @@ class WidgetUtils {
                         .socialMorphButtons[buttonType].isClicked.value;
 
                 UiUtils.openLink(
-                    mainController.gamingMorphButtons[buttonType].link);
+                    mainController.socialMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -308,6 +444,12 @@ class WidgetUtils {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      gradient: (mainController
+                              .socialMorphButtons[buttonType].showDetails.value)
+                          ? LinearGradient(
+                              colors:
+                                  mainController.socialGradientList[buttonType])
+                          : null,
                       boxShadow: !mainController
                               .socialMorphButtons[buttonType].isClicked.value
                           ? [
@@ -336,7 +478,7 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/${mainController.socialMorphButtons[buttonType].image}.png',
+                        'assets/images/icons/${mainController.socialMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -358,15 +500,23 @@ class WidgetUtils {
           onEnter: (a) {
             mainController.musicMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .14;
+            mainController.musicMorphButtons[buttonType].showDetails.value =
+                true;
           },
           onExit: (a) {
             mainController.musicMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .12;
+            mainController.musicMorphButtons[buttonType].showDetails.value =
+                false;
           },
           child: InkWell(
             onTap: () async {
               mainController.musicMorphButtons[buttonType].isClicked.value =
                   !mainController.musicMorphButtons[buttonType].isClicked.value;
+
+              // mainController.musicController.animateToPage(buttonType + 1,
+              //     duration: Duration(milliseconds: 200),
+              //     curve: Curves.easeInOut);
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
@@ -375,7 +525,7 @@ class WidgetUtils {
                         .musicMorphButtons[buttonType].isClicked.value;
 
                 UiUtils.openLink(
-                    mainController.gamingMorphButtons[buttonType].link);
+                    mainController.musicMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -386,6 +536,12 @@ class WidgetUtils {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      gradient: (mainController
+                              .musicMorphButtons[buttonType].showDetails.value)
+                          ? LinearGradient(
+                              colors:
+                                  mainController.musicGradientList[buttonType])
+                          : null,
                       boxShadow: !mainController
                               .musicMorphButtons[buttonType].isClicked.value
                           ? [
@@ -414,7 +570,7 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/${mainController.musicMorphButtons[buttonType].image}.png',
+                        'assets/images/icons/${mainController.musicMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -426,6 +582,366 @@ class WidgetUtils {
       ),
     );
   }
+
+  static Widget StreamLinkButtons(
+    MainController mainController,
+    int id,
+    String label,
+  ) {
+    return MouseRegion(
+      onEnter: (event) {
+        switch (id) {
+          case 0:
+            mainController.ytHover.value = true;
+            break;
+          case 1:
+            mainController.twitchHover.value = true;
+            break;
+          case 2:
+            mainController.discordHover.value = true;
+            break;
+        }
+      },
+      onExit: (event) {
+        switch (id) {
+          case 0:
+            mainController.ytHover.value = false;
+            break;
+          case 1:
+            mainController.twitchHover.value = false;
+            break;
+          case 2:
+            mainController.discordHover.value = false;
+            break;
+        }
+      },
+      child: Obx(
+        () => AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          padding: EdgeInsets.all(14),
+          decoration: BoxDecoration(
+              gradient: ((id == 0)
+                      ? mainController.ytHover.value
+                      : (id == 1)
+                          ? mainController.twitchHover.value
+                          : mainController.discordHover.value)
+                  ? LinearGradient(
+                      colors: mainController.streamGradientList[id])
+                  : null,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              boxShadow: (mainController.ytHover.value)
+                  ? [
+                      BoxShadow(
+                          color: Colors.grey[500]!,
+                          offset: Offset(4, 4),
+                          blurRadius: 15,
+                          spreadRadius: 1),
+                      BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-4, -4),
+                          blurRadius: 15,
+                          spreadRadius: 1)
+                    ]
+                  : null),
+          child: TextButton.icon(
+            onPressed: () {
+              switch (id) {
+                case 0:
+                  UiUtils.openLink('yt');
+                  break;
+                case 1:
+                  UiUtils.openLink('twitch');
+                  break;
+                case 2:
+                  UiUtils.openLink('discord');
+                  break;
+              }
+            },
+            label: Text(
+              '${label}',
+              style: AppThemeData.appThemeData.textTheme.headlineMedium,
+            ),
+            icon: Icon(
+              // !((id == 0)
+              //         ? mainController.ytHover.value
+              //         : (id == 1)
+              //             ? mainController.twitchHover.value
+              //             : mainController.discordHover.value)
+              //     ? Icons.link
+              //     :
+              Icons.arrow_forward_ios_rounded,
+              color: ((id == 0)
+                      ? mainController.ytHover.value
+                      : (id == 1)
+                          ? mainController.twitchHover.value
+                          : mainController.discordHover.value)
+                  ? AppThemeData.appThemeData.primaryColor
+                  : Colors.transparent,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget codingProgressRow(
+      MainController mainController, String label, int id) {
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text('${label} skills'),
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: FAProgressBar(
+            size: 24,
+            backgroundColor:
+                AppThemeData.appThemeData.primaryColor.withOpacity(0.2),
+            animatedDuration: Duration(milliseconds: 300),
+            currentValue: (id == 0)
+                ? mainController.vsValue.value
+                : mainController.asValue.value,
+            displayText: '%',
+            progressGradient:
+                LinearGradient(colors: mainController.ideGradientList[id]),
+          ),
+        ),
+      ],
+    );
+  }
+
+  static Widget pieChart(
+      BuildContext context, var dataMap, String label, var gradientList,
+      {bool isGradient = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: PieChart(
+        dataMap: dataMap,
+        animationDuration: Duration(milliseconds: 800),
+        chartLegendSpacing: 32,
+        chartRadius: MediaQuery.of(context).size.width / 9,
+        initialAngleInDegree: 0,
+        chartType: ChartType.ring,
+        ringStrokeWidth: 32,
+        centerText: "${label}",
+        legendOptions: LegendOptions(
+          showLegendsInRow: false,
+          legendPosition: LegendPosition.right,
+          showLegends: true,
+          legendShape: BoxShape.circle,
+          legendTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        chartValuesOptions: ChartValuesOptions(
+          showChartValueBackground: true,
+          showChartValues: true,
+          showChartValuesOutside: false,
+          decimalPlaces: 0,
+        ),
+        gradientList: (isGradient) ? gradientList : null,
+      ),
+    );
+  }
+
+// class StreamLinkButtons extends StatelessWidget {
+//   StreamLinkButtons({
+//     Key? key,
+//     required this.mainController,
+//     required this.id,
+//     required this.label,
+//   }) : super(key: key);
+
+//   final MainController mainController;
+//   final int id;
+//   final String label;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MouseRegion(
+//       onEnter: (event) {
+//         switch (id) {
+//           case 0:
+//             mainController.ytHover.value = true;
+//             break;
+//           case 1:
+//             mainController.twitchHover.value = true;
+//             break;
+//           case 2:
+//             mainController.discordHover.value = true;
+//             break;
+//         }
+//       },
+//       onExit: (event) {
+//         switch (id) {
+//           case 0:
+//             mainController.ytHover.value = false;
+//             break;
+//           case 1:
+//             mainController.twitchHover.value = false;
+//             break;
+//           case 2:
+//             mainController.discordHover.value = false;
+//             break;
+//         }
+//       },
+//       child: Obx(
+//         () => AnimatedContainer(
+//           duration: Duration(milliseconds: 200),
+//           padding: EdgeInsets.all(14),
+//           decoration: BoxDecoration(
+//               gradient: ((id == 0)
+//                       ? mainController.ytHover.value
+//                       : (id == 1)
+//                           ? mainController.twitchHover.value
+//                           : mainController.discordHover.value)
+//                   ? LinearGradient(
+//                       colors: mainController.streamGradientList[id])
+//                   : null,
+//               borderRadius: BorderRadius.all(Radius.circular(10)),
+//               boxShadow: (mainController.ytHover.value)
+//                   ? [
+//                       BoxShadow(
+//                           color: Colors.grey[500]!,
+//                           offset: Offset(4, 4),
+//                           blurRadius: 15,
+//                           spreadRadius: 1),
+//                       BoxShadow(
+//                           color: Colors.white,
+//                           offset: Offset(-4, -4),
+//                           blurRadius: 15,
+//                           spreadRadius: 1)
+//                     ]
+//                   : null),
+//           child: TextButton.icon(
+//             onPressed: () {
+//               switch (id) {
+//                 case 0:
+//                   UiUtils.openLink('yt');
+//                   break;
+//                 case 1:
+//                   UiUtils.openLink('twitch');
+//                   break;
+//                 case 2:
+//                   UiUtils.openLink('discord');
+//                   break;
+//               }
+//             },
+//             label: Text(
+//               '${label}',
+//               style: AppThemeData.appThemeData.textTheme.headlineMedium,
+//             ),
+//             icon: Icon(
+//               Icons.arrow_forward_ios_rounded,
+//               color: ((id == 0)
+//                       ? mainController.ytHover.value
+//                       : (id == 1)
+//                           ? mainController.twitchHover.value
+//                           : mainController.discordHover.value)
+//                   ? AppThemeData.appThemeData.primaryColor
+//                   : Colors.transparent,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+// class codingProgressRow extends StatelessWidget {
+//   const codingProgressRow({
+//     Key? key,
+//     required this.mainController,
+//     required this.label,
+//     required this.id,
+//   }) : super(key: key);
+
+//   final MainController mainController;
+//   final String label;
+//   final int id;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Expanded(
+//           child: Padding(
+//             padding: const EdgeInsets.symmetric(vertical: 20.0),
+//             child: MouseRegion(
+//               onEnter: (e) {
+//                 switch (id) {
+//                   case 0:
+//                     mainController.flutterOpa.value = 1.0;
+//                     mainController.flutterValue.value =
+//                         (CONSTANTS.flutterProjects /
+//                                 (CONSTANTS.flutterProjects +
+//                                     CONSTANTS.reactProjects +
+//                                     CONSTANTS.vueProjects)) *
+//                             100;
+//                     break;
+//                   case 1:
+//                     mainController.reactOpa.value = 1.0;
+//                     mainController.reactValue.value = (CONSTANTS.reactProjects /
+//                             (CONSTANTS.flutterProjects +
+//                                 CONSTANTS.reactProjects +
+//                                 CONSTANTS.vueProjects)) *
+//                         100;
+//                     break;
+//                   case 2:
+//                     mainController.vueOpa.value = 1.0;
+//                     mainController.vueValue.value = (CONSTANTS.vueProjects /
+//                             (CONSTANTS.flutterProjects +
+//                                 CONSTANTS.reactProjects +
+//                                 CONSTANTS.vueProjects)) *
+//                         100;
+//                     break;
+//                 }
+//               },
+//               // onExit: (e) {
+//               //   mainController.flutterOpa.value = 0.0;
+//               //   mainController.reactOpa.value = 0.0;
+//               //   mainController.vueOpa.value = 0.0;
+//               //   mainController.flutterValue.value = 0.0;
+//               //   mainController.reactValue.value = 0.0;
+//               //   mainController.vueValue.value = 0.0;
+//               // },
+//               child: Text('${label} skills'),
+//             ),
+//           ),
+//         ),
+//         Expanded(
+//           flex: 4,
+//           child: Obx(
+//             () => AnimatedOpacity(
+//               opacity: (id == 0)
+//                   ? mainController.flutterOpa.value
+//                   : (id == 1)
+//                       ? mainController.reactOpa.value
+//                       : mainController.vueOpa.value,
+//               duration: Duration(milliseconds: 200),
+//               child: FAProgressBar(
+//                 progressColor:
+//                     AppThemeData.appThemeData.primaryColor.withOpacity(0.3),
+//                 size: 24,
+//                 animatedDuration: Duration(milliseconds: 300),
+//                 currentValue: (id == 0)
+//                     ? mainController.flutterValue.value
+//                     : (id == 1)
+//                         ? mainController.reactValue.value
+//                         : mainController.vueValue.value,
+//                 displayText: '%',
+//                 progressGradient: LinearGradient(
+//                     colors: mainController.skillsGradientList[id]),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
   // static Future openLinkDialog(BuildContext context) {
   //   return Get.defaultDialog(

@@ -1,115 +1,129 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
 import 'UiUtils.dart';
 
-class FloatingNavBar extends StatelessWidget {
-  const FloatingNavBar(
-      {Key? key, required this.mainController, required this.sizingInformation})
+class FloatingNavBarHori extends StatelessWidget {
+  const FloatingNavBarHori({Key? key, required this.mainController})
       : super(key: key);
 
   final MainController mainController;
-  final SizingInformation sizingInformation;
 
   @override
   Widget build(BuildContext context) {
-    return (sizingInformation.deviceScreenType == DeviceScreenType.desktop)
-        ? Obx(
-            () => Container(
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  MouseRegion(
-                    onEnter: (event) => mainController.navHovered.value = 1,
-                    onExit: (event) => mainController.navHovered.value = 0,
-                    child: AnimatedOpacity(
-                      duration: Duration(milliseconds: 222),
-                      opacity: mainController.navHovered.value,
-                      child: Container(
-                        height: MediaQuery.of(context).size.height / 7,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FloatingNavIcons(
-                                hoverID: 1,
-                                iconData: Icons.home_rounded,
-                                mainController: mainController),
-                            FloatingNavIcons(
-                                hoverID: 2,
-                                iconData: Icons.list_rounded,
-                                mainController: mainController),
-                            FloatingNavIcons(
-                                hoverID: 3,
-                                iconData: Icons.games_rounded,
-                                mainController: mainController),
-                            FloatingNavIcons(
-                                hoverID: 4,
-                                iconData: Icons.music_note_rounded,
-                                mainController: mainController),
-                            FloatingNavIcons(
-                                hoverID: 5,
-                                iconData: Icons.person_rounded,
-                                mainController: mainController),
-                            FloatingNavIcons(
-                                hoverID: 6,
-                                iconData: Icons.email_rounded,
-                                mainController: mainController),
-                          ],
-                        ),
-                      ),
+    return Obx(
+      () => Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Center(
+              child: MouseRegion(
+                onEnter: (event) => mainController.navHovered.value = 1,
+                onExit: (event) => mainController.navHovered.value = 0,
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 222),
+                  opacity: mainController.navHovered.value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[700]!.withOpacity(0.6),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(24))),
+                    margin: EdgeInsets.only(bottom: 30),
+                    height: MediaQuery.of(context).size.height / 12,
+                    width: MediaQuery.of(context).size.width / 5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FloatingNavIcons(
+                            hoverID: 1,
+                            iconData: Icons.home_rounded,
+                            mainController: mainController),
+                        FloatingNavIcons(
+                            hoverID: 2,
+                            iconData: Icons.list_rounded,
+                            mainController: mainController),
+                        FloatingNavIcons(
+                            hoverID: 3,
+                            iconData: Icons.games_rounded,
+                            mainController: mainController),
+                        FloatingNavIcons(
+                            hoverID: 4,
+                            iconData: Icons.music_note_rounded,
+                            mainController: mainController),
+                        FloatingNavIcons(
+                            hoverID: 5,
+                            iconData: Icons.person_rounded,
+                            mainController: mainController),
+                        FloatingNavIcons(
+                            hoverID: 6,
+                            iconData: Icons.email_rounded,
+                            mainController: mainController),
+                      ],
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
-              // ),
-            ),
-          )
-        : Container();
+            )
+          ],
+        ),
+        // ),
+      ),
+    );
+  }
+}
 
-    // Container(
-    //   height: MediaQuery.of(context).size.height,
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Row(
-    //         mainAxisAlignment: MainAxisAlignment.end,
-    //         children: [
-    //           Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               VerticalNavIcons(
-    //                   iconID: 1,
-    //                   iconData: Icons.home_rounded,
-    //                   mainController: mainController),
-    //               VerticalNavIcons(
-    //                   iconID: 2,
-    //                   iconData: Icons.list_rounded,
-    //                   mainController: mainController),
-    //               VerticalNavIcons(
-    //                   iconID: 3,
-    //                   iconData: Icons.games_rounded,
-    //                   mainController: mainController),
-    //               VerticalNavIcons(
-    //                   iconID: 4,
-    //                   iconData: Icons.music_note_rounded,
-    //                   mainController: mainController),
-    //               VerticalNavIcons(
-    //                   iconID: 5,
-    //                   iconData: Icons.person_rounded,
-    //                   mainController: mainController),
-    //               VerticalNavIcons(
-    //                   iconID: 6,
-    //                   iconData: Icons.email_rounded,
-    //                   mainController: mainController),
-    //             ],
-    //           ),
-    //         ],
-    //       )
-    //     ],
-    //   ),
-    // );
+class FloatingNavBarVert extends StatelessWidget {
+  const FloatingNavBarVert({Key? key, required this.mainController})
+      : super(key: key);
+
+  final MainController mainController;
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    VerticalNavIcons(
+                        iconID: 1,
+                        iconData: Icons.home_rounded,
+                        mainController: mainController),
+                    VerticalNavIcons(
+                        iconID: 2,
+                        iconData: Icons.list_rounded,
+                        mainController: mainController),
+                    VerticalNavIcons(
+                        iconID: 3,
+                        iconData: Icons.games_rounded,
+                        mainController: mainController),
+                    VerticalNavIcons(
+                        iconID: 4,
+                        iconData: Icons.music_note_rounded,
+                        mainController: mainController),
+                    VerticalNavIcons(
+                        iconID: 5,
+                        iconData: Icons.person_rounded,
+                        mainController: mainController),
+                    VerticalNavIcons(
+                        iconID: 6,
+                        iconData: Icons.email_rounded,
+                        mainController: mainController),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -189,7 +203,7 @@ class FloatingNavIcons extends StatelessWidget {
             child: IconButton(
                 icon: Icon(
                   iconData,
-                  color: Colors.white,
+                  color: Colors.white70,
                 ),
                 iconSize: 24,
                 onPressed: () {

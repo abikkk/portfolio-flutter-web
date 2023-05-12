@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 
-class SocialsContainer extends StatelessWidget {
-  SocialsContainer({Key? key, required this.mainController}) : super(key: key);
+class DesktopSocialsScreen extends StatelessWidget {
+  DesktopSocialsScreen({Key? key, required this.mainController})
+      : super(key: key);
 
   final MainController mainController;
 
@@ -42,5 +43,16 @@ class SocialsContainer extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class SocialsScreen extends StatelessWidget {
+  const SocialsScreen({Key? key, required this.mainController})
+      : super(key: key);
+  final MainController mainController;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

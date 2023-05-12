@@ -8,6 +8,12 @@ class CONSTANTS {
   static const buttonFlutter = 'flutter';
   static const buttonReact = 'react';
   static const buttonVue = 'vue';
+  static const flutterProjects = 22.0;
+  static const reactProjects = 6.0;
+  static const vueProjects = 3.0;
+  static const vscodePoints = 65.0;
+  static const androidStudioPoints = 35.0;
+
 
   // gaming
   static const buttonValorant = 'val';
