@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
+import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 
 class DesktopSocialsScreen extends StatelessWidget {
@@ -13,31 +14,39 @@ class DesktopSocialsScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(
-          child: Text(
-            'connect with me',
-            // style: TextStyle(fontSize: 48),
-          ),
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              WidgetUtils.socialMorphButtons(context, mainController, 0),
-              WidgetUtils.socialMorphButtons(context, mainController, 1),
+              Text(
+                'connect with me',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+              SizedBox(
+                height: 24,
+              )
             ],
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          flex: 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              WidgetUtils.socialMorphButtons(context, mainController, 2),
-              WidgetUtils.socialMorphButtons(context, mainController, 3),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WidgetUtils.socialMorphButtons(context, mainController, 0),
+                  WidgetUtils.socialMorphButtons(context, mainController, 1),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WidgetUtils.socialMorphButtons(context, mainController, 2),
+                  WidgetUtils.socialMorphButtons(context, mainController, 3),
+                ],
+              ),
             ],
           ),
         ),

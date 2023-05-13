@@ -55,10 +55,10 @@ class FloatingNavBarHori extends StatelessWidget {
                             hoverID: 5,
                             iconData: Icons.person_rounded,
                             mainController: mainController),
-                        FloatingNavIcons(
-                            hoverID: 6,
-                            iconData: Icons.email_rounded,
-                            mainController: mainController),
+                        // FloatingNavIcons(
+                        //     hoverID: 6,
+                        //     iconData: Icons.email_rounded,
+                        //     mainController: mainController),
                       ],
                     ),
                   ),

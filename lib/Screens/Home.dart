@@ -66,7 +66,7 @@ class HomeContainer extends StatelessWidget {
                         DesktopSocialsScreen(
                           mainController: mainController,
                         ),
-                        ContactContainer()
+                        // ContactContainer()
                       ],
                       controller: mainController.pageController,
                     ),
@@ -101,25 +101,25 @@ class HomeContainer extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         children: [
                           HomeScreen(),
-                          CodingScreen(
-                            mainController: mainController,
-                          ),
-                          GamingScreen(
-                            mainController: mainController,
-                          ),
-                          MusicScreen(
-                            mainController: mainController,
-                          ),
-                          SocialsScreen(
-                            mainController: mainController,
-                          ),
-                          ContactContainer()
+                          // CodingScreen(
+                          //   mainController: mainController,
+                          // ),
+                          // GamingScreen(
+                          //   mainController: mainController,
+                          // ),
+                          // MusicScreen(
+                          //   mainController: mainController,
+                          // ),
+                          // SocialsScreen(
+                          //   mainController: mainController,
+                          // ),
+                          // ContactContainer()
                         ],
                         controller: mainController.pageController,
                       ),
-                      FloatingNavBarVert(
-                        mainController: mainController,
-                      )
+                      // FloatingNavBarVert(
+                      //   mainController: mainController,
+                      // )
                     ],
                   ),
                 ),

@@ -148,6 +148,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        body: Center(
+            child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'coming soon!',
+          style: AppThemeData.appThemeData.textTheme.headlineLarge,
+        ),
+        Text(
+          'sorry, currenty only works on desktop.',
+          style: AppThemeData.appThemeData.textTheme.labelMedium,
+        ),
+      ],
+    )));
   }
 }

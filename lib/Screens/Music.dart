@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import '../Controllers/MainController.dart';
+import '../Utils/AppThemeData.dart';
 
 class DesktopMusicScreen extends StatelessWidget {
   DesktopMusicScreen({Key? key, required this.mainController})
@@ -13,22 +14,33 @@ class DesktopMusicScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'listen to my music',
-              // style: TextStyle(fontSize: 48),
-            ),
-          ],
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+        Expanded(
+          flex: 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              WidgetUtils.musicMorphButtons(context, mainController, 0),
-              WidgetUtils.musicMorphButtons(context, mainController, 1)
+              Text(
+                'listen to my music',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+              SizedBox(
+                height: 24,
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WidgetUtils.musicMorphButtons(context, mainController, 0),
+                  WidgetUtils.musicMorphButtons(context, mainController, 1)
+                ],
+              ),
             ],
           ),
         ),
@@ -38,7 +50,7 @@ class DesktopMusicScreen extends StatelessWidget {
 }
 
 class MusicScreen extends StatelessWidget {
-  const MusicScreen({Key? key,required this.mainController}) : super(key: key);
+  const MusicScreen({Key? key, required this.mainController}) : super(key: key);
   final MainController mainController;
 
   @override
