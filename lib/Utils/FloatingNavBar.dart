@@ -27,8 +27,7 @@ class FloatingNavBarHori extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.grey[400]!.withOpacity(0.6),
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(24))),
+                        borderRadius: BorderRadius.all(Radius.circular(24))),
                     margin: EdgeInsets.only(bottom: 30),
                     height: MediaQuery.of(context).size.height / 12,
                     width: MediaQuery.of(context).size.width / 5,
@@ -41,7 +40,7 @@ class FloatingNavBarHori extends StatelessWidget {
                             mainController: mainController),
                         FloatingNavIcons(
                             hoverID: 2,
-                            iconData: Icons.list_rounded,
+                            iconData: Icons.format_list_bulleted_rounded,
                             mainController: mainController),
                         FloatingNavIcons(
                             hoverID: 3,
