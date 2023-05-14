@@ -754,7 +754,7 @@ class WidgetUtils {
           dataMap: dataMap,
           animationDuration: Duration(milliseconds: 800),
           chartLegendSpacing: 44,
-          chartRadius: MediaQuery.of(context).size.width / 8,
+          chartRadius: MediaQuery.of(context).size.width / 10,
           initialAngleInDegree: 0,
           chartType: ChartType.disc,
           // ringStrokeWidth: 44,

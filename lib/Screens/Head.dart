@@ -38,11 +38,12 @@ class DesktopHomeScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 10,
-                width: MediaQuery.of(context).size.width / 2.4,
+                width: MediaQuery.of(context).size.width / 3,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
+                      flex: 3,
                       child: subtitleTexts(
                         mainController: mainController,
                         label: 'frontend developer',
@@ -59,7 +60,8 @@ class DesktopHomeScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Center(
+                      flex: 2,
+                      child: Align(alignment: Alignment.centerRight,
                         child: subtitleTexts(
                           mainController: mainController,
                           label: 'musician',
@@ -130,6 +132,7 @@ class subtitleTexts extends StatelessWidget {
               ? AppThemeData.appThemeData.textTheme.displaySmall!
               : AppThemeData.appThemeData.textTheme.titleSmall!,
           child: InkWell(
+            hoverColor: Colors.transparent,
             onTap: () {
               UiUtils.navigate(id + 2, mainController);
             },
