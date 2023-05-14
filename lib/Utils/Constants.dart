@@ -11,6 +11,8 @@ class CONSTANTS {
   static const flutterProjects = 22.0;
   static const reactProjects = 6.0;
   static const vueProjects = 3.0;
+  static const vsCode = 'vs_code';
+  static const androidStudio = 'android_studio';
   static const vscodePoints = 65.0;
   static const androidStudioPoints = 35.0;
 

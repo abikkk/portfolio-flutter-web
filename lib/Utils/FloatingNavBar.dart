@@ -26,7 +26,7 @@ class FloatingNavBarHori extends StatelessWidget {
                   opacity: mainController.navHovered.value,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey[700]!.withOpacity(0.6),
+                        color: Colors.grey[400]!.withOpacity(0.6),
                         borderRadius:
                             BorderRadius.all(Radius.circular(24))),
                     margin: EdgeInsets.only(bottom: 30),

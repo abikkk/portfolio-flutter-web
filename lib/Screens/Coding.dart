@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
+import 'package:my_porfolio/Utils/Constants.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import '../Controllers/MainController.dart';
 
@@ -54,160 +55,6 @@ class DesktopCodingScreen extends StatelessWidget {
   }
 }
 
-class FlutterDetails extends StatelessWidget {
-  const FlutterDetails({Key? key, required this.mainController})
-      : super(key: key);
-
-  final MainController mainController;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(44.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Text(
-                'flutter',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Text(
-                  'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara.\ni was involved in 15+ projects for our clients in dubai and some local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: WidgetUtils.pieChart(
-                    mainController,
-                    context,
-                    mainController.usageFlutter,
-                    'IDE',
-                    mainController.ideGradientList,
-                    isGradient: true),
-              ),
-              Expanded(child: Container())
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ReactDetails extends StatelessWidget {
-  const ReactDetails({Key? key, required this.mainController})
-      : super(key: key);
-  final MainController mainController;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(44.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Text(
-                'react.js',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Text(
-                  'i worked as a freelancer for 8 months.\nmy projects ranges as follows:\n - portfolio websites\n - cafe website\n - ecomerce\n - warehouse/inventory management.',
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: WidgetUtils.pieChart(
-                    mainController,
-                    context,
-                    mainController.usageReact,
-                    'IDE',
-                    mainController.ideGradientList,
-                    isGradient: true),
-              ),
-              Expanded(child: Container())
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class VueDetails extends StatelessWidget {
-  const VueDetails({Key? key, required this.mainController}) : super(key: key);
-
-  final MainController mainController;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(44.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Text(
-                'vue.js',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Text(
-                  'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months.\ni was involved in development of employee record management system and attendance management system.\ni have my own portfolio website under development as well.',
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: WidgetUtils.pieChart(
-                    mainController,
-                    context,
-                    mainController.usageVue,
-                    'IDE',
-                    mainController.ideGradientList,
-                    isGradient: true),
-              ),
-              Expanded(child: Container())
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class IntroDetails extends StatelessWidget {
   const IntroDetails({Key? key, required this.mainController})
       : super(key: key);
@@ -255,6 +102,7 @@ class IntroDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
+                    flex: 2,
                     child: WidgetUtils.pieChart(
                         mainController,
                         context,
@@ -264,18 +112,162 @@ class IntroDetails extends StatelessWidget {
                         isGradient: true),
                   ),
                   Expanded(
+                    flex: 3,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        WidgetUtils.codingProgressRow(
-                            mainController, 'vs code', 0),
-                        WidgetUtils.codingProgressRow(
-                            mainController, 'android studio', 1),
+                        WidgetUtils.codingProgressRow(mainController, 'vs code',
+                            0, mainController.vsValue.value),
+                        WidgetUtils.codingProgressRow(mainController,
+                            'android studio', 1, mainController.asValue.value),
                       ],
                     ),
                   ),
                 ],
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FlutterDetails extends StatelessWidget {
+  const FlutterDetails({Key? key, required this.mainController})
+      : super(key: key);
+
+  final MainController mainController;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'flutter',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Text(
+                  'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara.\ni was involved in 15+ projects for our clients in dubai and some local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                    mainController.usageFlutter[CONSTANTS.vsCode]!),
+                WidgetUtils.codingProgressRow(mainController, 'android studio',
+                    1, mainController.usageFlutter[CONSTANTS.androidStudio]!),
+                // Expanded(
+                //   child: WidgetUtils.pieChart(
+                //       mainController,
+                //       context,
+                //       mainController.usageFlutter,
+                //       'IDE',
+                //       mainController.ideGradientList,
+                //       isGradient: true),
+                // ),
+                // Expanded(child: Container())
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReactDetails extends StatelessWidget {
+  const ReactDetails({Key? key, required this.mainController})
+      : super(key: key);
+  final MainController mainController;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'react.js',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Text(
+                  'i worked as a freelancer for 8 months.\nmy projects ranges as follows:\n - portfolio websites\n - cafe website\n - ecomerce\n - warehouse/inventory management.',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                mainController.usageReact[CONSTANTS.vsCode]!),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VueDetails extends StatelessWidget {
+  const VueDetails({Key? key, required this.mainController}) : super(key: key);
+
+  final MainController mainController;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'vue.js',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Text(
+                  'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months.\ni was involved in development of employee record management system and attendance management system.\ni have my own portfolio website under development as well.',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                mainController.usageVue[CONSTANTS.vsCode]!),
           ),
         ],
       ),

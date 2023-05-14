@@ -665,13 +665,6 @@ class WidgetUtils {
               style: AppThemeData.appThemeData.textTheme.headlineMedium,
             ),
             icon: Icon(
-              // !((id == 0)
-              //         ? mainController.ytHover.value
-              //         : (id == 1)
-              //             ? mainController.twitchHover.value
-              //             : mainController.discordHover.value)
-              //     ? Icons.link
-              //     :
               Icons.arrow_forward_ios_rounded,
               color: ((id == 0)
                       ? mainController.ytHover.value
@@ -688,63 +681,47 @@ class WidgetUtils {
   }
 
   static Widget codingProgressRow(
-      MainController mainController, String label, int id) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Text('${label} skills'),
+      MainController mainController, String label, int id, double value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '${label} usage : ',
+                  // style: AppThemeData.appThemeData.textTheme.bodySmall,
+                )),
           ),
-        ),
-        Expanded(
-          flex: 2,
-          child: FAProgressBar(
-            size: 24,
-            backgroundColor:
-                AppThemeData.appThemeData.primaryColor.withOpacity(0.2),
-            animatedDuration: Duration(milliseconds: 300),
-            currentValue: (id == 0)
-                ? mainController.vsValue.value
-                : mainController.asValue.value,
-            displayText: '%',
-            progressGradient:
-                LinearGradient(colors: mainController.ideGradientList[id]),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: FAProgressBar(
+                direction: Axis.horizontal,
+                verticalDirection: VerticalDirection.down,
+                size: 24,
+                backgroundColor:
+                    AppThemeData.appThemeData.primaryColor.withOpacity(0.2),
+                animatedDuration: Duration(milliseconds: 300),
+                currentValue: value,
+                formatValueFixed: 0,
+                // displayText: '%',
+                progressGradient:
+                    LinearGradient(colors: mainController.ideGradientList[id]),
+              ),
+            ),
           ),
-        ),
-      ],
+          Text(' (${value}%)')
+        ],
+      ),
     );
   }
 
   static Widget pieChart(MainController mainController, BuildContext context,
       var dataMap, String label, var gradientList,
       {bool isGradient = false}) {
-    // return SizedBox(
-    //   height: double.minPositive,
-    //   child: PieChart(
-    //     PieChartData(
-    //       pieTouchData: PieTouchData(
-    //         touchCallback: (FlTouchEvent event, pieTouchResponse) {
-    //           if (!event.isInterestedForInteractions ||
-    //               pieTouchResponse == null ||
-    //               pieTouchResponse.touchedSection == null) {
-    //             mainController.pieChartHover.value = -1;
-    //             return;
-    //           }
-    //           mainController.pieChartHover.value =
-    //               pieTouchResponse.touchedSection!.touchedSectionIndex;
-    //         },
-    //       ),
-    //       // startDegreeOffset: 180,
-    //       borderData: FlBorderData(
-    //         show: true,
-    //       ),
-    //       sectionsSpace: 5,
-    //       centerSpaceRadius: 50,
-    //       sections: mainController.showingSections(),
-    //     ),
-    //   ),
-    // );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SizedBox(
@@ -754,23 +731,19 @@ class WidgetUtils {
           dataMap: dataMap,
           animationDuration: Duration(milliseconds: 800),
           chartLegendSpacing: 44,
-          chartRadius: MediaQuery.of(context).size.width / 10,
+          chartRadius: MediaQuery.of(context).size.width / 7,
           initialAngleInDegree: 0,
           chartType: ChartType.disc,
-          // ringStrokeWidth: 44,
           centerText: "${label}",
           legendOptions: LegendOptions(
-            showLegendsInRow: false,
-            legendPosition: LegendPosition.left,
-            showLegends: true,
-            legendShape: BoxShape.rectangle,
-            legendTextStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+              showLegendsInRow: false,
+              legendPosition: LegendPosition.left,
+              showLegends: true,
+              legendShape: BoxShape.circle,
+              legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
           chartValuesOptions: ChartValuesOptions(
             showChartValueBackground: true,
-            showChartValues: false,
+            showChartValues: true,
             showChartValuesOutside: false,
             decimalPlaces: 0,
           ),
@@ -779,22 +752,6 @@ class WidgetUtils {
       ),
     );
   }
-
-  // static PieChartSectionData pieChartSegment(
-  //     MaterialColor color0, double value, String label) {
-  //   return PieChartSectionData(
-  //     color: color0,
-  //     value: (value /
-  //             (CONSTANTS.flutterProjects +
-  //                 CONSTANTS.reactProjects +
-  //                 CONSTANTS.vueProjects)) *
-  //         100,
-  //     title: '${label}',
-  //     titleStyle: AppThemeData.appThemeData.textTheme.bodySmall,
-  //     radius: 50,
-  //     titlePositionPercentageOffset: .5,
-  //   );
-  // }
 
 // class StreamLinkButtons extends StatelessWidget {
 //   StreamLinkButtons({
@@ -807,7 +764,6 @@ class WidgetUtils {
 //   final MainController mainController;
 //   final int id;
 //   final String label;
-
 //   @override
 //   Widget build(BuildContext context) {
 //     return MouseRegion(
