@@ -51,10 +51,10 @@ class HomeContainer extends StatelessWidget {
                       allowImplicitScrolling: true,
                       scrollDirection: Axis.horizontal,
                       children: [
-                        DesktopCodingScreen(
+                        DesktopHomeScreen(
                           mainController: mainController,
                         ),
-                        DesktopHomeScreen(
+                        DesktopCodingScreen(
                           mainController: mainController,
                         ),
                         DesktopGamingScreen(
