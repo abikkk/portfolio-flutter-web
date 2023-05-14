@@ -16,7 +16,7 @@ class DesktopHomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image(
-              image: AssetImage('images/profile_shot.png'),
+              image: AssetImage('assets/images/profile_shot.png'),
               height: MediaQuery.of(context).size.height,
               fit: BoxFit.cover,
             ),

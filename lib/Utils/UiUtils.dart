@@ -1,3 +1,4 @@
+// import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,8 @@ import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
+// import 'Constants.dart';
+// import 'Constants.dart';
 
 class UiUtils {
   // web page launcher
@@ -713,39 +716,85 @@ class WidgetUtils {
     );
   }
 
-  static Widget pieChart(
-      BuildContext context, var dataMap, String label, var gradientList,
+  static Widget pieChart(MainController mainController, BuildContext context,
+      var dataMap, String label, var gradientList,
       {bool isGradient = false}) {
+    // return SizedBox(
+    //   height: double.minPositive,
+    //   child: PieChart(
+    //     PieChartData(
+    //       pieTouchData: PieTouchData(
+    //         touchCallback: (FlTouchEvent event, pieTouchResponse) {
+    //           if (!event.isInterestedForInteractions ||
+    //               pieTouchResponse == null ||
+    //               pieTouchResponse.touchedSection == null) {
+    //             mainController.pieChartHover.value = -1;
+    //             return;
+    //           }
+    //           mainController.pieChartHover.value =
+    //               pieTouchResponse.touchedSection!.touchedSectionIndex;
+    //         },
+    //       ),
+    //       // startDegreeOffset: 180,
+    //       borderData: FlBorderData(
+    //         show: true,
+    //       ),
+    //       sectionsSpace: 5,
+    //       centerSpaceRadius: 50,
+    //       sections: mainController.showingSections(),
+    //     ),
+    //   ),
+    // );
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: PieChart(
-        dataMap: dataMap,
-        animationDuration: Duration(milliseconds: 800),
-        chartLegendSpacing: 32,
-        chartRadius: MediaQuery.of(context).size.width / 9,
-        initialAngleInDegree: 0,
-        chartType: ChartType.ring,
-        ringStrokeWidth: 32,
-        centerText: "${label}",
-        legendOptions: LegendOptions(
-          showLegendsInRow: false,
-          legendPosition: LegendPosition.right,
-          showLegends: true,
-          legendShape: BoxShape.circle,
-          legendTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: SizedBox(
+        height: 333,
+        width: 333,
+        child: PieChart(
+          dataMap: dataMap,
+          animationDuration: Duration(milliseconds: 800),
+          chartLegendSpacing: 44,
+          chartRadius: MediaQuery.of(context).size.width / 8,
+          initialAngleInDegree: 0,
+          chartType: ChartType.disc,
+          // ringStrokeWidth: 44,
+          centerText: "${label}",
+          legendOptions: LegendOptions(
+            showLegendsInRow: false,
+            legendPosition: LegendPosition.left,
+            showLegends: true,
+            legendShape: BoxShape.rectangle,
+            legendTextStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          chartValuesOptions: ChartValuesOptions(
+            showChartValueBackground: true,
+            showChartValues: false,
+            showChartValuesOutside: false,
+            decimalPlaces: 0,
+          ),
+          gradientList: (isGradient) ? gradientList : null,
         ),
-        chartValuesOptions: ChartValuesOptions(
-          showChartValueBackground: true,
-          showChartValues: true,
-          showChartValuesOutside: false,
-          decimalPlaces: 0,
-        ),
-        gradientList: (isGradient) ? gradientList : null,
       ),
     );
   }
+
+  // static PieChartSectionData pieChartSegment(
+  //     MaterialColor color0, double value, String label) {
+  //   return PieChartSectionData(
+  //     color: color0,
+  //     value: (value /
+  //             (CONSTANTS.flutterProjects +
+  //                 CONSTANTS.reactProjects +
+  //                 CONSTANTS.vueProjects)) *
+  //         100,
+  //     title: '${label}',
+  //     titleStyle: AppThemeData.appThemeData.textTheme.bodySmall,
+  //     radius: 50,
+  //     titlePositionPercentageOffset: .5,
+  //   );
+  // }
 
 // class StreamLinkButtons extends StatelessWidget {
 //   StreamLinkButtons({

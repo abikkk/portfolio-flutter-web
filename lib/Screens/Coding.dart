@@ -86,9 +86,11 @@ class FlutterDetails extends StatelessWidget {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 child: WidgetUtils.pieChart(
+                    mainController,
                     context,
                     mainController.usageFlutter,
                     'IDE',
@@ -135,10 +137,15 @@ class ReactDetails extends StatelessWidget {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: WidgetUtils.pieChart(context, mainController.usageReact,
-                    'IDE', mainController.ideGradientList,
+                child: WidgetUtils.pieChart(
+                    mainController,
+                    context,
+                    mainController.usageReact,
+                    'IDE',
+                    mainController.ideGradientList,
                     isGradient: true),
               ),
               Expanded(child: Container())
@@ -181,10 +188,15 @@ class VueDetails extends StatelessWidget {
             ),
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: WidgetUtils.pieChart(context, mainController.usageVue,
-                    'IDE', mainController.ideGradientList,
+                child: WidgetUtils.pieChart(
+                    mainController,
+                    context,
+                    mainController.usageVue,
+                    'IDE',
+                    mainController.ideGradientList,
                     isGradient: true),
               ),
               Expanded(child: Container())
@@ -240,9 +252,11 @@ class IntroDetails extends StatelessWidget {
                 ),
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: WidgetUtils.pieChart(
+                        mainController,
                         context,
                         mainController.projectMap,
                         'projects',

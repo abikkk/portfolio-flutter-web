@@ -1,7 +1,11 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Models/MorphButton.dart';
+import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
+
+import '../Utils/UiUtils.dart';
 
 class MainController extends GetxController {
   // page controller
@@ -36,6 +40,7 @@ class MainController extends GetxController {
       subtitle_3 = false.obs;
 
   // coding screen
+  RxInt pieChartHover = 0.obs;
   final RxBool flutter = false.obs, react = false.obs, vue = false.obs;
   final RxDouble vsOpa = 0.0.obs, asOpa = 0.0.obs;
   final RxDouble vsValue = CONSTANTS.vscodePoints.obs,
@@ -81,6 +86,31 @@ class MainController extends GetxController {
       Color.fromRGBO(14, 180, 116, 1),
     ]
   ];
+
+  // List<PieChartSectionData> showingSections() {
+  //   return List.generate(
+  //     3,
+  //     (i) {
+  //       const color0 = Colors.lightBlue;
+  //       const color1 = Colors.blue;
+  //       const color2 = Colors.green;
+
+  //       switch (i) {
+  //         case 0:
+  //           return WidgetUtils.pieChartSegment(
+  //               color0, CONSTANTS.flutterProjects, CONSTANTS.buttonFlutter);
+  //         case 1:
+  //           return WidgetUtils.pieChartSegment(
+  //               color1, CONSTANTS.reactProjects, CONSTANTS.buttonReact);
+  //         case 2:
+  //           return WidgetUtils.pieChartSegment(
+  //               color2, CONSTANTS.vueProjects, CONSTANTS.buttonVue);
+  //         default:
+  //           throw Error();
+  //       }
+  //     },
+  //   );
+  // }
 
   // gaming screen
   final RxBool ytHover = false.obs,
@@ -290,7 +320,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
-            image: 'soundCloud'.obs,
+            image: 'soundcloud'.obs,
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'soundcloud'.obs),

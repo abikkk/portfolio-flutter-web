@@ -7,7 +7,7 @@ class AppThemeData {
     textTheme: TextTheme(
       // content
       bodySmall: TextStyle(
-        fontSize: 20,
+        fontSize: 16,
         color: Colors.black54,
         height: 2,
       ),
