@@ -130,7 +130,6 @@ class YoutubeDetails extends StatelessWidget {
                   child: Text(
                     'i upload clips from my gameplays and live streams to my youtube channel. drop by and show some love if you can. thanks!',
                     softWrap: true,
-                    textAlign: TextAlign.justify,
                   ),
                 ),
               ],
@@ -173,7 +172,6 @@ class TwitchDetails extends StatelessWidget {
                   child: Text(
                     'i try to stream regularly, as much as i can. i normally just stream for myself. my live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.',
                     softWrap: true,
-                    textAlign: TextAlign.justify,
                   ),
                 ),
               ],

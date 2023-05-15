@@ -1,13 +1,10 @@
-import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
 import '../Utils/FloatingNavBar.dart';
 import '../Utils/UiUtils.dart';
 import 'Coding.dart';
-import 'Contact.dart';
 import 'Gaming.dart';
 import 'Head.dart';
 import 'Music.dart';
