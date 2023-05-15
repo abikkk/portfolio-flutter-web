@@ -14,12 +14,17 @@ class MainController extends GetxController {
   final PageController streamController = PageController(
     initialPage: 0,
   );
+  final PageController gamingController = PageController(
+    initialPage: 0,
+  );
   final PageController musicController = PageController(
     initialPage: 0,
   );
   final PageController socialsController = PageController(
     initialPage: 0,
   );
+  RxDouble showScrollBtn = 0.0.obs, scrollIndex = 0.0.obs;
+  RxBool isCodeScrollDown = true.obs, isGameScrollDown = true.obs;
 
   // navigation bar
   final RxInt hoverID = 0.obs, navIndex = 0.obs, navIconID = 0.obs;
@@ -36,7 +41,6 @@ class MainController extends GetxController {
       subtitle_3 = false.obs;
 
   // coding screen
-  RxInt pieChartHover = 0.obs;
   final RxBool flutter = false.obs, react = false.obs, vue = false.obs;
   final RxDouble vsOpa = 0.0.obs, asOpa = 0.0.obs;
   final RxDouble vsValue = CONSTANTS.vscodePoints.obs,

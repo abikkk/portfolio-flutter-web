@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import '../Controllers/MainController.dart';
 
@@ -10,65 +11,90 @@ class DesktopGamingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-        pageSnapping: true,
-        allowImplicitScrolling: true,
-        scrollDirection: Axis.vertical,
-        children: [
-          // youtube twitch discord
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: PageView(
-                    allowImplicitScrolling: true,
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      YoutubeDetails(
-                        mainController: mainController,
+    return Stack(
+      children: [
+        PageView(
+            pageSnapping: true,
+            allowImplicitScrolling: true,
+            scrollDirection: Axis.vertical,
+            controller: mainController.gamingController,
+            onPageChanged: (value) {
+              if (mainController.gamingController.page!.round() == 1) {
+                mainController.isGameScrollDown.value = false;
+              } else {
+                mainController.isGameScrollDown.value = true;
+              }
+            },
+            children: [
+              // youtube twitch discord
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: PageView(
+                        allowImplicitScrolling: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          YoutubeDetails(
+                            mainController: mainController,
+                            isDesktop: true,
+                          ),
+                          TwitchDetails(
+                            mainController: mainController,
+                            isDesktop: true,
+                          ),
+                          DiscordDetails(
+                            mainController: mainController,
+                            isDesktop: true,
+                          ),
+                        ],
+                        controller: mainController.streamController,
                       ),
-                      TwitchDetails(
-                        mainController: mainController,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          WidgetUtils.streamMorphButtons(
+                              context, mainController, 0),
+                          WidgetUtils.streamMorphButtons(
+                              context, mainController, 1),
+                          WidgetUtils.streamMorphButtons(
+                              context, mainController, 2),
+                        ],
                       ),
-                      DiscordDetails(
-                        mainController: mainController,
-                      ),
-                    ],
-                    controller: mainController.streamController,
-                  ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      WidgetUtils.streamMorphButtons(
-                          context, mainController, 0),
-                      WidgetUtils.streamMorphButtons(
-                          context, mainController, 1),
-                      WidgetUtils.streamMorphButtons(
-                          context, mainController, 2),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
 
-          // games
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                WidgetUtils.gamingMorphButtons(context, mainController, 0),
-                WidgetUtils.gamingMorphButtons(context, mainController, 1),
-                WidgetUtils.gamingMorphButtons(context, mainController, 2),
-              ],
-            ),
+              // games
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    WidgetUtils.gamingMorphButtons(context, mainController, 0),
+                    WidgetUtils.gamingMorphButtons(context, mainController, 1),
+                    WidgetUtils.gamingMorphButtons(context, mainController, 2),
+                  ],
+                ),
+              ),
+            ]),
+        Positioned(
+          left: 30,
+          bottom: 30,
+          child: Obx(
+            () => WidgetUtils.ScrollButton(
+                mainController,
+                mainController.gamingController,
+                mainController.isGameScrollDown),
           ),
-        ]);
+        ),
+      ],
+    );
   }
 }
 
@@ -100,11 +126,12 @@ class GTADetails extends StatelessWidget {
 }
 
 class YoutubeDetails extends StatelessWidget {
-  const YoutubeDetails({Key? key, required this.mainController})
+  const YoutubeDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
-
+  final bool isDesktop;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -135,6 +162,10 @@ class YoutubeDetails extends StatelessWidget {
               ],
             ),
           ),
+          (isDesktop)
+              ? SizedBox()
+              : WidgetUtils.streamMorphButtons(context, mainController, 0,
+                  isDesktop: false)
         ],
       ),
     );
@@ -142,10 +173,12 @@ class YoutubeDetails extends StatelessWidget {
 }
 
 class TwitchDetails extends StatelessWidget {
-  const TwitchDetails({Key? key, required this.mainController})
+  const TwitchDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
+  final bool isDesktop;
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +197,7 @@ class TwitchDetails extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -177,6 +210,10 @@ class TwitchDetails extends StatelessWidget {
               ],
             ),
           ),
+          (isDesktop)
+              ? SizedBox()
+              : WidgetUtils.streamMorphButtons(context, mainController, 1,
+                  isDesktop: false)
         ],
       ),
     );
@@ -184,10 +221,13 @@ class TwitchDetails extends StatelessWidget {
 }
 
 class DiscordDetails extends StatelessWidget {
-  const DiscordDetails({Key? key, required this.mainController})
+  const DiscordDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
+  final bool isDesktop;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -205,7 +245,7 @@ class DiscordDetails extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -218,6 +258,10 @@ class DiscordDetails extends StatelessWidget {
               ],
             ),
           ),
+          (isDesktop)
+              ? SizedBox()
+              : WidgetUtils.streamMorphButtons(context, mainController, 2,
+                  isDesktop: false)
         ],
       ),
     );
@@ -237,12 +281,15 @@ class GamingScreen extends StatelessWidget {
       children: [
         YoutubeDetails(
           mainController: mainController,
+          isDesktop: false,
         ),
         TwitchDetails(
           mainController: mainController,
+          isDesktop: false,
         ),
         DiscordDetails(
           mainController: mainController,
+          isDesktop: false,
         ),
       ],
       controller: mainController.streamController,

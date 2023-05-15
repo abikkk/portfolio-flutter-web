@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
@@ -12,47 +14,91 @@ class DesktopCodingScreen extends StatelessWidget {
   final MainController mainController;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        Expanded(
-          flex: 3,
-          child: MouseRegion(
-            onHover: (e) {
-              mainController.showScrollDownBtn.value = true;
-            },
-            child: PageView(
-              allowImplicitScrolling: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                IntroDetails(
-                  mainController: mainController,
-                  isDesktop: true,
+        Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: MouseRegion(
+                onHover: (e) {
+                  mainController.showScrollDownBtn.value = true;
+                },
+                child: PageView(
+                  allowImplicitScrolling: true,
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    IntroDetails(
+                      mainController: mainController,
+                      isDesktop: true,
+                    ),
+                    FlutterDetails(
+                      mainController: mainController,
+                      isDesktop: true,
+                    ),
+                    ReactDetails(
+                      mainController: mainController,
+                      isDesktop: true,
+                    ),
+                    VueDetails(
+                      mainController: mainController,
+                      isDesktop: true,
+                    )
+                  ],
+                  controller: mainController.codingController,
+                  onPageChanged: (value) {
+                    if (mainController.codingController.page!.round() == 3) {
+                      mainController.isCodeScrollDown.value = false;
+                    } else {
+                      mainController.isCodeScrollDown.value = true;
+                    }
+                  },
                 ),
-                FlutterDetails(
-                  mainController: mainController,
-                  isDesktop: true,
-                ),
-                ReactDetails(
-                  mainController: mainController,
-                  isDesktop: true,
-                ),
-                VueDetails(
-                  mainController: mainController,
-                  isDesktop: true,
-                )
-              ],
-              controller: mainController.codingController,
+              ),
             ),
-          ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WidgetUtils.codingMorphButtons(context, mainController, 0),
+                  WidgetUtils.codingMorphButtons(context, mainController, 1),
+                  WidgetUtils.codingMorphButtons(context, mainController, 2),
+                ],
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              WidgetUtils.codingMorphButtons(context, mainController, 0),
-              WidgetUtils.codingMorphButtons(context, mainController, 1),
-              WidgetUtils.codingMorphButtons(context, mainController, 2),
-            ],
+
+        // scroll up/down button
+        Positioned(
+          left: 30,
+          bottom: 30,
+          child: Obx(
+            () => WidgetUtils.ScrollButton(
+                mainController,
+                mainController.codingController,
+                mainController.isCodeScrollDown),
+            //     MouseRegion(
+            //   onEnter: (e) {
+            //     mainController.showScrollBtn.value = 1.0;
+            //   },
+            //   onExit: (e) {
+            //     mainController.showScrollBtn.value = 0.0;
+            //   },
+            //   child: AnimatedOpacity(
+            //     duration: Duration(milliseconds: 200),
+            //     opacity: mainController.showScrollBtn.value,
+            //     child: IconButton(
+            //         onPressed: () {
+            //           mainController.codingController.nextPage(
+            //               duration: Duration(milliseconds: 200),
+            //               curve: Curves.fastOutSlowIn);
+            //         },
+            //         icon: Icon((mainController.isCodeScrollDown.value)
+            //             ? Icons.arrow_drop_down_rounded
+            //             : Icons.arrow_drop_up_rounded)),
+            //   ),
+            // ),
           ),
         ),
       ],

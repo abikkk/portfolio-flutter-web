@@ -143,6 +143,36 @@ class WidgetUtils {
     );
   }
 
+  static MouseRegion ScrollButton(MainController mainController,
+      PageController pageController, RxBool scrollDown) {
+    return MouseRegion(
+      onEnter: (e) {
+        mainController.showScrollBtn.value = 1.0;
+      },
+      onExit: (e) {
+        mainController.showScrollBtn.value = 0.0;
+      },
+      child: AnimatedOpacity(
+        duration: Duration(milliseconds: 200),
+        opacity: mainController.showScrollBtn.value,
+        child: IconButton(
+            onPressed: () {
+              if (scrollDown.value)
+                pageController.nextPage(
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.fastOutSlowIn);
+              else
+                pageController.animateTo(pageController.initialPage.toDouble(),
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.fastOutSlowIn);
+            },
+            icon: Icon((scrollDown.value)
+                ? Icons.keyboard_arrow_down_rounded
+                : Icons.keyboard_arrow_up_rounded)),
+      ),
+    );
+  }
+
   static Widget codingMorphButtons(
       BuildContext context, MainController mainController, int buttonType) {
     return Obx(
@@ -336,7 +366,8 @@ class WidgetUtils {
   }
 
   static Widget streamMorphButtons(
-      BuildContext context, MainController mainController, int buttonType) {
+      BuildContext context, MainController mainController, int buttonType,
+      {bool isDesktop = true}) {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(15.0),
@@ -359,18 +390,19 @@ class WidgetUtils {
                   !mainController
                       .streamMorphButtons[buttonType].isClicked.value;
 
-              mainController.streamController.animateToPage(buttonType,
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut);
-
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
                 mainController.streamMorphButtons[buttonType].isClicked.value =
                     !mainController
                         .streamMorphButtons[buttonType].isClicked.value;
 
-                // UiUtils.openLink(
-                //     mainController.streamMorphButtons[buttonType].link.value);
+                if (isDesktop)
+                  mainController.streamController.animateToPage(buttonType,
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInOut);
+                else
+                  UiUtils.openLink(
+                      mainController.streamMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -529,10 +561,11 @@ class WidgetUtils {
   }
 
   static Widget musicMorphButtons(
-      BuildContext context, MainController mainController, int buttonType,{bool isDesktop=true}) {
+      BuildContext context, MainController mainController, int buttonType,
+      {bool isDesktop = true}) {
     return Obx(
       () => Padding(
-        padding: EdgeInsets.all((isDesktop)?15.0:5),
+        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
             mainController.musicMorphButtons[buttonType].scale.value =
