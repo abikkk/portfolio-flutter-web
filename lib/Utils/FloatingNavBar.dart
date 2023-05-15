@@ -1,10 +1,12 @@
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_porfolio/Utils/AppThemeData.dart';
 import '../Controllers/MainController.dart';
 import 'UiUtils.dart';
 
-class FloatingNavBarHori extends StatelessWidget {
-  const FloatingNavBarHori({Key? key, required this.mainController})
+class FloatingNavBarDesktop extends StatelessWidget {
+  const FloatingNavBarDesktop({Key? key, required this.mainController})
       : super(key: key);
 
   final MainController mainController;
@@ -34,27 +36,37 @@ class FloatingNavBarHori extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        FloatingNavIcons(
-                            hoverID: 1,
-                            iconData: Icons.home_rounded,
-                            mainController: mainController),
-                        FloatingNavIcons(
-                            hoverID: 2,
-                            iconData: Icons.format_list_bulleted_rounded,
-                            mainController: mainController),
-                        FloatingNavIcons(
-                            hoverID: 3,
-                            iconData: Icons.games_rounded,
-                            mainController: mainController),
-                        FloatingNavIcons(
-                            hoverID: 4,
-                            iconData: Icons.music_note_rounded,
-                            mainController: mainController),
-                        FloatingNavIcons(
-                            hoverID: 5,
-                            iconData: Icons.person_rounded,
-                            mainController: mainController),
-                        // FloatingNavIcons(
+                        FloatingNavBarIcons(
+                          hoverID: 1,
+                          iconData: Icons.home_rounded,
+                          mainController: mainController,
+                          isDesktop: true,
+                        ),
+                        FloatingNavBarIcons(
+                          hoverID: 2,
+                          iconData: Icons.format_list_bulleted_rounded,
+                          mainController: mainController,
+                          isDesktop: true,
+                        ),
+                        FloatingNavBarIcons(
+                          hoverID: 3,
+                          iconData: Icons.games_rounded,
+                          mainController: mainController,
+                          isDesktop: true,
+                        ),
+                        FloatingNavBarIcons(
+                          hoverID: 4,
+                          iconData: Icons.music_note_rounded,
+                          mainController: mainController,
+                          isDesktop: true,
+                        ),
+                        FloatingNavBarIcons(
+                          hoverID: 5,
+                          iconData: Icons.person_rounded,
+                          mainController: mainController,
+                          isDesktop: true,
+                        ),
+                        // FloatingNavBarIcons(
                         //     hoverID: 6,
                         //     iconData: Icons.email_rounded,
                         //     mainController: mainController),
@@ -72,106 +84,47 @@ class FloatingNavBarHori extends StatelessWidget {
   }
 }
 
-class FloatingNavBarVert extends StatelessWidget {
-  const FloatingNavBarVert({Key? key, required this.mainController})
+class FloatingNavBar extends StatelessWidget {
+  const FloatingNavBar({Key? key, required this.mainController})
       : super(key: key);
 
   final MainController mainController;
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    VerticalNavIcons(
-                        iconID: 1,
-                        iconData: Icons.home_rounded,
-                        mainController: mainController),
-                    VerticalNavIcons(
-                        iconID: 2,
-                        iconData: Icons.list_rounded,
-                        mainController: mainController),
-                    VerticalNavIcons(
-                        iconID: 3,
-                        iconData: Icons.games_rounded,
-                        mainController: mainController),
-                    VerticalNavIcons(
-                        iconID: 4,
-                        iconData: Icons.music_note_rounded,
-                        mainController: mainController),
-                    VerticalNavIcons(
-                        iconID: 5,
-                        iconData: Icons.person_rounded,
-                        mainController: mainController),
-                    VerticalNavIcons(
-                        iconID: 6,
-                        iconData: Icons.email_rounded,
-                        mainController: mainController),
-                  ],
-                ),
-              ],
-            )
-          ],
-        ),
+      () => FlashyTabBar(
+        selectedIndex: mainController.navIndex.value,
+        animationDuration: Duration(milliseconds: 200),
+        showElevation: true,
+        onItemSelected: (index) {
+          mainController.navIndex.value = index;
+          UiUtils.navigate(index + 1, mainController);
+        },
+        items: [
+          WidgetUtils.flashyTabBarItem('home', Icons.home),
+          WidgetUtils.flashyTabBarItem('code', Icons.format_list_bulleted),
+          WidgetUtils.flashyTabBarItem('game', Icons.gamepad),
+          WidgetUtils.flashyTabBarItem('music', Icons.music_note),
+          WidgetUtils.flashyTabBarItem('social', Icons.person),
+        ],
       ),
     );
   }
 }
 
-class VerticalNavIcons extends StatelessWidget {
-  const VerticalNavIcons(
-      {Key? key,
-      required this.iconID,
-      required this.iconData,
-      required this.mainController})
-      : super(key: key);
-
-  final int iconID;
-  final IconData iconData;
-  final MainController mainController;
-  @override
-  Widget build(BuildContext context) {
-    return (iconID != 0 && mainController.navIndex == iconID)
-        ? Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: IconButton(
-                icon: Icon(
-                  iconData,
-                  color: Colors.black,
-                ),
-                iconSize: 24,
-                onPressed: () {
-                  UiUtils.navigate(iconID, mainController);
-                }),
-          )
-        : IconButton(
-            icon: WidgetUtils.bulletineIcon(),
-            iconSize: 12,
-            onPressed: () {
-              UiUtils.navigate(iconID, mainController);
-            });
-  }
-}
-
-class FloatingNavIcons extends StatelessWidget {
-  const FloatingNavIcons(
+class FloatingNavBarIcons extends StatelessWidget {
+  const FloatingNavBarIcons(
       {Key? key,
       required this.hoverID,
       required this.iconData,
-      required this.mainController})
+      required this.mainController,
+      required this.isDesktop})
       : super(key: key);
 
   final int hoverID;
   final IconData iconData;
   final MainController mainController;
+  final bool isDesktop;
 
   @override
   Widget build(BuildContext context) {
@@ -190,19 +143,21 @@ class FloatingNavIcons extends StatelessWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return ScaleTransition(scale: animation, child: child);
             },
-            child: iconWidget(mainController.navIconID.value)),
+            child: iconWidget(mainController.navIconID.value, isDesktop)),
       ),
     );
   }
 
-  Widget iconWidget(int navID) {
+  Widget iconWidget(int navID, bool isDesktop) {
     return (navID != 0 && navID == hoverID)
         ? Padding(
             padding: const EdgeInsets.all(0.0),
             child: IconButton(
                 icon: Icon(
                   iconData,
-                  color: Colors.white70,
+                  color: (isDesktop)
+                      ? Colors.white70
+                      : AppThemeData.appThemeData.primaryColor,
                 ),
                 iconSize: 24,
                 onPressed: () {
@@ -210,7 +165,7 @@ class FloatingNavIcons extends StatelessWidget {
                 }),
           )
         : IconButton(
-            icon: WidgetUtils.bulletineIcon(),
+            icon: WidgetUtils.bulletineIcon(isDesktop),
             iconSize: 12,
             onPressed: () {
               UiUtils.navigate(navID, mainController);

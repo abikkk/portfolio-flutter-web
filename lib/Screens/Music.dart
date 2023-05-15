@@ -55,6 +55,30 @@ class MusicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'listen to my music',
+          style: AppThemeData.appThemeData.textTheme.headlineMedium,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 24,
+        ),
+        Flex(
+          direction: MediaQuery.of(context).orientation == Orientation.landscape
+              ? Axis.horizontal
+              : Axis.vertical,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WidgetUtils.musicMorphButtons(context, mainController, 1,
+                isDesktop: false),
+            WidgetUtils.musicMorphButtons(context, mainController, 0,
+                isDesktop: false),
+          ],
+        ),
+      ],
+    );
   }
 }

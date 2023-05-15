@@ -1,9 +1,11 @@
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:my_porfolio/main.dart';
+import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
 import '../Utils/FloatingNavBar.dart';
+import '../Utils/UiUtils.dart';
 import 'Coding.dart';
 import 'Contact.dart';
 import 'Gaming.dart';
@@ -70,7 +72,7 @@ class HomeContainer extends StatelessWidget {
                       ],
                       controller: mainController.pageController,
                     ),
-                    FloatingNavBarHori(
+                    FloatingNavBarDesktop(
                       mainController: mainController,
                     )
                   ],
@@ -90,41 +92,56 @@ class HomeContainer extends StatelessWidget {
         print('>> Device is a tablet/mobile');
         return SafeArea(
           child: Scaffold(
-            body: SingleChildScrollView(
+            body: NotificationListener(
+              onNotification: (UserScrollNotification e) {
+                if (e.direction == ScrollDirection.forward) {
+                  mainController.navHovered.value = 1.0;
+                } else if (e.direction == ScrollDirection.reverse) {
+                  mainController.navHovered.value = 0.0;
+                }
+                return false;
+              },
               child: ResponsiveBuilder(
                 builder: (context, sizingInformation) => SizedBox(
                   height: sizingInformation.screenSize.height,
                   child: Stack(
                     children: [
                       PageView(
-                        allowImplicitScrolling: true,
+                        allowImplicitScrolling: false,
+                        pageSnapping: sizingInformation.deviceScreenType ==
+                                DeviceScreenType.tablet
+                            ? true
+                            : false,
                         scrollDirection: Axis.vertical,
                         children: [
-                          HomeScreen(),
-                          // CodingScreen(
-                          //   mainController: mainController,
-                          // ),
-                          // GamingScreen(
-                          //   mainController: mainController,
-                          // ),
-                          // MusicScreen(
-                          //   mainController: mainController,
-                          // ),
-                          // SocialsScreen(
-                          //   mainController: mainController,
-                          // ),
+                          HomeScreen(
+                            mainController: mainController,
+                          ),
+                          CodingScreen(
+                            mainController: mainController,
+                          ),
+                          GamingScreen(
+                            mainController: mainController,
+                          ),
+                          MusicScreen(
+                            mainController: mainController,
+                          ),
+                          SocialsScreen(
+                            mainController: mainController,
+                          ),
                           // ContactContainer()
                         ],
                         controller: mainController.pageController,
                       ),
-                      // FloatingNavBarVert(
-                      //   mainController: mainController,
-                      // )
                     ],
                   ),
                 ),
               ),
             ),
+            // bottomNavigationBar: FloatingNavBar(
+            //   mainController: mainController,
+            // ),
+            floatingActionButton: WidgetUtils.scrollButton(mainController),
           ),
         );
       } else if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {

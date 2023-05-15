@@ -62,6 +62,36 @@ class SocialsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'connect with me',
+          style: AppThemeData.appThemeData.textTheme.headlineMedium,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WidgetUtils.socialMorphButtons(context, mainController, 0,
+                isDesktop: false),
+            WidgetUtils.socialMorphButtons(context, mainController, 1,
+                isDesktop: false),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WidgetUtils.socialMorphButtons(context, mainController, 2,
+                isDesktop: false),
+            WidgetUtils.socialMorphButtons(context, mainController, 3,
+                isDesktop: false),
+          ],
+        ),
+      ],
+    );
   }
 }

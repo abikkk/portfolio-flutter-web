@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
@@ -25,15 +26,19 @@ class DesktopCodingScreen extends StatelessWidget {
               children: [
                 IntroDetails(
                   mainController: mainController,
+                  isDesktop: true,
                 ),
                 FlutterDetails(
                   mainController: mainController,
+                  isDesktop: true,
                 ),
                 ReactDetails(
                   mainController: mainController,
+                  isDesktop: true,
                 ),
                 VueDetails(
                   mainController: mainController,
+                  isDesktop: true,
                 )
               ],
               controller: mainController.codingController,
@@ -56,13 +61,15 @@ class DesktopCodingScreen extends StatelessWidget {
 }
 
 class IntroDetails extends StatelessWidget {
-  const IntroDetails({Key? key, required this.mainController})
+  const IntroDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
   final MainController mainController;
+  final isDesktop;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(44.0),
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -78,54 +85,65 @@ class IntroDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Row(
               children: [
-                Text(
-                  'i can work for projects using the following frameworks.',
-                  overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Text(
+                    'i can work for projects using the following frameworks.',
+                    softWrap: true,
+                    maxLines: 4,
+                    // overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'my knowledge base on these languages and development environments (IDE) i use can be divided as follows:',
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'my knowledge base on these languages and development environments (IDE) i use can be divided as follows:',
+                    softWrap: true,
+                    maxLines: 4,
+                    // overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: WidgetUtils.pieChart(
-                        mainController,
-                        context,
-                        mainController.projectMap,
-                        'projects',
-                        mainController.skillsGradientList,
-                        isGradient: true),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Flex(
+              direction: isDesktop ? Axis.horizontal : Axis.vertical,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: isDesktop ? 2 : 3,
+                  child: WidgetUtils.pieChart(
+                      mainController,
+                      context,
+                      mainController.projectMap,
+                      'projects',
+                      mainController.skillsGradientList,
+                      isGradient: true,
+                      isDesktop: false),
+                ),
+                Expanded(
+                  flex: isDesktop ? 3 : 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      WidgetUtils.codingProgressRow(mainController, 'vs code',
+                          0, mainController.vsValue.value,
+                          isDesktop: false),
+                      WidgetUtils.codingProgressRow(mainController,
+                          'android studio', 1, mainController.asValue.value,
+                          isDesktop: false),
+                    ],
                   ),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        WidgetUtils.codingProgressRow(mainController, 'vs code',
-                            0, mainController.vsValue.value),
-                        WidgetUtils.codingProgressRow(mainController,
-                            'android studio', 1, mainController.asValue.value),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -134,10 +152,12 @@ class IntroDetails extends StatelessWidget {
 }
 
 class FlutterDetails extends StatelessWidget {
-  const FlutterDetails({Key? key, required this.mainController})
+  const FlutterDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
+  final bool isDesktop;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -157,33 +177,30 @@ class FlutterDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Row(
               children: [
-                Text(
-                  'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara.\ni was involved in 15+ projects for our clients in dubai and some local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
-                  overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Text(
+                    'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
+                    maxLines: 8,
+                    softWrap: true,
+                    textAlign: TextAlign.justify,
+                    // overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 40.0),
+            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
-                    mainController.usageFlutter[CONSTANTS.vsCode]!),
+                    mainController.usageFlutter[CONSTANTS.vsCode]!,
+                    isDesktop: false),
                 WidgetUtils.codingProgressRow(mainController, 'android studio',
-                    1, mainController.usageFlutter[CONSTANTS.androidStudio]!),
-                // Expanded(
-                //   child: WidgetUtils.pieChart(
-                //       mainController,
-                //       context,
-                //       mainController.usageFlutter,
-                //       'IDE',
-                //       mainController.ideGradientList,
-                //       isGradient: true),
-                // ),
-                // Expanded(child: Container())
+                    1, mainController.usageFlutter[CONSTANTS.androidStudio]!,
+                    isDesktop: false),
               ],
             ),
           ),
@@ -194,13 +211,15 @@ class FlutterDetails extends StatelessWidget {
 }
 
 class ReactDetails extends StatelessWidget {
-  const ReactDetails({Key? key, required this.mainController})
+  const ReactDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
   final MainController mainController;
+  final bool isDesktop;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(44.0),
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -214,17 +233,36 @@ class ReactDetails extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
+            child: Column(
               children: [
-                Text(
-                  'i worked as a freelancer for 8 months.\nmy projects ranges as follows:\n - portfolio websites\n - cafe website\n - ecomerce\n - warehouse/inventory management.',
-                  overflow: TextOverflow.ellipsis,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'i worked as a freelancer for 8 months. my projects ranges as follows:',
+                        textAlign: TextAlign.justify,
+                        softWrap: true,
+                        maxLines: 4,
+                        // overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      ' - portfolio websites\n - cafe website\n - ecommerce\n - warehouse/inventory management',
+                      softWrap: true,
+                      maxLines: 8,
+                    )),
+                  ],
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 40.0),
+            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
             child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
                 mainController.usageReact[CONSTANTS.vsCode]!),
           ),
@@ -235,13 +273,16 @@ class ReactDetails extends StatelessWidget {
 }
 
 class VueDetails extends StatelessWidget {
-  const VueDetails({Key? key, required this.mainController}) : super(key: key);
+  const VueDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
+      : super(key: key);
 
   final MainController mainController;
+  final bool isDesktop;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(44.0),
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -257,15 +298,20 @@ class VueDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Row(
               children: [
-                Text(
-                  'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months.\ni was involved in development of employee record management system and attendance management system.\ni have my own portfolio website under development as well.',
-                  overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Text(
+                    'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months. i was involved in development of employee record management system and attendance management system. i have my own portfolio website under development as well.',
+                    maxLines: 8,
+                    softWrap: true,
+                    textAlign: TextAlign.justify,
+                    // overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 40.0),
+            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
             child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
                 mainController.usageVue[CONSTANTS.vsCode]!),
           ),
@@ -282,6 +328,26 @@ class CodingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return PageView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        IntroDetails(
+          mainController: mainController,
+          isDesktop: false,
+        ),
+        FlutterDetails(
+          mainController: mainController,
+          isDesktop: false,
+        ),
+        ReactDetails(
+          mainController: mainController,
+          isDesktop: false,
+        ),
+        VueDetails(
+          mainController: mainController,
+          isDesktop: false,
+        )
+      ],
+    );
   }
 }

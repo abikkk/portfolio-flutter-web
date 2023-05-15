@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import '../Controllers/MainController.dart';
-import '../Utils/AppThemeData.dart';
 
 class DesktopGamingScreen extends StatelessWidget {
   DesktopGamingScreen({Key? key, required this.mainController})
@@ -128,8 +126,13 @@ class YoutubeDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                    'i upload clips from my gameplays and live streams to my youtube channel.\ndrop by and show some love if you can. thanks!'),
+                Expanded(
+                  child: Text(
+                    'i upload clips from my gameplays and live streams to my youtube channel. drop by and show some love if you can. thanks!',
+                    softWrap: true,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
               ],
             ),
           ),
@@ -166,8 +169,13 @@ class TwitchDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                    'i try to stream regularly, as much as i can. i normally just stream for myself.\nmy live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.'),
+                Expanded(
+                  child: Text(
+                    'i try to stream regularly, as much as i can. i normally just stream for myself. my live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.',
+                    softWrap: true,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
               ],
             ),
           ),
@@ -203,8 +211,12 @@ class DiscordDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                    'you can join my discord server. we can have fun together with my friends.'),
+                Expanded(
+                  child: Text(
+                    'you can join my discord server. we can have fun together with my friends.',
+                    softWrap: true,
+                  ),
+                ),
               ],
             ),
           ),
@@ -221,6 +233,21 @@ class GamingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return PageView(
+      allowImplicitScrolling: true,
+      scrollDirection: Axis.horizontal,
+      children: [
+        YoutubeDetails(
+          mainController: mainController,
+        ),
+        TwitchDetails(
+          mainController: mainController,
+        ),
+        DiscordDetails(
+          mainController: mainController,
+        ),
+      ],
+      controller: mainController.streamController,
+    );
   }
 }

@@ -1,4 +1,4 @@
-// import 'package:fl_chart/fl_chart.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:get/get.dart';
@@ -6,8 +6,6 @@ import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
-// import 'Constants.dart';
-// import 'Constants.dart';
 
 class UiUtils {
   // web page launcher
@@ -115,10 +113,33 @@ class UiUtils {
 }
 
 class WidgetUtils {
-  static Widget bulletineIcon() {
+  static Widget scrollButton(MainController mainController) {
+    return Obx(
+      () => AnimatedOpacity(
+        opacity: mainController.navHovered.value,
+        duration: Duration(milliseconds: 200),
+        child: IconButton(
+            onPressed: () {
+              mainController.navHovered.value = 0.0;
+              UiUtils.navigate(0, mainController);
+            },
+            icon: Icon(Icons.arrow_drop_up_rounded)),
+      ),
+    );
+  }
+
+  static Widget bulletineIcon(bool isDesktop) {
     return Icon(
       Icons.circle,
-      color: Colors.white,
+      color:
+          (isDesktop) ? Colors.white : AppThemeData.appThemeData.primaryColor,
+    );
+  }
+
+  static FlashyTabBarItem flashyTabBarItem(String label, IconData iconData) {
+    return FlashyTabBarItem(
+      icon: Icon(iconData),
+      title: Text('${label}'),
     );
   }
 
@@ -202,7 +223,10 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/icons/${mainController.codingMorphButtons[buttonType].image}.png',
+                        mainController.codingMorphButtons[buttonType]
+                                .showDetails.value
+                            ? 'assets/images/icons/${mainController.codingMorphButtons[buttonType].image_hovered}.png'
+                            : 'assets/images/icons/${mainController.codingMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -295,7 +319,10 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/icons/${mainController.gamingMorphButtons[buttonType].image}.png',
+                        mainController.gamingMorphButtons[buttonType]
+                                .showDetails.value
+                            ? 'assets/images/icons/${mainController.gamingMorphButtons[buttonType].image_hovered}.png'
+                            : 'assets/images/icons/${mainController.gamingMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -388,7 +415,10 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/icons/${mainController.streamMorphButtons[buttonType].image}.png',
+                        mainController.streamMorphButtons[buttonType]
+                                .showDetails.value
+                            ? 'assets/images/icons/${mainController.streamMorphButtons[buttonType].image_hovered}.png'
+                            : 'assets/images/icons/${mainController.streamMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -402,10 +432,11 @@ class WidgetUtils {
   }
 
   static Widget socialMorphButtons(
-      BuildContext context, MainController mainController, int buttonType) {
+      BuildContext context, MainController mainController, int buttonType,
+      {bool isDesktop = true}) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
             mainController.socialMorphButtons[buttonType].scale.value =
@@ -481,7 +512,10 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/icons/${mainController.socialMorphButtons[buttonType].image}.png',
+                        mainController.socialMorphButtons[buttonType]
+                                .showDetails.value
+                            ? 'assets/images/icons/${mainController.socialMorphButtons[buttonType].image_hovered}.png'
+                            : 'assets/images/icons/${mainController.socialMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -495,10 +529,10 @@ class WidgetUtils {
   }
 
   static Widget musicMorphButtons(
-      BuildContext context, MainController mainController, int buttonType) {
+      BuildContext context, MainController mainController, int buttonType,{bool isDesktop=true}) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all((isDesktop)?15.0:5),
         child: MouseRegion(
           onEnter: (a) {
             mainController.musicMorphButtons[buttonType].scale.value =
@@ -573,7 +607,10 @@ class WidgetUtils {
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
                       child: Image.asset(
-                        'assets/images/icons/${mainController.musicMorphButtons[buttonType].image}.png',
+                        mainController
+                                .musicMorphButtons[buttonType].showDetails.value
+                            ? 'assets/images/icons/${mainController.musicMorphButtons[buttonType].image_hovered}.png'
+                            : 'assets/images/icons/${mainController.musicMorphButtons[buttonType].image}.png',
                       ),
                     ),
                   ),
@@ -632,7 +669,11 @@ class WidgetUtils {
                       colors: mainController.streamGradientList[id])
                   : null,
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: (mainController.ytHover.value)
+              boxShadow: (((id == 0)
+                      ? mainController.ytHover.value
+                      : (id == 1)
+                          ? mainController.twitchHover.value
+                          : mainController.discordHover.value))
                   ? [
                       BoxShadow(
                           color: Colors.grey[500]!,
@@ -661,9 +702,24 @@ class WidgetUtils {
               }
             },
             label: Text(
-              '${label}',
-              style: AppThemeData.appThemeData.textTheme.headlineMedium,
-            ),
+                // ((id == 0)
+                //         ? mainController.ytHover.value
+                //         : (id == 1)
+                //             ? mainController.twitchHover.value
+                //             : mainController.discordHover.value)
+                // ?
+                '${label}'
+                //     :
+                // '> ${label} <'
+                ,
+                style: ((id == 0)
+                        ? mainController.ytHover.value
+                        : (id == 1)
+                            ? mainController.twitchHover.value
+                            : mainController.discordHover.value)
+                    ? AppThemeData.appThemeData.textTheme.headlineMedium!
+                        .copyWith(color: Colors.white.withOpacity(0.9))
+                    : AppThemeData.appThemeData.textTheme.headlineMedium!),
             icon: Icon(
               Icons.arrow_forward_ios_rounded,
               color: ((id == 0)
@@ -671,7 +727,7 @@ class WidgetUtils {
                       : (id == 1)
                           ? mainController.twitchHover.value
                           : mainController.discordHover.value)
-                  ? AppThemeData.appThemeData.primaryColor
+                  ? Colors.white.withOpacity(0.9)
                   : Colors.transparent,
             ),
           ),
@@ -681,9 +737,10 @@ class WidgetUtils {
   }
 
   static Widget codingProgressRow(
-      MainController mainController, String label, int id, double value) {
+      MainController mainController, String label, int id, double value,
+      {bool isDesktop = true}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.symmetric(vertical: (isDesktop) ? 10.0 : 5.0),
       child: Row(
         children: [
           Expanded(
@@ -691,7 +748,9 @@ class WidgetUtils {
                 alignment: Alignment.centerRight,
                 child: Text(
                   '${label} usage : ',
-                  // style: AppThemeData.appThemeData.textTheme.bodySmall,
+                  style: (isDesktop)
+                      ? null
+                      : AppThemeData.appThemeData.textTheme.bodySmall,
                 )),
           ),
           Expanded(
@@ -721,34 +780,32 @@ class WidgetUtils {
 
   static Widget pieChart(MainController mainController, BuildContext context,
       var dataMap, String label, var gradientList,
-      {bool isGradient = false}) {
+      {bool isGradient = false, bool isDesktop = true}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: SizedBox(
-        height: 333,
-        width: 333,
-        child: PieChart(
-          dataMap: dataMap,
-          animationDuration: Duration(milliseconds: 800),
-          chartLegendSpacing: 44,
-          chartRadius: MediaQuery.of(context).size.width / 7,
-          initialAngleInDegree: 0,
-          chartType: ChartType.disc,
-          centerText: "${label}",
-          legendOptions: LegendOptions(
-              showLegendsInRow: false,
-              legendPosition: LegendPosition.left,
-              showLegends: true,
-              legendShape: BoxShape.circle,
-              legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
-          chartValuesOptions: ChartValuesOptions(
-            showChartValueBackground: true,
-            showChartValues: true,
-            showChartValuesOutside: false,
-            decimalPlaces: 0,
-          ),
-          gradientList: (isGradient) ? gradientList : null,
+      child: PieChart(
+        dataMap: dataMap,
+        animationDuration: Duration(milliseconds: 800),
+        chartLegendSpacing: 44,
+        chartRadius: (isDesktop)
+            ? MediaQuery.of(context).size.width / 7
+            : MediaQuery.of(context).size.width / 3,
+        initialAngleInDegree: 0,
+        chartType: ChartType.disc,
+        centerText: "${label}",
+        legendOptions: LegendOptions(
+            showLegendsInRow: false,
+            legendPosition: LegendPosition.left,
+            showLegends: true,
+            legendShape: BoxShape.circle,
+            legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
+        chartValuesOptions: ChartValuesOptions(
+          showChartValueBackground: true,
+          showChartValues: true,
+          showChartValuesOutside: false,
+          decimalPlaces: 0,
         ),
+        gradientList: (isGradient) ? gradientList : null,
       ),
     );
   }

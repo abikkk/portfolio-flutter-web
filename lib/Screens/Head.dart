@@ -61,7 +61,8 @@ class DesktopHomeScreen extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 2,
-                      child: Align(alignment: Alignment.centerRight,
+                      child: Align(
+                        alignment: Alignment.centerRight,
                         child: subtitleTexts(
                           mainController: mainController,
                           label: 'musician',
@@ -147,24 +148,24 @@ class subtitleTexts extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+  const HomeScreen({Key? key, required this.mainController}) : super(key: key);
+  final MainController mainController;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          'coming soon!',
-          style: AppThemeData.appThemeData.textTheme.headlineLarge,
-        ),
-        Text(
-          'sorry, currenty only works on desktop.',
-          style: AppThemeData.appThemeData.textTheme.labelMedium,
+        Image(
+          image: AssetImage('assets/images/logo/black_transparent.png'),
+          height: MediaQuery.of(context).orientation == Orientation.landscape
+              ? MediaQuery.of(context).size.height - 25
+              : null,
+          fit: MediaQuery.of(context).orientation == Orientation.portrait
+              ? BoxFit.cover
+              : BoxFit.fitHeight,
         ),
       ],
-    )));
+    );
   }
 }
