@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
 import 'Constants.dart';
 
-class FunctionUtils {
+class Functions {
   // web page launcher
   static openLink(type) async {
     switch (type) {
@@ -107,14 +107,15 @@ class FunctionUtils {
   }
 
 // page view navigation
-  static navigate(int navIndex, MainController mainController) {
-    mainController.pageController.animateToPage(navIndex - 1,
+  static navigate(int navIndex, PageController pageController,
+      MainController mainController) {
+    pageController.animateToPage(navIndex - 1,
         duration: Duration(milliseconds: 444), curve: Curves.easeInOut);
     mainController.navIndex.value = navIndex - 1;
   }
 }
 
-class ScreenUtils {
+class Screens {
   static Widget HomeContainer(
       {required BuildContext context,
       required MainController mainController,
@@ -154,7 +155,7 @@ class ScreenUtils {
                         children: [
                           Expanded(
                             flex: 3,
-                            child: WidgetUtils.subtitleTexts(
+                            child: Widgets.subtitleTexts(
                               mainController: mainController,
                               label: 'frontend developer',
                               id: 0,
@@ -162,7 +163,7 @@ class ScreenUtils {
                           ),
                           Expanded(
                             child: Center(
-                              child: WidgetUtils.subtitleTexts(
+                              child: Widgets.subtitleTexts(
                                 mainController: mainController,
                                 label: 'gamer',
                                 id: 1,
@@ -173,7 +174,7 @@ class ScreenUtils {
                             flex: 2,
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: WidgetUtils.subtitleTexts(
+                              child: Widgets.subtitleTexts(
                                 mainController: mainController,
                                 label: 'musician',
                                 id: 2,
@@ -220,25 +221,25 @@ class ScreenUtils {
                 allowImplicitScrolling: true,
                 scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
                 children: [
-                  WidgetUtils.CodingIntroDetails(
+                  Widgets.CodingIntroDetails(
                     context: context,
                     mainController: mainController,
                     isDesktop: isDesktop,
                   ),
-                  WidgetUtils.FlutterDetails(
+                  Widgets.FlutterDetails(
                     mainController: mainController,
                     isDesktop: isDesktop,
                   ),
-                  WidgetUtils.ReactDetails(
+                  Widgets.ReactDetails(
                     mainController: mainController,
                     isDesktop: isDesktop,
                   ),
-                  WidgetUtils.VueDetails(
+                  Widgets.VueDetails(
                     mainController: mainController,
                     isDesktop: isDesktop,
                   ),
                   // if (isDesktop)
-                  WidgetUtils.ProjectDetails(
+                  Widgets.ProjectDetails(
                       mainController: mainController, isDesktop: isDesktop)
                 ],
                 controller: mainController.codingController,
@@ -260,6 +261,9 @@ class ScreenUtils {
                       mainController.codingMorphButtons[i].isFocused.value =
                           true;
                   }
+
+                  mainController.codingIndex.value =
+                      mainController.codingController.page!.round();
                 },
               ),
             ),
@@ -268,9 +272,9 @@ class ScreenUtils {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    WidgetUtils.codingMorphButtons(context, mainController, 0),
-                    WidgetUtils.codingMorphButtons(context, mainController, 1),
-                    WidgetUtils.codingMorphButtons(context, mainController, 2),
+                    Widgets.codingMorphButtons(context, mainController, 0),
+                    Widgets.codingMorphButtons(context, mainController, 1),
+                    Widgets.codingMorphButtons(context, mainController, 2),
                   ],
                 ),
               ),
@@ -283,7 +287,7 @@ class ScreenUtils {
             left: 30,
             bottom: 30,
             child: Obx(
-              () => WidgetUtils.desktopScrollButton(
+              () => Widgets.desktopScrollButton(
                   mainController,
                   mainController.codingController,
                   mainController.isCodeScrollDown),
@@ -333,19 +337,22 @@ class ScreenUtils {
                               mainController
                                   .streamMorphButtons[i].isFocused.value = true;
                           }
+
+                          mainController.gamingIndex.value =
+                              mainController.streamController.page!.round();
                         },
                         children: [
-                          WidgetUtils.YoutubeDetails(
+                          Widgets.YoutubeDetails(
                             context: context,
                             mainController: mainController,
                             isDesktop: isDesktop,
                           ),
-                          WidgetUtils.TwitchDetails(
+                          Widgets.TwitchDetails(
                             context: context,
                             mainController: mainController,
                             isDesktop: isDesktop,
                           ),
-                          WidgetUtils.DiscordDetails(
+                          Widgets.DiscordDetails(
                             context: context,
                             mainController: mainController,
                             isDesktop: isDesktop,
@@ -359,11 +366,11 @@ class ScreenUtils {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            WidgetUtils.streamMorphButtons(
+                            Widgets.streamMorphButtons(
                                 context, mainController, 0),
-                            WidgetUtils.streamMorphButtons(
+                            Widgets.streamMorphButtons(
                                 context, mainController, 1),
-                            WidgetUtils.streamMorphButtons(
+                            Widgets.streamMorphButtons(
                                 context, mainController, 2),
                           ],
                         ),
@@ -379,12 +386,9 @@ class ScreenUtils {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      WidgetUtils.gamingMorphButtons(
-                          context, mainController, 0),
-                      WidgetUtils.gamingMorphButtons(
-                          context, mainController, 1),
-                      WidgetUtils.gamingMorphButtons(
-                          context, mainController, 2),
+                      Widgets.gamingMorphButtons(context, mainController, 0),
+                      Widgets.gamingMorphButtons(context, mainController, 1),
+                      Widgets.gamingMorphButtons(context, mainController, 2),
                     ],
                   ),
                 ),
@@ -394,7 +398,7 @@ class ScreenUtils {
             left: 30,
             bottom: 30,
             child: Obx(
-              () => WidgetUtils.desktopScrollButton(
+              () => Widgets.desktopScrollButton(
                   mainController,
                   mainController.gamingController,
                   mainController.isGameScrollDown),
@@ -440,9 +444,9 @@ class ScreenUtils {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              WidgetUtils.musicMorphButtons(context, mainController, 0,
+              Widgets.musicMorphButtons(context, mainController, 0,
                   isDesktop: isDesktop),
-              WidgetUtils.musicMorphButtons(context, mainController, 1,
+              Widgets.musicMorphButtons(context, mainController, 1,
                   isDesktop: isDesktop),
             ],
           ),
@@ -483,18 +487,18 @@ class ScreenUtils {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  WidgetUtils.socialMorphButtons(context, mainController, 0,
+                  Widgets.socialMorphButtons(context, mainController, 0,
                       isDesktop: isDesktop),
-                  WidgetUtils.socialMorphButtons(context, mainController, 1,
+                  Widgets.socialMorphButtons(context, mainController, 1,
                       isDesktop: isDesktop),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  WidgetUtils.socialMorphButtons(context, mainController, 2,
+                  Widgets.socialMorphButtons(context, mainController, 2,
                       isDesktop: isDesktop),
-                  WidgetUtils.socialMorphButtons(context, mainController, 3,
+                  Widgets.socialMorphButtons(context, mainController, 3,
                       isDesktop: isDesktop),
                 ],
               ),
@@ -506,7 +510,7 @@ class ScreenUtils {
   }
 }
 
-class WidgetUtils {
+class Widgets {
   // general UIs
   static Widget scrollButton(MainController mainController) {
     return Obx(
@@ -516,7 +520,8 @@ class WidgetUtils {
         child: IconButton(
             onPressed: () {
               mainController.navHovered.value = 0.0;
-              FunctionUtils.navigate(0, mainController);
+              Functions.navigate(
+                  0, mainController.pageController, mainController);
             },
             icon: Icon(Icons.arrow_drop_up_rounded)),
       ),
@@ -645,7 +650,8 @@ class WidgetUtils {
           child: InkWell(
             hoverColor: Colors.transparent,
             onTap: () {
-              FunctionUtils.navigate(id + 2, mainController);
+              Functions.navigate(
+                  id + 2, mainController.pageController, mainController);
             },
             child: Text(
               '${label}',
@@ -709,7 +715,7 @@ class WidgetUtils {
               children: [
                 Expanded(
                   flex: isDesktop ? 2 : 3,
-                  child: WidgetUtils.pieChart(
+                  child: Widgets.pieChart(
                       mainController,
                       context,
                       mainController.projectMap,
@@ -724,10 +730,10 @@ class WidgetUtils {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      WidgetUtils.codingProgressRow(mainController, 'vs code',
-                          0, mainController.vsValue.value,
+                      Widgets.codingProgressRow(mainController, 'vs code', 0,
+                          mainController.vsValue.value,
                           isDesktop: false),
-                      WidgetUtils.codingProgressRow(mainController,
+                      Widgets.codingProgressRow(mainController,
                           'android studio', 1, mainController.asValue.value,
                           isDesktop: false),
                     ],
@@ -776,11 +782,11 @@ class WidgetUtils {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                Widgets.codingProgressRow(mainController, 'vs code', 0,
                     mainController.usageFlutter[CONSTANTS.vsCode]!,
                     isDesktop: false),
-                WidgetUtils.codingProgressRow(mainController, 'android studio',
-                    1, mainController.usageFlutter[CONSTANTS.androidStudio]!,
+                Widgets.codingProgressRow(mainController, 'android studio', 1,
+                    mainController.usageFlutter[CONSTANTS.androidStudio]!,
                     isDesktop: false),
               ],
             ),
@@ -835,7 +841,7 @@ class WidgetUtils {
           ),
           Padding(
             padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
-            child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+            child: Widgets.codingProgressRow(mainController, 'vs code', 0,
                 mainController.usageReact[CONSTANTS.vsCode]!),
           ),
         ],
@@ -874,7 +880,7 @@ class WidgetUtils {
           ),
           Padding(
             padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
-            child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+            child: Widgets.codingProgressRow(mainController, 'vs code', 0,
                 mainController.usageVue[CONSTANTS.vsCode]!),
           ),
         ],
@@ -912,7 +918,7 @@ class WidgetUtils {
                           crossAxisCount: (isDesktop) ? 4 : 2),
                       children: [
                         for (var project in mainController.projects)
-                          WidgetUtils.projectCard(
+                          Widgets.projectCard(
                               '${project.label}',
                               '${project.image}',
                               project.devLang.value == 'vue'
@@ -944,7 +950,7 @@ class WidgetUtils {
         children: [
           Row(
             children: [
-              WidgetUtils.StreamLinkButtons(
+              Widgets.StreamLinkButtons(
                 mainController,
                 0,
                 'youtube',
@@ -967,7 +973,7 @@ class WidgetUtils {
           ),
           (isDesktop)
               ? SizedBox()
-              : WidgetUtils.streamMorphButtons(context, mainController, 0,
+              : Widgets.streamMorphButtons(context, mainController, 0,
                   isDesktop: false)
         ],
       ),
@@ -985,7 +991,7 @@ class WidgetUtils {
         children: [
           Row(
             children: [
-              WidgetUtils.StreamLinkButtons(
+              Widgets.StreamLinkButtons(
                 mainController,
                 1,
                 'twitch',
@@ -1008,7 +1014,7 @@ class WidgetUtils {
           ),
           (isDesktop)
               ? SizedBox()
-              : WidgetUtils.streamMorphButtons(context, mainController, 1,
+              : Widgets.streamMorphButtons(context, mainController, 1,
                   isDesktop: false)
         ],
       ),
@@ -1026,7 +1032,7 @@ class WidgetUtils {
         children: [
           Row(
             children: [
-              WidgetUtils.StreamLinkButtons(
+              Widgets.StreamLinkButtons(
                 mainController,
                 2,
                 'discord',
@@ -1049,7 +1055,7 @@ class WidgetUtils {
           ),
           (isDesktop)
               ? SizedBox()
-              : WidgetUtils.streamMorphButtons(context, mainController, 2,
+              : Widgets.streamMorphButtons(context, mainController, 2,
                   isDesktop: false)
         ],
       ),
@@ -1189,7 +1195,7 @@ class WidgetUtils {
                     !mainController
                         .gamingMorphButtons[buttonType].isClicked.value;
 
-                FunctionUtils.openLink(
+                Functions.openLink(
                     mainController.gamingMorphButtons[buttonType].link.value);
               });
             },
@@ -1287,7 +1293,7 @@ class WidgetUtils {
                       duration: Duration(milliseconds: 200),
                       curve: Curves.easeInOut);
                 else
-                  FunctionUtils.openLink(
+                  Functions.openLink(
                       mainController.streamMorphButtons[buttonType].link.value);
               });
             },
@@ -1387,7 +1393,7 @@ class WidgetUtils {
                     !mainController
                         .socialMorphButtons[buttonType].isClicked.value;
 
-                FunctionUtils.openLink(
+                Functions.openLink(
                     mainController.socialMorphButtons[buttonType].link.value);
               });
             },
@@ -1483,7 +1489,7 @@ class WidgetUtils {
                     !mainController
                         .musicMorphButtons[buttonType].isClicked.value;
 
-                FunctionUtils.openLink(
+                Functions.openLink(
                     mainController.musicMorphButtons[buttonType].link.value);
               });
             },
@@ -1613,13 +1619,13 @@ class WidgetUtils {
             onPressed: () {
               switch (id) {
                 case 0:
-                  FunctionUtils.openLink('yt');
+                  Functions.openLink('yt');
                   break;
                 case 1:
-                  FunctionUtils.openLink('twitch');
+                  Functions.openLink('twitch');
                   break;
                 case 2:
-                  FunctionUtils.openLink('discord');
+                  Functions.openLink('discord');
                   break;
               }
             },

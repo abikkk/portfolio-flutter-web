@@ -98,14 +98,14 @@ class FloatingNavBar extends StatelessWidget {
         showElevation: true,
         onItemSelected: (index) {
           mainController.navIndex.value = index;
-          FunctionUtils.navigate(index + 1, mainController);
+          Functions.navigate(index + 1,mainController.pageController, mainController);
         },
         items: [
-          WidgetUtils.flashyTabBarItem('home', Icons.home),
-          WidgetUtils.flashyTabBarItem('code', Icons.format_list_bulleted),
-          WidgetUtils.flashyTabBarItem('game', Icons.gamepad),
-          WidgetUtils.flashyTabBarItem('music', Icons.music_note),
-          WidgetUtils.flashyTabBarItem('social', Icons.person),
+          Widgets.flashyTabBarItem('home', Icons.home),
+          Widgets.flashyTabBarItem('code', Icons.format_list_bulleted),
+          Widgets.flashyTabBarItem('game', Icons.gamepad),
+          Widgets.flashyTabBarItem('music', Icons.music_note),
+          Widgets.flashyTabBarItem('social', Icons.person),
         ],
       ),
     );
@@ -161,14 +161,14 @@ class FloatingNavBarIcons extends StatelessWidget {
                 ),
                 iconSize: 24,
                 onPressed: () {
-                  FunctionUtils.navigate(navID, mainController);
+          Functions.navigate(navID,mainController.pageController, mainController);
                 }),
           )
         : IconButton(
-            icon: WidgetUtils.bulletineIcon(isDesktop),
+            icon: Widgets.bulletineIcon(isDesktop),
             iconSize: 12,
             onPressed: () {
-              FunctionUtils.navigate(navID, mainController);
+          Functions.navigate(navID,mainController.pageController, mainController);
             });
   }
 }

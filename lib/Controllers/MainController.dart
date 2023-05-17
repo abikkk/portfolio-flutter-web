@@ -6,7 +6,7 @@ import '../Models/ProjectCard.dart';
 
 class MainController extends GetxController {
   // page controller
-  // final RxInt codingIndex = 0.obs, gamingIndex = 0.obs;
+  final RxInt codingIndex = 0.obs, gamingIndex = 0.obs;
   final PageController pageController = PageController(
     initialPage: 0,
   );

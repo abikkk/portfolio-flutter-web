@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
 import '../Utils/FloatingNavBar.dart';
@@ -35,6 +36,17 @@ class HomeContainer extends StatelessWidget {
               child: Stack(
                 children: [
                   PageView(
+                    onPageChanged: (value) {
+                      if (mainController.codingIndex.value > 0) {
+                        Functions.navigate(mainController.codingIndex.value + 1,
+                            mainController.codingController, mainController);
+                      }
+
+                      if (mainController.gamingIndex.value > 0) {
+                        Functions.navigate(mainController.gamingIndex.value + 1,
+                            mainController.streamController, mainController);
+                      }
+                    },
                     physics: BouncingScrollPhysics(),
                     pageSnapping: sizingInformation.deviceScreenType ==
                             DeviceScreenType.mobile
@@ -50,29 +62,29 @@ class HomeContainer extends StatelessWidget {
                         ? Axis.horizontal
                         : Axis.vertical,
                     children: [
-                      ScreenUtils.HomeContainer(
+                      Screens.HomeContainer(
                         context: context,
                         mainController: mainController,
                         isDesktop: sizingInformation.deviceScreenType ==
                             DeviceScreenType.desktop,
                       ),
-                      ScreenUtils.CodingContainer(
+                      Screens.CodingContainer(
                           context: context,
                           mainController: mainController,
                           isDesktop: sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop),
-                      ScreenUtils.GamingContainer(
+                      Screens.GamingContainer(
                           context: context,
                           mainController: mainController,
                           isDesktop: sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop),
-                      ScreenUtils.MusicContainer(
+                      Screens.MusicContainer(
                         context: context,
                         mainController: mainController,
                         isDesktop: sizingInformation.deviceScreenType ==
                             DeviceScreenType.desktop,
                       ),
-                      ScreenUtils.SocialsContainer(
+                      Screens.SocialsContainer(
                         context: context,
                         mainController: mainController,
                         isDesktop: sizingInformation.deviceScreenType ==
@@ -92,7 +104,7 @@ class HomeContainer extends StatelessWidget {
           ),
           floatingActionButton:
               (sizingInformation.deviceScreenType != DeviceScreenType.desktop)
-                  ? WidgetUtils.scrollButton(mainController)
+                  ? Widgets.scrollButton(mainController)
                   : null,
         ),
       );
