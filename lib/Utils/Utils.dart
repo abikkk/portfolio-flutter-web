@@ -6,6 +6,7 @@ import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
+import 'Constants.dart';
 
 class FunctionUtils {
   // web page launcher
@@ -113,7 +114,400 @@ class FunctionUtils {
   }
 }
 
+class ScreenUtils {
+  static Widget HomeContainer(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return (isDesktop)
+        ? Stack(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image(
+                    image: AssetImage('assets/images/profile_shot.png'),
+                    height: MediaQuery.of(context).size.height,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 44.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'hi there!',
+                      style: AppThemeData.appThemeData.textTheme.headlineSmall,
+                    ),
+                    Text(
+                      'abik vaidhya',
+                      style: AppThemeData.appThemeData.textTheme.headlineLarge,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 10,
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: WidgetUtils.subtitleTexts(
+                              mainController: mainController,
+                              label: 'frontend developer',
+                              id: 0,
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: WidgetUtils.subtitleTexts(
+                                mainController: mainController,
+                                label: 'gamer',
+                                id: 1,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: WidgetUtils.subtitleTexts(
+                                mainController: mainController,
+                                label: 'musician',
+                                id: 2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image(
+                image: AssetImage('assets/images/logo/black_transparent.png'),
+                height:
+                    MediaQuery.of(context).orientation == Orientation.landscape
+                        ? MediaQuery.of(context).size.height - 25
+                        : null,
+                fit: MediaQuery.of(context).orientation == Orientation.portrait
+                    ? BoxFit.cover
+                    : BoxFit.fitHeight,
+              ),
+            ],
+          );
+  }
+
+  static Widget CodingContainer(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Stack(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: PageView(
+                allowImplicitScrolling: true,
+                scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
+                children: [
+                  WidgetUtils.CodingIntroDetails(
+                    context: context,
+                    mainController: mainController,
+                    isDesktop: isDesktop,
+                  ),
+                  WidgetUtils.FlutterDetails(
+                    mainController: mainController,
+                    isDesktop: isDesktop,
+                  ),
+                  WidgetUtils.ReactDetails(
+                    mainController: mainController,
+                    isDesktop: isDesktop,
+                  ),
+                  WidgetUtils.VueDetails(
+                    mainController: mainController,
+                    isDesktop: isDesktop,
+                  ),
+                  // if (isDesktop)
+                  WidgetUtils.ProjectDetails(
+                      mainController: mainController, isDesktop: isDesktop)
+                ],
+                controller: mainController.codingController,
+                onPageChanged: (value) {
+                  // scroll up/down button icon changes
+                  if (mainController.codingController.page!.round() == 4 &&
+                      isDesktop) {
+                    mainController.isCodeScrollDown.value = false;
+                  } else {
+                    mainController.isCodeScrollDown.value = true;
+                  }
+
+                  // focus for morph buttons
+                  for (int i = 0; i < 3; i++) {
+                    if (mainController.codingController.page!.round() != i + 1)
+                      mainController.codingMorphButtons[i].isFocused.value =
+                          false;
+                    else
+                      mainController.codingMorphButtons[i].isFocused.value =
+                          true;
+                  }
+                },
+              ),
+            ),
+            if (isDesktop)
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    WidgetUtils.codingMorphButtons(context, mainController, 0),
+                    WidgetUtils.codingMorphButtons(context, mainController, 1),
+                    WidgetUtils.codingMorphButtons(context, mainController, 2),
+                  ],
+                ),
+              ),
+          ],
+        ),
+
+        // scroll up/down button
+        if (isDesktop)
+          Positioned(
+            left: 30,
+            bottom: 30,
+            child: Obx(
+              () => WidgetUtils.desktopScrollButton(
+                  mainController,
+                  mainController.codingController,
+                  mainController.isCodeScrollDown),
+            ),
+          ),
+      ],
+    );
+  }
+
+  static Widget GamingContainer(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Stack(
+      children: [
+        PageView(
+            pageSnapping: true,
+            allowImplicitScrolling: true,
+            scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
+            controller: mainController.gamingController,
+            onPageChanged: (value) {
+              if (mainController.gamingController.page!.round() == 1) {
+                mainController.isGameScrollDown.value = false;
+              } else {
+                mainController.isGameScrollDown.value = true;
+              }
+            },
+            children: [
+              // youtube twitch discord
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: PageView(
+                        allowImplicitScrolling: true,
+                        scrollDirection:
+                            (isDesktop) ? Axis.vertical : Axis.horizontal,
+                        onPageChanged: (event) {
+                          for (int i = 0; i < 3; i++) {
+                            if (mainController.streamController.page!.round() !=
+                                i)
+                              mainController.streamMorphButtons[i].isFocused
+                                  .value = false;
+                            else
+                              mainController
+                                  .streamMorphButtons[i].isFocused.value = true;
+                          }
+                        },
+                        children: [
+                          WidgetUtils.YoutubeDetails(
+                            context: context,
+                            mainController: mainController,
+                            isDesktop: isDesktop,
+                          ),
+                          WidgetUtils.TwitchDetails(
+                            context: context,
+                            mainController: mainController,
+                            isDesktop: isDesktop,
+                          ),
+                          WidgetUtils.DiscordDetails(
+                            context: context,
+                            mainController: mainController,
+                            isDesktop: isDesktop,
+                          ),
+                        ],
+                        controller: mainController.streamController,
+                      ),
+                    ),
+                    if (isDesktop)
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            WidgetUtils.streamMorphButtons(
+                                context, mainController, 0),
+                            WidgetUtils.streamMorphButtons(
+                                context, mainController, 1),
+                            WidgetUtils.streamMorphButtons(
+                                context, mainController, 2),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+
+              if (isDesktop)
+                // games
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      WidgetUtils.gamingMorphButtons(
+                          context, mainController, 0),
+                      WidgetUtils.gamingMorphButtons(
+                          context, mainController, 1),
+                      WidgetUtils.gamingMorphButtons(
+                          context, mainController, 2),
+                    ],
+                  ),
+                ),
+            ]),
+        if (isDesktop)
+          Positioned(
+            left: 30,
+            bottom: 30,
+            child: Obx(
+              () => WidgetUtils.desktopScrollButton(
+                  mainController,
+                  mainController.gamingController,
+                  mainController.isGameScrollDown),
+            ),
+          ),
+      ],
+    );
+  }
+
+  static Widget MusicContainer(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  'listen to my music',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Flex(
+            direction:
+                MediaQuery.of(context).orientation == Orientation.landscape ||
+                        !isDesktop
+                    ? Axis.horizontal
+                    : Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              WidgetUtils.musicMorphButtons(context, mainController, 0,
+                  isDesktop: isDesktop),
+              WidgetUtils.musicMorphButtons(context, mainController, 1,
+                  isDesktop: isDesktop),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  static Widget SocialsContainer(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  'connect with me',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
+              ),
+              SizedBox(
+                height: 24,
+              )
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WidgetUtils.socialMorphButtons(context, mainController, 0,
+                      isDesktop: isDesktop),
+                  WidgetUtils.socialMorphButtons(context, mainController, 1,
+                      isDesktop: isDesktop),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  WidgetUtils.socialMorphButtons(context, mainController, 2,
+                      isDesktop: isDesktop),
+                  WidgetUtils.socialMorphButtons(context, mainController, 3,
+                      isDesktop: isDesktop),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class WidgetUtils {
+  // general UIs
   static Widget scrollButton(MainController mainController) {
     return Obx(
       () => AnimatedOpacity(
@@ -129,11 +523,10 @@ class WidgetUtils {
     );
   }
 
-  static Widget bulletineIcon(bool isDesktop) {
+  static Widget bulletineIcon(bool hasColor, {Color iconColor = Colors.white}) {
     return Icon(
       Icons.circle,
-      color:
-          (isDesktop) ? Colors.white : AppThemeData.appThemeData.primaryColor,
+      color: (hasColor) ? iconColor : AppThemeData.appThemeData.primaryColor,
     );
   }
 
@@ -144,7 +537,7 @@ class WidgetUtils {
     );
   }
 
-  static MouseRegion ScrollButton(MainController mainController,
+  static MouseRegion desktopScrollButton(MainController mainController,
       PageController pageController, RxBool scrollDown) {
     return MouseRegion(
       onEnter: (e) {
@@ -174,7 +567,7 @@ class WidgetUtils {
     );
   }
 
-  static Card projectCard(String label, String image) {
+  static Card projectCard(String label, String image, Color iconColor) {
     return Card(
       elevation: 8,
       child: Column(
@@ -197,6 +590,10 @@ class WidgetUtils {
                 textAlign: TextAlign.center,
                 softWrap: true,
               )),
+              Padding(
+                padding: const EdgeInsets.only(right: 4.0),
+                child: bulletineIcon(true, iconColor: iconColor),
+              )
             ],
           )
         ],
@@ -204,6 +601,462 @@ class WidgetUtils {
     );
   }
 
+  static Widget subtitleTexts(
+      {required MainController mainController,
+      required int id,
+      required String label}) {
+    return MouseRegion(
+      onEnter: (v) {
+        switch (id) {
+          case 0:
+            mainController.subtitle_1.value = true;
+            break;
+          case 1:
+            mainController.subtitle_2.value = true;
+            break;
+          case 2:
+            mainController.subtitle_3.value = true;
+            break;
+        }
+      },
+      onExit: (v) {
+        switch (id) {
+          case 0:
+            mainController.subtitle_1.value = false;
+            break;
+          case 1:
+            mainController.subtitle_2.value = false;
+            break;
+          case 2:
+            mainController.subtitle_3.value = false;
+            break;
+        }
+      },
+      child: Obx(
+        () => AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 200),
+          style: !((id == 0)
+                  ? mainController.subtitle_1.value
+                  : (id == 1)
+                      ? mainController.subtitle_2.value
+                      : mainController.subtitle_3.value)
+              ? AppThemeData.appThemeData.textTheme.displaySmall!
+              : AppThemeData.appThemeData.textTheme.titleSmall!,
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            onTap: () {
+              FunctionUtils.navigate(id + 2, mainController);
+            },
+            child: Text(
+              '${label}',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+// coding
+  static Widget CodingIntroDetails(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Padding(
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'my skills',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'i can work for projects using the following frameworks.',
+                    softWrap: true,
+                    maxLines: 4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'my knowledge base on these languages and development environments (IDE) i use can be divided as follows:',
+                    softWrap: true,
+                    maxLines: 4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Flex(
+              direction: isDesktop ? Axis.horizontal : Axis.vertical,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: isDesktop ? 2 : 3,
+                  child: WidgetUtils.pieChart(
+                      mainController,
+                      context,
+                      mainController.projectMap,
+                      'projects',
+                      mainController.skillsGradientList,
+                      isGradient: true,
+                      isDesktop: false),
+                ),
+                Expanded(
+                  flex: isDesktop ? 3 : 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      WidgetUtils.codingProgressRow(mainController, 'vs code',
+                          0, mainController.vsValue.value,
+                          isDesktop: false),
+                      WidgetUtils.codingProgressRow(mainController,
+                          'android studio', 1, mainController.asValue.value,
+                          isDesktop: false),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget FlutterDetails(
+      {required MainController mainController, required bool isDesktop}) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'flutter',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
+                    maxLines: 8,
+                    softWrap: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                    mainController.usageFlutter[CONSTANTS.vsCode]!,
+                    isDesktop: false),
+                WidgetUtils.codingProgressRow(mainController, 'android studio',
+                    1, mainController.usageFlutter[CONSTANTS.androidStudio]!,
+                    isDesktop: false),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget ReactDetails(
+      {required MainController mainController, required bool isDesktop}) {
+    return Padding(
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'react.js',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'i worked as a freelancer for 8 months. my projects ranges as follows:',
+                        softWrap: true,
+                        maxLines: 4,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      ' - portfolio websites\n - cafe website\n - ecommerce\n - warehouse/inventory management',
+                      softWrap: true,
+                      maxLines: 8,
+                    )),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
+            child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                mainController.usageReact[CONSTANTS.vsCode]!),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget VueDetails(
+      {required MainController mainController, required bool isDesktop}) {
+    return Padding(
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'vue.js',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months. i was involved in development of employee record management system and attendance management system. i have my own portfolio website under development as well.',
+                    maxLines: 8,
+                    softWrap: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
+            child: WidgetUtils.codingProgressRow(mainController, 'vs code', 0,
+                mainController.usageVue[CONSTANTS.vsCode]!),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget ProjectDetails(
+      {required MainController mainController, required bool isDesktop}) {
+    return Padding(
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'projects',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GridView(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(10),
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: (isDesktop) ? 4 : 2),
+                      children: [
+                        for (var project in mainController.projects)
+                          WidgetUtils.projectCard(
+                              '${project.label}',
+                              '${project.image}',
+                              project.devLang.value == 'vue'
+                                  ? Colors.green
+                                  : project.devLang.value == 'react'
+                                      ? Color.fromARGB(255, 3, 117, 248)
+                                      : Color.fromARGB(255, 9, 74, 187))
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+// gaming
+  static Widget YoutubeDetails(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              WidgetUtils.StreamLinkButtons(
+                mainController,
+                0,
+                'youtube',
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    'i upload clips from my gameplays and live streams to my youtube channel. drop by and show some love if you can. thanks!',
+                    softWrap: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          (isDesktop)
+              ? SizedBox()
+              : WidgetUtils.streamMorphButtons(context, mainController, 0,
+                  isDesktop: false)
+        ],
+      ),
+    );
+  }
+
+  static Widget TwitchDetails(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              WidgetUtils.StreamLinkButtons(
+                mainController,
+                1,
+                'twitch',
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    'i try to stream regularly, as much as i can. i normally just stream for myself. my live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.',
+                    softWrap: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          (isDesktop)
+              ? SizedBox()
+              : WidgetUtils.streamMorphButtons(context, mainController, 1,
+                  isDesktop: false)
+        ],
+      ),
+    );
+  }
+
+  static Widget DiscordDetails(
+      {required BuildContext context,
+      required MainController mainController,
+      required bool isDesktop}) {
+    return Padding(
+      padding: const EdgeInsets.all(44.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              WidgetUtils.StreamLinkButtons(
+                mainController,
+                2,
+                'discord',
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    'you can join my discord server. we can have fun together with my friends.',
+                    softWrap: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          (isDesktop)
+              ? SizedBox()
+              : WidgetUtils.streamMorphButtons(context, mainController, 2,
+                  isDesktop: false)
+        ],
+      ),
+    );
+  }
+
+// morph buttons
   static Widget codingMorphButtons(
       BuildContext context, MainController mainController, int buttonType) {
     return Obx(

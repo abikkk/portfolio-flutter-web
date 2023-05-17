@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Models/MorphButton.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
-
 import '../Models/ProjectCard.dart';
-import '../Screens/Coding.dart';
-import '../Screens/Gaming.dart';
-import '../Screens/Head.dart';
-import '../Screens/Music.dart';
-import '../Screens/Socials.dart';
 
 class MainController extends GetxController {
   // page controller
+  // final RxInt codingIndex = 0.obs, gamingIndex = 0.obs;
   final PageController pageController = PageController(
     initialPage: 0,
   );
@@ -102,66 +97,105 @@ class MainController extends GetxController {
         image: 'original_grey_bg.png'.obs,
         label: 'portfolio'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'northern_trails.png'.obs,
         label: 'northern trails cafe app'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'weather_app.png'.obs,
         label: 'weather app'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'pfd_logo.png'.obs,
         label: 'Pokhara Food Delivery App'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'vansales_logo.png'.obs,
         label: 'ILG Vansales App (Mobile Sales)'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'ilg_logo.png'.obs,
         label: 'ILG Order Booking App'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'ebt_logo.jpeg'.obs,
         label: 'EBT Hospitality App'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'electronica_logo.jpeg'.obs,
         label: 'EBT Delivery App'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'fasttrack_logo.png'.obs,
         label: 'EBT Fasttrack App'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'tim_hortons_logo.png'.obs,
         label: 'Tim Hortons POS'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
         image: 'hypercity_logo.jpeg'.obs,
         label: 'HyperCity MPOS'.obs,
         details: ''.obs,
+        devLang: 'flutter'.obs,
+        link: 'github'.obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: 'original_grey_bg.png'.obs,
+        label: 'toda mart'.obs,
+        details: ''.obs,
+        devLang: 'react'.obs,
+        link: 'github'.obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: 'original_grey_bg.png'.obs,
+        label: 'hotel northern trails'.obs,
+        details: ''.obs,
+        devLang: 'react'.obs,
+        link: 'github'.obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: 'original_grey_bg.png'.obs,
+        label: 'employee attendance system'.obs,
+        details: ''.obs,
+        devLang: 'vue'.obs,
+        link: 'github'.obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: 'original_grey_bg.png'.obs,
+        label: 'inventory management system '.obs,
+        details: ''.obs,
+        devLang: 'vue'.obs,
         link: 'github'.obs),
   ].obs;
 
