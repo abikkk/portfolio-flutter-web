@@ -1,106 +1,110 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
-import 'package:my_porfolio/Utils/UiUtils.dart';
+import 'package:my_porfolio/Utils/Utils.dart';
 import '../Controllers/MainController.dart';
 
-class DesktopCodingScreen extends StatelessWidget {
-  DesktopCodingScreen({Key? key, required this.mainController})
+class CodingScreen extends StatelessWidget {
+  CodingScreen(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
+  final bool isDesktop;
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> desktopScreens = [
+      IntroDetails(
+        mainController: mainController,
+        isDesktop: true,
+      ),
+      FlutterDetails(
+        mainController: mainController,
+        isDesktop: true,
+      ),
+      ReactDetails(
+        mainController: mainController,
+        isDesktop: true,
+      ),
+      VueDetails(
+        mainController: mainController,
+        isDesktop: true,
+      ),
+      ProjectDetails(
+        mainController: mainController,
+        isDesktop: true,
+      )
+    ];
+
+    List<Widget> mobileScreens = [
+      IntroDetails(
+        mainController: mainController,
+        isDesktop: false,
+      ),
+      FlutterDetails(
+        mainController: mainController,
+        isDesktop: false,
+      ),
+      ReactDetails(
+        mainController: mainController,
+        isDesktop: false,
+      ),
+      VueDetails(
+        mainController: mainController,
+        isDesktop: false,
+      ),
+      ProjectDetails(mainController: mainController, isDesktop: false)
+    ];
+
     return Stack(
       children: [
         Row(
           children: [
             Expanded(
               flex: 3,
-              child: MouseRegion(
-                onHover: (e) {
-                  mainController.showScrollDownBtn.value = true;
+              child: PageView(
+                allowImplicitScrolling: true,
+                scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
+                children: (isDesktop) ? desktopScreens : mobileScreens,
+                controller: mainController.codingController,
+                onPageChanged: (value) {
+                  if (mainController.codingController.page!.round() == 4 &&
+                      isDesktop) {
+                    mainController.isCodeScrollDown.value = false;
+                  } else {
+                    mainController.isCodeScrollDown.value = true;
+                  }
                 },
-                child: PageView(
-                  allowImplicitScrolling: true,
-                  scrollDirection: Axis.vertical,
+              ),
+            ),
+            if (isDesktop)
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IntroDetails(
-                      mainController: mainController,
-                      isDesktop: true,
-                    ),
-                    FlutterDetails(
-                      mainController: mainController,
-                      isDesktop: true,
-                    ),
-                    ReactDetails(
-                      mainController: mainController,
-                      isDesktop: true,
-                    ),
-                    VueDetails(
-                      mainController: mainController,
-                      isDesktop: true,
-                    )
+                    WidgetUtils.codingMorphButtons(context, mainController, 0),
+                    WidgetUtils.codingMorphButtons(context, mainController, 1),
+                    WidgetUtils.codingMorphButtons(context, mainController, 2),
                   ],
-                  controller: mainController.codingController,
-                  onPageChanged: (value) {
-                    if (mainController.codingController.page!.round() == 3) {
-                      mainController.isCodeScrollDown.value = false;
-                    } else {
-                      mainController.isCodeScrollDown.value = true;
-                    }
-                  },
                 ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WidgetUtils.codingMorphButtons(context, mainController, 0),
-                  WidgetUtils.codingMorphButtons(context, mainController, 1),
-                  WidgetUtils.codingMorphButtons(context, mainController, 2),
-                ],
-              ),
-            ),
           ],
         ),
 
         // scroll up/down button
-        Positioned(
-          left: 30,
-          bottom: 30,
-          child: Obx(
-            () => WidgetUtils.ScrollButton(
-                mainController,
-                mainController.codingController,
-                mainController.isCodeScrollDown),
-            //     MouseRegion(
-            //   onEnter: (e) {
-            //     mainController.showScrollBtn.value = 1.0;
-            //   },
-            //   onExit: (e) {
-            //     mainController.showScrollBtn.value = 0.0;
-            //   },
-            //   child: AnimatedOpacity(
-            //     duration: Duration(milliseconds: 200),
-            //     opacity: mainController.showScrollBtn.value,
-            //     child: IconButton(
-            //         onPressed: () {
-            //           mainController.codingController.nextPage(
-            //               duration: Duration(milliseconds: 200),
-            //               curve: Curves.fastOutSlowIn);
-            //         },
-            //         icon: Icon((mainController.isCodeScrollDown.value)
-            //             ? Icons.arrow_drop_down_rounded
-            //             : Icons.arrow_drop_up_rounded)),
-            //   ),
-            // ),
+        if (isDesktop)
+          Positioned(
+            left: 30,
+            bottom: 30,
+            child: Obx(
+              () => WidgetUtils.ScrollButton(
+                  mainController,
+                  mainController.codingController,
+                  mainController.isCodeScrollDown),
+            ),
           ),
-        ),
       ],
     );
   }
@@ -359,33 +363,55 @@ class VueDetails extends StatelessWidget {
   }
 }
 
-class CodingScreen extends StatelessWidget {
-  const CodingScreen({Key? key, required this.mainController})
+class ProjectDetails extends StatelessWidget {
+  const ProjectDetails(
+      {Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
+
   final MainController mainController;
+  final bool isDesktop;
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        IntroDetails(
-          mainController: mainController,
-          isDesktop: false,
-        ),
-        FlutterDetails(
-          mainController: mainController,
-          isDesktop: false,
-        ),
-        ReactDetails(
-          mainController: mainController,
-          isDesktop: false,
-        ),
-        VueDetails(
-          mainController: mainController,
-          isDesktop: false,
-        )
-      ],
+    return Padding(
+      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                'projects',
+                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GridView(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(10),
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: (isDesktop) ? 4 : 2),
+                      children: [
+                        for (var project in mainController.projects)
+                          WidgetUtils.projectCard(
+                              '${project.label}', '${project.image}')
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
 
-class UiUtils {
+class FunctionUtils {
   // web page launcher
   static openLink(type) async {
     switch (type) {
@@ -21,7 +21,7 @@ class UiUtils {
       case 'ig':
         {
           if (!await launchUrl(
-              Uri.parse('https://www.instagram.com/_abik.vaidhya_/')))
+              Uri.parse('https://www.instagram.com/abik.vaidhya/')))
             throw 'Could not launch Instagram Link!';
         }
         break;
@@ -69,14 +69,14 @@ class UiUtils {
         {
           if (!await launchUrl(Uri.parse(
               'https://apex.tracker.gg/apex/profile/origin/TheOogieBoogie/overview')))
-            throw 'Could not launch Apex stats Link!';
+            throw 'Could not launch Apex Legends stats Link!';
           break;
         }
       case 'gta v':
         {
           if (!await launchUrl(Uri.parse(
               'https://socialclub.rockstargames.com/member/thepepepopoman/')))
-            throw 'Could not launch GTA V Social Club Link!';
+            throw 'Could not launch Rockstar Social Club Link!';
           break;
         }
       case 'soundcloud':
@@ -105,6 +105,7 @@ class UiUtils {
     }
   }
 
+// page view navigation
   static navigate(int navIndex, MainController mainController) {
     mainController.pageController.animateToPage(navIndex - 1,
         duration: Duration(milliseconds: 444), curve: Curves.easeInOut);
@@ -116,12 +117,12 @@ class WidgetUtils {
   static Widget scrollButton(MainController mainController) {
     return Obx(
       () => AnimatedOpacity(
-        opacity: mainController.navHovered.value,
+        opacity: mainController.scrollBtn.value,
         duration: Duration(milliseconds: 200),
         child: IconButton(
             onPressed: () {
               mainController.navHovered.value = 0.0;
-              UiUtils.navigate(0, mainController);
+              FunctionUtils.navigate(0, mainController);
             },
             icon: Icon(Icons.arrow_drop_up_rounded)),
       ),
@@ -169,6 +170,36 @@ class WidgetUtils {
             icon: Icon((scrollDown.value)
                 ? Icons.keyboard_arrow_down_rounded
                 : Icons.keyboard_arrow_up_rounded)),
+      ),
+    );
+  }
+
+  static Card projectCard(String label, String image) {
+    return Card(
+      elevation: 8,
+      child: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+              child: Image(
+                image: AssetImage('assets/images/projects/${image}'),
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: Text(
+                '${label}',
+                textAlign: TextAlign.center,
+                softWrap: true,
+              )),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -303,7 +334,7 @@ class WidgetUtils {
                     !mainController
                         .gamingMorphButtons[buttonType].isClicked.value;
 
-                UiUtils.openLink(
+                FunctionUtils.openLink(
                     mainController.gamingMorphButtons[buttonType].link.value);
               });
             },
@@ -401,7 +432,7 @@ class WidgetUtils {
                       duration: Duration(milliseconds: 200),
                       curve: Curves.easeInOut);
                 else
-                  UiUtils.openLink(
+                  FunctionUtils.openLink(
                       mainController.streamMorphButtons[buttonType].link.value);
               });
             },
@@ -498,7 +529,7 @@ class WidgetUtils {
                     !mainController
                         .socialMorphButtons[buttonType].isClicked.value;
 
-                UiUtils.openLink(
+                FunctionUtils.openLink(
                     mainController.socialMorphButtons[buttonType].link.value);
               });
             },
@@ -594,7 +625,7 @@ class WidgetUtils {
                     !mainController
                         .musicMorphButtons[buttonType].isClicked.value;
 
-                UiUtils.openLink(
+                FunctionUtils.openLink(
                     mainController.musicMorphButtons[buttonType].link.value);
               });
             },
@@ -724,13 +755,13 @@ class WidgetUtils {
             onPressed: () {
               switch (id) {
                 case 0:
-                  UiUtils.openLink('yt');
+                  FunctionUtils.openLink('yt');
                   break;
                 case 1:
-                  UiUtils.openLink('twitch');
+                  FunctionUtils.openLink('twitch');
                   break;
                 case 2:
-                  UiUtils.openLink('discord');
+                  FunctionUtils.openLink('discord');
                   break;
               }
             },
@@ -842,373 +873,4 @@ class WidgetUtils {
       ),
     );
   }
-
-// class StreamLinkButtons extends StatelessWidget {
-//   StreamLinkButtons({
-//     Key? key,
-//     required this.mainController,
-//     required this.id,
-//     required this.label,
-//   }) : super(key: key);
-
-//   final MainController mainController;
-//   final int id;
-//   final String label;
-//   @override
-//   Widget build(BuildContext context) {
-//     return MouseRegion(
-//       onEnter: (event) {
-//         switch (id) {
-//           case 0:
-//             mainController.ytHover.value = true;
-//             break;
-//           case 1:
-//             mainController.twitchHover.value = true;
-//             break;
-//           case 2:
-//             mainController.discordHover.value = true;
-//             break;
-//         }
-//       },
-//       onExit: (event) {
-//         switch (id) {
-//           case 0:
-//             mainController.ytHover.value = false;
-//             break;
-//           case 1:
-//             mainController.twitchHover.value = false;
-//             break;
-//           case 2:
-//             mainController.discordHover.value = false;
-//             break;
-//         }
-//       },
-//       child: Obx(
-//         () => AnimatedContainer(
-//           duration: Duration(milliseconds: 200),
-//           padding: EdgeInsets.all(14),
-//           decoration: BoxDecoration(
-//               gradient: ((id == 0)
-//                       ? mainController.ytHover.value
-//                       : (id == 1)
-//                           ? mainController.twitchHover.value
-//                           : mainController.discordHover.value)
-//                   ? LinearGradient(
-//                       colors: mainController.streamGradientList[id])
-//                   : null,
-//               borderRadius: BorderRadius.all(Radius.circular(10)),
-//               boxShadow: (mainController.ytHover.value)
-//                   ? [
-//                       BoxShadow(
-//                           color: Colors.grey[500]!,
-//                           offset: Offset(4, 4),
-//                           blurRadius: 15,
-//                           spreadRadius: 1),
-//                       BoxShadow(
-//                           color: Colors.white,
-//                           offset: Offset(-4, -4),
-//                           blurRadius: 15,
-//                           spreadRadius: 1)
-//                     ]
-//                   : null),
-//           child: TextButton.icon(
-//             onPressed: () {
-//               switch (id) {
-//                 case 0:
-//                   UiUtils.openLink('yt');
-//                   break;
-//                 case 1:
-//                   UiUtils.openLink('twitch');
-//                   break;
-//                 case 2:
-//                   UiUtils.openLink('discord');
-//                   break;
-//               }
-//             },
-//             label: Text(
-//               '${label}',
-//               style: AppThemeData.appThemeData.textTheme.headlineMedium,
-//             ),
-//             icon: Icon(
-//               Icons.arrow_forward_ios_rounded,
-//               color: ((id == 0)
-//                       ? mainController.ytHover.value
-//                       : (id == 1)
-//                           ? mainController.twitchHover.value
-//                           : mainController.discordHover.value)
-//                   ? AppThemeData.appThemeData.primaryColor
-//                   : Colors.transparent,
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-// class codingProgressRow extends StatelessWidget {
-//   const codingProgressRow({
-//     Key? key,
-//     required this.mainController,
-//     required this.label,
-//     required this.id,
-//   }) : super(key: key);
-
-//   final MainController mainController;
-//   final String label;
-//   final int id;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         Expanded(
-//           child: Padding(
-//             padding: const EdgeInsets.symmetric(vertical: 20.0),
-//             child: MouseRegion(
-//               onEnter: (e) {
-//                 switch (id) {
-//                   case 0:
-//                     mainController.flutterOpa.value = 1.0;
-//                     mainController.flutterValue.value =
-//                         (CONSTANTS.flutterProjects /
-//                                 (CONSTANTS.flutterProjects +
-//                                     CONSTANTS.reactProjects +
-//                                     CONSTANTS.vueProjects)) *
-//                             100;
-//                     break;
-//                   case 1:
-//                     mainController.reactOpa.value = 1.0;
-//                     mainController.reactValue.value = (CONSTANTS.reactProjects /
-//                             (CONSTANTS.flutterProjects +
-//                                 CONSTANTS.reactProjects +
-//                                 CONSTANTS.vueProjects)) *
-//                         100;
-//                     break;
-//                   case 2:
-//                     mainController.vueOpa.value = 1.0;
-//                     mainController.vueValue.value = (CONSTANTS.vueProjects /
-//                             (CONSTANTS.flutterProjects +
-//                                 CONSTANTS.reactProjects +
-//                                 CONSTANTS.vueProjects)) *
-//                         100;
-//                     break;
-//                 }
-//               },
-//               // onExit: (e) {
-//               //   mainController.flutterOpa.value = 0.0;
-//               //   mainController.reactOpa.value = 0.0;
-//               //   mainController.vueOpa.value = 0.0;
-//               //   mainController.flutterValue.value = 0.0;
-//               //   mainController.reactValue.value = 0.0;
-//               //   mainController.vueValue.value = 0.0;
-//               // },
-//               child: Text('${label} skills'),
-//             ),
-//           ),
-//         ),
-//         Expanded(
-//           flex: 4,
-//           child: Obx(
-//             () => AnimatedOpacity(
-//               opacity: (id == 0)
-//                   ? mainController.flutterOpa.value
-//                   : (id == 1)
-//                       ? mainController.reactOpa.value
-//                       : mainController.vueOpa.value,
-//               duration: Duration(milliseconds: 200),
-//               child: FAProgressBar(
-//                 progressColor:
-//                     AppThemeData.appThemeData.primaryColor.withOpacity(0.3),
-//                 size: 24,
-//                 animatedDuration: Duration(milliseconds: 300),
-//                 currentValue: (id == 0)
-//                     ? mainController.flutterValue.value
-//                     : (id == 1)
-//                         ? mainController.reactValue.value
-//                         : mainController.vueValue.value,
-//                 displayText: '%',
-//                 progressGradient: LinearGradient(
-//                     colors: mainController.skillsGradientList[id]),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-  // static Future openLinkDialog(BuildContext context) {
-  //   return Get.defaultDialog(
-  //       title: 'links:',
-  //       titleStyle: TextStyle(fontStyle: FontStyle.normal),
-  //       content: Container(
-  //         width: MediaQuery.of(context).size.width / 4,
-  //         height: MediaQuery.of(context).size.height / 4,
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           children: [
-  //             Center(
-  //               child: InkWell(
-  //                 onTap: () async {
-  //                   UiUtils.openLink('soundcloud');
-  //                 },
-  //                 child: MouseRegion(
-  //                   onEnter: (a) {
-  //                     scScale = MediaQuery.of(context).size.height * .2;
-  //                   },
-  //                   onExit: (a) {
-  //                     scScale = MediaQuery.of(context).size.height * .18;
-  //                   },
-  //                   child: Card(
-  //                     child: Wrap(
-  //                       children: [
-  //                         AnimatedContainer(
-  //                           duration: Duration(milliseconds: 100),
-  //                           decoration: BoxDecoration(
-  //                               color: Colors.white,
-  //                               borderRadius: BorderRadius.circular(15),
-  //                               boxShadow: !scClicked
-  //                                   ? [
-  //                                       BoxShadow(
-  //                                           color: Colors.grey[500]!,
-  //                                           offset: Offset(4, 4),
-  //                                           blurRadius: 15,
-  //                                           spreadRadius: 1),
-  //                                       BoxShadow(
-  //                                           color: Colors.white,
-  //                                           offset: Offset(-4, -4),
-  //                                           blurRadius: 15,
-  //                                           spreadRadius: 1)
-  //                                     ]
-  //                                   : null),
-  //                           child: Padding(
-  //                             padding: const EdgeInsets.all(5.0),
-  //                             child: AnimatedContainer(
-  //                               height: scScale != 0.0
-  //                                   ? scScale
-  //                                   : MediaQuery.of(context).size.height * .18,
-  //                               duration: Duration(milliseconds: 150),
-  //                               child: Image.asset(
-  //                                 'images/soundcloud.png',
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             Center(
-  //               child: InkWell(
-  //                 onTap: () async {
-  //                   UiUtils.openLink('soundcloud');
-  //                 },
-  //                 child: MouseRegion(
-  //                   onEnter: (a) {
-  //                     scScale = MediaQuery.of(context).size.height * .2;
-  //                   },
-  //                   onExit: (a) {
-  //                     scScale = MediaQuery.of(context).size.height * .18;
-  //                   },
-  //                   child: Card(
-  //                     child: Wrap(
-  //                       children: [
-  //                         AnimatedContainer(
-  //                           duration: Duration(milliseconds: 100),
-  //                           decoration: BoxDecoration(
-  //                               color: Colors.white,
-  //                               borderRadius: BorderRadius.circular(15),
-  //                               boxShadow: !scClicked
-  //                                   ? [
-  //                                       BoxShadow(
-  //                                           color: Colors.grey[500]!,
-  //                                           offset: Offset(4, 4),
-  //                                           blurRadius: 15,
-  //                                           spreadRadius: 1),
-  //                                       BoxShadow(
-  //                                           color: Colors.white,
-  //                                           offset: Offset(-4, -4),
-  //                                           blurRadius: 15,
-  //                                           spreadRadius: 1)
-  //                                     ]
-  //                                   : null),
-  //                           child: Padding(
-  //                             padding: const EdgeInsets.all(5.0),
-  //                             child: AnimatedContainer(
-  //                               height: scScale != 0.0
-  //                                   ? scScale
-  //                                   : MediaQuery.of(context).size.height * .18,
-  //                               duration: Duration(milliseconds: 150),
-  //                               child: Image.asset(
-  //                                 'images/soundcloud.png',
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             Center(
-  //               child: InkWell(
-  //                 onTap: () async {
-  //                   UiUtils.openLink('bandlabs');
-  //                 },
-  //                 child: MouseRegion(
-  //                   onEnter: (a) {
-  //                     bdScale = MediaQuery.of(context).size.height * .2;
-  //                   },
-  //                   onExit: (a) {
-  //                     bdScale = MediaQuery.of(context).size.height * .18;
-  //                   },
-  //                   child: Card(
-  //                     child: Wrap(
-  //                       children: [
-  //                         AnimatedContainer(
-  //                           duration: Duration(milliseconds: 100),
-  //                           decoration: BoxDecoration(
-  //                               color: Colors.white,
-  //                               borderRadius: BorderRadius.circular(15),
-  //                               boxShadow: !blClicked
-  //                                   ? [
-  //                                       BoxShadow(
-  //                                           color: Colors.grey[500]!,
-  //                                           offset: Offset(4, 4),
-  //                                           blurRadius: 15,
-  //                                           spreadRadius: 1),
-  //                                       BoxShadow(
-  //                                           color: Colors.white,
-  //                                           offset: Offset(-4, -4),
-  //                                           blurRadius: 15,
-  //                                           spreadRadius: 1)
-  //                                     ]
-  //                                   : null),
-  //                           child: Padding(
-  //                             padding: const EdgeInsets.all(5.0),
-  //                             child: AnimatedContainer(
-  //                               height: bdScale != 0.0
-  //                                   ? bdScale
-  //                                   : MediaQuery.of(context).size.height * .18,
-  //                               duration: Duration(milliseconds: 150),
-  //                               child: Image.asset(
-  //                                 'images/bandlab.png',
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ));
-  // }
 }

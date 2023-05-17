@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_porfolio/Utils/UiUtils.dart';
+import 'package:my_porfolio/Utils/Utils.dart';
 import '../Controllers/MainController.dart';
 import '../Utils/AppThemeData.dart';
 
-class DesktopMusicScreen extends StatelessWidget {
-  DesktopMusicScreen({Key? key, required this.mainController})
+class MusicScreen extends StatelessWidget {
+  MusicScreen({Key? key, required this.mainController,required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
+  final bool isDesktop;
 
   @override
   Widget build(BuildContext context) {
@@ -31,52 +32,17 @@ class DesktopMusicScreen extends StatelessWidget {
         ),
         Expanded(
           flex: 3,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: Flex(
+            direction:
+                MediaQuery.of(context).orientation == Orientation.landscape &&
+                        !isDesktop
+                    ? Axis.horizontal
+                    : Axis.vertical,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WidgetUtils.musicMorphButtons(context, mainController, 0),
-                  WidgetUtils.musicMorphButtons(context, mainController, 1)
-                ],
-              ),
+              WidgetUtils.musicMorphButtons(context, mainController, 0,isDesktop: isDesktop),
+              WidgetUtils.musicMorphButtons(context, mainController, 1,isDesktop: isDesktop),
             ],
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class MusicScreen extends StatelessWidget {
-  const MusicScreen({Key? key, required this.mainController}) : super(key: key);
-  final MainController mainController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'listen to my music',
-          style: AppThemeData.appThemeData.textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(
-          height: 24,
-        ),
-        Flex(
-          direction: MediaQuery.of(context).orientation == Orientation.landscape
-              ? Axis.horizontal
-              : Axis.vertical,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            WidgetUtils.musicMorphButtons(context, mainController, 1,
-                isDesktop: false),
-            WidgetUtils.musicMorphButtons(context, mainController, 0,
-                isDesktop: false),
-          ],
         ),
       ],
     );

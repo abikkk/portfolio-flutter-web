@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import '../Controllers/MainController.dart';
-import 'UiUtils.dart';
+import 'Utils.dart';
 
 class FloatingNavBarDesktop extends StatelessWidget {
   const FloatingNavBarDesktop({Key? key, required this.mainController})
@@ -98,7 +98,7 @@ class FloatingNavBar extends StatelessWidget {
         showElevation: true,
         onItemSelected: (index) {
           mainController.navIndex.value = index;
-          UiUtils.navigate(index + 1, mainController);
+          FunctionUtils.navigate(index + 1, mainController);
         },
         items: [
           WidgetUtils.flashyTabBarItem('home', Icons.home),
@@ -161,14 +161,14 @@ class FloatingNavBarIcons extends StatelessWidget {
                 ),
                 iconSize: 24,
                 onPressed: () {
-                  UiUtils.navigate(navID, mainController);
+                  FunctionUtils.navigate(navID, mainController);
                 }),
           )
         : IconButton(
             icon: WidgetUtils.bulletineIcon(isDesktop),
             iconSize: 12,
             onPressed: () {
-              UiUtils.navigate(navID, mainController);
+              FunctionUtils.navigate(navID, mainController);
             });
   }
 }

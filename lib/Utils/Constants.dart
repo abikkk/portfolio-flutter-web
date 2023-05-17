@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+import 'package:my_porfolio/Models/ProjectCard.dart';
+
 class CONSTANTS {
   // app theme
   static const appFont = 'MAIN_APP_FONT';
@@ -15,7 +18,6 @@ class CONSTANTS {
   static const androidStudio = 'android_studio';
   static const vscodePoints = 65.0;
   static const androidStudioPoints = 35.0;
-
 
   // gaming
   static const buttonValorant = 'val';
