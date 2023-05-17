@@ -70,11 +70,22 @@ class CodingScreen extends StatelessWidget {
                 children: (isDesktop) ? desktopScreens : mobileScreens,
                 controller: mainController.codingController,
                 onPageChanged: (value) {
+                  // scroll up/down button icon changes
                   if (mainController.codingController.page!.round() == 4 &&
                       isDesktop) {
                     mainController.isCodeScrollDown.value = false;
                   } else {
                     mainController.isCodeScrollDown.value = true;
+                  }
+
+                  // focus for morph buttons
+                  for (int i = 0; i < 3; i++) {
+                    if (mainController.codingController.page!.round() != i + 1)
+                      mainController.codingMorphButtons[i].isFocused.value =
+                          false;
+                    else
+                      mainController.codingMorphButtons[i].isFocused.value =
+                          true;
                   }
                 },
               ),
@@ -388,7 +399,7 @@ class ProjectDetails extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
                   Expanded(

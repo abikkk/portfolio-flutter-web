@@ -4,7 +4,7 @@ import '../Controllers/MainController.dart';
 import '../Utils/AppThemeData.dart';
 
 class MusicScreen extends StatelessWidget {
-  MusicScreen({Key? key, required this.mainController,required this.isDesktop})
+  MusicScreen({Key? key, required this.mainController, required this.isDesktop})
       : super(key: key);
 
   final MainController mainController;
@@ -34,13 +34,17 @@ class MusicScreen extends StatelessWidget {
           flex: 3,
           child: Flex(
             direction:
-                MediaQuery.of(context).orientation == Orientation.landscape &&
+                MediaQuery.of(context).orientation == Orientation.landscape ||
                         !isDesktop
                     ? Axis.horizontal
                     : Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              WidgetUtils.musicMorphButtons(context, mainController, 0,isDesktop: isDesktop),
-              WidgetUtils.musicMorphButtons(context, mainController, 1,isDesktop: isDesktop),
+              WidgetUtils.musicMorphButtons(context, mainController, 0,
+                  isDesktop: isDesktop),
+              WidgetUtils.musicMorphButtons(context, mainController, 1,
+                  isDesktop: isDesktop),
             ],
           ),
         ),

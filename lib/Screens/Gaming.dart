@@ -37,7 +37,21 @@ class GamingScreen extends StatelessWidget {
                       flex: 3,
                       child: PageView(
                         allowImplicitScrolling: true,
-                        scrollDirection: Axis.vertical,
+                        scrollDirection:
+                            (isDesktop) ? Axis.vertical : Axis.horizontal,
+                        onPageChanged: (event) {
+                          // focus for morph buttons
+                          // if(isDesktop)
+                          for (int i = 0; i < 3; i++) {
+                            if (mainController.streamController.page!.round() !=
+                                i)
+                              mainController.streamMorphButtons[i].isFocused
+                                  .value = false;
+                            else
+                              mainController
+                                  .streamMorphButtons[i].isFocused.value = true;
+                          }
+                        },
                         children: [
                           YoutubeDetails(
                             mainController: mainController,

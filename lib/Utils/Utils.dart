@@ -249,8 +249,10 @@ class WidgetUtils {
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      gradient: (mainController
-                              .codingMorphButtons[buttonType].showDetails.value)
+                      gradient: (mainController.codingMorphButtons[buttonType]
+                                  .showDetails.value ||
+                              mainController.codingMorphButtons[buttonType]
+                                  .isFocused.value)
                           ? LinearGradient(
                               colors:
                                   mainController.skillsGradientList[buttonType])
@@ -444,8 +446,11 @@ class WidgetUtils {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (mainController
-                              .streamMorphButtons[buttonType].showDetails.value)
+                      gradient: (mainController.streamMorphButtons[buttonType]
+                                  .showDetails.value ||
+                              mainController.streamMorphButtons[buttonType]
+                                      .isFocused.value &&
+                                  isDesktop)
                           ? LinearGradient(
                               colors:
                                   mainController.streamGradientList[buttonType])

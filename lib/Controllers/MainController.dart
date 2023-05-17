@@ -35,7 +35,8 @@ class MainController extends GetxController {
 
   // navigation bar
   final RxInt hoverID = 0.obs, navIndex = 0.obs, navIconID = 0.obs;
-  final RxDouble navHovered = 0.0.obs,scrollBtn=0.0.obs,
+  final RxDouble navHovered = 0.0.obs,
+      scrollBtn = 0.0.obs,
       bgTop = 0.0.obs,
       headerTop = 0.0.obs,
       pad = 50.0.obs,
@@ -234,6 +235,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'flutter'.obs,
             image_hovered: 'flutter_white'.obs,
             pad: 50.0.obs,
@@ -242,6 +244,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'react'.obs,
             image_hovered: 'react_white'.obs,
             pad: 50.0.obs,
@@ -250,6 +253,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'vue'.obs,
             image_hovered: 'vue_white'.obs,
             pad: 50.0.obs,
@@ -260,6 +264,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'vscode'.obs,
             image_hovered: 'vscode'.obs,
             pad: 50.0.obs,
@@ -268,6 +273,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'android_studio'.obs,
             image_hovered: 'android_studio'.obs,
             pad: 50.0.obs,
@@ -278,6 +284,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'valorant'.obs,
             image_hovered: 'valorant'.obs,
             pad: 50.0.obs,
@@ -286,6 +293,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'apex'.obs,
             image_hovered: 'apex'.obs,
             pad: 50.0.obs,
@@ -294,6 +302,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'gtav'.obs,
             image_hovered: 'gtav'.obs,
             pad: 50.0.obs,
@@ -304,6 +313,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: true.obs,
             image: 'yt'.obs,
             image_hovered: 'yt_white'.obs,
             pad: 50.0.obs,
@@ -312,6 +322,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'twitch'.obs,
             image_hovered: 'twitch_white'.obs,
             pad: 50.0.obs,
@@ -320,6 +331,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'discord'.obs,
             image_hovered: 'discord_white'.obs,
             pad: 50.0.obs,
@@ -330,6 +342,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'fb'.obs,
             image_hovered: 'fb_white'.obs,
             pad: 50.0.obs,
@@ -338,6 +351,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'ig'.obs,
             image_hovered: 'ig_white'.obs,
             pad: 50.0.obs,
@@ -346,6 +360,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'twitter'.obs,
             image_hovered: 'twitter_white'.obs,
             pad: 50.0.obs,
@@ -354,6 +369,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'linkd'.obs,
             image_hovered: 'linkd_white'.obs,
             pad: 50.0.obs,
@@ -364,6 +380,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'linkd'.obs,
             image_hovered: 'linkd'.obs,
             pad: 50.0.obs,
@@ -372,6 +389,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'github'.obs,
             image_hovered: 'github'.obs,
             pad: 50.0.obs,
@@ -380,6 +398,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'gitlab'.obs,
             image_hovered: 'gitlab'.obs,
             pad: 50.0.obs,
@@ -390,6 +409,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'soundcloud'.obs,
             image_hovered: 'soundcloud_white'.obs,
             pad: 50.0.obs,
@@ -398,6 +418,7 @@ class MainController extends GetxController {
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
+            isFocused: false.obs,
             image: 'bandlab'.obs,
             image_hovered: 'bandlab_white'.obs,
             pad: 50.0.obs,
