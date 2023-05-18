@@ -37,12 +37,16 @@ class HomeContainer extends StatelessWidget {
                 children: [
                   PageView(
                     onPageChanged: (value) {
-                      if (mainController.codingIndex.value > 0) {
+                      if (mainController.codingIndex.value > 0 &&
+                          sizingInformation.deviceScreenType ==
+                              DeviceScreenType.desktop) {
                         Functions.navigate(mainController.codingIndex.value + 1,
                             mainController.codingController, mainController);
                       }
 
-                      if (mainController.gamingIndex.value > 0) {
+                      if (mainController.gamingIndex.value > 0 &&
+                          sizingInformation.deviceScreenType ==
+                              DeviceScreenType.desktop) {
                         Functions.navigate(mainController.gamingIndex.value + 1,
                             mainController.streamController, mainController);
                       }
