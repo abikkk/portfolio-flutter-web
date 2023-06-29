@@ -47,11 +47,16 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   simple_shadow: ^0.3.1
   flashy_tab_bar2: ^0.0.5
+  flutter_native_splash: ^2.3.1
   auto_size_text: ^3.0.0
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/logo/white_transparent_grey.png
 
 flutter_launcher_icons:
   android: "launcher_icon"

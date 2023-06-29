@@ -169,10 +169,15 @@ class Screens {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Image(
-                    image: AssetImage('assets/images/profile_shot.png'),
-                    height: MediaQuery.of(context).size.height,
-                    fit: BoxFit.cover,
+                  SimpleShadow(
+                    sigma: 12,
+                    opacity: 0.6,
+                    offset: Offset(-12, 10),
+                    child: Image(
+                      image: AssetImage('assets/images/profile_shot.png'),
+                      height: MediaQuery.of(context).size.height,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ],
               ),
@@ -240,15 +245,18 @@ class Screens {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image(
-                image: AssetImage('assets/images/logo/black_transparent.png'),
-                height:
-                    MediaQuery.of(context).orientation == Orientation.landscape
-                        ? MediaQuery.of(context).size.height - 25
-                        : null,
-                fit: MediaQuery.of(context).orientation == Orientation.portrait
-                    ? BoxFit.cover
-                    : BoxFit.fitHeight,
+              Widgets.customShadowBox(
+                Image(
+                  image: AssetImage('assets/images/logo/black_transparent.png'),
+                  height: MediaQuery.of(context).orientation ==
+                          Orientation.landscape
+                      ? MediaQuery.of(context).size.height - 25
+                      : null,
+                  fit:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? BoxFit.cover
+                          : BoxFit.fitHeight,
+                ),
               ),
             ],
           );

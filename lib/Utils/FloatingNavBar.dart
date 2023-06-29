@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -210,7 +209,7 @@ class FloatingNavBarIcons extends StatelessWidget {
         //     iconSize: (mainController.navHovered == 0) ? 5 : 7);
         : IconButton(
             icon: Widgets.bulletineIcon(true, iconColor: Colors.black45),
-            iconSize: (mainController.navHovered == 0) ? 5 : 7,
+            iconSize: (mainController.navHovered == 0) ? 5 : 8,
             onPressed: () {
               Functions.navigate(
                   navID, mainController.pageController, mainController);
