@@ -1,6 +1,3 @@
-import 'package:get/get.dart';
-import 'package:my_porfolio/Models/ProjectCard.dart';
-
 class CONSTANTS {
   // app theme
   static const appFont = 'MAIN_APP_FONT';

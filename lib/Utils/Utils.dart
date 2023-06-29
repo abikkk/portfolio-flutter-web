@@ -113,6 +113,47 @@ class Functions {
         duration: Duration(milliseconds: 444), curve: Curves.easeInOut);
     mainController.navIndex.value = navIndex - 1;
   }
+
+// get images references
+  getImageReferences() {}
+  // precache images
+  static precacheImages(MainController mainController, BuildContext context) {
+    for (int i = 0; i < mainController.codingMorphButtons.length; i++) {
+      precacheImage(mainController.codingMorphButtons[i].image.image, context);
+      precacheImage(
+          mainController.codingMorphButtons[i].image_hovered.image, context);
+    }
+    for (int i = 0; i < mainController.codeIDEMorphButtons.length; i++) {
+      precacheImage(mainController.codeIDEMorphButtons[i].image.image, context);
+    }
+    for (int i = 0; i < mainController.gamingMorphButtons.length; i++) {
+      precacheImage(mainController.gamingMorphButtons[i].image.image, context);
+      precacheImage(
+          mainController.gamingMorphButtons[i].image_hovered.image, context);
+    }
+    for (int i = 0; i < mainController.socialMorphButtons.length; i++) {
+      precacheImage(mainController.socialMorphButtons[i].image.image, context);
+      precacheImage(
+          mainController.socialMorphButtons[i].image_hovered.image, context);
+    }
+    for (int i = 0; i < mainController.streamMorphButtons.length; i++) {
+      precacheImage(mainController.streamMorphButtons[i].image.image, context);
+      precacheImage(
+          mainController.streamMorphButtons[i].image_hovered.image, context);
+    }
+    for (int i = 0; i < mainController.jobSocialsMorphButtons.length; i++) {
+      precacheImage(
+          mainController.jobSocialsMorphButtons[i].image.image, context);
+      precacheImage(
+          mainController.jobSocialsMorphButtons[i].image_hovered.image,
+          context);
+    }
+    for (int i = 0; i < mainController.musicMorphButtons.length; i++) {
+      precacheImage(mainController.musicMorphButtons[i].image.image, context);
+      precacheImage(
+          mainController.musicMorphButtons[i].image_hovered.image, context);
+    }
+  }
 }
 
 class Screens {
@@ -572,7 +613,7 @@ class Widgets {
     );
   }
 
-  static Card projectCard(String label, String image, Color iconColor) {
+  static Card projectCard(String label, Image image, Color iconColor) {
     return Card(
       elevation: 8,
       child: Column(
@@ -582,7 +623,7 @@ class Widgets {
               padding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
               child: Image(
-                image: AssetImage('assets/images/projects/${image}'),
+                image: image.image,
                 fit: BoxFit.contain,
               ),
             ),
@@ -920,7 +961,7 @@ class Widgets {
                         for (var project in mainController.projects)
                           Widgets.projectCard(
                               '${project.label}',
-                              '${project.image}',
+                              project.image,
                               project.devLang.value == 'vue'
                                   ? Colors.green
                                   : project.devLang.value == 'react'
@@ -1144,12 +1185,11 @@ class Widgets {
                               .codingMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
-                      child: Image.asset(
-                        mainController.codingMorphButtons[buttonType]
-                                .showDetails.value
-                            ? 'assets/images/icons/${mainController.codingMorphButtons[buttonType].image_hovered}.png'
-                            : 'assets/images/icons/${mainController.codingMorphButtons[buttonType].image}.png',
-                      ),
+                      child: mainController
+                              .codingMorphButtons[buttonType].showDetails.value
+                          ? mainController
+                              .codingMorphButtons[buttonType].image_hovered
+                          : mainController.codingMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1240,12 +1280,11 @@ class Widgets {
                               .gamingMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
-                      child: Image.asset(
-                        mainController.gamingMorphButtons[buttonType]
-                                .showDetails.value
-                            ? 'assets/images/icons/${mainController.gamingMorphButtons[buttonType].image_hovered}.png'
-                            : 'assets/images/icons/${mainController.gamingMorphButtons[buttonType].image}.png',
-                      ),
+                      child: mainController
+                              .gamingMorphButtons[buttonType].showDetails.value
+                          ? mainController
+                              .gamingMorphButtons[buttonType].image_hovered
+                          : mainController.gamingMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1341,12 +1380,11 @@ class Widgets {
                               .streamMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
-                      child: Image.asset(
-                        mainController.streamMorphButtons[buttonType]
-                                .showDetails.value
-                            ? 'assets/images/icons/${mainController.streamMorphButtons[buttonType].image_hovered}.png'
-                            : 'assets/images/icons/${mainController.streamMorphButtons[buttonType].image}.png',
-                      ),
+                      child: mainController
+                              .streamMorphButtons[buttonType].showDetails.value
+                          ? mainController
+                              .streamMorphButtons[buttonType].image_hovered
+                          : mainController.streamMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1438,12 +1476,11 @@ class Widgets {
                               .socialMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
-                      child: Image.asset(
-                        mainController.socialMorphButtons[buttonType]
-                                .showDetails.value
-                            ? 'assets/images/icons/${mainController.socialMorphButtons[buttonType].image_hovered}.png'
-                            : 'assets/images/icons/${mainController.socialMorphButtons[buttonType].image}.png',
-                      ),
+                      child: mainController
+                              .socialMorphButtons[buttonType].showDetails.value
+                          ? mainController
+                              .socialMorphButtons[buttonType].image_hovered
+                          : mainController.socialMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1534,12 +1571,11 @@ class Widgets {
                               .musicMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .12,
                       duration: Duration(milliseconds: 150),
-                      child: Image.asset(
-                        mainController
-                                .musicMorphButtons[buttonType].showDetails.value
-                            ? 'assets/images/icons/${mainController.musicMorphButtons[buttonType].image_hovered}.png'
-                            : 'assets/images/icons/${mainController.musicMorphButtons[buttonType].image}.png',
-                      ),
+                      child: mainController
+                              .musicMorphButtons[buttonType].showDetails.value
+                          ? mainController
+                              .musicMorphButtons[buttonType].image_hovered
+                          : mainController.musicMorphButtons[buttonType].image,
                     ),
                   ),
                 ),

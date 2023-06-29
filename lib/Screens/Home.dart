@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
 import '../Utils/FloatingNavBar.dart';
@@ -13,18 +12,17 @@ class HomeContainer extends StatefulWidget {
   State<HomeContainer> createState() => _HomeContainerState();
 }
 
-
 class _HomeContainerState extends State<HomeContainer> {
   final MainController mainController = MainController();
-
   double bg = 0.0;
 
-@override
+  @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    
+    Functions.precacheImages(mainController, context);
   }
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(

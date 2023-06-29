@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_porfolio/Models/Images.dart';
 import 'package:my_porfolio/Models/MorphButton.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
 import '../Models/ProjectCard.dart';
@@ -48,221 +49,221 @@ class MainController extends GetxController {
   final RxDouble vsOpa = 0.0.obs, asOpa = 0.0.obs;
   final RxDouble vsValue = CONSTANTS.vscodePoints.obs,
       asValue = CONSTANTS.androidStudioPoints.obs;
+
+  // gaming screen
+  final RxBool ytHover = false.obs,
+      twitchHover = false.obs,
+      discordHover = false.obs;
+
+  // IDE usage maps
   final Map<String, double> projectMap = {
-    "Flutter": CONSTANTS.flutterProjects,
-    "React": CONSTANTS.reactProjects,
-    "Vue": CONSTANTS.vueProjects
-  };
-  final Map<String, double> usageFlutter = {
-    CONSTANTS.vsCode: 55,
-    CONSTANTS.androidStudio: 45,
-  };
-  final Map<String, double> usageReact = {
-    CONSTANTS.vsCode: 100,
-    CONSTANTS.androidStudio: 0,
-  };
-  final Map<String, double> usageVue = {
-    CONSTANTS.vsCode: 100,
-    CONSTANTS.androidStudio: 0,
-  };
-  final skillsGradientList = <List<Color>>[
-    [
-      Color.fromRGBO(41, 71, 236, 1),
-      Color.fromRGBO(93, 147, 247, 1),
-    ],
-    [
-      Color.fromRGBO(5, 111, 160, 1),
-      Color.fromRGBO(12, 181, 248, 1),
-    ],
-    [
-      Color.fromRGBO(14, 180, 116, 1),
-      Color.fromRGBO(124, 238, 143, 1),
-    ]
-  ];
-  final ideGradientList = <List<Color>>[
-    [
-      Color.fromRGBO(5, 111, 160, 1),
-      Color.fromRGBO(12, 181, 248, 1),
-    ],
-    [
-      Color.fromRGBO(124, 238, 143, 1),
-      Color.fromRGBO(14, 180, 116, 1),
-    ]
-  ];
+        CONSTANTS.buttonFlutter: CONSTANTS.flutterProjects,
+        CONSTANTS.buttonReact: CONSTANTS.reactProjects,
+        CONSTANTS.buttonVue: CONSTANTS.vueProjects
+      },
+      usageFlutter = {
+        CONSTANTS.vsCode: 55,
+        CONSTANTS.androidStudio: 45,
+      },
+      usageReact = {
+        CONSTANTS.vsCode: 100,
+        CONSTANTS.androidStudio: 0,
+      },
+      usageVue = {
+        CONSTANTS.vsCode: 100,
+        CONSTANTS.androidStudio: 0,
+      };
 
   // projects
   RxList<ProjectCard> projects = [
     ProjectCard(
         showDetails: false.obs,
-        image: 'original_grey_bg.png'.obs,
+        image: Image.asset(AppImages.own),
         label: 'portfolio'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'northern_trails.png'.obs,
+        image: Image.asset(AppImages.northern_trails),
         label: 'northern trails cafe app'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'weather_app.png'.obs,
+        image: Image.asset(AppImages.weather_app),
         label: 'weather app'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'pfd_logo.png'.obs,
+        image: Image.asset(AppImages.pfd),
         label: 'Pokhara Food Delivery App'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'vansales_logo.png'.obs,
+        image: Image.asset(AppImages.vansales),
         label: 'ILG Vansales App (Mobile Sales)'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'ilg_logo.png'.obs,
+        image: Image.asset(AppImages.ilg),
         label: 'ILG Order Booking App'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'ebt_logo.jpeg'.obs,
+        image: Image.asset(AppImages.ebt),
         label: 'EBT Hospitality App'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'electronica_logo.jpeg'.obs,
+        image: Image.asset(AppImages.electronica),
         label: 'EBT Delivery App'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'fasttrack_logo.png'.obs,
+        image: Image.asset(AppImages.fasttrack),
         label: 'EBT Fasttrack App'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'tim_hortons_logo.png'.obs,
+        image: Image.asset(AppImages.tim_hortons),
         label: 'Tim Hortons POS'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'hypercity_logo.jpeg'.obs,
+        image: Image.asset(AppImages.hypercity),
         label: 'HyperCity MPOS'.obs,
         details: ''.obs,
         devLang: 'flutter'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'original_grey_bg.png'.obs,
+        image: Image.asset(AppImages.own),
         label: 'toda mart'.obs,
         details: ''.obs,
         devLang: 'react'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'original_grey_bg.png'.obs,
+        image: Image.asset(AppImages.own),
         label: 'hotel northern trails'.obs,
         details: ''.obs,
         devLang: 'react'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'original_grey_bg.png'.obs,
+        image: Image.asset(AppImages.own),
         label: 'employee attendance system'.obs,
         details: ''.obs,
         devLang: 'vue'.obs,
         link: 'github'.obs),
     ProjectCard(
         showDetails: false.obs,
-        image: 'original_grey_bg.png'.obs,
+        image: Image.asset(AppImages.own),
         label: 'inventory management system '.obs,
         details: ''.obs,
         devLang: 'vue'.obs,
         link: 'github'.obs),
   ].obs;
 
-  // gaming screen
-  final RxBool ytHover = false.obs,
-      twitchHover = false.obs,
-      discordHover = false.obs;
+  // gradient colors list
   final gameGradientList = <List<Color>>[
-    [
-      Color.fromRGBO(212, 30, 30, 1),
-      Color.fromRGBO(247, 83, 83, 1),
-    ],
-    [
-      Color.fromRGBO(143, 38, 38, 1),
-      Color.fromRGBO(235, 24, 24, 1),
-    ],
-    [
-      Color.fromRGBO(14, 180, 116, 1),
-      Color.fromRGBO(124, 238, 143, 1),
-    ]
-  ];
-  final streamGradientList = <List<Color>>[
-    [
-      Color.fromRGBO(212, 30, 30, 1),
-      Color.fromRGBO(247, 83, 83, 1),
-    ],
-    [
-      Color.fromRGBO(176, 3, 245, 1),
-      Color.fromRGBO(224, 82, 243, 1),
-    ],
-    [
-      Color.fromRGBO(6, 118, 247, 1),
-      Color.fromRGBO(73, 141, 243, 1),
-    ]
-  ];
-
-  // socials screen
-  final socialGradientList = <List<Color>>[
-    [
-      Color.fromRGBO(73, 141, 243, 1),
-      Color.fromRGBO(6, 118, 247, 1),
-    ],
-    [
-      Color.fromRGBO(238, 155, 61, 1),
-      Color.fromRGBO(202, 15, 93, 1),
-    ],
-    [
-      Color.fromRGBO(101, 160, 236, 1),
-      Color.fromRGBO(38, 156, 235, 1),
-    ],
-    [
-      Color.fromRGBO(6, 118, 247, 1),
-      Color.fromRGBO(73, 141, 243, 1),
-    ],
-  ];
-
-  // music screen
-  final musicGradientList = <List<Color>>[
-    [
-      Color.fromRGBO(238, 65, 21, 1),
-      Color.fromRGBO(241, 115, 77, 1),
-    ],
-    [
-      Color.fromRGBO(238, 46, 46, 1),
-      Color.fromRGBO(247, 83, 83, 1),
-    ],
-  ];
+        [
+          Color.fromRGBO(212, 30, 30, 1),
+          Color.fromRGBO(247, 83, 83, 1),
+        ],
+        [
+          Color.fromRGBO(143, 38, 38, 1),
+          Color.fromRGBO(235, 24, 24, 1),
+        ],
+        [
+          Color.fromRGBO(14, 180, 116, 1),
+          Color.fromRGBO(124, 238, 143, 1),
+        ]
+      ],
+      streamGradientList = <List<Color>>[
+        [
+          Color.fromRGBO(212, 30, 30, 1),
+          Color.fromRGBO(247, 83, 83, 1),
+        ],
+        [
+          Color.fromRGBO(176, 3, 245, 1),
+          Color.fromRGBO(224, 82, 243, 1),
+        ],
+        [
+          Color.fromRGBO(6, 118, 247, 1),
+          Color.fromRGBO(73, 141, 243, 1),
+        ]
+      ],
+      socialGradientList = <List<Color>>[
+        [
+          Color.fromRGBO(73, 141, 243, 1),
+          Color.fromRGBO(6, 118, 247, 1),
+        ],
+        [
+          Color.fromRGBO(238, 155, 61, 1),
+          Color.fromRGBO(202, 15, 93, 1),
+        ],
+        [
+          Color.fromRGBO(101, 160, 236, 1),
+          Color.fromRGBO(38, 156, 235, 1),
+        ],
+        [
+          Color.fromRGBO(6, 118, 247, 1),
+          Color.fromRGBO(73, 141, 243, 1),
+        ],
+      ],
+      musicGradientList = <List<Color>>[
+        [
+          Color.fromRGBO(238, 65, 21, 1),
+          Color.fromRGBO(241, 115, 77, 1),
+        ],
+        [
+          Color.fromRGBO(238, 46, 46, 1),
+          Color.fromRGBO(247, 83, 83, 1),
+        ],
+      ],
+      skillsGradientList = <List<Color>>[
+        [
+          Color.fromRGBO(41, 71, 236, 1),
+          Color.fromRGBO(93, 147, 247, 1),
+        ],
+        [
+          Color.fromRGBO(5, 111, 160, 1),
+          Color.fromRGBO(12, 181, 248, 1),
+        ],
+        [
+          Color.fromRGBO(14, 180, 116, 1),
+          Color.fromRGBO(124, 238, 143, 1),
+        ]
+      ],
+      ideGradientList = <List<Color>>[
+        [
+          Color.fromRGBO(5, 111, 160, 1),
+          Color.fromRGBO(12, 181, 248, 1),
+        ],
+        [
+          Color.fromRGBO(124, 238, 143, 1),
+          Color.fromRGBO(14, 180, 116, 1),
+        ]
+      ];
 
 // morphic buttons
   RxList<MorphButton> codingMorphButtons = [
@@ -270,8 +271,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'flutter'.obs,
-            image_hovered: 'flutter_white'.obs,
+            image: Image.asset(AppImages.flutter),
+            image_hovered: Image.asset(AppImages.flutter_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
@@ -279,8 +280,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'react'.obs,
-            image_hovered: 'react_white'.obs,
+            image: Image.asset(AppImages.react),
+            image_hovered: Image.asset(AppImages.react_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
@@ -288,8 +289,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'vue'.obs,
-            image_hovered: 'vue_white'.obs,
+            image: Image.asset(AppImages.vue),
+            image_hovered: Image.asset(AppImages.vue_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs)
@@ -299,8 +300,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'vscode'.obs,
-            image_hovered: 'vscode'.obs,
+            image: Image.asset(AppImages.vs_code),
+            image_hovered: Image.asset(AppImages.vs_code_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'vscode'.obs),
@@ -308,8 +309,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'android_studio'.obs,
-            image_hovered: 'android_studio'.obs,
+            image: Image.asset(AppImages.android_studio),
+            image_hovered: Image.asset(AppImages.android_studio_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'android_studio'.obs),
@@ -319,8 +320,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'valorant'.obs,
-            image_hovered: 'valorant'.obs,
+            image: Image.asset(AppImages.valorant),
+            image_hovered: Image.asset(AppImages.valorant_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'valorant'.obs),
@@ -328,8 +329,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'apex'.obs,
-            image_hovered: 'apex'.obs,
+            image: Image.asset(AppImages.apex),
+            image_hovered: Image.asset(AppImages.apex_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'apex legends'.obs),
@@ -337,8 +338,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'gtav'.obs,
-            image_hovered: 'gtav'.obs,
+            image: Image.asset(AppImages.gtav),
+            image_hovered: Image.asset(AppImages.gtav_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'gta v'.obs),
@@ -348,8 +349,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: true.obs,
-            image: 'yt'.obs,
-            image_hovered: 'yt_white'.obs,
+            image: Image.asset(AppImages.yt),
+            image_hovered: Image.asset(AppImages.yt_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'yt'.obs),
@@ -357,8 +358,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'twitch'.obs,
-            image_hovered: 'twitch_white'.obs,
+            image: Image.asset(AppImages.twitch),
+            image_hovered: Image.asset(AppImages.twitch_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'twitch'.obs),
@@ -366,8 +367,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'discord'.obs,
-            image_hovered: 'discord_white'.obs,
+            image: Image.asset(AppImages.discord),
+            image_hovered: Image.asset(AppImages.discord_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'discord'.obs),
@@ -377,8 +378,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'fb'.obs,
-            image_hovered: 'fb_white'.obs,
+            image: Image.asset(AppImages.fb),
+            image_hovered: Image.asset(AppImages.fb_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'fb'.obs),
@@ -386,8 +387,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'ig'.obs,
-            image_hovered: 'ig_white'.obs,
+            image: Image.asset(AppImages.ig),
+            image_hovered: Image.asset(AppImages.ig_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'ig'.obs),
@@ -395,8 +396,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'twitter'.obs,
-            image_hovered: 'twitter_white'.obs,
+            image: Image.asset(AppImages.twitter),
+            image_hovered: Image.asset(AppImages.twitter_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'twitter'.obs),
@@ -404,8 +405,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'linkd'.obs,
-            image_hovered: 'linkd_white'.obs,
+            image: Image.asset(AppImages.linkd),
+            image_hovered: Image.asset(AppImages.linkd_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'linkd'.obs),
@@ -415,8 +416,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'linkd'.obs,
-            image_hovered: 'linkd'.obs,
+            image: Image.asset(AppImages.linkd),
+            image_hovered: Image.asset(AppImages.linkd_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'linkd'.obs),
@@ -424,8 +425,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'github'.obs,
-            image_hovered: 'github'.obs,
+            image: Image.asset(AppImages.github),
+            image_hovered: Image.asset(AppImages.github_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
@@ -433,8 +434,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'gitlab'.obs,
-            image_hovered: 'gitlab'.obs,
+            image: Image.asset(AppImages.gitlab),
+            image_hovered: Image.asset(AppImages.gitlab_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'gitlab'.obs),
@@ -444,8 +445,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'soundcloud'.obs,
-            image_hovered: 'soundcloud_white'.obs,
+            image: Image.asset(AppImages.soundcloud),
+            image_hovered: Image.asset(AppImages.soundcloud_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'soundcloud'.obs),
@@ -453,8 +454,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: 'bandlab'.obs,
-            image_hovered: 'bandlab_white'.obs,
+            image: Image.asset(AppImages.bandlab),
+            image_hovered: Image.asset(AppImages.bandlab_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'bandlabs'.obs),

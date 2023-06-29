@@ -1,9 +1,13 @@
+// import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MorphButton extends GetxController {
-  RxBool isClicked = false.obs, showDetails = false.obs,isFocused=false.obs;
+  RxBool isClicked = false.obs, showDetails = false.obs, isFocused = false.obs;
   RxDouble scale = 0.0.obs, pad = 50.0.obs;
-  RxString image = ''.obs, link = ''.obs, image_hovered = ''.obs;
+  Image image, image_hovered;
+  RxString link = ''.obs;
+  // RxString image = ''.obs, link = ''.obs, image_hovered = ''.obs;
 
   MorphButton(
       {required this.isClicked,
