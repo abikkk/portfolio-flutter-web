@@ -6,12 +6,25 @@ import '../Controllers/MainController.dart';
 import '../Utils/FloatingNavBar.dart';
 import '../Utils/Utils.dart';
 
-class HomeContainer extends StatelessWidget {
+class HomeContainer extends StatefulWidget {
   HomeContainer({Key? key}) : super(key: key);
+
+  @override
+  State<HomeContainer> createState() => _HomeContainerState();
+}
+
+
+class _HomeContainerState extends State<HomeContainer> {
   final MainController mainController = MainController();
 
   double bg = 0.0;
 
+@override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    
+  }
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(

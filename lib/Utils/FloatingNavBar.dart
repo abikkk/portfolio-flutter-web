@@ -28,7 +28,7 @@ class FloatingNavBarDesktop extends StatelessWidget {
                   opacity: mainController.navHovered.value,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey[400]!.withOpacity(0.6),
+                        color: Colors.grey[500]!.withOpacity(0.5),
                         borderRadius: BorderRadius.all(Radius.circular(24))),
                     margin: EdgeInsets.only(bottom: 30),
                     height: MediaQuery.of(context).size.height / 12,
@@ -98,7 +98,8 @@ class FloatingNavBar extends StatelessWidget {
         showElevation: true,
         onItemSelected: (index) {
           mainController.navIndex.value = index;
-          Functions.navigate(index + 1,mainController.pageController, mainController);
+          Functions.navigate(
+              index + 1, mainController.pageController, mainController);
         },
         items: [
           Widgets.flashyTabBarItem('home', Icons.home),
@@ -161,14 +162,16 @@ class FloatingNavBarIcons extends StatelessWidget {
                 ),
                 iconSize: 24,
                 onPressed: () {
-          Functions.navigate(navID,mainController.pageController, mainController);
+                  Functions.navigate(
+                      navID, mainController.pageController, mainController);
                 }),
           )
         : IconButton(
             icon: Widgets.bulletineIcon(isDesktop),
             iconSize: 12,
             onPressed: () {
-          Functions.navigate(navID,mainController.pageController, mainController);
+              Functions.navigate(
+                  navID, mainController.pageController, mainController);
             });
   }
 }
