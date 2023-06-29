@@ -7,6 +7,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
 import 'Constants.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 class Functions {
   // web page launcher
@@ -116,6 +117,7 @@ class Functions {
 
 // get images references
   getImageReferences() {}
+
   // precache images
   static precacheImages(MainController mainController, BuildContext context) {
     for (int i = 0; i < mainController.codingMorphButtons.length; i++) {
@@ -174,58 +176,62 @@ class Screens {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 44.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'hi there!',
-                      style: AppThemeData.appThemeData.textTheme.headlineSmall,
-                    ),
-                    Text(
-                      'abik vaidhya',
-                      style: AppThemeData.appThemeData.textTheme.headlineLarge,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 10,
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: Widgets.subtitleTexts(
-                              mainController: mainController,
-                              label: 'frontend developer',
-                              id: 0,
-                            ),
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: Widgets.subtitleTexts(
-                                mainController: mainController,
-                                label: 'gamer',
-                                id: 1,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Widgets.subtitleTexts(
-                                mainController: mainController,
-                                label: 'musician',
-                                id: 2,
-                              ),
-                            ),
-                          ),
-                        ],
+              Widgets.customShadowBox(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 44.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'hi there!',
+                        style:
+                            AppThemeData.appThemeData.textTheme.headlineSmall,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'abik vaidhya',
+                        style:
+                            AppThemeData.appThemeData.textTheme.headlineLarge,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 10,
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Widgets.subtitleTexts(
+                                mainController: mainController,
+                                label: 'frontend developer',
+                                id: 0,
+                              ),
+                            ),
+                            Expanded(
+                              child: Center(
+                                child: Widgets.subtitleTexts(
+                                  mainController: mainController,
+                                  label: 'gamer',
+                                  id: 1,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Widgets.subtitleTexts(
+                                  mainController: mainController,
+                                  label: 'musician',
+                                  id: 2,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -463,9 +469,11 @@ class Screens {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(
-                  'listen to my music',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                child: Widgets.customShadowBox(
+                  Text(
+                    'listen to my music',
+                    style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                  ),
                 ),
               ),
               SizedBox(
@@ -509,9 +517,11 @@ class Screens {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(
-                  'connect with me',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                child: Widgets.customShadowBox(
+                  Text(
+                    'connect with me',
+                    style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                  ),
                 ),
               ),
               SizedBox(
@@ -551,8 +561,8 @@ class Screens {
   }
 }
 
+// general UIs
 class Widgets {
-  // general UIs
   static Widget scrollButton(MainController mainController) {
     return Obx(
       () => AnimatedOpacity(
@@ -569,9 +579,11 @@ class Widgets {
     );
   }
 
-  static Widget bulletineIcon(bool hasColor, {Color iconColor = Colors.white}) {
+  static Widget bulletineIcon(bool hasColor,
+      {double? iconSize, Color iconColor = Colors.white}) {
     return Icon(
       Icons.circle,
+      size: iconSize,
       color: (hasColor) ? iconColor : AppThemeData.appThemeData.primaryColor,
     );
   }
@@ -590,7 +602,7 @@ class Widgets {
         mainController.showScrollBtn.value = 1.0;
       },
       onExit: (e) {
-        mainController.showScrollBtn.value = 0.0;
+        mainController.showScrollBtn.value = 0.3;
       },
       child: AnimatedOpacity(
         duration: Duration(milliseconds: 200),
@@ -703,6 +715,16 @@ class Widgets {
     );
   }
 
+  static SimpleShadow customShadowBox(Widget child,
+      {double opacity = 0.6, double sigma = 4}) {
+    return SimpleShadow(
+      opacity: opacity,
+      offset: Offset(8.0, 6.0),
+      sigma: sigma,
+      child: child,
+    );
+  }
+
 // coding
   static Widget CodingIntroDetails(
       {required BuildContext context,
@@ -715,9 +737,11 @@ class Widgets {
         children: [
           Row(
             children: [
-              Text(
-                'my skills',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              Widgets.customShadowBox(
+                Text(
+                  'my skills',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
               ),
             ],
           ),
@@ -726,10 +750,12 @@ class Widgets {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    'i can work for projects using the following frameworks.',
-                    softWrap: true,
-                    maxLines: 4,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'i can work for projects using the following frameworks.',
+                      softWrap: true,
+                      maxLines: 4,
+                    ),
                   ),
                 ),
               ],
@@ -740,10 +766,12 @@ class Widgets {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    'my knowledge base on these languages and development environments (IDE) i use can be divided as follows:',
-                    softWrap: true,
-                    maxLines: 4,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'my knowledge base on these languages and development environments (IDE) i use can be divided as follows:',
+                      softWrap: true,
+                      maxLines: 4,
+                    ),
                   ),
                 ),
               ],
@@ -797,9 +825,11 @@ class Widgets {
         children: [
           Row(
             children: [
-              Text(
-                'flutter',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              Widgets.customShadowBox(
+                Text(
+                  'flutter',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
               ),
             ],
           ),
@@ -808,10 +838,12 @@ class Widgets {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
-                    maxLines: 8,
-                    softWrap: true,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
+                      maxLines: 8,
+                      softWrap: true,
+                    ),
                   ),
                 ),
               ],
@@ -846,9 +878,11 @@ class Widgets {
         children: [
           Row(
             children: [
-              Text(
-                'react.js',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              Widgets.customShadowBox(
+                Text(
+                  'react.js',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
               ),
             ],
           ),
@@ -859,10 +893,12 @@ class Widgets {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        'i worked as a freelancer for 8 months. my projects ranges as follows:',
-                        softWrap: true,
-                        maxLines: 4,
+                      child: Widgets.customShadowBox(
+                        Text(
+                          'i worked as a freelancer for 8 months. my projects ranges as follows:',
+                          softWrap: true,
+                          maxLines: 4,
+                        ),
                       ),
                     ),
                   ],
@@ -870,10 +906,12 @@ class Widgets {
                 Row(
                   children: [
                     Expanded(
-                        child: Text(
-                      ' - portfolio websites\n - cafe website\n - ecommerce\n - warehouse/inventory management',
-                      softWrap: true,
-                      maxLines: 8,
+                        child: Widgets.customShadowBox(
+                      Text(
+                        ' - portfolio websites\n - cafe website\n - ecommerce\n - warehouse/inventory management',
+                        softWrap: true,
+                        maxLines: 8,
+                      ),
                     )),
                   ],
                 ),
@@ -899,9 +937,11 @@ class Widgets {
         children: [
           Row(
             children: [
-              Text(
-                'vue.js',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              Widgets.customShadowBox(
+                Text(
+                  'vue.js',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
               ),
             ],
           ),
@@ -910,10 +950,12 @@ class Widgets {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months. i was involved in development of employee record management system and attendance management system. i have my own portfolio website under development as well.',
-                    maxLines: 8,
-                    softWrap: true,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months. i was involved in development of employee record management system and attendance management system. i have my own portfolio website under development as well.',
+                      maxLines: 8,
+                      softWrap: true,
+                    ),
                   ),
                 ),
               ],
@@ -938,9 +980,11 @@ class Widgets {
         children: [
           Row(
             children: [
-              Text(
-                'projects',
-                style: AppThemeData.appThemeData.textTheme.headlineMedium,
+              Widgets.customShadowBox(
+                Text(
+                  'projects',
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                ),
               ),
             ],
           ),
@@ -1004,9 +1048,11 @@ class Widgets {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    'i upload clips from my gameplays and live streams to my youtube channel. drop by and show some love if you can. thanks!',
-                    softWrap: true,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'i upload clips from my gameplays and live streams to my youtube channel. drop by and show some love if you can. thanks!',
+                      softWrap: true,
+                    ),
                   ),
                 ),
               ],
@@ -1045,9 +1091,11 @@ class Widgets {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    'i try to stream regularly, as much as i can. i normally just stream for myself. my live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.',
-                    softWrap: true,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'i try to stream regularly, as much as i can. i normally just stream for myself. my live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.',
+                      softWrap: true,
+                    ),
                   ),
                 ),
               ],
@@ -1086,9 +1134,11 @@ class Widgets {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    'you can join my discord server. we can have fun together with my friends.',
-                    softWrap: true,
+                  child: Widgets.customShadowBox(
+                    Text(
+                      'you can join my discord server. we can have fun together with my friends.',
+                      softWrap: true,
+                    ),
                   ),
                 ),
               ],

@@ -8,6 +8,7 @@ import '../Models/ProjectCard.dart';
 class MainController extends GetxController {
   // page controller
   final RxInt codingIndex = 0.obs, gamingIndex = 0.obs;
+
   final PageController pageController = PageController(
     initialPage: 0,
   );
@@ -26,7 +27,10 @@ class MainController extends GetxController {
   final PageController socialsController = PageController(
     initialPage: 0,
   );
-  RxDouble showScrollBtn = 0.0.obs, scrollIndex = 0.0.obs;
+  RxDouble showScrollBtn = 0.3.obs,
+      scrollIndex = 0.0.obs,
+      cursorX = 0.0.obs,
+      cursorY = 0.0.obs;
   RxBool isCodeScrollDown = true.obs, isGameScrollDown = true.obs;
 
   // navigation bar
