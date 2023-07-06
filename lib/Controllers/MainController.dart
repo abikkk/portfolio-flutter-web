@@ -31,7 +31,10 @@ class MainController extends GetxController {
       scrollIndex = 0.0.obs,
       cursorX = 0.0.obs,
       cursorY = 0.0.obs;
-  RxBool isCodeScrollDown = true.obs, isGameScrollDown = true.obs;
+  RxBool isCodeScrollDown = true.obs,
+      isGameScrollDown = true.obs,
+      projectDetails = false.obs;
+  late ProjectCard selectedProject;
 
   // navigation bar
   final RxInt hoverID = 0.obs, navIndex = 0.obs, navIconID = 0.obs;
@@ -84,107 +87,255 @@ class MainController extends GetxController {
         showDetails: false.obs,
         image: Image.asset(AppImages.own),
         label: 'portfolio'.obs,
-        details: ''.obs,
+        details:
+            'this is my portfolio website developed using flutter web. it contains information about my skillset and what i am available for.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.northern_trails),
-        label: 'northern trails cafe app'.obs,
-        details: ''.obs,
-        devLang: 'flutter'.obs,
-        link: 'github'.obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.weather_app),
-        label: 'weather app'.obs,
-        details: ''.obs,
-        devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagLaunched,
+          CONSTANTS.projectTagWorkingOn,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.pfd),
         label: 'Pokhara Food Delivery App'.obs,
-        details: ''.obs,
+        details:
+            'food order/delivery application currently operational in Pokhara.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.vansales),
-        label: 'ILG Vansales App (Mobile Sales)'.obs,
-        details: ''.obs,
-        devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [CONSTANTS.projectTagCompleted].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.ilg),
         label: 'ILG Order Booking App'.obs,
-        details: ''.obs,
+        details:
+            'inventory management and stock order application designed by EBT LLC, Dubai for their clients.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.vansales),
+        label: 'ILG Vansales App (Mobile Sales)'.obs,
+        details:
+            'updated version of ILG Order Booking App with then latest dart version (3.0.7), with modified features.'
+                .obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.ebt),
         label: 'EBT Hospitality App'.obs,
-        details: ''.obs,
+        details:
+            'menu + mobile POS system for multiple restaurants and lounges for clients of EBT LLC, Dubai.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.electronica),
         label: 'EBT Delivery App'.obs,
-        details: ''.obs,
+        details:
+            'delivery service application with staff management features for clients of EBT LLC, Dubai.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.fasttrack),
         label: 'EBT Fasttrack App'.obs,
-        details: ''.obs,
+        details:
+            'garage application with mechanic support and vehicle support features for clients for EBT LLC, Dubai.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.tim_hortons),
         label: 'Tim Hortons POS'.obs,
-        details: ''.obs,
+        details:
+            'mobile POS application for Tim Hortons clients of EBT LLC, Dubai.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.hypercity),
         label: 'HyperCity MPOS'.obs,
-        details: ''.obs,
+        details:
+            'mobile POS application for HyperCity client of EBT LLC, Dubai.'
+                .obs,
         devLang: 'flutter'.obs,
-        link: 'github'.obs),
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagLaunched,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.northern_trails),
+        label: 'northern trails cafe app'.obs,
+        details:
+            'a simple cafe menu app for a cafe located in khahare, lakeside.'
+                .obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagWorkingOn,
+          CONSTANTS.projectTagUnder,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.own),
+        label: 'weather app'.obs,
+        details: 'a simple weather application.'.obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagWorkingOn,
+          CONSTANTS.projectTagUnder,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.own),
+        label: 'aayush man gubaju - portfolio'.obs,
+        details:
+            'portfolio web application for a graphic designer, Mr. Aayush Man Gubaju.'
+                .obs,
+        devLang: 'flutter web'.obs,
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagUnder,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.own),
+        label: 'passenger life'.obs,
+        details:
+            'portfolio/blog web application for ui/ux designer, Ms. Aayushi Shrestha.'
+                .obs,
+        devLang: 'flutter web'.obs,
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagUnder,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.own),
+        label: 'ghar jagga'.obs,
+        details: 'real estate application for Pokhara, Nepal.'.obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagWorkingOn,
+          CONSTANTS.projectTagUnder,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.own),
+        label: 'nepanime'.obs,
+        details:
+            'e-commerce mobile app for anime accessories in Pokhara, Nepal.'
+                .obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagWorkingOn,
+          CONSTANTS.projectTagUnder,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.own),
         label: 'toda mart'.obs,
-        details: ''.obs,
+        details: 'profile website for Toda Mart, Pokhara'.obs,
         devLang: 'react'.obs,
-        link: 'github'.obs),
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagUnder,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.own),
         label: 'hotel northern trails'.obs,
-        details: ''.obs,
+        details:
+            'profile web site for Hotel Northern Trails located in Khahare, Lakeside, Pokhara.'
+                .obs,
         devLang: 'react'.obs,
-        link: 'github'.obs),
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagUnder,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.own),
         label: 'employee attendance system'.obs,
-        details: ''.obs,
+        details:
+            'attendance system for employees for a company, developed as a intern project for Utsaha Advert, Pokhara.'
+                .obs,
         devLang: 'vue'.obs,
-        link: 'github'.obs),
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagDropped,
+        ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.own),
         label: 'inventory management system '.obs,
-        details: ''.obs,
+        details:
+            'stock/inventory management system for a company, developed as a intern project for Utsaha Advert, Pokhara.'
+                .obs,
         devLang: 'vue'.obs,
-        link: 'github'.obs),
+        platform: ['web'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagDropped,
+        ].obs),
   ].obs;
 
   // gradient colors list

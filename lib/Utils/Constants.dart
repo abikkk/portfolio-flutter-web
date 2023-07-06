@@ -1,4 +1,11 @@
 class CONSTANTS {
+  // general
+  static const projectTagUnder = 'Under Development';
+  static const projectTagCompleted = 'Completed';
+  static const projectTagWorkingOn = 'Working On';
+  static const projectTagDropped = 'Dropped';
+  static const projectTagLaunched = 'Launched';
+
   // app theme
   static const appFont = 'MAIN_APP_FONT';
   static const appColor = 'MAIN_APP_COLOR';

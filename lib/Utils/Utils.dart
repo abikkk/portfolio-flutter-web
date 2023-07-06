@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
+import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
@@ -571,6 +572,33 @@ class Screens {
 
 // general UIs
 class Widgets {
+  static Future defaultDialog(String label) {
+    return Get.defaultDialog(
+      title: '$label',
+      middleText: "i worked on $label",
+      barrierDismissible: true,
+      radius: 30,
+      content: Text('hello world'),
+      backgroundColor: Colors.grey.shade700.withOpacity(0.6),
+      titleStyle: TextStyle(color: Colors.white),
+      middleTextStyle: TextStyle(color: Colors.white),
+    );
+  }
+
+  static Future defaultBottomSheet(String label) {
+    return Get.bottomSheet(
+      Container(
+          color: Colors.greenAccent,
+          child: Wrap(
+            children: [
+              Text('Hii 1', textScaleFactor: 2),
+            ],
+          )),
+      barrierColor: Colors.red[50],
+      isDismissible: true,
+    );
+  }
+
   static Widget scrollButton(MainController mainController) {
     return Obx(
       () => AnimatedOpacity(
@@ -633,36 +661,48 @@ class Widgets {
     );
   }
 
-  static Card projectCard(String label, Image image, Color iconColor) {
+  static Card projectCard(
+      MainController mainController, ProjectCard project, Color iconColor) {
     return Card(
       elevation: 8,
-      child: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              child: Image(
-                image: image.image,
-                fit: BoxFit.contain,
+      child: GestureDetector(
+        onTap: () {
+          mainController.projectDetails.value =
+              !mainController.projectDetails.value;
+          mainController.selectedProject = project;
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                child: Image(
+                  // height: 100,
+                  width: 100,
+                  image: project.image.image,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: Text(
-                '${label}',
-                textAlign: TextAlign.center,
-                softWrap: true,
-              )),
-              Padding(
-                padding: const EdgeInsets.only(right: 4.0),
-                child: bulletineIcon(true, iconColor: iconColor),
-              )
-            ],
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                    '${project.label}',
+                    style: AppThemeData.appThemeData.textTheme.bodySmall!
+                        .copyWith(height: 1),
+                    textAlign: TextAlign.start,
+                    softWrap: true,
+                  )),
+                  bulletineIcon(true, iconColor: iconColor)
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -747,7 +787,7 @@ class Widgets {
             children: [
               Widgets.customShadowBox(
                 Text(
-                  'my skills',
+                  'portfolio',
                   style: AppThemeData.appThemeData.textTheme.headlineMedium,
                 ),
               ),
@@ -760,7 +800,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i can work for projects using the following frameworks.',
+                      'i having working as a flutter developer professionally for almost 3 years now.\ni have experiences with REST and SOAP APIs along with XML language and JSON parsin',
                       softWrap: true,
                       maxLines: 4,
                     ),
@@ -770,7 +810,7 @@ class Widgets {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            padding: const EdgeInsets.only(top: 5.0),
             child: Row(
               children: [
                 Expanded(
@@ -802,7 +842,7 @@ class Widgets {
                       isDesktop: false),
                 ),
                 Expanded(
-                  flex: isDesktop ? 3 : 1,
+                  flex: isDesktop ? 3 : 2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
@@ -916,7 +956,7 @@ class Widgets {
                     Expanded(
                         child: Widgets.customShadowBox(
                       Text(
-                        ' - portfolio websites\n - cafe website\n - ecommerce\n - warehouse/inventory management',
+                        ' - portfolio websites\n - cafe website\n - e-commerce\n - warehouse/inventory management',
                         softWrap: true,
                         maxLines: 8,
                       ),
@@ -1002,24 +1042,35 @@ class Widgets {
               child: Row(
                 children: [
                   Expanded(
-                    child: GridView(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.all(10),
-                      keyboardDismissBehavior:
-                          ScrollViewKeyboardDismissBehavior.onDrag,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: (isDesktop) ? 4 : 2),
-                      children: [
-                        for (var project in mainController.projects)
-                          Widgets.projectCard(
-                              '${project.label}',
-                              project.image,
-                              project.devLang.value == 'vue'
-                                  ? Colors.green
-                                  : project.devLang.value == 'react'
-                                      ? Color.fromARGB(255, 3, 117, 248)
-                                      : Color.fromARGB(255, 9, 74, 187))
-                      ],
+                    child: Obx(
+                      () => AnimatedSwitcher(
+                        duration: Duration(milliseconds: 500),
+                        child: (mainController.projectDetails.value)
+                            ? projectDetailSection(mainController, isDesktop)
+                            : GridView(
+                                shrinkWrap: true,
+                                padding: EdgeInsets.all(10),
+                                keyboardDismissBehavior:
+                                    ScrollViewKeyboardDismissBehavior.onDrag,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: (isDesktop) ? 6 : 2),
+                                children: [
+                                  for (ProjectCard project
+                                      in mainController.projects)
+                                    Widgets.projectCard(
+                                        mainController,
+                                        project,
+                                        project.devLang.value == 'vue'
+                                            ? Colors.green
+                                            : project.devLang.value == 'react'
+                                                ? Color.fromARGB(
+                                                    255, 3, 117, 248)
+                                                : Color.fromARGB(
+                                                    255, 9, 74, 187))
+                                ],
+                              ),
+                      ),
                     ),
                   )
                 ],
@@ -1027,6 +1078,79 @@ class Widgets {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  static Padding projectDetailSection(
+      MainController mainController, bool isDesktop) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: customShadowBox(
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      mainController.projectDetails.value =
+                          !mainController.projectDetails.value;
+                    },
+                    child: Icon(Icons.arrow_back_ios)),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      mainController.selectedProject.label.value,
+                      style: AppThemeData.appThemeData.textTheme.displayLarge,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    mainController.selectedProject.details.value,
+                    softWrap: true,
+                    maxLines: 8,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text('developed using:'),
+                ),
+                Expanded(
+                    flex: (isDesktop) ? 3 : 1,
+                    child: Text(mainController.selectedProject.devLang.value))
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text('platforms:'),
+                ),
+                Expanded(
+                    flex: (isDesktop) ? 3 : 1,
+                    child: Text(
+                        mainController.selectedProject.platform.toString()))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
