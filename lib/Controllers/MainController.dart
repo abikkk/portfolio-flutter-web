@@ -27,6 +27,7 @@ class MainController extends GetxController {
   final PageController socialsController = PageController(
     initialPage: 0,
   );
+  
   RxDouble showScrollBtn = 0.3.obs,
       scrollIndex = 0.0.obs,
       cursorX = 0.0.obs,

@@ -81,6 +81,7 @@ class _HomeContainerState extends State<HomeContainer> {
                               DeviceScreenType.mobile
                           ? false
                           : true,
+                      // pageSnapping: false,
                       allowImplicitScrolling:
                           sizingInformation.deviceScreenType ==
                                   DeviceScreenType.desktop

@@ -10,6 +10,7 @@ import 'AppThemeData.dart';
 import 'Constants.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
+// functions
 class Functions {
   // web page launcher
   static openLink(type) async {
@@ -159,6 +160,7 @@ class Functions {
   }
 }
 
+// screens
 class Screens {
   static Widget HomeContainer(
       {required BuildContext context,
@@ -274,6 +276,7 @@ class Screens {
             Expanded(
               flex: 3,
               child: PageView(
+                pageSnapping: isDesktop ? false : true,
                 allowImplicitScrolling: true,
                 scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
                 children: [
@@ -360,7 +363,7 @@ class Screens {
     return Stack(
       children: [
         PageView(
-            pageSnapping: true,
+            // pageSnapping: isDesktop ? false : true,
             allowImplicitScrolling: true,
             scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
             controller: mainController.gamingController,
@@ -380,6 +383,7 @@ class Screens {
                     Expanded(
                       flex: 3,
                       child: PageView(
+                        pageSnapping: isDesktop ? false : true,
                         allowImplicitScrolling: true,
                         scrollDirection:
                             (isDesktop) ? Axis.vertical : Axis.horizontal,
