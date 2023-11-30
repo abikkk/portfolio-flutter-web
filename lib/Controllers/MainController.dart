@@ -27,7 +27,7 @@ class MainController extends GetxController {
   final PageController socialsController = PageController(
     initialPage: 0,
   );
-  
+
   RxDouble showScrollBtn = 0.3.obs,
       scrollIndex = 0.0.obs,
       cursorX = 0.0.obs,
@@ -70,8 +70,8 @@ class MainController extends GetxController {
         CONSTANTS.buttonVue: CONSTANTS.vueProjects
       },
       usageFlutter = {
-        CONSTANTS.vsCode: 55,
-        CONSTANTS.androidStudio: 45,
+        CONSTANTS.vsCode: 30,
+        CONSTANTS.androidStudio: 70,
       },
       usageReact = {
         CONSTANTS.vsCode: 100,
@@ -100,6 +100,32 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
+        image: Image.asset(AppImages.hah),
+        label: 'My Hotel and Home'.obs,
+        details:
+            'home/apartment/flat/rooms/hotel rental application currently operational in Nepal.'
+                .obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagPlayStore,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.wholisticminds),
+        label: 'Wholistic Minds'.obs,
+        details: 'medical app currently operational in USA.'.obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagAppStore,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
         image: Image.asset(AppImages.pfd),
         label: 'Pokhara Food Delivery App'.obs,
         details:
@@ -114,7 +140,7 @@ class MainController extends GetxController {
         image: Image.asset(AppImages.ilg),
         label: 'ILG Order Booking App'.obs,
         details:
-            'inventory management and stock order application designed by EBT LLC, Dubai for their clients.'
+            'updated version of ILG Vansales App (Mobile Sales) with then latest dart version (3.0.7), with modified features.'
                 .obs,
         devLang: 'flutter'.obs,
         platform: ['android', 'iOS'].obs,
@@ -128,7 +154,7 @@ class MainController extends GetxController {
         image: Image.asset(AppImages.vansales),
         label: 'ILG Vansales App (Mobile Sales)'.obs,
         details:
-            'updated version of ILG Order Booking App with then latest dart version (3.0.7), with modified features.'
+            'inventory management and stock order application designed by EBT LLC, Dubai for their clients.'
                 .obs,
         devLang: 'flutter'.obs,
         platform: ['android', 'iOS'].obs,

@@ -5,7 +5,7 @@ class ProjectCard extends GetxController {
   RxBool showDetails = false.obs;
   Image image;
   RxString link = ''.obs, label = ''.obs, details = ''.obs, devLang = ''.obs;
-  RxList tags = [].obs,platform=[].obs;
+  RxList tags = [].obs, platform = [].obs;
 
   ProjectCard(
       {required this.showDetails,
@@ -13,6 +13,7 @@ class ProjectCard extends GetxController {
       required this.label,
       required this.link,
       required this.devLang,
-      required this.details,required this.platform,
+      required this.details,
+      required this.platform,
       required this.tags});
 }

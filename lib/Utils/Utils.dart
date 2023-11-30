@@ -804,7 +804,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i having working as a flutter developer professionally for almost 3 years now.\ni have experiences with REST and SOAP APIs along with XML language and JSON parsin',
+                      'i have been working as a flutter developer professionally for 3+ years now.\ni have experiences with REST and SOAP APIs along with XML language and JSON parsing. i can work with Provider, GetX and Riverpod 2.0 as state management for my application development.',
                       softWrap: true,
                       maxLines: 4,
                     ),
@@ -892,7 +892,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n * notable example of local project would be "Pokhara Food Delivery", which is available on Google Play Store.',
+                      'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n* notable example of local project would be Pokhara Food Delivery and My Hotel and Home which are available on Google Play Store.\n* and Wholistic Minds which is available in Apple App Store.',
                       maxLines: 8,
                       softWrap: true,
                     ),

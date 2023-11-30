@@ -5,6 +5,8 @@ class CONSTANTS {
   static const projectTagWorkingOn = 'Working On';
   static const projectTagDropped = 'Dropped';
   static const projectTagLaunched = 'Launched';
+  static const projectTagAppStore = 'App Store';
+  static const projectTagPlayStore = 'Play Store';
 
   // app theme
   static const appFont = 'MAIN_APP_FONT';
@@ -15,13 +17,13 @@ class CONSTANTS {
   static const buttonFlutter = 'flutter';
   static const buttonReact = 'react';
   static const buttonVue = 'vue';
-  static const flutterProjects = 22.0;
+  static const flutterProjects = 26.0;
   static const reactProjects = 6.0;
   static const vueProjects = 3.0;
   static const vsCode = 'vs_code';
   static const androidStudio = 'android_studio';
-  static const vscodePoints = 65.0;
-  static const androidStudioPoints = 35.0;
+  static const vscodePoints = 40.0;
+  static const androidStudioPoints = 60.0;
 
   // gaming
   static const buttonValorant = 'val';

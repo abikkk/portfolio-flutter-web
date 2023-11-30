@@ -6,10 +6,12 @@ class AppImages {
 
 // projects
   static const String own = projectsPath + 'original_grey_bg.png';
+  static const String weather_app = projectsPath + 'weather_app.png';
+  static const String hah = projectsPath + 'hah_logo.png';
+  static const String wholisticminds = projectsPath + 'wholisticminds_logo.png';
+  static const String pfd = projectsPath + 'pfd_logo.png';
   static const String northern_trails =
       projectsPath + 'northern_trails_logo.png';
-  static const String weather_app = projectsPath + 'weather_app.png';
-  static const String pfd = projectsPath + 'pfd_logo.png';
   static const String ilg = projectsPath + 'ilg_logo.png';
   static const String hypercity = projectsPath + 'hypercity_logo.jpeg';
   static const String electronica = projectsPath + 'electronica_logo.jpeg';
