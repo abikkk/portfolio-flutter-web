@@ -892,7 +892,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i have been working as a senior flutter developer for the past 2 years in a private software solution company in Pokhara, involved in 15+ projects for our clients in Dubai and local projects as well.\n* notable example of local project would be Pokhara Food Delivery and My Hotel and Home which are available on Google Play Store.\n* and Wholistic Minds which is available in Apple App Store.',
+                      'i am currently working as a senior flutter developer for the past year in a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on\n> My Hotel and Home which is available on Google Play Store\n> Wholistic Minds which is available on Apple App Store\n> Pokhara Food Delivery which is availabe both on Google Play Store as well as Apple App Store.',
                       maxLines: 8,
                       softWrap: true,
                     ),
