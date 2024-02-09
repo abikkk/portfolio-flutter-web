@@ -86,7 +86,7 @@ class MainController extends GetxController {
   RxList<ProjectCard> projects = [
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.own),
+        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
         label: 'portfolio'.obs,
         details:
             'this is my portfolio website developed using flutter web. it contains information about my skillset and what i am available for.'
@@ -107,6 +107,20 @@ class MainController extends GetxController {
                 .obs,
         devLang: 'flutter'.obs,
         platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagPlayStore,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
+        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        label: 'Fullmoon Mobile App'.obs,
+        details:
+            'construction management application currently operational in Nepal.'
+                .obs,
+        devLang: 'flutter'.obs,
+        platform: ['android'].obs,
         link: 'github'.obs,
         tags: [
           CONSTANTS.projectTagCompleted,
@@ -177,34 +191,34 @@ class MainController extends GetxController {
           CONSTANTS.projectTagCompleted,
           CONSTANTS.projectTagLaunched,
         ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.electronica),
-        label: 'EBT Delivery App'.obs,
-        details:
-            'delivery service application with staff management features for clients of EBT LLC, Dubai.'
-                .obs,
-        devLang: 'flutter'.obs,
-        platform: ['android', 'iOS'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagCompleted,
-          CONSTANTS.projectTagLaunched,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.fasttrack),
-        label: 'EBT Fasttrack App'.obs,
-        details:
-            'garage application with mechanic support and vehicle support features for clients for EBT LLC, Dubai.'
-                .obs,
-        devLang: 'flutter'.obs,
-        platform: ['android', 'iOS'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagCompleted,
-          CONSTANTS.projectTagLaunched,
-        ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.electronica),
+    //     label: 'EBT Delivery App'.obs,
+    //     details:
+    //         'delivery service application with staff management features for clients of EBT LLC, Dubai.'
+    //             .obs,
+    //     devLang: 'flutter'.obs,
+    //     platform: ['android', 'iOS'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagCompleted,
+    //       CONSTANTS.projectTagLaunched,
+    //     ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.fasttrack),
+    //     label: 'EBT Fasttrack App'.obs,
+    //     details:
+    //         'garage application with mechanic support and vehicle support features for clients for EBT LLC, Dubai.'
+    //             .obs,
+    //     devLang: 'flutter'.obs,
+    //     platform: ['android', 'iOS'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagCompleted,
+    //       CONSTANTS.projectTagLaunched,
+    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.tim_hortons),
@@ -219,37 +233,37 @@ class MainController extends GetxController {
           CONSTANTS.projectTagCompleted,
           CONSTANTS.projectTagLaunched,
         ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.hypercity),
+    //     label: 'HyperCity MPOS'.obs,
+    //     details:
+    //         'mobile POS application for HyperCity client of EBT LLC, Dubai.'
+    //             .obs,
+    //     devLang: 'flutter'.obs,
+    //     platform: ['android', 'iOS'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagCompleted,
+    //       CONSTANTS.projectTagLaunched,
+    //     ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.northern_trails),
+    //     label: 'northern trails cafe app'.obs,
+    //     details:
+    //         'a simple cafe menu app for a cafe located in khahare, lakeside.'
+    //             .obs,
+    //     devLang: 'flutter'.obs,
+    //     platform: ['android', 'iOS'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagWorkingOn,
+    //       CONSTANTS.projectTagUnder,
+    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.hypercity),
-        label: 'HyperCity MPOS'.obs,
-        details:
-            'mobile POS application for HyperCity client of EBT LLC, Dubai.'
-                .obs,
-        devLang: 'flutter'.obs,
-        platform: ['android', 'iOS'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagCompleted,
-          CONSTANTS.projectTagLaunched,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.northern_trails),
-        label: 'northern trails cafe app'.obs,
-        details:
-            'a simple cafe menu app for a cafe located in khahare, lakeside.'
-                .obs,
-        devLang: 'flutter'.obs,
-        platform: ['android', 'iOS'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagWorkingOn,
-          CONSTANTS.projectTagUnder,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.own),
+        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
         label: 'weather app'.obs,
         details: 'a simple weather application.'.obs,
         devLang: 'flutter'.obs,
@@ -259,22 +273,22 @@ class MainController extends GetxController {
           CONSTANTS.projectTagWorkingOn,
           CONSTANTS.projectTagUnder,
         ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.own),
+    //     label: 'aayush man gubaju - portfolio'.obs,
+    //     details:
+    //         'portfolio web application for a graphic designer, Mr. Aayush Man Gubaju.'
+    //             .obs,
+    //     devLang: 'flutter web'.obs,
+    //     platform: ['web'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagUnder,
+    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.own),
-        label: 'aayush man gubaju - portfolio'.obs,
-        details:
-            'portfolio web application for a graphic designer, Mr. Aayush Man Gubaju.'
-                .obs,
-        devLang: 'flutter web'.obs,
-        platform: ['web'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagUnder,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.own),
+        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
         label: 'passenger life'.obs,
         details:
             'portfolio/blog web application for ui/ux designer, Ms. Aayushi Shrestha.'
@@ -287,7 +301,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.own),
+        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
         label: 'ghar jagga'.obs,
         details: 'real estate application for Pokhara, Nepal.'.obs,
         devLang: 'flutter'.obs,
@@ -297,23 +311,23 @@ class MainController extends GetxController {
           CONSTANTS.projectTagWorkingOn,
           CONSTANTS.projectTagUnder,
         ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.own),
+    //     label: 'nepanime'.obs,
+    //     details:
+    //         'e-commerce mobile app for anime accessories in Pokhara, Nepal.'
+    //             .obs,
+    //     devLang: 'flutter'.obs,
+    //     platform: ['android', 'iOS'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagWorkingOn,
+    //       CONSTANTS.projectTagUnder,
+    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.own),
-        label: 'nepanime'.obs,
-        details:
-            'e-commerce mobile app for anime accessories in Pokhara, Nepal.'
-                .obs,
-        devLang: 'flutter'.obs,
-        platform: ['android', 'iOS'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagWorkingOn,
-          CONSTANTS.projectTagUnder,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.own),
+        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
         label: 'toda mart'.obs,
         details: 'profile website for Toda Mart, Pokhara'.obs,
         devLang: 'react'.obs,
@@ -322,47 +336,47 @@ class MainController extends GetxController {
         tags: [
           CONSTANTS.projectTagUnder,
         ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.own),
-        label: 'hotel northern trails'.obs,
-        details:
-            'profile web site for Hotel Northern Trails located in Khahare, Lakeside, Pokhara.'
-                .obs,
-        devLang: 'react'.obs,
-        platform: ['web'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagUnder,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.own),
-        label: 'employee attendance system'.obs,
-        details:
-            'attendance system for employees for a company, developed as a intern project for Utsaha Advert, Pokhara.'
-                .obs,
-        devLang: 'vue'.obs,
-        platform: ['web'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagCompleted,
-          CONSTANTS.projectTagDropped,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.own),
-        label: 'inventory management system '.obs,
-        details:
-            'stock/inventory management system for a company, developed as a intern project for Utsaha Advert, Pokhara.'
-                .obs,
-        devLang: 'vue'.obs,
-        platform: ['web'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagCompleted,
-          CONSTANTS.projectTagDropped,
-        ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.own),
+    //     label: 'hotel northern trails'.obs,
+    //     details:
+    //         'profile web site for Hotel Northern Trails located in Khahare, Lakeside, Pokhara.'
+    //             .obs,
+    //     devLang: 'react'.obs,
+    //     platform: ['web'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagUnder,
+    //     ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.own),
+    //     label: 'employee attendance system'.obs,
+    //     details:
+    //         'attendance system for employees for a company, developed as a intern project for Utsaha Advert, Pokhara.'
+    //             .obs,
+    //     devLang: 'vue'.obs,
+    //     platform: ['web'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagCompleted,
+    //       CONSTANTS.projectTagDropped,
+    //     ].obs),
+    // ProjectCard(
+    //     showDetails: false.obs,
+    //     image: Image.asset(AppImages.own),
+    //     label: 'inventory management system '.obs,
+    //     details:
+    //         'stock/inventory management system for a company, developed as a intern project for Utsaha Advert, Pokhara.'
+    //             .obs,
+    //     devLang: 'vue'.obs,
+    //     platform: ['web'].obs,
+    //     link: 'github'.obs,
+    //     tags: [
+    //       CONSTANTS.projectTagCompleted,
+    //       CONSTANTS.projectTagDropped,
+    //     ].obs),
   ].obs;
 
   // gradient colors list

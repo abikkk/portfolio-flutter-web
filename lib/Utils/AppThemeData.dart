@@ -25,19 +25,19 @@ class AppThemeData {
         fontSize: 20,
         color: Colors.black87,
         height: 2,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
       labelMedium: TextStyle(
         fontSize: 18,
         color: Colors.black87,
         height: 2,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
       labelLarge: TextStyle(
         fontSize: 20,
         color: Colors.black87,
         height: 2,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
 
       // titles
@@ -60,19 +60,19 @@ class AppThemeData {
         fontSize: 20,
         color: Colors.black87,
         height: 1.2,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
       titleMedium: TextStyle(
         fontSize: 25,
         color: Colors.black87,
         height: 1.2,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
       titleLarge: TextStyle(
         fontSize: 230,
         color: Colors.black87,
         height: 1.2,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
 
       // large texts

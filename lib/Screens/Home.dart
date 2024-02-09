@@ -18,17 +18,14 @@ class _HomeContainerState extends State<HomeContainer> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    Functions.precacheImages(mainController, context);
+    Functions.precacheImages(mainController, context); // pre-load images
   }
 
 // fetches mouse pointer location
   void _updateLocation(PointerEvent details) {
-    // setState(() {
     mainController.cursorX.value = details.position.dx;
     mainController.cursorY.value = details.position.dy;
-    // });
   }
 
   @override

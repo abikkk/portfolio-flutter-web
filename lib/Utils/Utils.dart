@@ -665,47 +665,52 @@ class Widgets {
     );
   }
 
-  static Card projectCard(
+  static Container projectCard(
       MainController mainController, ProjectCard project, Color iconColor) {
-    return Card(
-      elevation: 8,
-      child: GestureDetector(
-        onTap: () {
-          mainController.projectDetails.value =
-              !mainController.projectDetails.value;
-          mainController.selectedProject = project;
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                child: Image(
-                  // height: 100,
-                  width: 100,
-                  image: project.image.image,
-                  fit: BoxFit.contain,
+    return Container(
+      margin: EdgeInsets.all(5),
+      child: Card(
+        color: Colors.grey.shade100,
+        elevation: 5,
+        child: GestureDetector(
+          onTap: () {
+            mainController.projectDetails.value =
+                !mainController.projectDetails.value;
+            mainController.selectedProject = project;
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 10.0),
+                  child: Image(
+                    // height: 100,
+                    width: 100,
+                    image: project.image.image,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Text(
-                    '${project.label}',
-                    style: AppThemeData.appThemeData.textTheme.bodySmall!
-                        .copyWith(height: 1),
-                    textAlign: TextAlign.start,
-                    softWrap: true,
-                  )),
-                  bulletineIcon(true, iconColor: iconColor)
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                      '${project.label}',
+                      style: AppThemeData.appThemeData.textTheme.bodySmall!
+                          .copyWith(height: 1),
+                      textAlign: TextAlign.start,
+                      softWrap: true,
+                    )),
+                    bulletineIcon(true, iconColor: iconColor)
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -742,24 +747,26 @@ class Widgets {
             break;
         }
       },
-      child: Obx(
-        () => AnimatedDefaultTextStyle(
-          duration: Duration(milliseconds: 200),
-          style: !((id == 0)
-                  ? mainController.subtitle_1.value
-                  : (id == 1)
-                      ? mainController.subtitle_2.value
-                      : mainController.subtitle_3.value)
-              ? AppThemeData.appThemeData.textTheme.displaySmall!
-              : AppThemeData.appThemeData.textTheme.titleSmall!,
-          child: InkWell(
-            hoverColor: Colors.transparent,
-            onTap: () {
-              Functions.navigate(
-                  id + 2, mainController.pageController, mainController);
-            },
-            child: Text(
-              '${label}',
+      child: Center(
+        child: Obx(
+          () => AnimatedDefaultTextStyle(
+            duration: Duration(milliseconds: 200),
+            style: !((id == 0)
+                    ? mainController.subtitle_1.value
+                    : (id == 1)
+                        ? mainController.subtitle_2.value
+                        : mainController.subtitle_3.value)
+                ? AppThemeData.appThemeData.textTheme.displaySmall!
+                : AppThemeData.appThemeData.textTheme.titleSmall!,
+            child: GestureDetector(
+              // hoverColor: Colors.transparent,
+              onTap: () {
+                Functions.navigate(
+                    id + 2, mainController.pageController, mainController);
+              },
+              child: Text(
+                '${label}',
+              ),
             ),
           ),
         ),
