@@ -7,7 +7,6 @@ import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'AppThemeData.dart';
-import 'Constants.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 // functions
@@ -102,6 +101,19 @@ class Functions {
             throw 'Could not launch GitHub Link!';
           break;
         }
+      case 'gitlab':
+        {
+          if (!await launchUrl(Uri.parse('https://gitlab.com/abikkk')))
+            throw 'Could not launch GitLab Link!';
+          break;
+        }
+      case 'upwork':
+        {
+          if (!await launchUrl(Uri.parse(
+              'https://www.upwork.com/freelancers/~016121bb01f7cc716a?mp_source=share')))
+            throw 'Could not launch UpWork Link!';
+          break;
+        }
       default:
         {
           throw '${type}';
@@ -118,7 +130,7 @@ class Functions {
   }
 
 // get images references
-  getImageReferences() {}
+  // getImageReferences() {}
 
   // precache images
   static precacheImages(MainController mainController, BuildContext context) {
@@ -167,82 +179,61 @@ class Screens {
       required MainController mainController,
       required bool isDesktop}) {
     return (isDesktop)
-        ? Stack(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+        ? Widgets.customShadowBox(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 44.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SimpleShadow(
-                    sigma: 12,
-                    opacity: 0.6,
-                    offset: Offset(-12, 10),
-                    child: Image(
-                      image: AssetImage('assets/images/profile_shot.png'),
-                      height: MediaQuery.of(context).size.height,
-                      fit: BoxFit.cover,
+                  Text(
+                    'hi there!',
+                    style: AppThemeData.appThemeData.textTheme.headlineSmall,
+                  ),
+                  Text(
+                    'abik vaidhya',
+                    style: AppThemeData.appThemeData.textTheme.headlineLarge,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Widgets.subtitleTexts(
+                            mainController: mainController,
+                            label: 'about me',
+                            id: 0,
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Widgets.subtitleTexts(
+                              mainController: mainController,
+                              label: 'connect with me',
+                              id: 3,
+                            ),
+                          ),
+                        ),
+                        // Expanded(
+                        //   flex: 2,
+                        //   child: Align(
+                        //     alignment: Alignment.centerRight,
+                        //     child: Widgets.subtitleTexts(
+                        //       mainController: mainController,
+                        //       label: 'musician',
+                        //       id: 2,
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              Widgets.customShadowBox(
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 44.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'hi there!',
-                        style:
-                            AppThemeData.appThemeData.textTheme.headlineSmall,
-                      ),
-                      Text(
-                        'abik vaidhya',
-                        style:
-                            AppThemeData.appThemeData.textTheme.headlineLarge,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 10,
-                        width: MediaQuery.of(context).size.width / 3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Widgets.subtitleTexts(
-                                mainController: mainController,
-                                label: 'frontend developer',
-                                id: 0,
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: Widgets.subtitleTexts(
-                                  mainController: mainController,
-                                  label: 'gamer',
-                                  id: 1,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Widgets.subtitleTexts(
-                                  mainController: mainController,
-                                  label: 'musician',
-                                  id: 2,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           )
         : Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -271,10 +262,10 @@ class Screens {
       required bool isDesktop}) {
     return Stack(
       children: [
-        Row(
+        Column(
           children: [
             Expanded(
-              flex: 3,
+              // flex: 3,
               child: PageView(
                 pageSnapping: isDesktop ? false : true,
                 allowImplicitScrolling: true,
@@ -326,17 +317,6 @@ class Screens {
                 },
               ),
             ),
-            if (isDesktop)
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Widgets.codingMorphButtons(context, mainController, 0),
-                    Widgets.codingMorphButtons(context, mainController, 1),
-                    Widgets.codingMorphButtons(context, mainController, 2),
-                  ],
-                ),
-              ),
           ],
         ),
 
@@ -439,31 +419,31 @@ class Screens {
                 ),
               ),
 
-              if (isDesktop)
-                // games
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Widgets.gamingMorphButtons(context, mainController, 0),
-                      Widgets.gamingMorphButtons(context, mainController, 1),
-                      Widgets.gamingMorphButtons(context, mainController, 2),
-                    ],
-                  ),
-                ),
+              // if (isDesktop)
+              //   // games
+              //   SizedBox(
+              //     height: MediaQuery.of(context).size.height,
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Widgets.gamingMorphButtons(context, mainController, 0),
+              //         Widgets.gamingMorphButtons(context, mainController, 1),
+              //         Widgets.gamingMorphButtons(context, mainController, 2),
+              //       ],
+              //     ),
+              //   ),
             ]),
-        if (isDesktop)
-          Positioned(
-            left: 30,
-            bottom: 30,
-            child: Obx(
-              () => Widgets.desktopScrollButton(
-                  mainController,
-                  mainController.gamingController,
-                  mainController.isGameScrollDown),
-            ),
-          ),
+        // if (isDesktop)
+        //   Positioned(
+        //     left: 30,
+        //     bottom: 30,
+        //     child: Obx(
+        //       () => Widgets.desktopScrollButton(
+        //           mainController,
+        //           mainController.gamingController,
+        //           mainController.isGameScrollDown),
+        //     ),
+        //   ),
       ],
     );
   }
@@ -589,19 +569,19 @@ class Widgets {
     );
   }
 
-  static Future defaultBottomSheet(String label) {
-    return Get.bottomSheet(
-      Container(
-          color: Colors.greenAccent,
-          child: Wrap(
-            children: [
-              Text('Hii 1', textScaleFactor: 2),
-            ],
-          )),
-      barrierColor: Colors.red[50],
-      isDismissible: true,
-    );
-  }
+  // static Future defaultBottomSheet(String label) {
+  //   return Get.bottomSheet(
+  //     Container(
+  //         color: Colors.greenAccent,
+  //         child: Wrap(
+  //           children: [
+  //             Text('Hii 1', textScaleFactor: 2),
+  //           ],
+  //         )),
+  //     barrierColor: Colors.red[50],
+  //     isDismissible: true,
+  //   );
+  // }
 
   static Widget scrollButton(MainController mainController) {
     return Obx(
@@ -726,12 +706,12 @@ class Widgets {
           case 0:
             mainController.subtitle_1.value = true;
             break;
-          case 1:
+          case 3:
             mainController.subtitle_2.value = true;
             break;
-          case 2:
-            mainController.subtitle_3.value = true;
-            break;
+          // case 2:
+          //   mainController.subtitle_3.value = true;
+          //   break;
         }
       },
       onExit: (v) {
@@ -739,23 +719,23 @@ class Widgets {
           case 0:
             mainController.subtitle_1.value = false;
             break;
-          case 1:
+          case 3:
             mainController.subtitle_2.value = false;
             break;
-          case 2:
-            mainController.subtitle_3.value = false;
-            break;
+          // case 2:
+          //   mainController.subtitle_3.value = false;
+          //   break;
         }
       },
       child: Center(
         child: Obx(
           () => AnimatedDefaultTextStyle(
-            duration: Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 111),
             style: !((id == 0)
                     ? mainController.subtitle_1.value
-                    : (id == 1)
-                        ? mainController.subtitle_2.value
-                        : mainController.subtitle_3.value)
+                    // : (id == 1)
+                    //     ? mainController.subtitle_2.value
+                    : mainController.subtitle_2.value)
                 ? AppThemeData.appThemeData.textTheme.displaySmall!
                 : AppThemeData.appThemeData.textTheme.titleSmall!,
             child: GestureDetector(
@@ -794,82 +774,70 @@ class Widgets {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Widgets.customShadowBox(
-                Text(
-                  'portfolio',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      'i have been working as a flutter developer professionally for 3+ years now.\ni have experiences with REST and SOAP APIs along with XML language and JSON parsing. i can work with Provider, GetX and Riverpod 2.0 as state management for my application development.',
-                      softWrap: true,
-                      maxLines: 4,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      'my knowledge base on these languages and development environments (IDE) i use can be divided as follows:',
-                      softWrap: true,
-                      maxLines: 4,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
           Expanded(
-            child: Flex(
-              direction: isDesktop ? Axis.horizontal : Axis.vertical,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
-                  flex: isDesktop ? 2 : 3,
-                  child: Widgets.pieChart(
-                      mainController,
-                      context,
-                      mainController.projectMap,
-                      'projects',
-                      mainController.skillsGradientList,
-                      isGradient: true,
-                      isDesktop: false),
+                Row(
+                  children: [
+                    Widgets.customShadowBox(
+                      Text(
+                        'portfolio',
+                        style:
+                            AppThemeData.appThemeData.textTheme.headlineMedium,
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  flex: isDesktop ? 3 : 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Row(
                     children: [
-                      Widgets.codingProgressRow(mainController, 'vs code', 0,
-                          mainController.vsValue.value,
-                          isDesktop: false),
-                      Widgets.codingProgressRow(mainController,
-                          'android studio', 1, mainController.asValue.value,
-                          isDesktop: false),
+                      Expanded(
+                        child: Widgets.customShadowBox(
+                          Text(
+                            'i have been working as a flutter developer professionally for 3+ years now.\ni have experiences with frontend web development using React.js and Vue.js as well.\nother professional skillsets that i posses are as follows:\nstatemanagements, GitHub/GitLab, JS, NPM, Figma',
+                            softWrap: true,
+                            maxLines: 4,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
+          if (isDesktop)
+            Expanded(
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Widgets.codingMorphButtons(context, mainController, 0),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Widgets.codingMorphButtons(context, mainController, 1),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Widgets.codingMorphButtons(context, mainController, 2),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Widgets.codingMorphButtons(context, mainController, 3),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Widgets.codingMorphButtons(context, mainController, 4),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Widgets.codingMorphButtons(context, mainController, 5),
+                ],
+              ),
+            ),
         ],
       ),
     );
@@ -899,27 +867,12 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i am currently working as a senior flutter developer for the past year in a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on\n> My Hotel and Home which is available on Google Play Store\n> Wholistic Minds which is available on Apple App Store\n> Pokhara Food Delivery which is availabe both on Google Play Store as well as Apple App Store.',
+                      'i am currently working as a senior flutter developer for a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on\n> Wholistic Minds which is available on Apple App Store as well as Google Play Store\n> My Hotel and Home which is available on Google Play Store\n> Pokhara Food Delivery which is availabe both on Google Play Store.',
                       maxLines: 8,
                       softWrap: true,
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Widgets.codingProgressRow(mainController, 'vs code', 0,
-                    mainController.usageFlutter[CONSTANTS.vsCode]!,
-                    isDesktop: false),
-                Widgets.codingProgressRow(mainController, 'android studio', 1,
-                    mainController.usageFlutter[CONSTANTS.androidStudio]!,
-                    isDesktop: false),
               ],
             ),
           ),
@@ -977,11 +930,6 @@ class Widgets {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
-            child: Widgets.codingProgressRow(mainController, 'vs code', 0,
-                mainController.usageReact[CONSTANTS.vsCode]!),
-          ),
         ],
       ),
     );
@@ -1019,11 +967,6 @@ class Widgets {
                 ),
               ],
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: (isDesktop) ? 40.0 : 10),
-            child: Widgets.codingProgressRow(mainController, 'vs code', 0,
-                mainController.usageVue[CONSTANTS.vsCode]!),
           ),
         ],
       ),
@@ -1301,15 +1244,17 @@ class Widgets {
       BuildContext context, MainController mainController, int buttonType) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(10.0),
         child: MouseRegion(
           onEnter: (a) {
+            // debugPrint(mainController.codingMorphButtons.length.toString());
             mainController.codingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .14;
             mainController.codingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
+            // debugPrint(buttonType.toString());
             mainController.codingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .12;
             mainController.codingMorphButtons[buttonType].showDetails.value =
@@ -1317,23 +1262,26 @@ class Widgets {
           },
           child: InkWell(
             onTap: () async {
-              mainController.codingMorphButtons[buttonType].isClicked.value =
-                  !mainController
-                      .codingMorphButtons[buttonType].isClicked.value;
-
-              mainController.codingController.animateToPage((buttonType + 1),
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut);
-
-              // delay
-              Future.delayed(const Duration(milliseconds: 150), () {
+              if (buttonType < 3) {
                 mainController.codingMorphButtons[buttonType].isClicked.value =
                     !mainController
                         .codingMorphButtons[buttonType].isClicked.value;
 
-                // mainController
-                //     .codingMorphButtons[buttonType].showDetails.value = true;
-              });
+                mainController.codingController.animateToPage((buttonType + 1),
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.easeInOut);
+
+                // delay
+                Future.delayed(const Duration(milliseconds: 150), () {
+                  mainController
+                          .codingMorphButtons[buttonType].isClicked.value =
+                      !mainController
+                          .codingMorphButtons[buttonType].isClicked.value;
+                });
+              } else {
+                Functions.openLink(
+                    mainController.codingMorphButtons[buttonType].link.value);
+              }
             },
             child: Wrap(
               children: [
@@ -1814,8 +1762,8 @@ class Widgets {
       },
       child: Obx(
         () => AnimatedContainer(
-          duration: Duration(milliseconds: 200),
-          padding: EdgeInsets.all(14),
+          duration: Duration(milliseconds: 111),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               gradient: ((id == 0)
                       ? mainController.ytHover.value

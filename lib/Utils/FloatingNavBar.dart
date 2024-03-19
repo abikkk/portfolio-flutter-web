@@ -15,8 +15,9 @@ class FloatingNavBarDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
+      () => AnimatedContainer(
         height: MediaQuery.of(context).size.height,
+        duration: Duration(milliseconds: 111),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -129,7 +130,7 @@ class FloatingNavBar extends StatelessWidget {
     return Obx(
       () => FlashyTabBar(
         selectedIndex: mainController.navIndex.value,
-        animationDuration: Duration(milliseconds: 200),
+        animationDuration: Duration(milliseconds: 111),
         showElevation: true,
         onItemSelected: (index) {
           mainController.navIndex.value = index;
@@ -159,7 +160,6 @@ class FloatingNavBarIcons extends StatelessWidget {
   final int hoverID;
   final IconData iconData;
   final MainController mainController;
-  // final bool isDesktop;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class FloatingNavBarIcons extends StatelessWidget {
       () => AnimatedPadding(
         padding: EdgeInsets.symmetric(
             horizontal: (mainController.navHovered.value == 1) ? 15 : 0.0),
-        duration: const Duration(milliseconds: 111),
+        duration: Duration(milliseconds: 111),
         child: MouseRegion(
           onEnter: (a) {
             mainController.navIconID.value = hoverID;
@@ -178,7 +178,7 @@ class FloatingNavBarIcons extends StatelessWidget {
           child: AnimatedSwitcher(
               switchInCurve: Curves.bounceInOut,
               switchOutCurve: Curves.bounceInOut,
-              duration: const Duration(milliseconds: 222),
+              duration: const Duration(milliseconds: 111),
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return ScaleTransition(scale: animation, child: child);
               },

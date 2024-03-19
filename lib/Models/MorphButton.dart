@@ -7,7 +7,6 @@ class MorphButton extends GetxController {
   RxDouble scale = 0.0.obs, pad = 50.0.obs;
   Image image, image_hovered;
   RxString link = ''.obs;
-  // RxString image = ''.obs, link = ''.obs, image_hovered = ''.obs;
 
   MorphButton(
       {required this.isClicked,

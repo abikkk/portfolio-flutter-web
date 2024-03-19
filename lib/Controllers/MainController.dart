@@ -32,6 +32,9 @@ class MainController extends GetxController {
       scrollIndex = 0.0.obs,
       cursorX = 0.0.obs,
       cursorY = 0.0.obs;
+  // RxInt durationLong = 444.obs,
+  //     durationShort = 111.obs,
+  //     durationMedium = 222.obs;
   RxBool isCodeScrollDown = true.obs,
       isGameScrollDown = true.obs,
       projectDetails = false.obs;
@@ -448,6 +451,18 @@ class MainController extends GetxController {
         [
           Color.fromRGBO(14, 180, 116, 1),
           Color.fromRGBO(124, 238, 143, 1),
+        ],
+        [
+          Color.fromRGBO(197, 197, 197, 1),
+          Color.fromRGBO(180, 180, 180, 1),
+        ],
+        [
+          Color.fromRGBO(235, 94, 29, 1),
+          Color.fromRGBO(224, 118, 85, 1),
+        ],        
+        [
+          Color.fromRGBO(109, 235, 84, 1),
+          Color.fromRGBO(58, 204, 14, 1),
         ]
       ],
       ideGradientList = <List<Color>>[
@@ -471,7 +486,7 @@ class MainController extends GetxController {
             image_hovered: Image.asset(AppImages.flutter_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
-            link: 'github'.obs),
+            link: 'flutter'.obs),
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
@@ -480,7 +495,7 @@ class MainController extends GetxController {
             image_hovered: Image.asset(AppImages.react_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
-            link: 'github'.obs),
+            link: 'react'.obs),
         MorphButton(
             isClicked: false.obs,
             showDetails: false.obs,
@@ -489,7 +504,34 @@ class MainController extends GetxController {
             image_hovered: Image.asset(AppImages.vue_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
-            link: 'github'.obs)
+            link: 'vue'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            isFocused: false.obs,
+            image: Image.asset(AppImages.github),
+            image_hovered: Image.asset(AppImages.github_hovered),
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'github'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            isFocused: false.obs,
+            image: Image.asset(AppImages.gitlab),
+            image_hovered: Image.asset(AppImages.gitlab_hovered),
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'gitlab'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            isFocused: false.obs,
+            image: Image.asset(AppImages.upwork),
+            image_hovered: Image.asset(AppImages.upwork_hovered),
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'upwork'.obs),
       ].obs,
       codeIDEMorphButtons = [
         MorphButton(

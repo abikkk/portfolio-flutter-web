@@ -68,6 +68,8 @@ class AppImages {
   // job socials
   static const String github = iconsPath + 'github.png';
   static const String gitlab = iconsPath + 'gitlab.png';
+  static const String upwork = iconsPath + 'upwork.png';
+  static const String upwork_hovered = iconsPath + 'upwork_white.png';
   static const String github_hovered = iconsPath + 'github.png';
   static const String gitlab_hovered = iconsPath + 'gitlab.png';
 
