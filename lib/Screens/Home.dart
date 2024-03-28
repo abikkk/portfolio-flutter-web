@@ -73,7 +73,10 @@ class _HomeContainerState extends State<HomeContainer> {
                               mainController);
                         }
                       },
-                      physics: ClampingScrollPhysics(),
+                      physics: sizingInformation.deviceScreenType ==
+                              DeviceScreenType.mobile
+                          ? ClampingScrollPhysics()
+                          : NeverScrollableScrollPhysics(),
                       pageSnapping: sizingInformation.deviceScreenType ==
                               DeviceScreenType.mobile
                           ? false

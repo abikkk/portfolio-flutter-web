@@ -114,6 +114,34 @@ class Functions {
             throw 'Could not launch UpWork Link!';
           break;
         }
+      case 'wm':
+        {
+          if (!await launchUrl(Uri.parse(
+              'https://play.google.com/store/apps/details?id=com.wholisticminds.app')))
+            throw 'Could not launch UpWork Link!';
+          break;
+        }
+      case 'hnh':
+        {
+          if (!await launchUrl(Uri.parse(
+              'https://play.google.com/store/apps/details?id=com.dev.My_HaH')))
+            throw 'Could not launch UpWork Link!';
+          break;
+        }
+      case 'pfd':
+        {
+          if (!await launchUrl(Uri.parse(
+              'https://play.google.com/store/search?q=pokhara%20food%20delivery&c=apps')))
+            throw 'Could not launch UpWork Link!';
+          break;
+        }
+      case 'fullmoon':
+        {
+          if (!await launchUrl(Uri.parse(
+              'https://play.google.com/store/apps/details?id=com.beesoul.fullmoon&pli=1')))
+            throw 'Could not launch UpWork Link!';
+          break;
+        }
       default:
         {
           throw '${type}';
@@ -269,6 +297,9 @@ class Screens {
               child: PageView(
                 pageSnapping: isDesktop ? false : true,
                 allowImplicitScrolling: true,
+                physics: isDesktop
+                    ? NeverScrollableScrollPhysics()
+                    : ClampingScrollPhysics(),
                 scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
                 children: [
                   Widgets.CodingIntroDetails(
@@ -343,7 +374,9 @@ class Screens {
     return Stack(
       children: [
         PageView(
-            // pageSnapping: isDesktop ? false : true,
+            physics: isDesktop
+                ? NeverScrollableScrollPhysics()
+                : ClampingScrollPhysics(),
             allowImplicitScrolling: true,
             scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
             controller: mainController.gamingController,
@@ -867,12 +900,84 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i am currently working as a senior flutter developer for a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on\n> Wholistic Minds which is available on Apple App Store as well as Google Play Store\n> My Hotel and Home which is available on Google Play Store\n> Pokhara Food Delivery which is availabe both on Google Play Store.',
+                      'i am currently working as a senior flutter developer for a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on:',
                       maxLines: 8,
                       softWrap: true,
                     ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Widgets.customShadowBox(
+                  Text(
+                    '> Wholistic Minds which is available on Apple App Store as well as Google Play Store',
+                    maxLines: 8,
+                    softWrap: true,
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Widgets.customShadowBox(
+                  GestureDetector(
+                      onTap: () {
+                        Functions.openLink('wm');
+                      },
+                      child: Icon(Icons.link)),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Widgets.customShadowBox(
+                  Text(
+                    '> My Hotel and Home which is available on Google Play Store',
+                    maxLines: 8,
+                    softWrap: true,
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Widgets.customShadowBox(
+                  GestureDetector(
+                      onTap: () {
+                        Functions.openLink('hnh');
+                      },
+                      child: Icon(Icons.link)),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Widgets.customShadowBox(
+                  Text(
+                    '> Pokhara Food Delivery which is availabe both on Google Play Store.',
+                    maxLines: 8,
+                    softWrap: true,
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Widgets.customShadowBox(
+                  GestureDetector(
+                      onTap: () {
+                        Functions.openLink('pfd');
+                      },
+                      child: Icon(Icons.link)),
+                )
               ],
             ),
           ),
