@@ -40,12 +40,17 @@ class _HomeContainerState extends State<HomeContainer> {
               onNotification: (notif) {
                 if (notif.direction == ScrollDirection.forward &&
                     sizingInformation.deviceScreenType !=
-                        DeviceScreenType.desktop) {
+                        DeviceScreenType.desktop &&
+                    (mainController.pageController.page != null &&
+                        mainController.pageController.page!.round() > 0)) {
                   mainController.scrollBtn.value = 1.0;
-                } else if (notif.direction == ScrollDirection.reverse &&
-                    sizingInformation.deviceScreenType !=
-                        DeviceScreenType.desktop) {
-                  mainController.scrollBtn.value = 0.0;
+                  // } else
+                  // if (notif.direction == ScrollDirection.reverse &&
+                  //     sizingInformation.deviceScreenType !=
+                  //         DeviceScreenType.desktop &&
+                  //     (mainController.pageController.page != null &&
+                  //         mainController.pageController.page!.round() == 0)) {
+                  //   mainController.scrollBtn.value = 0.0;
                 }
                 return false;
               },
@@ -79,7 +84,7 @@ class _HomeContainerState extends State<HomeContainer> {
                           : NeverScrollableScrollPhysics(),
                       pageSnapping: sizingInformation.deviceScreenType ==
                               DeviceScreenType.mobile
-                          ? false
+                          ? true
                           : true,
                       // pageSnapping: false,
                       allowImplicitScrolling:

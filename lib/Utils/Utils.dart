@@ -2,6 +2,7 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -229,7 +230,6 @@ class Screens {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                          flex: 3,
                           child: Widgets.subtitleTexts(
                             mainController: mainController,
                             label: 'about me',
@@ -245,17 +245,6 @@ class Screens {
                             ),
                           ),
                         ),
-                        // Expanded(
-                        //   flex: 2,
-                        //   child: Align(
-                        //     alignment: Alignment.centerRight,
-                        //     child: Widgets.subtitleTexts(
-                        //       mainController: mainController,
-                        //       label: 'musician',
-                        //       id: 2,
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -326,7 +315,7 @@ class Screens {
                 controller: mainController.codingController,
                 onPageChanged: (value) {
                   // scroll up/down button icon changes
-                  if (mainController.codingController.page!.round() == 4 &&
+                  if (mainController.codingController.page!.round() > 0 &&
                       isDesktop) {
                     mainController.isCodeScrollDown.value = false;
                   } else {
@@ -551,18 +540,22 @@ class Screens {
                 ),
               ),
               SizedBox(
-                height: 24,
+                height: (isDesktop) ? 24 : 0,
               )
             ],
           ),
         ),
         Expanded(
           flex: 3,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: Flex(
+            direction: isDesktop ? Axis.horizontal : Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Flex(
+                direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+                mainAxisAlignment: isDesktop
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.center,
                 children: [
                   Widgets.socialMorphButtons(context, mainController, 0,
                       isDesktop: isDesktop),
@@ -570,8 +563,11 @@ class Screens {
                       isDesktop: isDesktop),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Flex(
+                direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+                mainAxisAlignment: isDesktop
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.center,
                 children: [
                   Widgets.socialMorphButtons(context, mainController, 2,
                       isDesktop: isDesktop),
@@ -579,6 +575,31 @@ class Screens {
                       isDesktop: isDesktop),
                 ],
               ),
+              Flex(
+                direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+                mainAxisAlignment: isDesktop
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.center,
+                children: [
+                  Widgets.codingMorphButtons(context, mainController, 3,
+                      isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, mainController, 4,
+                      isDesktop: isDesktop),
+                ],
+              ),
+              if (isDesktop)
+                Flex(
+                  direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+                  mainAxisAlignment: isDesktop
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.center,
+                  children: [
+                    Widgets.codingMorphButtons(context, mainController, 5,
+                        isDesktop: isDesktop),
+                    Widgets.streamMorphButtons(context, mainController, 2,
+                        isDesktop: isDesktop, isSocials: true),
+                  ],
+                ),
             ],
           ),
         ),
@@ -809,7 +830,7 @@ class Widgets {
         children: [
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   children: [
@@ -829,7 +850,7 @@ class Widgets {
                       Expanded(
                         child: Widgets.customShadowBox(
                           Text(
-                            'i have been working as a flutter developer professionally for 3+ years now.\ni have experiences with frontend web development using React.js and Vue.js as well.\nother professional skillsets that i posses are as follows:\nstatemanagements, GitHub/GitLab, JS, NPM, Figma',
+                            'i am a flutter developer .\ni have experiences with frontend development for 4+ years now.\nother skillsets that i have are as follows:\ GitHub/GitLab, JS, NPM, Figma',
                             softWrap: true,
                             maxLines: 4,
                           ),
@@ -847,27 +868,33 @@ class Widgets {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Widgets.codingMorphButtons(context, mainController, 0),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Widgets.codingMorphButtons(context, mainController, 1),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Widgets.codingMorphButtons(context, mainController, 2),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Widgets.codingMorphButtons(context, mainController, 3),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Widgets.codingMorphButtons(context, mainController, 4),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Widgets.codingMorphButtons(context, mainController, 5),
+                  Widgets.codingMorphButtons(context, mainController, 0,
+                      isDesktop: isDesktop),
+                  // SizedBox(
+                  //   width: 5,
+                  // ),
+                  Widgets.codingMorphButtons(context, mainController, 1,
+                      isDesktop: isDesktop),
+                  // SizedBox(
+                  //   width: 5,
+                  // ),
+                  Widgets.codingMorphButtons(context, mainController, 2,
+                      isDesktop: isDesktop),
+                  // SizedBox(
+                  //   width: 5,
+                  // ),
+                  Widgets.codingMorphButtons(context, mainController, 3,
+                      isDesktop: isDesktop),
+                  // SizedBox(
+                  //   width: 5,
+                  // ),
+                  Widgets.codingMorphButtons(context, mainController, 4,
+                      isDesktop: isDesktop),
+                  // SizedBox(
+                  //   width: 5,
+                  // ),
+                  Widgets.codingMorphButtons(context, mainController, 5,
+                      isDesktop: isDesktop),
                 ],
               ),
             ),
@@ -913,11 +940,13 @@ class Widgets {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Row(
               children: [
-                Widgets.customShadowBox(
-                  Text(
-                    '> Wholistic Minds which is available on Apple App Store as well as Google Play Store',
-                    maxLines: 8,
-                    softWrap: true,
+                Expanded(
+                  child: Widgets.customShadowBox(
+                    Text(
+                      '> Wholistic Minds which is available on Apple App Store as well as Google Play Store',
+                      maxLines: 2,
+                      softWrap: true,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -937,11 +966,13 @@ class Widgets {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Row(
               children: [
-                Widgets.customShadowBox(
-                  Text(
-                    '> My Hotel and Home which is available on Google Play Store',
-                    maxLines: 8,
-                    softWrap: true,
+                Expanded(
+                  child: Widgets.customShadowBox(
+                    Text(
+                      '> My Hotel and Home which is available on Google Play Store',
+                      maxLines: 2,
+                      softWrap: true,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -961,11 +992,13 @@ class Widgets {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Row(
               children: [
-                Widgets.customShadowBox(
-                  Text(
-                    '> Pokhara Food Delivery which is availabe both on Google Play Store.',
-                    maxLines: 8,
-                    softWrap: true,
+                Expanded(
+                  child: Widgets.customShadowBox(
+                    Text(
+                      '> Pokhara Food Delivery which is availabe both on Google Play Store.',
+                      maxLines: 2,
+                      softWrap: true,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -1346,22 +1379,22 @@ class Widgets {
 
 // morph buttons
   static Widget codingMorphButtons(
-      BuildContext context, MainController mainController, int buttonType) {
+      BuildContext context, MainController mainController, int buttonType,
+      {bool isDesktop = true}) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
-            // debugPrint(mainController.codingMorphButtons.length.toString());
             mainController.codingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .14;
+                MediaQuery.of(context).size.height * .12;
             mainController.codingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             // debugPrint(buttonType.toString());
             mainController.codingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+                MediaQuery.of(context).size.height * .10;
             mainController.codingMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1429,7 +1462,7 @@ class Widgets {
                               0.0
                           ? mainController
                               .codingMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .12,
+                          : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .codingMorphButtons[buttonType].showDetails.value
@@ -1455,13 +1488,13 @@ class Widgets {
         child: MouseRegion(
           onEnter: (a) {
             mainController.gamingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .14;
+                MediaQuery.of(context).size.height * .12;
             mainController.gamingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             mainController.gamingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+                MediaQuery.of(context).size.height * .10;
             mainController.gamingMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1524,7 +1557,7 @@ class Widgets {
                               0.0
                           ? mainController
                               .gamingMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .12,
+                          : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .gamingMorphButtons[buttonType].showDetails.value
@@ -1544,43 +1577,49 @@ class Widgets {
 
   static Widget streamMorphButtons(
       BuildContext context, MainController mainController, int buttonType,
-      {bool isDesktop = true}) {
+      {bool isDesktop = true, bool isSocials = false}) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
             mainController.streamMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .14;
+                MediaQuery.of(context).size.height * .12;
             mainController.streamMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             mainController.streamMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+                MediaQuery.of(context).size.height * .10;
             mainController.streamMorphButtons[buttonType].showDetails.value =
                 false;
           },
           child: InkWell(
             onTap: () async {
-              mainController.streamMorphButtons[buttonType].isClicked.value =
-                  !mainController
-                      .streamMorphButtons[buttonType].isClicked.value;
-
-              // delay
-              Future.delayed(const Duration(milliseconds: 150), () {
+              if (!isSocials) {
                 mainController.streamMorphButtons[buttonType].isClicked.value =
                     !mainController
                         .streamMorphButtons[buttonType].isClicked.value;
 
-                if (isDesktop)
-                  mainController.streamController.animateToPage(buttonType,
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeInOut);
-                else
-                  Functions.openLink(
-                      mainController.streamMorphButtons[buttonType].link.value);
-              });
+                // delay
+                Future.delayed(const Duration(milliseconds: 150), () {
+                  mainController
+                          .streamMorphButtons[buttonType].isClicked.value =
+                      !mainController
+                          .streamMorphButtons[buttonType].isClicked.value;
+
+                  if (isDesktop)
+                    mainController.streamController.animateToPage(buttonType,
+                        duration: Duration(milliseconds: 200),
+                        curve: Curves.easeInOut);
+                  else
+                    Functions.openLink(mainController
+                        .streamMorphButtons[buttonType].link.value);
+                });
+              } else {
+                Functions.openLink(
+                    mainController.streamMorphButtons[buttonType].link.value);
+              }
             },
             child: Wrap(
               children: [
@@ -1624,7 +1663,7 @@ class Widgets {
                               0.0
                           ? mainController
                               .streamMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .12,
+                          : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .streamMorphButtons[buttonType].showDetails.value
@@ -1651,13 +1690,13 @@ class Widgets {
         child: MouseRegion(
           onEnter: (a) {
             mainController.socialMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .14;
+                MediaQuery.of(context).size.height * .12;
             mainController.socialMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             mainController.socialMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+                MediaQuery.of(context).size.height * .10;
             mainController.socialMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1666,10 +1705,6 @@ class Widgets {
               mainController.socialMorphButtons[buttonType].isClicked.value =
                   !mainController
                       .socialMorphButtons[buttonType].isClicked.value;
-
-              // mainController.socialsController.animateToPage(buttonType,
-              //     duration: Duration(milliseconds: 200),
-              //     curve: Curves.easeInOut);
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
@@ -1720,7 +1755,7 @@ class Widgets {
                               0.0
                           ? mainController
                               .socialMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .12,
+                          : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .socialMorphButtons[buttonType].showDetails.value
@@ -1747,13 +1782,13 @@ class Widgets {
         child: MouseRegion(
           onEnter: (a) {
             mainController.musicMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .14;
+                MediaQuery.of(context).size.height * .12;
             mainController.musicMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             mainController.musicMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+                MediaQuery.of(context).size.height * .10;
             mainController.musicMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1815,7 +1850,7 @@ class Widgets {
                               0.0
                           ? mainController
                               .musicMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .12,
+                          : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .musicMorphButtons[buttonType].showDetails.value
@@ -1911,17 +1946,7 @@ class Widgets {
                   break;
               }
             },
-            label: Text(
-                // ((id == 0)
-                //         ? mainController.ytHover.value
-                //         : (id == 1)
-                //             ? mainController.twitchHover.value
-                //             : mainController.discordHover.value)
-                // ?
-                '${label}'
-                //     :
-                // '> ${label} <'
-                ,
+            label: Text('${label}',
                 style: ((id == 0)
                         ? mainController.ytHover.value
                         : (id == 1)
