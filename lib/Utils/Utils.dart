@@ -870,30 +870,17 @@ class Widgets {
                 children: [
                   Widgets.codingMorphButtons(context, mainController, 0,
                       isDesktop: isDesktop),
-                  // SizedBox(
-                  //   width: 5,
-                  // ),
                   Widgets.codingMorphButtons(context, mainController, 1,
                       isDesktop: isDesktop),
-                  // SizedBox(
-                  //   width: 5,
-                  // ),
                   Widgets.codingMorphButtons(context, mainController, 2,
                       isDesktop: isDesktop),
-                  // SizedBox(
-                  //   width: 5,
-                  // ),
                   Widgets.codingMorphButtons(context, mainController, 3,
                       isDesktop: isDesktop),
-                  // SizedBox(
-                  //   width: 5,
-                  // ),
                   Widgets.codingMorphButtons(context, mainController, 4,
                       isDesktop: isDesktop),
-                  // SizedBox(
-                  //   width: 5,
-                  // ),
                   Widgets.codingMorphButtons(context, mainController, 5,
+                      isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, mainController, 6,
                       isDesktop: isDesktop),
                 ],
               ),
@@ -1392,7 +1379,6 @@ class Widgets {
                 true;
           },
           onExit: (a) {
-            // debugPrint(buttonType.toString());
             mainController.codingMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .10;
             mainController.codingMorphButtons[buttonType].showDetails.value =
@@ -1400,7 +1386,7 @@ class Widgets {
           },
           child: InkWell(
             onTap: () async {
-              if (buttonType < 3) {
+              if (buttonType < 3 || buttonType == 6) {
                 mainController.codingMorphButtons[buttonType].isClicked.value =
                     !mainController
                         .codingMorphButtons[buttonType].isClicked.value;

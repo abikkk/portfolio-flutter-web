@@ -44,13 +44,6 @@ class _HomeContainerState extends State<HomeContainer> {
                     (mainController.pageController.page != null &&
                         mainController.pageController.page!.round() > 0)) {
                   mainController.scrollBtn.value = 1.0;
-                  // } else
-                  // if (notif.direction == ScrollDirection.reverse &&
-                  //     sizingInformation.deviceScreenType !=
-                  //         DeviceScreenType.desktop &&
-                  //     (mainController.pageController.page != null &&
-                  //         mainController.pageController.page!.round() == 0)) {
-                  //   mainController.scrollBtn.value = 0.0;
                 }
                 return false;
               },

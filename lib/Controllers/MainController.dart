@@ -32,6 +32,7 @@ class MainController extends GetxController {
       scrollIndex = 0.0.obs,
       cursorX = 0.0.obs,
       cursorY = 0.0.obs;
+
   // RxInt durationLong = 444.obs,
   //     durationShort = 111.obs,
   //     durationMedium = 222.obs;
@@ -103,6 +104,18 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
+        image: Image.asset(AppImages.wholisticminds),
+        label: 'Wholistic Minds'.obs,
+        details: 'medical app currently operational in USA.'.obs,
+        devLang: 'flutter'.obs,
+        platform: ['android', 'iOS'].obs,
+        link: 'github'.obs,
+        tags: [
+          CONSTANTS.projectTagCompleted,
+          CONSTANTS.projectTagAppStore,
+        ].obs),
+    ProjectCard(
+        showDetails: false.obs,
         image: Image.asset(AppImages.hah),
         label: 'My Hotel and Home'.obs,
         details:
@@ -128,18 +141,6 @@ class MainController extends GetxController {
         tags: [
           CONSTANTS.projectTagCompleted,
           CONSTANTS.projectTagPlayStore,
-        ].obs),
-    ProjectCard(
-        showDetails: false.obs,
-        image: Image.asset(AppImages.wholisticminds),
-        label: 'Wholistic Minds'.obs,
-        details: 'medical app currently operational in USA.'.obs,
-        devLang: 'flutter'.obs,
-        platform: ['android', 'iOS'].obs,
-        link: 'github'.obs,
-        tags: [
-          CONSTANTS.projectTagCompleted,
-          CONSTANTS.projectTagAppStore,
         ].obs),
     ProjectCard(
         showDetails: false.obs,
@@ -194,34 +195,6 @@ class MainController extends GetxController {
           CONSTANTS.projectTagCompleted,
           CONSTANTS.projectTagLaunched,
         ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.electronica),
-    //     label: 'EBT Delivery App'.obs,
-    //     details:
-    //         'delivery service application with staff management features for clients of EBT LLC, Dubai.'
-    //             .obs,
-    //     devLang: 'flutter'.obs,
-    //     platform: ['android', 'iOS'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagCompleted,
-    //       CONSTANTS.projectTagLaunched,
-    //     ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.fasttrack),
-    //     label: 'EBT Fasttrack App'.obs,
-    //     details:
-    //         'garage application with mechanic support and vehicle support features for clients for EBT LLC, Dubai.'
-    //             .obs,
-    //     devLang: 'flutter'.obs,
-    //     platform: ['android', 'iOS'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagCompleted,
-    //       CONSTANTS.projectTagLaunched,
-    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.tim_hortons),
@@ -236,34 +209,6 @@ class MainController extends GetxController {
           CONSTANTS.projectTagCompleted,
           CONSTANTS.projectTagLaunched,
         ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.hypercity),
-    //     label: 'HyperCity MPOS'.obs,
-    //     details:
-    //         'mobile POS application for HyperCity client of EBT LLC, Dubai.'
-    //             .obs,
-    //     devLang: 'flutter'.obs,
-    //     platform: ['android', 'iOS'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagCompleted,
-    //       CONSTANTS.projectTagLaunched,
-    //     ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.northern_trails),
-    //     label: 'northern trails cafe app'.obs,
-    //     details:
-    //         'a simple cafe menu app for a cafe located in khahare, lakeside.'
-    //             .obs,
-    //     devLang: 'flutter'.obs,
-    //     platform: ['android', 'iOS'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagWorkingOn,
-    //       CONSTANTS.projectTagUnder,
-    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
@@ -276,19 +221,6 @@ class MainController extends GetxController {
           CONSTANTS.projectTagWorkingOn,
           CONSTANTS.projectTagUnder,
         ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.own),
-    //     label: 'aayush man gubaju - portfolio'.obs,
-    //     details:
-    //         'portfolio web application for a graphic designer, Mr. Aayush Man Gubaju.'
-    //             .obs,
-    //     devLang: 'flutter web'.obs,
-    //     platform: ['web'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagUnder,
-    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
@@ -314,20 +246,6 @@ class MainController extends GetxController {
           CONSTANTS.projectTagWorkingOn,
           CONSTANTS.projectTagUnder,
         ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.own),
-    //     label: 'nepanime'.obs,
-    //     details:
-    //         'e-commerce mobile app for anime accessories in Pokhara, Nepal.'
-    //             .obs,
-    //     devLang: 'flutter'.obs,
-    //     platform: ['android', 'iOS'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagWorkingOn,
-    //       CONSTANTS.projectTagUnder,
-    //     ].obs),
     ProjectCard(
         showDetails: false.obs,
         image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
@@ -339,47 +257,6 @@ class MainController extends GetxController {
         tags: [
           CONSTANTS.projectTagUnder,
         ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.own),
-    //     label: 'hotel northern trails'.obs,
-    //     details:
-    //         'profile web site for Hotel Northern Trails located in Khahare, Lakeside, Pokhara.'
-    //             .obs,
-    //     devLang: 'react'.obs,
-    //     platform: ['web'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagUnder,
-    //     ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.own),
-    //     label: 'employee attendance system'.obs,
-    //     details:
-    //         'attendance system for employees for a company, developed as a intern project for Utsaha Advert, Pokhara.'
-    //             .obs,
-    //     devLang: 'vue'.obs,
-    //     platform: ['web'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagCompleted,
-    //       CONSTANTS.projectTagDropped,
-    //     ].obs),
-    // ProjectCard(
-    //     showDetails: false.obs,
-    //     image: Image.asset(AppImages.own),
-    //     label: 'inventory management system '.obs,
-    //     details:
-    //         'stock/inventory management system for a company, developed as a intern project for Utsaha Advert, Pokhara.'
-    //             .obs,
-    //     devLang: 'vue'.obs,
-    //     platform: ['web'].obs,
-    //     link: 'github'.obs,
-    //     tags: [
-    //       CONSTANTS.projectTagCompleted,
-    //       CONSTANTS.projectTagDropped,
-    //     ].obs),
   ].obs;
 
   // gradient colors list
@@ -445,24 +322,34 @@ class MainController extends GetxController {
           Color.fromRGBO(93, 147, 247, 1),
         ],
         [
+          // Color.fromRGBO(93, 147, 247, 1),
           Color.fromRGBO(5, 111, 160, 1),
           Color.fromRGBO(12, 181, 248, 1),
         ],
         [
+          // Color.fromRGBO(12, 181, 248, 1),
           Color.fromRGBO(14, 180, 116, 1),
           Color.fromRGBO(124, 238, 143, 1),
         ],
         [
+          // Color.fromRGBO(124, 238, 143, 1),
           Color.fromRGBO(197, 197, 197, 1),
           Color.fromRGBO(180, 180, 180, 1),
         ],
         [
+          // Color.fromRGBO(180, 180, 180, 1),
           Color.fromRGBO(235, 94, 29, 1),
           Color.fromRGBO(224, 118, 85, 1),
-        ],        
+        ],
         [
+          // Color.fromRGBO(224, 118, 85, 1),
           Color.fromRGBO(109, 235, 84, 1),
           Color.fromRGBO(58, 204, 14, 1),
+        ],
+        [
+          Color.fromRGBO(58, 204, 14, 1),
+          Color.fromRGBO(12, 181, 248, 1),
+          // Color.fromRGBO(93, 147, 247, 1),
         ]
       ],
       ideGradientList = <List<Color>>[
@@ -532,6 +419,15 @@ class MainController extends GetxController {
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'upwork'.obs),
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            isFocused: false.obs,
+            image: Image.asset(AppImages.projects),
+            image_hovered: Image.asset(AppImages.projects_hovered),
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: 'projects'.obs),
       ].obs,
       codeIDEMorphButtons = [
         MorphButton(
