@@ -16,14 +16,17 @@ class FloatingNavBarDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => AnimatedContainer(
+        // margin: EdgeInsets.only(right: 30),
         height: MediaQuery.of(context).size.height,
         duration: Duration(milliseconds: 111),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(flex: 4, child: Container()),
+            Expanded(flex: 4, child: SizedBox()),
             Expanded(
-              child: Center(
+              child: Align(
+                alignment: Alignment.bottomCenter,
                 child: MouseRegion(
                   onEnter: (event) => mainController.navHovered.value = 1,
                   onExit: (event) => mainController.navHovered.value = 0,
@@ -39,14 +42,19 @@ class FloatingNavBarDesktop extends StatelessWidget {
                                 mainController.navHovered.value == 1 ? 6 : 2,
                           ),
                           child: AnimatedContainer(
-                            duration: Duration(milliseconds: 111),
-                            height: mainController.navHovered.value == 1
-                                ? MediaQuery.of(context).size.height / 12
-                                : MediaQuery.of(context).size.height / 24,
-                            width: mainController.navHovered.value == 1
-                                ? MediaQuery.of(context).size.width / 3.6
-                                : MediaQuery.of(context).size.width / 6,
-                          ),
+                              duration: Duration(milliseconds: 111),
+                              height:
+                                  // mainController.navHovered.value == 1
+                                  //     ?
+                                  MediaQuery.of(context).size.height / 12
+                              // :MediaQuery.of(context).size.height / 24
+                              ,
+                              width:
+                                  // mainController.navHovered.value == 1
+                                  //     ?
+                                  MediaQuery.of(context).size.width / 5.5
+                              // : MediaQuery.of(context).size.width / 6,
+                              ),
                         ),
                       ),
 
@@ -60,22 +68,28 @@ class FloatingNavBarDesktop extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(24))),
                         margin: EdgeInsets.only(bottom: 30),
-                        height: mainController.navHovered.value == 1
-                            ? MediaQuery.of(context).size.height / 12
-                            : MediaQuery.of(context).size.height / 24,
-                        width: mainController.navHovered.value == 1
-                            ? MediaQuery.of(context).size.width / 3.6
-                            : MediaQuery.of(context).size.width / 6,
+                        height:
+                            // mainController.navHovered.value == 1
+                            //     ?
+                            MediaQuery.of(context).size.height / 12
+                        // :MediaQuery.of(context).size.height / 24
+                        ,
+                        width:
+                            // mainController.navHovered.value == 1
+                            //     ?
+                            MediaQuery.of(context).size.width / 5.5
+                        // : MediaQuery.of(context).size.width / 6
+                        ,
                         duration: Duration(milliseconds: 111),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            FloatingNavBarIcons(
-                              hoverID: 1,
-                              iconData: Icons.home_rounded,
-                              mainController: mainController,
-                              // isDesktop: true,
-                            ),
+                            // FloatingNavBarIcons(
+                            //   hoverID: 1,
+                            //   iconData: Icons.home_rounded,
+                            //   mainController: mainController,
+                            //   // isDesktop: true,
+                            // ),
                             FloatingNavBarIcons(
                               hoverID: 2,
                               iconData: Icons.format_list_bulleted_rounded,
@@ -196,7 +210,9 @@ class FloatingNavBarIcons extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Icon(
                     iconData,
-                    color: Colors.black87,
+                    color: mainController.isDark.value
+                        ? Colors.white70
+                        : Colors.black87,
                     size: 24,
                   ),
                 ),
@@ -208,7 +224,10 @@ class FloatingNavBarIcons extends StatelessWidget {
         // : Widgets.bulletineIcon(true,
         //     iconSize: (mainController.navHovered == 0) ? 5 : 7);
         : IconButton(
-            icon: Widgets.bulletineIcon(true, iconColor: Colors.black45),
+            icon: Widgets.bulletineIcon(true,
+                iconColor: mainController.isDark.value
+                    ? Colors.white54
+                    : Colors.black45),
             iconSize: (mainController.navHovered == 0) ? 5 : 8,
             onPressed: () {
               Functions.navigate(

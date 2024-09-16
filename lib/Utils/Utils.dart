@@ -217,33 +217,46 @@ class Screens {
                 children: [
                   Text(
                     'hi there!',
-                    style: AppThemeData.appThemeData.textTheme.headlineSmall,
+                    style: AppThemeData.appThemeData.textTheme.headlineSmall!
+                        .copyWith(
+                            color: mainController.isDark.value
+                                ? Colors.white
+                                : Colors.black),
                   ),
                   Text(
                     'abik vaidhya',
-                    style: AppThemeData.appThemeData.textTheme.headlineLarge,
+                    style: AppThemeData.appThemeData.textTheme.headlineLarge!
+                        .copyWith(
+                            color: mainController.isDark.value
+                                ? Colors.white
+                                : Colors.black),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 10,
+                    height: MediaQuery.of(context).size.height / 8,
                     width: MediaQuery.of(context).size.width / 3,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Widgets.subtitleTexts(
-                            mainController: mainController,
-                            label: 'about me',
-                            id: 0,
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Widgets.subtitleTexts(
-                              mainController: mainController,
-                              label: 'connect with me',
-                              id: 3,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Widgets.subtitleTexts(
+                                mainController: mainController,
+                                label: 'about me',
+                                id: 0,
+                              ),
                             ),
-                          ),
+                            Expanded(
+                              child: Center(
+                                child: Widgets.subtitleTexts(
+                                  mainController: mainController,
+                                  label: 'connect with me',
+                                  id: 3,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -485,10 +498,12 @@ class Screens {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Widgets.customShadowBox(
-                  Text(
-                    'listen to my music',
-                    style: AppThemeData.appThemeData.textTheme.headlineMedium,
-                  ),
+                  Text('listen to my music',
+                      style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                          .copyWith(
+                              color: (mainController.isDark.value)
+                                  ? Colors.white
+                                  : Colors.black)),
                 ),
               ),
               SizedBox(
@@ -535,7 +550,11 @@ class Screens {
                 child: Widgets.customShadowBox(
                   Text(
                     'connect with me',
-                    style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                    style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                        .copyWith(
+                            color: (mainController.isDark.value)
+                                ? Colors.white
+                                : Colors.black),
                   ),
                 ),
               ),
@@ -648,7 +667,10 @@ class Widgets {
               Functions.navigate(
                   0, mainController.pageController, mainController);
             },
-            icon: Icon(Icons.arrow_drop_up_rounded)),
+            icon: Icon(
+              Icons.arrow_drop_up_rounded,
+              color: mainController.isDark.value ? Colors.white : Colors.black,
+            )),
       ),
     );
   }
@@ -676,7 +698,8 @@ class Widgets {
         mainController.showScrollBtn.value = 1.0;
       },
       onExit: (e) {
-        mainController.showScrollBtn.value = 0.3;
+        mainController.showScrollBtn.value =
+            (mainController.isDark.value) ? 0.6 : 0.3;
       },
       child: AnimatedOpacity(
         duration: Duration(milliseconds: 200),
@@ -704,7 +727,8 @@ class Widgets {
     return Container(
       margin: EdgeInsets.all(5),
       child: Card(
-        color: Colors.grey.shade100,
+        color:
+            mainController.isDark.value ? Colors.white30 : Colors.grey.shade200,
         elevation: 5,
         child: GestureDetector(
           onTap: () {
@@ -735,7 +759,11 @@ class Widgets {
                         child: Text(
                       '${project.label}',
                       style: AppThemeData.appThemeData.textTheme.bodySmall!
-                          .copyWith(height: 1),
+                          .copyWith(
+                              height: 1,
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       textAlign: TextAlign.start,
                       softWrap: true,
                     )),
@@ -763,9 +791,6 @@ class Widgets {
           case 3:
             mainController.subtitle_2.value = true;
             break;
-          // case 2:
-          //   mainController.subtitle_3.value = true;
-          //   break;
         }
       },
       onExit: (v) {
@@ -776,9 +801,6 @@ class Widgets {
           case 3:
             mainController.subtitle_2.value = false;
             break;
-          // case 2:
-          //   mainController.subtitle_3.value = false;
-          //   break;
         }
       },
       child: Center(
@@ -790,8 +812,14 @@ class Widgets {
                     // : (id == 1)
                     //     ? mainController.subtitle_2.value
                     : mainController.subtitle_2.value)
-                ? AppThemeData.appThemeData.textTheme.displaySmall!
-                : AppThemeData.appThemeData.textTheme.titleSmall!,
+                ? AppThemeData.appThemeData.textTheme.displaySmall!.copyWith(
+                    color: mainController.isDark.value
+                        ? Colors.white
+                        : Colors.black)
+                : AppThemeData.appThemeData.textTheme.titleSmall!.copyWith(
+                    color: mainController.isDark.value
+                        ? Colors.white
+                        : Colors.black),
             child: GestureDetector(
               // hoverColor: Colors.transparent,
               onTap: () {
@@ -837,8 +865,12 @@ class Widgets {
                     Widgets.customShadowBox(
                       Text(
                         'portfolio',
-                        style:
-                            AppThemeData.appThemeData.textTheme.headlineMedium,
+                        style: AppThemeData
+                            .appThemeData.textTheme.headlineMedium!
+                            .copyWith(
+                                color: mainController.isDark.value
+                                    ? Colors.white
+                                    : Colors.black),
                       ),
                     ),
                   ],
@@ -852,6 +884,12 @@ class Widgets {
                           Text(
                             'i am a flutter developer .\ni have experiences with frontend development for 4+ years now.\nother skillsets that i have are as follows:\ GitHub/GitLab, JS, NPM, Figma',
                             softWrap: true,
+                            style: AppThemeData
+                                .appThemeData.textTheme.bodyMedium!
+                                .copyWith(
+                                    color: mainController.isDark.value
+                                        ? Colors.white
+                                        : Colors.black),
                             maxLines: 4,
                           ),
                         ),
@@ -865,8 +903,8 @@ class Widgets {
           if (isDesktop)
             Expanded(
               flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Wrap(
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Widgets.codingMorphButtons(context, mainController, 0,
                       isDesktop: isDesktop),
@@ -902,7 +940,11 @@ class Widgets {
               Widgets.customShadowBox(
                 Text(
                   'flutter',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                      .copyWith(
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black),
                 ),
               ),
             ],
@@ -916,6 +958,11 @@ class Widgets {
                     Text(
                       'i am currently working as a senior flutter developer for a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on:',
                       maxLines: 8,
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -932,6 +979,11 @@ class Widgets {
                     Text(
                       '> Wholistic Minds which is available on Apple App Store as well as Google Play Store',
                       maxLines: 2,
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -944,7 +996,10 @@ class Widgets {
                       onTap: () {
                         Functions.openLink('wm');
                       },
-                      child: Icon(Icons.link)),
+                      child: Icon(Icons.link,
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black)),
                 )
               ],
             ),
@@ -958,6 +1013,11 @@ class Widgets {
                     Text(
                       '> My Hotel and Home which is available on Google Play Store',
                       maxLines: 2,
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -970,7 +1030,10 @@ class Widgets {
                       onTap: () {
                         Functions.openLink('hnh');
                       },
-                      child: Icon(Icons.link)),
+                      child: Icon(Icons.link,
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black)),
                 )
               ],
             ),
@@ -984,6 +1047,11 @@ class Widgets {
                     Text(
                       '> Pokhara Food Delivery which is availabe both on Google Play Store.',
                       maxLines: 2,
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -996,7 +1064,10 @@ class Widgets {
                       onTap: () {
                         Functions.openLink('pfd');
                       },
-                      child: Icon(Icons.link)),
+                      child: Icon(Icons.link,
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black)),
                 )
               ],
             ),
@@ -1018,7 +1089,11 @@ class Widgets {
               Widgets.customShadowBox(
                 Text(
                   'react.js',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                      .copyWith(
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black),
                 ),
               ),
             ],
@@ -1034,6 +1109,11 @@ class Widgets {
                         Text(
                           'i worked as a freelancer for 8 months. my projects ranges as follows:',
                           softWrap: true,
+                          style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                              .copyWith(
+                                  color: mainController.isDark.value
+                                      ? Colors.white
+                                      : Colors.black),
                           maxLines: 4,
                         ),
                       ),
@@ -1047,6 +1127,11 @@ class Widgets {
                       Text(
                         ' - portfolio websites\n - cafe website\n - e-commerce\n - warehouse/inventory management',
                         softWrap: true,
+                        style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                            .copyWith(
+                                color: mainController.isDark.value
+                                    ? Colors.white
+                                    : Colors.black),
                         maxLines: 8,
                       ),
                     )),
@@ -1072,7 +1157,11 @@ class Widgets {
               Widgets.customShadowBox(
                 Text(
                   'vue.js',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                      .copyWith(
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black),
                 ),
               ),
             ],
@@ -1086,6 +1175,11 @@ class Widgets {
                     Text(
                       'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months. i was involved in development of employee record management system and attendance management system. i have my own portfolio website under development as well.',
                       maxLines: 8,
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -1110,7 +1204,11 @@ class Widgets {
               Widgets.customShadowBox(
                 Text(
                   'projects',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium,
+                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                      .copyWith(
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black),
                 ),
               ),
             ],
@@ -1262,6 +1360,11 @@ class Widgets {
                   child: Widgets.customShadowBox(
                     Text(
                       'i upload clips from my gameplays and live streams to my youtube channel. drop by and show some love if you can. thanks!',
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -1305,6 +1408,11 @@ class Widgets {
                   child: Widgets.customShadowBox(
                     Text(
                       'i try to stream regularly, as much as i can. i normally just stream for myself. my live streams include games like valorant, apex legends, gta v online, singing sessions, podcasts and coding streams.\nyou can check out my twitch.',
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -1348,6 +1456,11 @@ class Widgets {
                   child: Widgets.customShadowBox(
                     Text(
                       'you can join my discord server. we can have fun together with my friends.',
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
                       softWrap: true,
                     ),
                   ),
@@ -1413,7 +1526,9 @@ class Widgets {
                   duration: Duration(milliseconds: 100),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: (mainController.isDark.value)
+                          ? Colors.black
+                          : Colors.white,
                       gradient: (mainController.codingMorphButtons[buttonType]
                                   .showDetails.value ||
                               mainController.codingMorphButtons[buttonType]
@@ -1428,13 +1543,19 @@ class Widgets {
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 15,
+                                  offset: (mainController.isDark.value)
+                                      ? Offset(2, 2)
+                                      : Offset(4, 4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1),
                               BoxShadow(
                                   color: Colors.white,
-                                  offset: Offset(-4, -4),
-                                  blurRadius: 15,
+                                  offset: (mainController.isDark.value)
+                                      ? Offset(-2, -2)
+                                      : Offset(-4, -4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1)
                             ]
                           : null),
@@ -1452,9 +1573,16 @@ class Widgets {
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .codingMorphButtons[buttonType].showDetails.value
-                          ? mainController
-                              .codingMorphButtons[buttonType].image_hovered
-                          : mainController.codingMorphButtons[buttonType].image,
+                          ? (mainController.isDark.value)
+                              ? mainController
+                                  .codingMorphButtons[buttonType].image_hovered
+                              : mainController
+                                  .codingMorphButtons[buttonType].image
+                          : (mainController.isDark.value)
+                              ? mainController
+                                  .codingMorphButtons[buttonType].image_hovered
+                              : mainController
+                                  .codingMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1613,7 +1741,9 @@ class Widgets {
                   duration: Duration(milliseconds: 100),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: (mainController.isDark.value)
+                          ? Colors.black
+                          : Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       gradient: (mainController.streamMorphButtons[buttonType]
                                   .showDetails.value ||
@@ -1629,13 +1759,19 @@ class Widgets {
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 15,
+                                  offset: mainController.isDark.value
+                                      ? Offset(2, 2)
+                                      : Offset(4, 4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1),
                               BoxShadow(
                                   color: Colors.white,
-                                  offset: Offset(-4, -4),
-                                  blurRadius: 15,
+                                  offset: mainController.isDark.value
+                                      ? Offset(-2, -2)
+                                      : Offset(-4, -4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1)
                             ]
                           : null),
@@ -1653,9 +1789,16 @@ class Widgets {
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .streamMorphButtons[buttonType].showDetails.value
-                          ? mainController
-                              .streamMorphButtons[buttonType].image_hovered
-                          : mainController.streamMorphButtons[buttonType].image,
+                          ? (mainController.isDark.value)
+                              ? mainController
+                                  .streamMorphButtons[buttonType].image
+                              : mainController
+                                  .streamMorphButtons[buttonType].image_hovered
+                          : (mainController.isDark.value)
+                              ? mainController
+                                  .streamMorphButtons[buttonType].image_hovered
+                              : mainController
+                                  .streamMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1708,7 +1851,9 @@ class Widgets {
                   duration: Duration(milliseconds: 100),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: mainController.isDark.value
+                          ? Colors.black
+                          : Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       gradient: (mainController
                               .socialMorphButtons[buttonType].showDetails.value)
@@ -1721,13 +1866,19 @@ class Widgets {
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 15,
+                                  offset: mainController.isDark.value
+                                      ? Offset(2, 2)
+                                      : Offset(4, 4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1),
                               BoxShadow(
                                   color: Colors.white,
-                                  offset: Offset(-4, -4),
-                                  blurRadius: 15,
+                                  offset: mainController.isDark.value
+                                      ? Offset(-2, -2)
+                                      : Offset(-4, -4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1)
                             ]
                           : null),
@@ -1745,9 +1896,16 @@ class Widgets {
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .socialMorphButtons[buttonType].showDetails.value
-                          ? mainController
-                              .socialMorphButtons[buttonType].image_hovered
-                          : mainController.socialMorphButtons[buttonType].image,
+                          ? mainController.isDark.value
+                              ? mainController
+                                  .socialMorphButtons[buttonType].image
+                              : mainController
+                                  .socialMorphButtons[buttonType].image_hovered
+                          : mainController.isDark.value
+                              ? mainController
+                                  .socialMorphButtons[buttonType].image_hovered
+                              : mainController
+                                  .socialMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1803,7 +1961,9 @@ class Widgets {
                   duration: Duration(milliseconds: 100),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: mainController.isDark.value
+                          ? Colors.black
+                          : Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       gradient: (mainController
                               .musicMorphButtons[buttonType].showDetails.value)
@@ -1816,13 +1976,19 @@ class Widgets {
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 15,
+                                  offset: mainController.isDark.value
+                                      ? Offset(2, 2)
+                                      : Offset(4, 4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1),
                               BoxShadow(
                                   color: Colors.white,
-                                  offset: Offset(-4, -4),
-                                  blurRadius: 15,
+                                  offset: mainController.isDark.value
+                                      ? Offset(-2, -2)
+                                      : Offset(-4, -4),
+                                  blurRadius:
+                                      mainController.isDark.value ? 5 : 15,
                                   spreadRadius: 1)
                             ]
                           : null),
@@ -1840,9 +2006,16 @@ class Widgets {
                       duration: Duration(milliseconds: 150),
                       child: mainController
                               .musicMorphButtons[buttonType].showDetails.value
-                          ? mainController
-                              .musicMorphButtons[buttonType].image_hovered
-                          : mainController.musicMorphButtons[buttonType].image,
+                          ? mainController.isDark.value
+                              ? mainController
+                                  .musicMorphButtons[buttonType].image
+                              : mainController
+                                  .musicMorphButtons[buttonType].image_hovered
+                          : mainController.isDark.value
+                              ? mainController
+                                  .musicMorphButtons[buttonType].image_hovered
+                              : mainController
+                                  .musicMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1939,8 +2112,15 @@ class Widgets {
                             ? mainController.twitchHover.value
                             : mainController.discordHover.value)
                     ? AppThemeData.appThemeData.textTheme.headlineMedium!
-                        .copyWith(color: Colors.white.withOpacity(0.9))
-                    : AppThemeData.appThemeData.textTheme.headlineMedium!),
+                        .copyWith(
+                            color: (mainController.isDark.value)
+                                ? Colors.white.withOpacity(0.9)
+                                : Colors.white.withOpacity(0.9))
+                    : AppThemeData.appThemeData.textTheme.headlineMedium!
+                        .copyWith(
+                            color: (mainController.isDark.value)
+                                ? Colors.white.withOpacity(0.9)
+                                : Colors.black.withOpacity(0.9))),
             icon: Icon(
               Icons.arrow_forward_ios_rounded,
               color: ((id == 0)

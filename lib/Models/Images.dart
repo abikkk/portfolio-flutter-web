@@ -72,8 +72,8 @@ class AppImages {
   static const String projects = iconsPath + 'code.png';
   static const String projects_hovered = iconsPath + 'code_white.png';
   static const String upwork_hovered = iconsPath + 'upwork_white.png';
-  static const String github_hovered = iconsPath + 'github.png';
-  static const String gitlab_hovered = iconsPath + 'gitlab.png';
+  static const String github_hovered = iconsPath + 'github_hovered.png';
+  static const String gitlab_hovered = iconsPath + 'gitlab_hovered.png';
 
   // music
   static const String soundcloud = iconsPath + 'soundcloud.png';
