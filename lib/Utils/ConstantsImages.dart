@@ -1,4 +1,4 @@
-class AppImages {
+class ImagesConstants {
   static const String imagesPath = 'assets/images/';
   static const String iconsPath = 'assets/images/icons/';
   static const String logoPath = 'assets/images/logo/';

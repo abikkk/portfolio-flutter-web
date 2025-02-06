@@ -35,7 +35,7 @@ dependencies:
   carousel_slider: ^4.2.1
   mailto: ^2.0.0
   email_validator: ^2.0.1
-  path_provider: ^2.0.14
+  path_provider: ^2.1.5
   image_picker: ^0.8.7+4
   flutter_email_sender: ^5.2.0
   flutter_animation_progress_bar: ^2.3.1

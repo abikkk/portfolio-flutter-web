@@ -1,11 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:my_porfolio/Utils/ScreenUtils.dart';
+import 'package:my_porfolio/Utils/UiUtils.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
-import '../Models/Images.dart';
+import '../Utils/ConstantsImages.dart';
 import '../Utils/FloatingNavBar.dart';
 import '../Utils/Utils.dart';
 
@@ -50,187 +50,18 @@ class _HomeContainerState extends State<HomeContainer> {
                       Expanded(
                         child: Obx(
                           () => Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 15),
-                            decoration: BoxDecoration(
-                                color: mainController.isDark.value
-                                    ? Colors.grey.shade300.withOpacity(0.3)
-                                    : Colors.grey.shade300.withOpacity(0.1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            width: 330,
-                            margin: EdgeInsets.all(10),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 300,
-                                  // width: 300,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(AppImages.own),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      color: mainController.isDark.value
-                                          ? Colors.grey.withOpacity(0.1)
-                                          : Colors.grey.shade300
-                                              .withOpacity(0.1),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                ),
-                                // Text(
-                                //   'abik vaidhya',
-                                //   style: TextStyle(
-                                //     fontSize: 48,
-                                //     color: Colors.white,
-                                //   ),
-                                // ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  height: 40,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          Colors.grey.shade300.withOpacity(0.3),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  child: Center(
-                                    child: Text(
-                                      'flutter developer',
-                                      style: TextStyle(
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Divider(
-                                  indent: 30,
-                                  endIndent: 30,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          Colors.grey.shade300.withOpacity(0.3),
-                                      child: Icon(
-                                        Icons.mail_outline,
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'abikvaidhya@gmail.com',
-                                      style: TextStyle(
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          Colors.grey.shade300.withOpacity(0.3),
-                                      child: Icon(
-                                        Icons.phone_iphone_rounded,
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '+977-986-908-0265',
-                                      style: TextStyle(
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          Colors.grey.shade300.withOpacity(0.3),
-                                      child: Icon(
-                                        Icons.pin_drop,
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Kathmandu, Nepal',
-                                      style: TextStyle(
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          Colors.grey.shade300.withOpacity(0.3),
-                                      child: Icon(
-                                        Icons.book,
-                                        color: mainController.isDark.value
-                                            ? Colors.white
-                                            : null,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'Herald International College',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: mainController.isDark.value
-                                              ? Colors.white
-                                              : null,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 15),
+                              decoration: BoxDecoration(
+                                  color: mainController.isDark.value
+                                      ? Colors.grey.shade300.withOpacity(0.3)
+                                      : Colors.grey.shade300.withOpacity(0.1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              width: 330,
+                              margin: EdgeInsets.all(10),
+                              child: Widgets.sideBar(
+                                  mainController: mainController)),
                         ),
                       ),
                     ],
@@ -247,8 +78,6 @@ class _HomeContainerState extends State<HomeContainer> {
                                 mainController.pageController.page!.round() >
                                     0)) {
                           mainController.scrollBtn.value = 1.0;
-                          // } else if (mainController.isDark.value) {
-                          //   mainController.scrollBtn.value = 0.8;
                         }
                         return false;
                       },

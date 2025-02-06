@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_porfolio/Models/Images.dart';
+import 'package:my_porfolio/Utils/ConstantsImages.dart';
 import 'package:my_porfolio/Models/MorphButton.dart';
 import 'package:my_porfolio/Utils/Constants.dart';
 import '../Models/ProjectCard.dart';
@@ -91,7 +91,7 @@ class MainController extends GetxController {
   RxList<ProjectCard> projects = [
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        image: Image.asset(ImagesConstants.logoPath + 'white_transparent.png'),
         label: 'portfolio'.obs,
         details:
             'this is my portfolio website developed using flutter web. it contains information about my skillset and what i am available for.'
@@ -105,7 +105,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.wholisticminds),
+        image: Image.asset(ImagesConstants.wholisticminds),
         label: 'Wholistic Minds'.obs,
         details: 'medical app currently operational in USA.'.obs,
         devLang: 'flutter'.obs,
@@ -117,7 +117,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.hah),
+        image: Image.asset(ImagesConstants.hah),
         label: 'My Hotel and Home'.obs,
         details:
             'home/apartment/flat/rooms/hotel rental application currently operational in Nepal.'
@@ -131,7 +131,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        image: Image.asset(ImagesConstants.logoPath + 'white_transparent.png'),
         label: 'Fullmoon Mobile App'.obs,
         details:
             'construction management application currently operational in Nepal.'
@@ -145,7 +145,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.pfd),
+        image: Image.asset(ImagesConstants.pfd),
         label: 'Pokhara Food Delivery App'.obs,
         details:
             'food order/delivery application currently operational in Pokhara.'
@@ -156,7 +156,7 @@ class MainController extends GetxController {
         tags: [CONSTANTS.projectTagCompleted].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.ilg),
+        image: Image.asset(ImagesConstants.ilg),
         label: 'ILG Order Booking App'.obs,
         details:
             'updated version of ILG Vansales App (Mobile Sales) with then latest dart version (3.0.7), with modified features.'
@@ -170,7 +170,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.vansales),
+        image: Image.asset(ImagesConstants.vansales),
         label: 'ILG Vansales App (Mobile Sales)'.obs,
         details:
             'inventory management and stock order application designed by EBT LLC, Dubai for their clients.'
@@ -184,7 +184,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.ebt),
+        image: Image.asset(ImagesConstants.ebt),
         label: 'EBT Hospitality App'.obs,
         details:
             'menu + mobile POS system for multiple restaurants and lounges for clients of EBT LLC, Dubai.'
@@ -198,7 +198,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.tim_hortons),
+        image: Image.asset(ImagesConstants.tim_hortons),
         label: 'Tim Hortons POS'.obs,
         details:
             'mobile POS application for Tim Hortons clients of EBT LLC, Dubai.'
@@ -212,7 +212,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        image: Image.asset(ImagesConstants.logoPath + 'white_transparent.png'),
         label: 'weather app'.obs,
         details: 'a simple weather application.'.obs,
         devLang: 'flutter'.obs,
@@ -224,7 +224,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        image: Image.asset(ImagesConstants.logoPath + 'white_transparent.png'),
         label: 'passenger life'.obs,
         details:
             'portfolio/blog web application for ui/ux designer, Ms. Aayushi Shrestha.'
@@ -237,7 +237,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        image: Image.asset(ImagesConstants.logoPath + 'white_transparent.png'),
         label: 'ghar jagga'.obs,
         details: 'real estate application for Pokhara, Nepal.'.obs,
         devLang: 'flutter'.obs,
@@ -249,7 +249,7 @@ class MainController extends GetxController {
         ].obs),
     ProjectCard(
         showDetails: false.obs,
-        image: Image.asset(AppImages.logoPath + 'white_transparent.png'),
+        image: Image.asset(ImagesConstants.logoPath + 'white_transparent.png'),
         label: 'toda mart'.obs,
         details: 'profile website for Toda Mart, Pokhara'.obs,
         devLang: 'react'.obs,
@@ -370,8 +370,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.flutter),
-            image_hovered: Image.asset(AppImages.flutter_hovered),
+            image: Image.asset(ImagesConstants.flutter),
+            image_hovered: Image.asset(ImagesConstants.flutter_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'flutter'.obs),
@@ -379,8 +379,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.react),
-            image_hovered: Image.asset(AppImages.react_hovered),
+            image: Image.asset(ImagesConstants.react),
+            image_hovered: Image.asset(ImagesConstants.react_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'react'.obs),
@@ -388,8 +388,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.vue),
-            image_hovered: Image.asset(AppImages.vue_hovered),
+            image: Image.asset(ImagesConstants.vue),
+            image_hovered: Image.asset(ImagesConstants.vue_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'vue'.obs),
@@ -397,8 +397,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.github),
-            image_hovered: Image.asset(AppImages.github_hovered),
+            image: Image.asset(ImagesConstants.github),
+            image_hovered: Image.asset(ImagesConstants.github_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
@@ -406,8 +406,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.gitlab),
-            image_hovered: Image.asset(AppImages.gitlab_hovered),
+            image: Image.asset(ImagesConstants.gitlab),
+            image_hovered: Image.asset(ImagesConstants.gitlab_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'gitlab'.obs),
@@ -415,8 +415,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.upwork),
-            image_hovered: Image.asset(AppImages.upwork_hovered),
+            image: Image.asset(ImagesConstants.upwork),
+            image_hovered: Image.asset(ImagesConstants.upwork_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'upwork'.obs),
@@ -424,8 +424,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.projects),
-            image_hovered: Image.asset(AppImages.projects_hovered),
+            image: Image.asset(ImagesConstants.projects),
+            image_hovered: Image.asset(ImagesConstants.projects_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'projects'.obs),
@@ -435,8 +435,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.vs_code),
-            image_hovered: Image.asset(AppImages.vs_code_hovered),
+            image: Image.asset(ImagesConstants.vs_code),
+            image_hovered: Image.asset(ImagesConstants.vs_code_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'vscode'.obs),
@@ -444,8 +444,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.android_studio),
-            image_hovered: Image.asset(AppImages.android_studio_hovered),
+            image: Image.asset(ImagesConstants.android_studio),
+            image_hovered: Image.asset(ImagesConstants.android_studio_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'android_studio'.obs),
@@ -455,8 +455,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.valorant),
-            image_hovered: Image.asset(AppImages.valorant_hovered),
+            image: Image.asset(ImagesConstants.valorant),
+            image_hovered: Image.asset(ImagesConstants.valorant_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'valorant'.obs),
@@ -464,8 +464,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.apex),
-            image_hovered: Image.asset(AppImages.apex_hovered),
+            image: Image.asset(ImagesConstants.apex),
+            image_hovered: Image.asset(ImagesConstants.apex_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'apex legends'.obs),
@@ -473,8 +473,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.gtav),
-            image_hovered: Image.asset(AppImages.gtav_hovered),
+            image: Image.asset(ImagesConstants.gtav),
+            image_hovered: Image.asset(ImagesConstants.gtav_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'gta v'.obs),
@@ -484,8 +484,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: true.obs,
-            image: Image.asset(AppImages.yt),
-            image_hovered: Image.asset(AppImages.yt_hovered),
+            image: Image.asset(ImagesConstants.yt),
+            image_hovered: Image.asset(ImagesConstants.yt_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'yt'.obs),
@@ -493,8 +493,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.twitch),
-            image_hovered: Image.asset(AppImages.twitch_hovered),
+            image: Image.asset(ImagesConstants.twitch),
+            image_hovered: Image.asset(ImagesConstants.twitch_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'twitch'.obs),
@@ -502,8 +502,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.discord),
-            image_hovered: Image.asset(AppImages.discord_hovered),
+            image: Image.asset(ImagesConstants.discord),
+            image_hovered: Image.asset(ImagesConstants.discord_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'discord'.obs),
@@ -513,8 +513,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.fb),
-            image_hovered: Image.asset(AppImages.fb_hovered),
+            image: Image.asset(ImagesConstants.fb),
+            image_hovered: Image.asset(ImagesConstants.fb_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'fb'.obs),
@@ -522,8 +522,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.ig),
-            image_hovered: Image.asset(AppImages.ig_hovered),
+            image: Image.asset(ImagesConstants.ig),
+            image_hovered: Image.asset(ImagesConstants.ig_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'ig'.obs),
@@ -531,8 +531,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.twitter),
-            image_hovered: Image.asset(AppImages.twitter_hovered),
+            image: Image.asset(ImagesConstants.twitter),
+            image_hovered: Image.asset(ImagesConstants.twitter_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'twitter'.obs),
@@ -540,8 +540,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.linkd),
-            image_hovered: Image.asset(AppImages.linkd_hovered),
+            image: Image.asset(ImagesConstants.linkd),
+            image_hovered: Image.asset(ImagesConstants.linkd_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'linkd'.obs),
@@ -551,8 +551,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.linkd),
-            image_hovered: Image.asset(AppImages.linkd_hovered),
+            image: Image.asset(ImagesConstants.linkd),
+            image_hovered: Image.asset(ImagesConstants.linkd_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'linkd'.obs),
@@ -560,8 +560,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.github),
-            image_hovered: Image.asset(AppImages.github_hovered),
+            image: Image.asset(ImagesConstants.github),
+            image_hovered: Image.asset(ImagesConstants.github_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'github'.obs),
@@ -569,8 +569,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.gitlab),
-            image_hovered: Image.asset(AppImages.gitlab_hovered),
+            image: Image.asset(ImagesConstants.gitlab),
+            image_hovered: Image.asset(ImagesConstants.gitlab_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'gitlab'.obs),
@@ -580,8 +580,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.soundcloud),
-            image_hovered: Image.asset(AppImages.soundcloud_hovered),
+            image: Image.asset(ImagesConstants.soundcloud),
+            image_hovered: Image.asset(ImagesConstants.soundcloud_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'soundcloud'.obs),
@@ -589,8 +589,8 @@ class MainController extends GetxController {
             isClicked: false.obs,
             showDetails: false.obs,
             isFocused: false.obs,
-            image: Image.asset(AppImages.bandlab),
-            image_hovered: Image.asset(AppImages.bandlab_hovered),
+            image: Image.asset(ImagesConstants.bandlab),
+            image_hovered: Image.asset(ImagesConstants.bandlab_hovered),
             pad: 50.0.obs,
             scale: 0.0.obs,
             link: 'bandlabs'.obs),
