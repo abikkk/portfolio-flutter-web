@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import '../Controllers/MainController.dart';
-import 'Utils.dart';
+import 'FunctionUtils.dart';
 
 class FloatingNavBarDesktop extends StatelessWidget {
   const FloatingNavBarDesktop({Key? key, required this.mainController})

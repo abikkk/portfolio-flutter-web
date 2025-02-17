@@ -6,7 +6,7 @@ import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/ConstantsImages.dart';
-import 'package:my_porfolio/Utils/Utils.dart';
+import 'package:my_porfolio/Utils/FunctionUtils.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -375,7 +375,7 @@ class Widgets {
                   children: [
                     Widgets.customShadowBox(
                       Text(
-                        'portfolio',
+                        'hi',
                         style: AppThemeData
                             .appThemeData.textTheme.headlineMedium!
                             .copyWith(
@@ -393,7 +393,7 @@ class Widgets {
                       Expanded(
                         child: Widgets.customShadowBox(
                           Text(
-                            'i am a flutter developer .\ni have experiences with frontend development for 4+ years now.\nother skillsets that i have are as follows:\ GitHub/GitLab, JS, NPM, Figma',
+                            'i am a flutter developer\ni have experiences with frontend mobile application development for 4+ years now\nother skillsets that i have are as follows:\ GitHub/GitLab, Figma, Firebase, etc',
                             softWrap: true,
                             style: AppThemeData
                                 .appThemeData.textTheme.bodyMedium!
@@ -467,7 +467,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i am currently working as a senior flutter developer for a private software solution company in Kathmandu, involved in multiple local as well as international projects for our clients\n* notable examples of projects I have worked on:',
+                      'i am currently working as a freelance flutter developer\npreviously i was involved in multiple local as well as international projects for multiple clients\nnotable examples of projects I have worked on:',
                       maxLines: 8,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
                           .copyWith(
@@ -997,14 +997,14 @@ class Widgets {
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
-            mainController.codingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+            // mainController.codingMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .12;
             mainController.codingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
-            mainController.codingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .10;
+            // mainController.codingMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .10;
             mainController.codingMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1112,14 +1112,14 @@ class Widgets {
         padding: const EdgeInsets.all(15.0),
         child: MouseRegion(
           onEnter: (a) {
-            mainController.gamingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+            // mainController.gamingMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .12;
             mainController.gamingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
-            mainController.gamingMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .10;
+            // mainController.gamingMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .10;
             mainController.gamingMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1208,14 +1208,14 @@ class Widgets {
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
-            mainController.streamMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+            // mainController.streamMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .12;
             mainController.streamMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
-            mainController.streamMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .10;
+            // mainController.streamMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .10;
             mainController.streamMorphButtons[buttonType].showDetails.value =
                 false;
           },
@@ -1329,14 +1329,14 @@ class Widgets {
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
-            mainController.socialMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
+            // mainController.socialMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .12;
             mainController.socialMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
-            mainController.socialMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .10;
+            // mainController.socialMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .10;
             mainController.socialMorphButtons[buttonType].showDetails.value =
                 false;
           },

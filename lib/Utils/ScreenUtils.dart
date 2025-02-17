@@ -100,7 +100,7 @@ class Screens {
               // flex: 3,
               child: PageView(
                 pageSnapping: isDesktop ? false : true,
-                allowImplicitScrolling: true,
+                allowImplicitScrolling: isDesktop ? false : true,
                 physics: isDesktop
                     ? NeverScrollableScrollPhysics()
                     : ClampingScrollPhysics(),
@@ -177,85 +177,98 @@ class Screens {
       required bool isDesktop}) {
     return Stack(
       children: [
-        PageView(
-            physics: isDesktop
-                ? NeverScrollableScrollPhysics()
-                : ClampingScrollPhysics(),
-            allowImplicitScrolling: true,
-            scrollDirection: (isDesktop) ? Axis.vertical : Axis.horizontal,
-            controller: mainController.gamingController,
-            onPageChanged: (value) {
-              if (mainController.gamingController.page!.round() == 1) {
-                mainController.isGameScrollDown.value = false;
-              } else {
-                mainController.isGameScrollDown.value = true;
-              }
-            },
-            children: [
-              // youtube twitch discord
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Row(
+        Column(
+          children: [
+            Expanded(
+              child: PageView(
+                  pageSnapping: isDesktop ? false : true,
+                  allowImplicitScrolling: isDesktop ? false : true,
+                  physics:
+                      // NeverScrollableScrollPhysics(),
+                      isDesktop
+                          ? NeverScrollableScrollPhysics()
+                          : ClampingScrollPhysics(),
+                  scrollDirection:
+                      (isDesktop) ? Axis.vertical : Axis.horizontal,
+                  controller: mainController.gamingController,
+                  onPageChanged: (value) {
+                    if (mainController.gamingController.page!.round() == 1) {
+                      mainController.isGameScrollDown.value = false;
+                    } else {
+                      mainController.isGameScrollDown.value = true;
+                    }
+                  },
                   children: [
-                    Expanded(
-                      flex: 3,
-                      child: PageView(
-                        pageSnapping: isDesktop ? false : true,
-                        allowImplicitScrolling: true,
-                        scrollDirection:
-                            (isDesktop) ? Axis.vertical : Axis.horizontal,
-                        onPageChanged: (event) {
-                          for (int i = 0; i < 3; i++) {
-                            if (mainController.streamController.page!.round() !=
-                                i)
-                              mainController.streamMorphButtons[i].isFocused
-                                  .value = false;
-                            else
-                              mainController
-                                  .streamMorphButtons[i].isFocused.value = true;
-                          }
-
-                          mainController.gamingIndex.value =
-                              mainController.streamController.page!.round();
-                        },
+                    // youtube twitch discord
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Row(
                         children: [
-                          Widgets.YoutubeDetails(
-                            context: context,
-                            mainController: mainController,
-                            isDesktop: isDesktop,
+                          Expanded(
+                            flex: 3,
+                            child: PageView(
+                              pageSnapping: isDesktop ? false : true,
+                              allowImplicitScrolling: true,
+                              scrollDirection:
+                                  (isDesktop) ? Axis.vertical : Axis.horizontal,
+                              onPageChanged: (event) {
+                                for (int i = 0; i < 3; i++) {
+                                  if (mainController.streamController.page!
+                                          .round() !=
+                                      i)
+                                    mainController.streamMorphButtons[i]
+                                        .isFocused.value = false;
+                                  else
+                                    mainController.streamMorphButtons[i]
+                                        .isFocused.value = true;
+                                }
+
+                                mainController.gamingIndex.value =
+                                    mainController.streamController.page!
+                                        .round();
+                              },
+                              children: [
+                                Widgets.YoutubeDetails(
+                                  context: context,
+                                  mainController: mainController,
+                                  isDesktop: isDesktop,
+                                ),
+                                Widgets.TwitchDetails(
+                                  context: context,
+                                  mainController: mainController,
+                                  isDesktop: isDesktop,
+                                ),
+                                Widgets.DiscordDetails(
+                                  context: context,
+                                  mainController: mainController,
+                                  isDesktop: isDesktop,
+                                ),
+                              ],
+                              controller: mainController.streamController,
+                            ),
                           ),
-                          Widgets.TwitchDetails(
-                            context: context,
-                            mainController: mainController,
-                            isDesktop: isDesktop,
-                          ),
-                          Widgets.DiscordDetails(
-                            context: context,
-                            mainController: mainController,
-                            isDesktop: isDesktop,
-                          ),
+                          if (isDesktop)
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Widgets.streamMorphButtons(
+                                      context, mainController, 0),
+                                  Widgets.streamMorphButtons(
+                                      context, mainController, 1),
+                                  Widgets.streamMorphButtons(
+                                      context, mainController, 2),
+                                ],
+                              ),
+                            ),
                         ],
-                        controller: mainController.streamController,
                       ),
                     ),
-                    if (isDesktop)
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Widgets.streamMorphButtons(
-                                context, mainController, 0),
-                            Widgets.streamMorphButtons(
-                                context, mainController, 1),
-                            Widgets.streamMorphButtons(
-                                context, mainController, 2),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ]),
+                  ]),
+            ),
+          ],
+        ),
+        SizedBox.shrink()
       ],
     );
   }

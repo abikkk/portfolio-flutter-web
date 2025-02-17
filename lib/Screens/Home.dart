@@ -5,9 +5,8 @@ import 'package:my_porfolio/Utils/ScreenUtils.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
-import '../Utils/ConstantsImages.dart';
 import '../Utils/FloatingNavBar.dart';
-import '../Utils/Utils.dart';
+import '../Utils/FunctionUtils.dart';
 
 class HomeContainer extends StatefulWidget {
   HomeContainer({Key? key}) : super(key: key);
