@@ -8,13 +8,14 @@ import '../Controllers/MainController.dart';
 import 'FunctionUtils.dart';
 
 class FloatingNavBarDesktop extends StatelessWidget {
-  const FloatingNavBarDesktop({Key? key, required this.mainController})
-      : super(key: key);
-
-  final MainController mainController;
+  const FloatingNavBarDesktop({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.find<MainController>();
+
     return Obx(
       () => AnimatedContainer(
         // margin: EdgeInsets.only(right: 30),
@@ -94,25 +95,21 @@ class FloatingNavBarDesktop extends StatelessWidget {
                             FloatingNavBarIcons(
                               hoverID: 2,
                               iconData: Icons.format_list_bulleted_rounded,
-                              mainController: mainController,
                               // isDesktop: true,
                             ),
                             FloatingNavBarIcons(
                               hoverID: 3,
                               iconData: Icons.games_rounded,
-                              mainController: mainController,
                               // isDesktop: true,
                             ),
                             FloatingNavBarIcons(
                               hoverID: 4,
                               iconData: Icons.music_note_rounded,
-                              mainController: mainController,
                               // isDesktop: true,
                             ),
                             FloatingNavBarIcons(
                               hoverID: 5,
                               iconData: Icons.person_rounded,
-                              mainController: mainController,
                               // isDesktop: true,
                             ),
                             // FloatingNavBarIcons(
@@ -140,6 +137,7 @@ class FloatingNavBar extends StatelessWidget {
       : super(key: key);
 
   final MainController mainController;
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -149,8 +147,7 @@ class FloatingNavBar extends StatelessWidget {
         showElevation: true,
         onItemSelected: (index) {
           mainController.navIndex.value = index;
-          Functions.navigate(
-              index + 1, mainController.pageController, mainController);
+          Functions.navigate(index + 1, mainController.pageController);
         },
         items: [
           Widgets.flashyTabBarItem('home', Icons.home),
@@ -169,15 +166,15 @@ class FloatingNavBarIcons extends StatelessWidget {
     Key? key,
     required this.hoverID,
     required this.iconData,
-    required this.mainController,
   }) : super(key: key);
 
   final int hoverID;
   final IconData iconData;
-  final MainController mainController;
 
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.find<MainController>();
+
     return Obx(
       () => AnimatedPadding(
         padding: EdgeInsets.symmetric(
@@ -204,6 +201,8 @@ class FloatingNavBarIcons extends StatelessWidget {
   }
 
   Widget iconWidget(int navID) {
+    MainController mainController = Get.find<MainController>();
+
     return (navID != 0 && navID == hoverID)
         ? SimpleShadow(
             child: GestureDetector(
@@ -218,8 +217,7 @@ class FloatingNavBarIcons extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Functions.navigate(
-                      navID, mainController.pageController, mainController);
+                  Functions.navigate(navID, mainController.pageController);
                 }),
           )
         // : Widgets.bulletineIcon(true,
@@ -231,8 +229,7 @@ class FloatingNavBarIcons extends StatelessWidget {
                     : Colors.black45),
             iconSize: (mainController.navHovered == 0) ? 5 : 8,
             onPressed: () {
-              Functions.navigate(
-                  navID, mainController.pageController, mainController);
+              Functions.navigate(navID, mainController.pageController);
             });
   }
 }

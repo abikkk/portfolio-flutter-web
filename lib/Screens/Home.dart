@@ -16,13 +16,14 @@ class HomeContainer extends StatefulWidget {
 }
 
 class _HomeContainerState extends State<HomeContainer> {
-  final MainController mainController = MainController();
+  final MainController mainController = Get.find<MainController>();
+
   double bg = 0.0;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Functions.precacheImages(mainController, context); // pre-load images
+    Functions.precacheImages(context); // pre-load images
   }
 
 // fetches mouse pointer location
@@ -59,8 +60,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                       BorderRadius.all(Radius.circular(20))),
                               width: 330,
                               margin: EdgeInsets.all(10),
-                              child: Widgets.sideBar(
-                                  mainController: mainController)),
+                              child: Widgets.sideBar()),
                         ),
                       ),
                     ],
@@ -91,18 +91,18 @@ class _HomeContainerState extends State<HomeContainer> {
                                     sizingInformation.deviceScreenType ==
                                         DeviceScreenType.desktop) {
                                   Functions.navigate(
-                                      mainController.codingIndex.value + 1,
-                                      mainController.codingController,
-                                      mainController);
+                                    mainController.codingIndex.value + 1,
+                                    mainController.codingController,
+                                  );
                                 }
 
                                 if (mainController.gamingIndex.value > 0 &&
                                     sizingInformation.deviceScreenType ==
                                         DeviceScreenType.desktop) {
                                   Functions.navigate(
-                                      mainController.gamingIndex.value + 1,
-                                      mainController.streamController,
-                                      mainController);
+                                    mainController.gamingIndex.value + 1,
+                                    mainController.streamController,
+                                  );
                                 }
                               },
                               physics: sizingInformation.deviceScreenType ==
@@ -137,13 +137,11 @@ class _HomeContainerState extends State<HomeContainer> {
                                   ),
                                 Screens.CodingContainer(
                                     context: context,
-                                    mainController: mainController,
                                     isDesktop:
                                         sizingInformation.deviceScreenType ==
                                             DeviceScreenType.desktop),
                                 Screens.GamingContainer(
                                     context: context,
-                                    mainController: mainController,
                                     isDesktop:
                                         sizingInformation.deviceScreenType ==
                                             DeviceScreenType.desktop),
@@ -168,9 +166,7 @@ class _HomeContainerState extends State<HomeContainer> {
                             // floating nav bar
                             if (sizingInformation.deviceScreenType ==
                                 DeviceScreenType.desktop)
-                              FloatingNavBarDesktop(
-                                mainController: mainController,
-                              ),
+                              FloatingNavBarDesktop(),
 
                             // dark-light theme toggle
                             Row(
@@ -198,7 +194,7 @@ class _HomeContainerState extends State<HomeContainer> {
             ),
             floatingActionButton:
                 (sizingInformation.deviceScreenType != DeviceScreenType.desktop)
-                    ? Widgets.scrollButton(mainController)
+                    ? Widgets.scrollButton()
                     : null,
           ),
         ),

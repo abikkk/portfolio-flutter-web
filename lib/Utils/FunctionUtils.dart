@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_porfolio/Controllers/CodingController.dart';
+import 'package:my_porfolio/Controllers/GamingController.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
+import 'package:my_porfolio/Controllers/MusicController.dart';
+import 'package:my_porfolio/Controllers/SocialsController.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // functions
@@ -44,7 +49,7 @@ class Functions {
       case 'linkd':
         {
           if (!await launchUrl(
-              Uri.parse('https://www.linkedin.com/in/abik-vaidhya-ab9015168/')))
+              Uri.parse('https://www.linkedin.com/in/abik-vaidhya/')))
             throw 'Could not launch LinkedIn Link!';
           break;
         }
@@ -143,49 +148,56 @@ class Functions {
   }
 
 // page view navigation
-  static navigate(int navIndex, PageController pageController,
-      MainController mainController) {
+  static navigate(int navIndex, PageController pageController) {
+    MainController mainController = Get.find<MainController>();
+
     pageController.animateToPage(navIndex - 1,
         duration: Duration(milliseconds: 444), curve: Curves.easeInOut);
     mainController.navIndex.value = navIndex - 1;
   }
 
   // precache images
-  static precacheImages(MainController mainController, BuildContext context) {
-    for (int i = 0; i < mainController.codingMorphButtons.length; i++) {
-      precacheImage(mainController.codingMorphButtons[i].image.image, context);
+  static precacheImages(BuildContext context) {
+    CodingController codingController = Get.find<CodingController>();
+    GamingController gamingController = Get.find<GamingController>();
+    SocialsController socialsController = Get.find<SocialsController>();
+    // ProjectsController projectsController = Get.find<ProjectsController>();
+    MusicController musicController = Get.find<MusicController>();
+
+    for (int i = 0; i < codingController.codingMorphButtons.length; i++) {
+      precacheImage(codingController.codingMorphButtons[i].image.image, context);
       precacheImage(
-          mainController.codingMorphButtons[i].image_hovered.image, context);
+          codingController.codingMorphButtons[i].image_hovered.image, context);
     }
-    for (int i = 0; i < mainController.codeIDEMorphButtons.length; i++) {
-      precacheImage(mainController.codeIDEMorphButtons[i].image.image, context);
+    for (int i = 0; i < codingController.codeIDEMorphButtons.length; i++) {
+      precacheImage(codingController.codeIDEMorphButtons[i].image.image, context);
     }
-    for (int i = 0; i < mainController.gamingMorphButtons.length; i++) {
-      precacheImage(mainController.gamingMorphButtons[i].image.image, context);
+    for (int i = 0; i < gamingController.gamingMorphButtons.length; i++) {
+      precacheImage(gamingController.gamingMorphButtons[i].image.image, context);
       precacheImage(
-          mainController.gamingMorphButtons[i].image_hovered.image, context);
+          gamingController.gamingMorphButtons[i].image_hovered.image, context);
     }
-    for (int i = 0; i < mainController.socialMorphButtons.length; i++) {
-      precacheImage(mainController.socialMorphButtons[i].image.image, context);
+    for (int i = 0; i < socialsController.socialMorphButtons.length; i++) {
+      precacheImage(socialsController.socialMorphButtons[i].image.image, context);
       precacheImage(
-          mainController.socialMorphButtons[i].image_hovered.image, context);
+          socialsController.socialMorphButtons[i].image_hovered.image, context);
     }
-    for (int i = 0; i < mainController.streamMorphButtons.length; i++) {
-      precacheImage(mainController.streamMorphButtons[i].image.image, context);
+    for (int i = 0; i < gamingController.streamMorphButtons.length; i++) {
+      precacheImage(gamingController.streamMorphButtons[i].image.image, context);
       precacheImage(
-          mainController.streamMorphButtons[i].image_hovered.image, context);
+          gamingController.streamMorphButtons[i].image_hovered.image, context);
     }
-    for (int i = 0; i < mainController.jobSocialsMorphButtons.length; i++) {
+    for (int i = 0; i < codingController.jobSocialsMorphButtons.length; i++) {
       precacheImage(
-          mainController.jobSocialsMorphButtons[i].image.image, context);
+          codingController.jobSocialsMorphButtons[i].image.image, context);
       precacheImage(
-          mainController.jobSocialsMorphButtons[i].image_hovered.image,
+          codingController.jobSocialsMorphButtons[i].image_hovered.image,
           context);
     }
-    for (int i = 0; i < mainController.musicMorphButtons.length; i++) {
-      precacheImage(mainController.musicMorphButtons[i].image.image, context);
+    for (int i = 0; i < musicController.musicMorphButtons.length; i++) {
+      precacheImage(musicController.musicMorphButtons[i].image.image, context);
       precacheImage(
-          mainController.musicMorphButtons[i].image_hovered.image, context);
+          musicController.musicMorphButtons[i].image_hovered.image, context);
     }
   }
 }

@@ -2,7 +2,11 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:get/get.dart';
+import 'package:my_porfolio/Controllers/CodingController.dart';
+import 'package:my_porfolio/Controllers/GamingController.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
+import 'package:my_porfolio/Controllers/MusicController.dart';
+import 'package:my_porfolio/Controllers/SocialsController.dart';
 import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/ConstantsImages.dart';
@@ -11,7 +15,8 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class Widgets {
-  static Widget sideBar({required MainController mainController}) {
+  static Widget sideBar() {
+    MainController mainController = Get.find<MainController>();
     return Column(
       children: [
         Container(
@@ -167,7 +172,8 @@ class Widgets {
     );
   }
 
-  static Widget scrollButton(MainController mainController) {
+  static Widget scrollButton() {
+    MainController mainController = Get.find<MainController>();
     return Obx(
       () => AnimatedOpacity(
         opacity: mainController.scrollBtn.value,
@@ -175,8 +181,7 @@ class Widgets {
         child: IconButton(
             onPressed: () {
               mainController.navHovered.value = 0.0;
-              Functions.navigate(
-                  0, mainController.pageController, mainController);
+              Functions.navigate(0, mainController.pageController);
             },
             icon: Icon(
               Icons.arrow_drop_up_rounded,
@@ -202,8 +207,9 @@ class Widgets {
     );
   }
 
-  static MouseRegion desktopScrollButton(MainController mainController,
+  static MouseRegion desktopScrollButton(
       PageController pageController, RxBool scrollDown) {
+    MainController mainController = Get.find<MainController>();
     return MouseRegion(
       onEnter: (e) {
         mainController.showScrollBtn.value = 1.0;
@@ -234,7 +240,8 @@ class Widgets {
   }
 
   static Container projectCard(
-      MainController mainController, ProjectCard project, Color iconColor) {
+      ProjectCard project, Color iconColor) {
+    MainController mainController = Get.find<MainController>();
     return Container(
       margin: EdgeInsets.all(5),
       child: Card(
@@ -289,10 +296,9 @@ class Widgets {
     );
   }
 
-  static Widget subtitleTexts(
-      {required MainController mainController,
-      required int id,
-      required String label}) {
+  static Widget subtitleTexts({required int id, required String label}) {
+    MainController mainController = Get.find<MainController>();
+
     return MouseRegion(
       onEnter: (v) {
         switch (id) {
@@ -334,8 +340,7 @@ class Widgets {
             child: GestureDetector(
               // hoverColor: Colors.transparent,
               onTap: () {
-                Functions.navigate(
-                    id + 2, mainController.pageController, mainController);
+                Functions.navigate(id + 2, mainController.pageController);
               },
               child: Text(
                 '${label}',
@@ -359,9 +364,9 @@ class Widgets {
 
 // coding
   static Widget CodingIntroDetails(
-      {required BuildContext context,
-      required MainController mainController,
-      required bool isDesktop}) {
+      {required BuildContext context, required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
+
     return Padding(
       padding: EdgeInsets.all((isDesktop) ? 44.0 : 20.0),
       child: Column(
@@ -417,20 +422,13 @@ class Widgets {
               child: Wrap(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Widgets.codingMorphButtons(context, mainController, 0,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 1,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 2,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 3,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 4,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 5,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 6,
-                      isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 0, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 1, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 2, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 5, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 6, isDesktop: isDesktop),
                 ],
               ),
             ),
@@ -439,8 +437,9 @@ class Widgets {
     );
   }
 
-  static Widget FlutterDetails(
-      {required MainController mainController, required bool isDesktop}) {
+  static Widget FlutterDetails({required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
+
     return Padding(
       padding: const EdgeInsets.all(44.0),
       child: Column(
@@ -588,8 +587,8 @@ class Widgets {
     );
   }
 
-  static Widget ReactDetails(
-      {required MainController mainController, required bool isDesktop}) {
+  static Widget ReactDetails({required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
       child: Column(
@@ -656,8 +655,8 @@ class Widgets {
     );
   }
 
-  static Widget VueDetails(
-      {required MainController mainController, required bool isDesktop}) {
+  static Widget VueDetails({required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
       child: Column(
@@ -703,8 +702,10 @@ class Widgets {
     );
   }
 
-  static Widget ProjectDetails(
-      {required MainController mainController, required bool isDesktop}) {
+  static Widget ProjectDetails({required bool isDesktop}) {
+    CodingController codingController = Get.find<CodingController>();
+    MainController mainController = Get.find<MainController>();
+
     return Padding(
       padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
       child: Column(
@@ -734,7 +735,7 @@ class Widgets {
                       () => AnimatedSwitcher(
                         duration: Duration(milliseconds: 500),
                         child: (mainController.projectDetails.value)
-                            ? projectDetailSection(mainController, isDesktop)
+                            ? projectDetailSection( isDesktop)
                             : GridView(
                                 shrinkWrap: true,
                                 padding: EdgeInsets.all(10),
@@ -745,9 +746,8 @@ class Widgets {
                                         crossAxisCount: (isDesktop) ? 6 : 2),
                                 children: [
                                   for (ProjectCard project
-                                      in mainController.projects)
+                                      in codingController.projects)
                                     Widgets.projectCard(
-                                        mainController,
                                         project,
                                         project.devLang.value == 'vue'
                                             ? Colors.green
@@ -771,7 +771,8 @@ class Widgets {
   }
 
   static Padding projectDetailSection(
-      MainController mainController, bool isDesktop) {
+      bool isDesktop) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: customShadowBox(
@@ -785,12 +786,16 @@ class Widgets {
                       mainController.projectDetails.value =
                           !mainController.projectDetails.value;
                     },
-                    child: Icon(Icons.arrow_back_ios)),
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    )),
                 Expanded(
                   child: Center(
                     child: Text(
                       mainController.selectedProject.label.value,
-                      style: AppThemeData.appThemeData.textTheme.displayLarge,
+                      style: AppThemeData.appThemeData.textTheme.displayLarge!
+                          .copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -805,6 +810,8 @@ class Widgets {
                   child: Text(
                     mainController.selectedProject.details.value,
                     softWrap: true,
+                    style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                        .copyWith(color: Colors.white),
                     maxLines: 8,
                   ),
                 )
@@ -816,7 +823,11 @@ class Widgets {
             Row(
               children: [
                 Expanded(
-                  child: Text('developed using:'),
+                  child: Text(
+                    'developed using:',
+                    style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                        .copyWith(color: Colors.white),
+                  ),
                 ),
                 Expanded(
                     flex: (isDesktop) ? 3 : 1,
@@ -829,12 +840,19 @@ class Widgets {
             Row(
               children: [
                 Expanded(
-                  child: Text('platforms:'),
+                  child: Text(
+                    'platforms:',
+                    style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                        .copyWith(color: Colors.white),
+                  ),
                 ),
                 Expanded(
                     flex: (isDesktop) ? 3 : 1,
                     child: Text(
-                        mainController.selectedProject.platform.toString()))
+                      mainController.selectedProject.platform.toString(),
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(color: Colors.white),
+                    ))
               ],
             )
           ],
@@ -846,8 +864,8 @@ class Widgets {
 // gaming
   static Widget YoutubeDetails(
       {required BuildContext context,
-      required MainController mainController,
       required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.all(44.0),
       child: Column(
@@ -856,7 +874,6 @@ class Widgets {
           Row(
             children: [
               Widgets.StreamLinkButtons(
-                mainController,
                 0,
                 'youtube',
               ),
@@ -885,8 +902,7 @@ class Widgets {
           ),
           (isDesktop)
               ? SizedBox()
-              : Widgets.streamMorphButtons(context, mainController, 0,
-                  isDesktop: false)
+              : Widgets.streamMorphButtons(context, 0, isDesktop: false)
         ],
       ),
     );
@@ -894,8 +910,8 @@ class Widgets {
 
   static Widget TwitchDetails(
       {required BuildContext context,
-      required MainController mainController,
       required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.all(44.0),
       child: Column(
@@ -904,7 +920,6 @@ class Widgets {
           Row(
             children: [
               Widgets.StreamLinkButtons(
-                mainController,
                 1,
                 'twitch',
               ),
@@ -933,8 +948,7 @@ class Widgets {
           ),
           (isDesktop)
               ? SizedBox()
-              : Widgets.streamMorphButtons(context, mainController, 1,
-                  isDesktop: false)
+              : Widgets.streamMorphButtons(context, 1, isDesktop: false)
         ],
       ),
     );
@@ -942,8 +956,8 @@ class Widgets {
 
   static Widget DiscordDetails(
       {required BuildContext context,
-      required MainController mainController,
       required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.all(44.0),
       child: Column(
@@ -952,7 +966,6 @@ class Widgets {
           Row(
             children: [
               Widgets.StreamLinkButtons(
-                mainController,
                 2,
                 'discord',
               ),
@@ -981,17 +994,18 @@ class Widgets {
           ),
           (isDesktop)
               ? SizedBox()
-              : Widgets.streamMorphButtons(context, mainController, 2,
-                  isDesktop: false)
+              : Widgets.streamMorphButtons(context, 2, isDesktop: false)
         ],
       ),
     );
   }
 
 // morph buttons
-  static Widget codingMorphButtons(
-      BuildContext context, MainController mainController, int buttonType,
+  static Widget codingMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true}) {
+    MainController mainController = Get.find<MainController>();
+    CodingController codingController = Get.find<CodingController>();
+
     return Obx(
       () => Padding(
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
@@ -999,20 +1013,21 @@ class Widgets {
           onEnter: (a) {
             // mainController.codingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            mainController.codingMorphButtons[buttonType].showDetails.value =
+            codingController.codingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             // mainController.codingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            mainController.codingMorphButtons[buttonType].showDetails.value =
+            codingController.codingMorphButtons[buttonType].showDetails.value =
                 false;
           },
           child: InkWell(
             onTap: () async {
               if (buttonType < 3 || buttonType == 6) {
-                mainController.codingMorphButtons[buttonType].isClicked.value =
-                    !mainController
+                codingController
+                        .codingMorphButtons[buttonType].isClicked.value =
+                    !codingController
                         .codingMorphButtons[buttonType].isClicked.value;
 
                 mainController.codingController.animateToPage((buttonType + 1),
@@ -1021,14 +1036,14 @@ class Widgets {
 
                 // delay
                 Future.delayed(const Duration(milliseconds: 150), () {
-                  mainController
+                  codingController
                           .codingMorphButtons[buttonType].isClicked.value =
-                      !mainController
+                      !codingController
                           .codingMorphButtons[buttonType].isClicked.value;
                 });
               } else {
                 Functions.openLink(
-                    mainController.codingMorphButtons[buttonType].link.value);
+                    codingController.codingMorphButtons[buttonType].link.value);
               }
             },
             child: Wrap(
@@ -1040,16 +1055,16 @@ class Widgets {
                       color: (mainController.isDark.value)
                           ? Colors.black
                           : Colors.white,
-                      gradient: (mainController.codingMorphButtons[buttonType]
+                      gradient: (codingController.codingMorphButtons[buttonType]
                                   .showDetails.value ||
-                              mainController.codingMorphButtons[buttonType]
+                              codingController.codingMorphButtons[buttonType]
                                   .isFocused.value)
                           ? LinearGradient(
                               colors:
                                   mainController.skillsGradientList[buttonType])
                           : null,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: !mainController
+                      boxShadow: !codingController
                               .codingMorphButtons[buttonType].isClicked.value
                           ? [
                               BoxShadow(
@@ -1071,28 +1086,28 @@ class Widgets {
                             ]
                           : null),
                   child: Padding(
-                    padding: EdgeInsets.all(mainController
+                    padding: EdgeInsets.all(codingController
                         .codingMorphButtons[buttonType].pad.value),
                     child: AnimatedContainer(
                       curve: Curves.easeIn,
-                      height: mainController
+                      height: codingController
                                   .codingMorphButtons[buttonType].scale.value !=
                               0.0
-                          ? mainController
+                          ? codingController
                               .codingMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
-                      child: mainController
+                      child: codingController
                               .codingMorphButtons[buttonType].showDetails.value
                           ? (mainController.isDark.value)
-                              ? mainController
+                              ? codingController
                                   .codingMorphButtons[buttonType].image_hovered
-                              : mainController
+                              : codingController
                                   .codingMorphButtons[buttonType].image
                           : (mainController.isDark.value)
-                              ? mainController
+                              ? codingController
                                   .codingMorphButtons[buttonType].image_hovered
-                              : mainController
+                              : codingController
                                   .codingMorphButtons[buttonType].image,
                     ),
                   ),
@@ -1105,8 +1120,10 @@ class Widgets {
     );
   }
 
-  static Widget gamingMorphButtons(
-      BuildContext context, MainController mainController, int buttonType) {
+  static Widget gamingMorphButtons(BuildContext context, int buttonType) {
+    MainController mainController = Get.find<MainController>();
+    GamingController gamingController = Get.find<GamingController>();
+
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(15.0),
@@ -1114,19 +1131,19 @@ class Widgets {
           onEnter: (a) {
             // mainController.gamingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            mainController.gamingMorphButtons[buttonType].showDetails.value =
+            gamingController.gamingMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             // mainController.gamingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            mainController.gamingMorphButtons[buttonType].showDetails.value =
+            gamingController.gamingMorphButtons[buttonType].showDetails.value =
                 false;
           },
           child: InkWell(
             onTap: () async {
-              mainController.gamingMorphButtons[buttonType].isClicked.value =
-                  !mainController
+              gamingController.gamingMorphButtons[buttonType].isClicked.value =
+                  !gamingController
                       .gamingMorphButtons[buttonType].isClicked.value;
 
               // mainController.gamingController.animateToPage(buttonType + 1,
@@ -1135,12 +1152,13 @@ class Widgets {
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
-                mainController.gamingMorphButtons[buttonType].isClicked.value =
-                    !mainController
+                gamingController
+                        .gamingMorphButtons[buttonType].isClicked.value =
+                    !gamingController
                         .gamingMorphButtons[buttonType].isClicked.value;
 
                 Functions.openLink(
-                    mainController.gamingMorphButtons[buttonType].link.value);
+                    gamingController.gamingMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -1151,13 +1169,13 @@ class Widgets {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (mainController
+                      gradient: (gamingController
                               .gamingMorphButtons[buttonType].showDetails.value)
                           ? LinearGradient(
                               colors:
                                   mainController.gameGradientList[buttonType])
                           : null,
-                      boxShadow: !mainController
+                      boxShadow: !gamingController
                               .gamingMorphButtons[buttonType].isClicked.value
                           ? [
                               BoxShadow(
@@ -1173,22 +1191,23 @@ class Widgets {
                             ]
                           : null),
                   child: Padding(
-                    padding: EdgeInsets.all(mainController
+                    padding: EdgeInsets.all(gamingController
                         .gamingMorphButtons[buttonType].pad.value),
                     child: AnimatedContainer(
                       curve: Curves.easeIn,
-                      height: mainController
+                      height: gamingController
                                   .gamingMorphButtons[buttonType].scale.value !=
                               0.0
-                          ? mainController
+                          ? gamingController
                               .gamingMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
-                      child: mainController
+                      child: gamingController
                               .gamingMorphButtons[buttonType].showDetails.value
-                          ? mainController
+                          ? gamingController
                               .gamingMorphButtons[buttonType].image_hovered
-                          : mainController.gamingMorphButtons[buttonType].image,
+                          : gamingController
+                              .gamingMorphButtons[buttonType].image,
                     ),
                   ),
                 ),
@@ -1200,9 +1219,11 @@ class Widgets {
     );
   }
 
-  static Widget streamMorphButtons(
-      BuildContext context, MainController mainController, int buttonType,
+  static Widget streamMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true, bool isSocials = false}) {
+    MainController mainController = Get.find<MainController>();
+    GamingController gamingController = Get.find<GamingController>();
+
     return Obx(
       () => Padding(
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
@@ -1210,27 +1231,28 @@ class Widgets {
           onEnter: (a) {
             // mainController.streamMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            mainController.streamMorphButtons[buttonType].showDetails.value =
+            gamingController.streamMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             // mainController.streamMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            mainController.streamMorphButtons[buttonType].showDetails.value =
+            gamingController.streamMorphButtons[buttonType].showDetails.value =
                 false;
           },
           child: InkWell(
             onTap: () async {
               if (!isSocials) {
-                mainController.streamMorphButtons[buttonType].isClicked.value =
-                    !mainController
+                gamingController
+                        .streamMorphButtons[buttonType].isClicked.value =
+                    !gamingController
                         .streamMorphButtons[buttonType].isClicked.value;
 
                 // delay
                 Future.delayed(const Duration(milliseconds: 150), () {
-                  mainController
+                  gamingController
                           .streamMorphButtons[buttonType].isClicked.value =
-                      !mainController
+                      !gamingController
                           .streamMorphButtons[buttonType].isClicked.value;
 
                   if (isDesktop)
@@ -1238,12 +1260,12 @@ class Widgets {
                         duration: Duration(milliseconds: 200),
                         curve: Curves.easeInOut);
                   else
-                    Functions.openLink(mainController
+                    Functions.openLink(gamingController
                         .streamMorphButtons[buttonType].link.value);
                 });
               } else {
                 Functions.openLink(
-                    mainController.streamMorphButtons[buttonType].link.value);
+                    gamingController.streamMorphButtons[buttonType].link.value);
               }
             },
             child: Wrap(
@@ -1256,16 +1278,16 @@ class Widgets {
                           ? Colors.black
                           : Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (mainController.streamMorphButtons[buttonType]
+                      gradient: (gamingController.streamMorphButtons[buttonType]
                                   .showDetails.value ||
-                              mainController.streamMorphButtons[buttonType]
+                              gamingController.streamMorphButtons[buttonType]
                                       .isFocused.value &&
                                   isDesktop)
                           ? LinearGradient(
                               colors:
                                   mainController.streamGradientList[buttonType])
                           : null,
-                      boxShadow: !mainController
+                      boxShadow: !gamingController
                               .streamMorphButtons[buttonType].isClicked.value
                           ? [
                               BoxShadow(
@@ -1287,28 +1309,28 @@ class Widgets {
                             ]
                           : null),
                   child: Padding(
-                    padding: EdgeInsets.all(mainController
+                    padding: EdgeInsets.all(gamingController
                         .streamMorphButtons[buttonType].pad.value),
                     child: AnimatedContainer(
                       curve: Curves.easeIn,
-                      height: mainController
+                      height: gamingController
                                   .streamMorphButtons[buttonType].scale.value !=
                               0.0
-                          ? mainController
+                          ? gamingController
                               .streamMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
-                      child: mainController
+                      child: gamingController
                               .streamMorphButtons[buttonType].showDetails.value
                           ? (mainController.isDark.value)
-                              ? mainController
+                              ? gamingController
                                   .streamMorphButtons[buttonType].image
-                              : mainController
+                              : gamingController
                                   .streamMorphButtons[buttonType].image_hovered
                           : (mainController.isDark.value)
-                              ? mainController
+                              ? gamingController
                                   .streamMorphButtons[buttonType].image_hovered
-                              : mainController
+                              : gamingController
                                   .streamMorphButtons[buttonType].image,
                     ),
                   ),
@@ -1322,8 +1344,11 @@ class Widgets {
   }
 
   static Widget socialMorphButtons(
-      BuildContext context, MainController mainController, int buttonType,
+      BuildContext context, int buttonType,
       {bool isDesktop = true}) {
+    MainController mainController = Get.find<MainController>();
+    SocialsController socialsController = Get.find<SocialsController>();
+
     return Obx(
       () => Padding(
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
@@ -1331,29 +1356,30 @@ class Widgets {
           onEnter: (a) {
             // mainController.socialMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            mainController.socialMorphButtons[buttonType].showDetails.value =
+            socialsController.socialMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
             // mainController.socialMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            mainController.socialMorphButtons[buttonType].showDetails.value =
+            socialsController.socialMorphButtons[buttonType].showDetails.value =
                 false;
           },
           child: InkWell(
             onTap: () async {
-              mainController.socialMorphButtons[buttonType].isClicked.value =
-                  !mainController
+              socialsController.socialMorphButtons[buttonType].isClicked.value =
+                  !socialsController
                       .socialMorphButtons[buttonType].isClicked.value;
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
-                mainController.socialMorphButtons[buttonType].isClicked.value =
-                    !mainController
+                socialsController
+                        .socialMorphButtons[buttonType].isClicked.value =
+                    !socialsController
                         .socialMorphButtons[buttonType].isClicked.value;
 
-                Functions.openLink(
-                    mainController.socialMorphButtons[buttonType].link.value);
+                Functions.openLink(socialsController
+                    .socialMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -1366,13 +1392,13 @@ class Widgets {
                           ? Colors.black
                           : Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (mainController
+                      gradient: (socialsController
                               .socialMorphButtons[buttonType].showDetails.value)
                           ? LinearGradient(
                               colors:
                                   mainController.socialGradientList[buttonType])
                           : null,
-                      boxShadow: !mainController
+                      boxShadow: !socialsController
                               .socialMorphButtons[buttonType].isClicked.value
                           ? [
                               BoxShadow(
@@ -1394,28 +1420,28 @@ class Widgets {
                             ]
                           : null),
                   child: Padding(
-                    padding: EdgeInsets.all(mainController
+                    padding: EdgeInsets.all(socialsController
                         .socialMorphButtons[buttonType].pad.value),
                     child: AnimatedContainer(
                       curve: Curves.easeIn,
-                      height: mainController
+                      height: socialsController
                                   .socialMorphButtons[buttonType].scale.value !=
                               0.0
-                          ? mainController
+                          ? socialsController
                               .socialMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
-                      child: mainController
+                      child: socialsController
                               .socialMorphButtons[buttonType].showDetails.value
                           ? mainController.isDark.value
-                              ? mainController
+                              ? socialsController
                                   .socialMorphButtons[buttonType].image
-                              : mainController
+                              : socialsController
                                   .socialMorphButtons[buttonType].image_hovered
                           : mainController.isDark.value
-                              ? mainController
+                              ? socialsController
                                   .socialMorphButtons[buttonType].image_hovered
-                              : mainController
+                              : socialsController
                                   .socialMorphButtons[buttonType].image,
                     ),
                   ),
@@ -1428,29 +1454,32 @@ class Widgets {
     );
   }
 
-  static Widget musicMorphButtons(
-      BuildContext context, MainController mainController, int buttonType,
+  static Widget musicMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true}) {
+    MainController mainController = Get.find<MainController>();
+    MusicController musicController = Get.find<MusicController>();
+
     return Obx(
       () => Padding(
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
-            mainController.musicMorphButtons[buttonType].scale.value =
+            musicController.musicMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .12;
-            mainController.musicMorphButtons[buttonType].showDetails.value =
+            musicController.musicMorphButtons[buttonType].showDetails.value =
                 true;
           },
           onExit: (a) {
-            mainController.musicMorphButtons[buttonType].scale.value =
+            musicController.musicMorphButtons[buttonType].scale.value =
                 MediaQuery.of(context).size.height * .10;
-            mainController.musicMorphButtons[buttonType].showDetails.value =
+            musicController.musicMorphButtons[buttonType].showDetails.value =
                 false;
           },
           child: InkWell(
             onTap: () async {
-              mainController.musicMorphButtons[buttonType].isClicked.value =
-                  !mainController.musicMorphButtons[buttonType].isClicked.value;
+              musicController.musicMorphButtons[buttonType].isClicked.value =
+                  !musicController
+                      .musicMorphButtons[buttonType].isClicked.value;
 
               // mainController.musicController.animateToPage(buttonType + 1,
               //     duration: Duration(milliseconds: 200),
@@ -1458,12 +1487,12 @@ class Widgets {
 
               // delay
               Future.delayed(const Duration(milliseconds: 150), () {
-                mainController.musicMorphButtons[buttonType].isClicked.value =
-                    !mainController
+                musicController.musicMorphButtons[buttonType].isClicked.value =
+                    !musicController
                         .musicMorphButtons[buttonType].isClicked.value;
 
                 Functions.openLink(
-                    mainController.musicMorphButtons[buttonType].link.value);
+                    musicController.musicMorphButtons[buttonType].link.value);
               });
             },
             child: Wrap(
@@ -1476,13 +1505,13 @@ class Widgets {
                           ? Colors.black
                           : Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (mainController
+                      gradient: (musicController
                               .musicMorphButtons[buttonType].showDetails.value)
                           ? LinearGradient(
                               colors:
                                   mainController.musicGradientList[buttonType])
                           : null,
-                      boxShadow: !mainController
+                      boxShadow: !musicController
                               .musicMorphButtons[buttonType].isClicked.value
                           ? [
                               BoxShadow(
@@ -1504,28 +1533,28 @@ class Widgets {
                             ]
                           : null),
                   child: Padding(
-                    padding: EdgeInsets.all(
-                        mainController.musicMorphButtons[buttonType].pad.value),
+                    padding: EdgeInsets.all(musicController
+                        .musicMorphButtons[buttonType].pad.value),
                     child: AnimatedContainer(
                       curve: Curves.easeIn,
-                      height: mainController
+                      height: musicController
                                   .musicMorphButtons[buttonType].scale.value !=
                               0.0
-                          ? mainController
+                          ? musicController
                               .musicMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
                       duration: Duration(milliseconds: 150),
-                      child: mainController
+                      child: musicController
                               .musicMorphButtons[buttonType].showDetails.value
                           ? mainController.isDark.value
-                              ? mainController
+                              ? musicController
                                   .musicMorphButtons[buttonType].image
-                              : mainController
+                              : musicController
                                   .musicMorphButtons[buttonType].image_hovered
                           : mainController.isDark.value
-                              ? mainController
+                              ? musicController
                                   .musicMorphButtons[buttonType].image_hovered
-                              : mainController
+                              : musicController
                                   .musicMorphButtons[buttonType].image,
                     ),
                   ),
@@ -1539,34 +1568,36 @@ class Widgets {
   }
 
   static Widget StreamLinkButtons(
-    MainController mainController,
     int id,
     String label,
   ) {
+    MainController mainController = Get.find<MainController>();
+    GamingController gamingController = Get.find<GamingController>();
+
     return MouseRegion(
       onEnter: (event) {
         switch (id) {
           case 0:
-            mainController.ytHover.value = true;
+            gamingController.ytHover.value = true;
             break;
           case 1:
-            mainController.twitchHover.value = true;
+            gamingController.twitchHover.value = true;
             break;
           case 2:
-            mainController.discordHover.value = true;
+            gamingController.discordHover.value = true;
             break;
         }
       },
       onExit: (event) {
         switch (id) {
           case 0:
-            mainController.ytHover.value = false;
+            gamingController.ytHover.value = false;
             break;
           case 1:
-            mainController.twitchHover.value = false;
+            gamingController.twitchHover.value = false;
             break;
           case 2:
-            mainController.discordHover.value = false;
+            gamingController.discordHover.value = false;
             break;
         }
       },
@@ -1576,19 +1607,19 @@ class Widgets {
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               gradient: ((id == 0)
-                      ? mainController.ytHover.value
+                      ? gamingController.ytHover.value
                       : (id == 1)
-                          ? mainController.twitchHover.value
-                          : mainController.discordHover.value)
+                          ? gamingController.twitchHover.value
+                          : gamingController.discordHover.value)
                   ? LinearGradient(
                       colors: mainController.streamGradientList[id])
                   : null,
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: (((id == 0)
-                      ? mainController.ytHover.value
+                      ? gamingController.ytHover.value
                       : (id == 1)
-                          ? mainController.twitchHover.value
-                          : mainController.discordHover.value))
+                          ? gamingController.twitchHover.value
+                          : gamingController.discordHover.value))
                   ? [
                       BoxShadow(
                           color: Colors.grey[500]!,
@@ -1618,10 +1649,10 @@ class Widgets {
             },
             label: Text('${label}',
                 style: ((id == 0)
-                        ? mainController.ytHover.value
+                        ? gamingController.ytHover.value
                         : (id == 1)
-                            ? mainController.twitchHover.value
-                            : mainController.discordHover.value)
+                            ? gamingController.twitchHover.value
+                            : gamingController.discordHover.value)
                     ? AppThemeData.appThemeData.textTheme.headlineMedium!
                         .copyWith(
                             color: (mainController.isDark.value)
@@ -1635,10 +1666,10 @@ class Widgets {
             icon: Icon(
               Icons.arrow_forward_ios_rounded,
               color: ((id == 0)
-                      ? mainController.ytHover.value
+                      ? gamingController.ytHover.value
                       : (id == 1)
-                          ? mainController.twitchHover.value
-                          : mainController.discordHover.value)
+                          ? gamingController.twitchHover.value
+                          : gamingController.discordHover.value)
                   ? Colors.white.withOpacity(0.9)
                   : Colors.transparent,
             ),
@@ -1649,8 +1680,9 @@ class Widgets {
   }
 
   static Widget codingProgressRow(
-      MainController mainController, String label, int id, double value,
+      String label, int id, double value,
       {bool isDesktop = true}) {
+    MainController mainController = Get.find<MainController>();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: (isDesktop) ? 10.0 : 5.0),
       child: Row(
@@ -1690,7 +1722,7 @@ class Widgets {
     );
   }
 
-  static Widget pieChart(MainController mainController, BuildContext context,
+  static Widget pieChart(BuildContext context,
       var dataMap, String label, var gradientList,
       {bool isGradient = false, bool isDesktop = true}) {
     return Padding(

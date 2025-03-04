@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_porfolio/Controllers/CodingController.dart';
+import 'package:my_porfolio/Controllers/GamingController.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
@@ -44,7 +46,6 @@ class Screens {
                           children: [
                             Expanded(
                               child: Widgets.subtitleTexts(
-                                mainController: mainController,
                                 label: 'about me',
                                 id: 0,
                               ),
@@ -52,7 +53,6 @@ class Screens {
                             Expanded(
                               child: Center(
                                 child: Widgets.subtitleTexts(
-                                  mainController: mainController,
                                   label: 'connect with me',
                                   id: 3,
                                 ),
@@ -89,9 +89,10 @@ class Screens {
   }
 
   static Widget CodingContainer(
-      {required BuildContext context,
-      required MainController mainController,
-      required bool isDesktop}) {
+      {required BuildContext context, required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
+    CodingController codingController = Get.find<CodingController>();
+
     return Stack(
       children: [
         Column(
@@ -108,24 +109,19 @@ class Screens {
                 children: [
                   Widgets.CodingIntroDetails(
                     context: context,
-                    mainController: mainController,
                     isDesktop: isDesktop,
                   ),
                   Widgets.FlutterDetails(
-                    mainController: mainController,
                     isDesktop: isDesktop,
                   ),
                   Widgets.ReactDetails(
-                    mainController: mainController,
                     isDesktop: isDesktop,
                   ),
                   Widgets.VueDetails(
-                    mainController: mainController,
                     isDesktop: isDesktop,
                   ),
                   // if (isDesktop)
-                  Widgets.ProjectDetails(
-                      mainController: mainController, isDesktop: isDesktop)
+                  Widgets.ProjectDetails(isDesktop: isDesktop)
                 ],
                 controller: mainController.codingController,
                 onPageChanged: (value) {
@@ -140,10 +136,10 @@ class Screens {
                   // focus for morph buttons
                   for (int i = 0; i < 3; i++) {
                     if (mainController.codingController.page!.round() != i + 1)
-                      mainController.codingMorphButtons[i].isFocused.value =
+                      codingController.codingMorphButtons[i].isFocused.value =
                           false;
                     else
-                      mainController.codingMorphButtons[i].isFocused.value =
+                      codingController.codingMorphButtons[i].isFocused.value =
                           true;
                   }
 
@@ -161,9 +157,7 @@ class Screens {
             left: 30,
             bottom: 30,
             child: Obx(
-              () => Widgets.desktopScrollButton(
-                  mainController,
-                  mainController.codingController,
+              () => Widgets.desktopScrollButton(mainController.codingController,
                   mainController.isCodeScrollDown),
             ),
           ),
@@ -172,9 +166,10 @@ class Screens {
   }
 
   static Widget GamingContainer(
-      {required BuildContext context,
-      required MainController mainController,
-      required bool isDesktop}) {
+      {required BuildContext context, required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
+    GamingController gamingController = Get.find<GamingController>();
+
     return Stack(
       children: [
         Column(
@@ -216,10 +211,10 @@ class Screens {
                                   if (mainController.streamController.page!
                                           .round() !=
                                       i)
-                                    mainController.streamMorphButtons[i]
+                                    gamingController.streamMorphButtons[i]
                                         .isFocused.value = false;
                                   else
-                                    mainController.streamMorphButtons[i]
+                                    gamingController.streamMorphButtons[i]
                                         .isFocused.value = true;
                                 }
 
@@ -230,17 +225,14 @@ class Screens {
                               children: [
                                 Widgets.YoutubeDetails(
                                   context: context,
-                                  mainController: mainController,
                                   isDesktop: isDesktop,
                                 ),
                                 Widgets.TwitchDetails(
                                   context: context,
-                                  mainController: mainController,
                                   isDesktop: isDesktop,
                                 ),
                                 Widgets.DiscordDetails(
                                   context: context,
-                                  mainController: mainController,
                                   isDesktop: isDesktop,
                                 ),
                               ],
@@ -252,12 +244,9 @@ class Screens {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Widgets.streamMorphButtons(
-                                      context, mainController, 0),
-                                  Widgets.streamMorphButtons(
-                                      context, mainController, 1),
-                                  Widgets.streamMorphButtons(
-                                      context, mainController, 2),
+                                  Widgets.streamMorphButtons(context, 0),
+                                  Widgets.streamMorphButtons(context, 1),
+                                  Widgets.streamMorphButtons(context, 2),
                                 ],
                               ),
                             ),
@@ -313,10 +302,8 @@ class Screens {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Widgets.musicMorphButtons(context, mainController, 0,
-                  isDesktop: isDesktop),
-              Widgets.musicMorphButtons(context, mainController, 1,
-                  isDesktop: isDesktop),
+              Widgets.musicMorphButtons(context, 0, isDesktop: isDesktop),
+              Widgets.musicMorphButtons(context, 1, isDesktop: isDesktop),
             ],
           ),
         ),
@@ -366,10 +353,8 @@ class Screens {
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.center,
                 children: [
-                  Widgets.socialMorphButtons(context, mainController, 0,
-                      isDesktop: isDesktop),
-                  Widgets.socialMorphButtons(context, mainController, 1,
-                      isDesktop: isDesktop),
+                  Widgets.socialMorphButtons(context, 0, isDesktop: isDesktop),
+                  Widgets.socialMorphButtons(context, 1, isDesktop: isDesktop),
                 ],
               ),
               Flex(
@@ -378,10 +363,8 @@ class Screens {
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.center,
                 children: [
-                  Widgets.socialMorphButtons(context, mainController, 2,
-                      isDesktop: isDesktop),
-                  Widgets.socialMorphButtons(context, mainController, 3,
-                      isDesktop: isDesktop),
+                  Widgets.socialMorphButtons(context, 2, isDesktop: isDesktop),
+                  Widgets.socialMorphButtons(context, 3, isDesktop: isDesktop),
                 ],
               ),
               Flex(
@@ -390,10 +373,8 @@ class Screens {
                     ? MainAxisAlignment.start
                     : MainAxisAlignment.center,
                 children: [
-                  Widgets.codingMorphButtons(context, mainController, 3,
-                      isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, mainController, 4,
-                      isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
                 ],
               ),
               if (isDesktop)
@@ -403,9 +384,9 @@ class Screens {
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.center,
                   children: [
-                    Widgets.codingMorphButtons(context, mainController, 5,
+                    Widgets.codingMorphButtons(context, 5,
                         isDesktop: isDesktop),
-                    Widgets.streamMorphButtons(context, mainController, 2,
+                    Widgets.streamMorphButtons(context, 2,
                         isDesktop: isDesktop, isSocials: true),
                   ],
                 ),
