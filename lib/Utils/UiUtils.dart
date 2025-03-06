@@ -1,6 +1,8 @@
+import 'package:easy_pie_chart/easy_pie_chart.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Controllers/CodingController.dart';
 import 'package:my_porfolio/Controllers/GamingController.dart';
@@ -9,153 +11,20 @@ import 'package:my_porfolio/Controllers/MusicController.dart';
 import 'package:my_porfolio/Controllers/SocialsController.dart';
 import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
-import 'package:my_porfolio/Utils/ConstantsImages.dart';
 import 'package:my_porfolio/Utils/FunctionUtils.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class Widgets {
-  static Widget sideBar() {
-    MainController mainController = Get.find<MainController>();
-    return Column(
-      children: [
-        Container(
-          height: 300,
-          // width: 300,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(ImagesConstants.own),
-                fit: BoxFit.cover,
-              ),
-              color: mainController.isDark.value
-                  ? Colors.grey.withOpacity(0.1)
-                  : Colors.grey.shade300.withOpacity(0.1),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Container(
-          height: 40,
-          width: 200,
-          decoration: BoxDecoration(
-              color: Colors.grey.shade300.withOpacity(0.3),
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Center(
-            child: Text(
-              'flutter developer',
-              style: TextStyle(
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Divider(
-          indent: 30,
-          endIndent: 30,
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.grey.shade300.withOpacity(0.3),
-              child: Icon(
-                Icons.mail_outline,
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Text(
-                'abikvaidhya@gmail.com',
-                style: TextStyle(
-                  color: mainController.isDark.value ? Colors.white : null,
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.grey.shade300.withOpacity(0.3),
-              child: Icon(
-                Icons.phone_iphone_rounded,
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              '+977-986-908-0265',
-              style: TextStyle(
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.grey.shade300.withOpacity(0.3),
-              child: Icon(
-                Icons.pin_drop,
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Kathmandu, Nepal',
-              style: TextStyle(
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.grey.shade300.withOpacity(0.3),
-              child: Icon(
-                Icons.book,
-                color: mainController.isDark.value ? Colors.white : null,
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: Text(
-                'Herald International College',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: mainController.isDark.value ? Colors.white : null,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
+  Future showToast(String msg,
+      {bool isShort = false, bool isDark = false}) async {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: isShort ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: isShort ? 1 : 2,
+      backgroundColor: isDark ? Colors.white : Colors.black,
+      textColor: isDark ? Colors.black : Colors.white,
     );
   }
 
@@ -369,75 +238,78 @@ class Widgets {
     return Padding(
       padding: EdgeInsets.all((isDesktop) ? 44.0 : 20.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Widgets.customShadowBox(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 10,
+            children: [
+              Row(
+                children: [
+                  Widgets.customShadowBox(
+                    Text(
+                      'hi',
+                      style: AppThemeData.appThemeData.textTheme.headlineMedium!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Widgets.customShadowBox(
                       Text(
-                        'hi',
-                        style: AppThemeData
-                            .appThemeData.textTheme.headlineMedium!
+                        'i am a flutter developer\ni have experiences with frontend mobile application development for 4+ years now\nother skillsets that i have are as follows:\ GitHub/GitLab, Figma, Firebase, etc',
+                        softWrap: true,
+                        style: AppThemeData.appThemeData.textTheme.bodyMedium!
                             .copyWith(
                                 color: mainController.isDark.value
                                     ? Colors.white
                                     : Colors.black),
+                        maxLines: 4,
                       ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Widgets.customShadowBox(
-                          Text(
-                            'i am a flutter developer\ni have experiences with frontend mobile application development for 4+ years now\nother skillsets that i have are as follows:\ GitHub/GitLab, Figma, Firebase, etc',
-                            softWrap: true,
-                            style: AppThemeData
-                                .appThemeData.textTheme.bodyMedium!
-                                .copyWith(
-                                    color: mainController.isDark.value
-                                        ? Colors.white
-                                        : Colors.black),
-                            maxLines: 4,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
           if (isDesktop)
             Expanded(
-              flex: 2,
+              // flex: 3,
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 20,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Widgets.codingMorphButtons(context, 0, isDesktop: isDesktop),
-                  // Widgets.codingMorphButtons(context, 1, isDesktop: isDesktop),
-                  // Widgets.codingMorphButtons(context, 2, isDesktop: isDesktop),
                   Widgets.pieChart(
                       context,
-                      {
-                        'flutter': 8.0,
-                        'react.js': 1.5,
-                        'vue.js': 0.5,
-                      },
+                      [
+                        PieData(value: 8, color: Colors.blue),
+                        PieData(value: 1.5, color: Colors.blueAccent),
+                        PieData(value: 0.5, color: Colors.green),
+                        // 'flutter': 8.0,
+                        // 'react.js': 1.5,
+                        // 'vue.js': 0.5,
+                      ],
                       '',
                       {},
                       isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 5, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 6, isDesktop: isDesktop),
+                  Wrap(
+                    children: [
+                      Widgets.codingMorphButtons(context, 3,
+                          isDesktop: isDesktop),
+                      Widgets.codingMorphButtons(context, 4,
+                          isDesktop: isDesktop),
+                      Widgets.codingMorphButtons(context, 5,
+                          isDesktop: isDesktop),
+                      Widgets.codingMorphButtons(context, 6,
+                          isDesktop: isDesktop),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -1683,78 +1555,100 @@ class Widgets {
     );
   }
 
-  static Widget codingProgressRow(String label, int id, double value,
-      {bool isDesktop = true}) {
-    MainController mainController = Get.find<MainController>();
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: (isDesktop) ? 10.0 : 5.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  '${label} usage : ',
-                  style: (isDesktop)
-                      ? null
-                      : AppThemeData.appThemeData.textTheme.bodySmall,
-                )),
-          ),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: FAProgressBar(
-                direction: Axis.horizontal,
-                verticalDirection: VerticalDirection.down,
-                size: 24,
-                backgroundColor:
-                    AppThemeData.appThemeData.primaryColor.withOpacity(0.2),
-                animatedDuration: Duration(milliseconds: 300),
-                currentValue: value,
-                formatValueFixed: 0,
-                // displayText: '%',
-                progressGradient:
-                    LinearGradient(colors: mainController.ideGradientList[id]),
-              ),
-            ),
-          ),
-          Text(' (${value}%)')
-        ],
-      ),
-    );
-  }
+  // static Widget codingProgressRow(String label, int id, double value,
+  //     {bool isDesktop = true}) {
+  //   MainController mainController = Get.find<MainController>();
+  //   return Padding(
+  //     padding: EdgeInsets.symmetric(vertical: (isDesktop) ? 10.0 : 5.0),
+  //     child: Row(
+  //       children: [
+  //         Expanded(
+  //           child: Align(
+  //               alignment: Alignment.centerRight,
+  //               child: Text(
+  //                 '${label} usage : ',
+  //                 style: (isDesktop)
+  //                     ? null
+  //                     : AppThemeData.appThemeData.textTheme.bodySmall,
+  //               )),
+  //         ),
+  //         Expanded(
+  //           flex: 2,
+  //           child: Padding(
+  //             padding: const EdgeInsets.only(top: 12.0),
+  //             child: FAProgressBar(
+  //               direction: Axis.horizontal,
+  //               verticalDirection: VerticalDirection.down,
+  //               size: 24,
+  //               backgroundColor:
+  //                   AppThemeData.appThemeData.primaryColor.withOpacity(0.2),
+  //               animatedDuration: Duration(milliseconds: 300),
+  //               currentValue: value,
+  //               formatValueFixed: 0,
+  //               // displayText: '%',
+  //               progressGradient:
+  //                   LinearGradient(colors: mainController.ideGradientList[id]),
+  //             ),
+  //           ),
+  //         ),
+  //         Text(' (${value}%)')
+  //       ],
+  //     ),
+  //   );
+  // }
 
   static Widget pieChart(
       BuildContext context, var dataMap, String label, var gradientList,
-      {bool isGradient = false, bool isDesktop = true}) {
+      {bool isDark = false, bool isGradient = false, bool isDesktop = true}) {
+    MainController mainController = Get.find<MainController>();
+    // CodingController codingController = Get.find<CodingController>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: PieChart(
-        dataMap: dataMap,
-        animationDuration: Duration(milliseconds: 800),
-        chartLegendSpacing: 44,
-        chartRadius: (isDesktop)
-            ? MediaQuery.of(context).size.width / 8
-            : MediaQuery.of(context).size.width / 4,
-        initialAngleInDegree: 0,
-        chartType: ChartType.disc,
-        centerText: "${label}",
-        legendOptions: LegendOptions(
-            showLegendsInRow: false,
-            legendPosition: LegendPosition.left,
-            showLegends: true,
-            legendShape: BoxShape.circle,
-            legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
-        chartValuesOptions: ChartValuesOptions(
-          showChartValueBackground: true,
-          showChartValuesInPercentage: true,
-          showChartValues: true,
-          showChartValuesOutside: true,
-          decimalPlaces: 0,
-        ),
-        gradientList: (isGradient) ? gradientList : null,
+      child: EasyPieChart(
+        key: const Key('frameworks'),
+        children: dataMap,
+        borderEdge: StrokeCap.round,
+        shouldAnimate: true,
+        centerText: 'frameworks',
+        centerStyle: AppThemeData.appThemeData.textTheme.displayMedium!,
+        pieType: PieType.crust,
+        onTap: (index) =>
+          mainController.codingController.animateToPage((index + 1),
+              duration: Duration(milliseconds: 200), curve: Curves.easeInOut)
+        ,
+        style: TextStyle(
+            color: isDark ? Colors.white : Colors.black, fontSize: 10),
+        gap: 0.8,
+        borderWidth: 35,
+        start: 0,
+        size: (isDesktop) ? 240 : 130,
       ),
+      // PieChart(
+      //   dataMap: dataMap,
+      //   animationDuration: Duration(milliseconds: 800),
+      //   chartLegendSpacing: 44,
+      //   chartRadius: (isDesktop)
+      //       ? MediaQuery.of(context).size.width / 8
+      //       : MediaQuery.of(context).size.width / 4,
+      //   initialAngleInDegree: 0,
+      //   chartType: ChartType.disc,
+      //   centerText: "${label}",
+      //   legendOptions: LegendOptions(
+      //       showLegendsInRow: false,
+      //       legendPosition: LegendPosition.left,
+      //       showLegends: true,
+      //       legendShape: BoxShape.circle,
+      //       legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
+      //   chartValuesOptions: ChartValuesOptions(
+      //     showChartValueBackground: true,
+      //     showChartValuesInPercentage: true,
+      //     showChartValues: true,
+      //     showChartValuesOutside: true,
+      //     decimalPlaces: 0,
+      //   ),
+      //   gradientList: (isGradient) ? gradientList : null,
+      // ),
     );
   }
 }

@@ -18,14 +18,12 @@ class FloatingNavBarDesktop extends StatelessWidget {
 
     return Obx(
       () => AnimatedContainer(
-        // margin: EdgeInsets.only(right: 30),
         height: MediaQuery.of(context).size.height,
         duration: Duration(milliseconds: 111),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(flex: 4, child: SizedBox()),
+            // Expanded(flex: 4, child: SizedBox()),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -79,8 +77,8 @@ class FloatingNavBarDesktop extends StatelessWidget {
                         width:
                             mainController.navHovered.value == 1
                                 ?
-                            MediaQuery.of(context).size.width / 3.5
-                        : MediaQuery.of(context).size.width / 6
+                            MediaQuery.of(context).size.width / 4
+                        : MediaQuery.of(context).size.width / 6.5
                         ,
                         duration: Duration(milliseconds: 111),
                         child: Row(
@@ -202,7 +200,7 @@ class FloatingNavBarIcons extends StatelessWidget {
   Widget iconWidget(int navID) {
     MainController mainController = Get.find<MainController>();
 
-    return (navID != 0 && navID == hoverID)
+    return (navID == hoverID)
         ? SimpleShadow(
             child: GestureDetector(
                 child: Padding(
