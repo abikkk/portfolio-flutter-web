@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:my_porfolio/Controllers/CodingController.dart';
 import 'package:my_porfolio/Controllers/GamingController.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
@@ -169,7 +168,7 @@ class Screens {
                 padding: const EdgeInsets.symmetric(horizontal: 44.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,spacing: 20,
                   children: [
                     Text(
                       'hi there!',
@@ -188,29 +187,24 @@ class Screens {
                                   : Colors.black),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 8,
+                      // height: MediaQuery.of(context).size.height / 8,
                       width: MediaQuery.of(context).size.width / 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Widgets.subtitleTexts(
-                                  label: 'about me',
-                                  id: 0,
-                                ),
+                          Expanded(
+                            child: Widgets.subtitleTexts(
+                              label: 'about me',
+                              id: 0,
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: Widgets.subtitleTexts(
+                                label: 'connect with me',
+                                id: 3,
                               ),
-                              Expanded(
-                                child: Center(
-                                  child: Widgets.subtitleTexts(
-                                    label: 'connect with me',
-                                    id: 3,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -271,7 +265,7 @@ class Screens {
                   Widgets.VueDetails(
                     isDesktop: isDesktop,
                   ),
-                  // if (isDesktop)
+                  if (isDesktop)
                   Widgets.ProjectDetails(isDesktop: isDesktop)
                 ],
                 controller: mainController.codingController,
@@ -444,6 +438,7 @@ class Screens {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
+          flex: 2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -468,53 +463,53 @@ class Screens {
         ),
         Expanded(
           flex: 3,
-          child: Flex(
+          child: Wrap(
             direction: isDesktop ? Axis.horizontal : Axis.vertical,
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flex(
-                direction: !isDesktop ? Axis.horizontal : Axis.vertical,
-                mainAxisAlignment: isDesktop
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.center,
-                children: [
-                  Widgets.socialMorphButtons(context, 0, isDesktop: isDesktop),
-                  Widgets.socialMorphButtons(context, 1, isDesktop: isDesktop),
-                ],
-              ),
-              Flex(
-                direction: !isDesktop ? Axis.horizontal : Axis.vertical,
-                mainAxisAlignment: isDesktop
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.center,
-                children: [
-                  Widgets.socialMorphButtons(context, 2, isDesktop: isDesktop),
-                  Widgets.socialMorphButtons(context, 3, isDesktop: isDesktop),
-                ],
-              ),
-              Flex(
-                direction: !isDesktop ? Axis.horizontal : Axis.vertical,
-                mainAxisAlignment: isDesktop
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.center,
-                children: [
-                  Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
-                ],
-              ),
+              Widgets.socialMorphButtons(context, 0, isDesktop: isDesktop),
+              Widgets.socialMorphButtons(context, 1, isDesktop: isDesktop),
+              // Flex(
+              //   direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+              //   mainAxisAlignment: isDesktop
+              //       ? MainAxisAlignment.start
+              //       : MainAxisAlignment.center,
+              //   children: [
+              //   ],
+              // ),
+              Widgets.socialMorphButtons(context, 2, isDesktop: isDesktop),
+              Widgets.socialMorphButtons(context, 3, isDesktop: isDesktop),
+              // Flex(
+              //   direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+              //   mainAxisAlignment: isDesktop
+              //       ? MainAxisAlignment.start
+              //       : MainAxisAlignment.center,
+              //   children: [
+              //   ],
+              // ),
+              Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
+              Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
+              // Flex(
+              //   direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+              //   mainAxisAlignment: isDesktop
+              //       ? MainAxisAlignment.start
+              //       : MainAxisAlignment.center,
+              //   children: [
+              //   ],
+              // ),
               if (isDesktop)
-                Flex(
-                  direction: !isDesktop ? Axis.horizontal : Axis.vertical,
-                  mainAxisAlignment: isDesktop
-                      ? MainAxisAlignment.start
-                      : MainAxisAlignment.center,
-                  children: [
-                    Widgets.codingMorphButtons(context, 5,
-                        isDesktop: isDesktop),
-                    Widgets.streamMorphButtons(context, 2,
-                        isDesktop: isDesktop, isSocials: true),
-                  ],
-                ),
+                Widgets.codingMorphButtons(context, 5, isDesktop: isDesktop),
+              if (isDesktop)
+                Widgets.streamMorphButtons(context, 2,
+                    isDesktop: isDesktop, isSocials: true),
+              // Flex(
+              //   direction: !isDesktop ? Axis.horizontal : Axis.vertical,
+              //   mainAxisAlignment: isDesktop
+              //       ? MainAxisAlignment.start
+              //       : MainAxisAlignment.center,
+              //   children: [
+              //   ],
+              // ),
             ],
           ),
         ),

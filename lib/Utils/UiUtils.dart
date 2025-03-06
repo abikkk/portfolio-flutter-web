@@ -1,7 +1,6 @@
 import 'package:easy_pie_chart/easy_pie_chart.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Controllers/CodingController.dart';
@@ -12,7 +11,6 @@ import 'package:my_porfolio/Controllers/SocialsController.dart';
 import 'package:my_porfolio/Models/ProjectCard.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
 import 'package:my_porfolio/Utils/FunctionUtils.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class Widgets {
@@ -112,16 +110,17 @@ class Widgets {
     MainController mainController = Get.find<MainController>();
     return Container(
       margin: EdgeInsets.all(5),
-      child: Card(
-        color:
-            mainController.isDark.value ? Colors.white30 : Colors.grey.shade200,
-        elevation: 5,
-        child: GestureDetector(
-          onTap: () {
-            mainController.projectDetails.value =
-                !mainController.projectDetails.value;
-            mainController.selectedProject = project;
-          },
+      child: GestureDetector(
+        onTap: () {
+          mainController.projectDetails.value =
+              !mainController.projectDetails.value;
+          mainController.selectedProject = project;
+        },
+        child: Card(
+          color: mainController.isDark.value
+              ? Colors.white30
+              : Colors.grey.shade200,
+          elevation: 5,
           child: Column(
             children: [
               Expanded(
@@ -220,13 +219,18 @@ class Widgets {
     );
   }
 
-  static SimpleShadow customShadowBox(Widget child,
+  static Widget customShadowBox(Widget child,
       {double opacity = 0.6, double sigma = 4}) {
-    return SimpleShadow(
-      opacity: opacity,
-      offset: Offset(8.0, 6.0),
-      sigma: sigma,
-      child: child,
+    MainController mainController = Get.find<MainController>();
+    return Obx(
+      () => SimpleShadow(
+        opacity: opacity,
+        offset:
+            mainController.isDark.value ? Offset(4.0, 3.0) : Offset(8.0, 6.0),
+        sigma: sigma,
+        child: child,
+        color: mainController.isDark.value ? Colors.grey : Colors.black,
+      ),
     );
   }
 
@@ -240,49 +244,53 @@ class Widgets {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 10,
-            children: [
-              Row(
-                children: [
-                  Widgets.customShadowBox(
-                    Text(
-                      'hi',
-                      style: AppThemeData.appThemeData.textTheme.headlineMedium!
-                          .copyWith(
-                              color: mainController.isDark.value
-                                  ? Colors.white
-                                  : Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Widgets.customShadowBox(
+          Expanded(
+            flex: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 10,
+              children: [
+                Row(
+                  children: [
+                    Widgets.customShadowBox(
                       Text(
-                        'i am a flutter developer\ni have experiences with frontend mobile application development for 4+ years now\nother skillsets that i have are as follows:\ GitHub/GitLab, Figma, Firebase, etc',
-                        softWrap: true,
-                        style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                        'about me',
+                        style: AppThemeData
+                            .appThemeData.textTheme.headlineMedium!
                             .copyWith(
                                 color: mainController.isDark.value
                                     ? Colors.white
                                     : Colors.black),
-                        maxLines: 4,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Widgets.customShadowBox(
+                        Text(
+                          'i am a flutter developer\ni have experiences with frontend mobile application development for 4+ years now\ni also have experience on GitHub/GitLab, Figma, Firebase, Slack/JIRA, etc',
+                          softWrap: true,
+                          style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                              .copyWith(
+                                  color: mainController.isDark.value
+                                      ? Colors.white
+                                      : Colors.black),
+                          maxLines: 4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           if (isDesktop)
             Expanded(
-              // flex: 3,
+              flex: 3,
               child: Row(
-                spacing: 20,
+                // spacing: 40,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Widgets.pieChart(
@@ -298,18 +306,13 @@ class Widgets {
                       '',
                       {},
                       isDesktop: isDesktop),
-                  Wrap(
-                    children: [
-                      Widgets.codingMorphButtons(context, 3,
-                          isDesktop: isDesktop),
-                      Widgets.codingMorphButtons(context, 4,
-                          isDesktop: isDesktop),
-                      Widgets.codingMorphButtons(context, 5,
-                          isDesktop: isDesktop),
-                      Widgets.codingMorphButtons(context, 6,
-                          isDesktop: isDesktop),
-                    ],
+                  SizedBox(
+                    width: 15,
                   ),
+                  Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 5, isDesktop: isDesktop),
+                  Widgets.codingMorphButtons(context, 6, isDesktop: isDesktop),
                 ],
               ),
             ),
@@ -624,7 +627,7 @@ class Widgets {
                                     ScrollViewKeyboardDismissBehavior.onDrag,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: (isDesktop) ? 6 : 2),
+                                        crossAxisCount: (isDesktop) ? 8 : 2),
                                 children: [
                                   for (ProjectCard project
                                       in codingController.projects)
@@ -656,86 +659,122 @@ class Widgets {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: customShadowBox(
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      mainController.projectDetails.value =
-                          !mainController.projectDetails.value;
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      mainController.selectedProject.label.value,
-                      style: AppThemeData.appThemeData.textTheme.displayLarge!
-                          .copyWith(color: Colors.white),
+        Obx(
+          () => Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        mainController.projectDetails.value =
+                            !mainController.projectDetails.value;
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: mainController.isDark.value
+                            ? Colors.white
+                            : Colors.black,
+                      )),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        mainController.selectedProject.label.value,
+                        style: AppThemeData.appThemeData.textTheme.displayLarge!
+                            .copyWith(
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    mainController.selectedProject.details.value,
-                    softWrap: true,
-                    style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                        .copyWith(color: Colors.white),
-                    maxLines: 8,
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      mainController.selectedProject.details.value,
+                      softWrap: true,
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                        color: mainController.isDark.value
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                      maxLines: 8,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'developed using:',
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                        color: mainController.isDark.value
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
                   ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'developed using:',
-                    style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-                Expanded(
-                    flex: (isDesktop) ? 3 : 1,
-                    child: Text(mainController.selectedProject.devLang.value))
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'platforms:',
-                    style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-                Expanded(
+                  Expanded(
                     flex: (isDesktop) ? 3 : 1,
                     child: Text(
-                      mainController.selectedProject.platform.toString(),
+                      mainController.selectedProject.devLang.value,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                          .copyWith(color: Colors.white),
-                    ))
-              ],
-            )
-          ],
+                          .copyWith(
+                        color: mainController.isDark.value
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'platforms:',
+                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                          .copyWith(
+                        color: mainController.isDark.value
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      flex: (isDesktop) ? 3 : 1,
+                      child: Text(
+                        mainController.selectedProject.platform
+                            .toString()
+                            .replaceAll('[', '')
+                            .replaceAll(']', ''),
+                        style: AppThemeData.appThemeData.textTheme.bodyMedium!
+                            .copyWith(
+                          color: mainController.isDark.value
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -877,7 +916,7 @@ class Widgets {
     );
   }
 
-// morph buttons
+// coding morph button
   static Widget codingMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
@@ -885,18 +924,18 @@ class Widgets {
 
     return Obx(
       () => Padding(
-        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
+        padding: EdgeInsets.all((isDesktop) ? 15 : 5),
         child: MouseRegion(
           onEnter: (a) {
             // mainController.codingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            codingController.codingMorphButtons[buttonType].showDetails.value =
+            codingController.codingMorphButtons[buttonType].isFocused.value =
                 true;
           },
           onExit: (a) {
             // mainController.codingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            codingController.codingMorphButtons[buttonType].showDetails.value =
+            codingController.codingMorphButtons[buttonType].isFocused.value =
                 false;
           },
           child: InkWell(
@@ -926,8 +965,8 @@ class Widgets {
             child: Wrap(
               children: [
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.fastOutSlowIn,
+                  duration: Duration(milliseconds: 111),
+                  curve: Curves.easeIn,
                   decoration: BoxDecoration(
                       color: (mainController.isDark.value)
                           ? Colors.black
@@ -938,11 +977,19 @@ class Widgets {
                                   .isFocused.value)
                           ? LinearGradient(
                               colors:
+                                  // (mainController.isDark.value)
+                                  //     ? [
+                                  //         Color.fromRGBO(166, 166, 166, 1.0),
+                                  //         Color.fromRGBO(122, 122, 122, 1.0),
+                                  //       ]
+                                  //     :
                                   mainController.skillsGradientList[buttonType])
                           : null,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: !codingController
-                              .codingMorphButtons[buttonType].isClicked.value
+                      boxShadow: codingController.codingMorphButtons[buttonType]
+                                  .isFocused.value &&
+                              !codingController.codingMorphButtons[buttonType]
+                                  .isClicked.value
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
@@ -973,7 +1020,7 @@ class Widgets {
                           ? codingController
                               .codingMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 150),
+                      duration: Duration(milliseconds: 111),
                       child: codingController
                               .codingMorphButtons[buttonType].showDetails.value
                           ? (mainController.isDark.value)
@@ -997,6 +1044,7 @@ class Widgets {
     );
   }
 
+  // gaming morph button
   static Widget gamingMorphButtons(BuildContext context, int buttonType) {
     MainController mainController = Get.find<MainController>();
     GamingController gamingController = Get.find<GamingController>();
@@ -1008,13 +1056,13 @@ class Widgets {
           onEnter: (a) {
             // mainController.gamingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            gamingController.gamingMorphButtons[buttonType].showDetails.value =
+            gamingController.gamingMorphButtons[buttonType].isFocused.value =
                 true;
           },
           onExit: (a) {
             // mainController.gamingMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            gamingController.gamingMorphButtons[buttonType].showDetails.value =
+            gamingController.gamingMorphButtons[buttonType].isFocused.value =
                 false;
           },
           child: InkWell(
@@ -1041,19 +1089,23 @@ class Widgets {
             child: Wrap(
               children: [
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: Duration(milliseconds: 111),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (gamingController
-                              .gamingMorphButtons[buttonType].showDetails.value)
+                      gradient: (gamingController.gamingMorphButtons[buttonType]
+                                  .showDetails.value ||
+                              gamingController.gamingMorphButtons[buttonType]
+                                  .isFocused.value)
                           ? LinearGradient(
                               colors:
                                   mainController.gameGradientList[buttonType])
                           : null,
-                      boxShadow: !gamingController
-                              .gamingMorphButtons[buttonType].isClicked.value
+                      boxShadow: gamingController.gamingMorphButtons[buttonType]
+                                  .isFocused.value &&
+                              !gamingController.gamingMorphButtons[buttonType]
+                                  .isClicked.value
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
@@ -1078,7 +1130,7 @@ class Widgets {
                           ? gamingController
                               .gamingMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 150),
+                      duration: Duration(milliseconds: 111),
                       child: gamingController
                               .gamingMorphButtons[buttonType].showDetails.value
                           ? gamingController
@@ -1096,6 +1148,7 @@ class Widgets {
     );
   }
 
+  // stream morph button
   static Widget streamMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true, bool isSocials = false}) {
     MainController mainController = Get.find<MainController>();
@@ -1108,14 +1161,12 @@ class Widgets {
           onEnter: (a) {
             // mainController.streamMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            gamingController.streamMorphButtons[buttonType].showDetails.value =
-                true;
+            gamingController.streamMorphButtons[buttonType].isFocused(true);
           },
           onExit: (a) {
             // mainController.streamMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            gamingController.streamMorphButtons[buttonType].showDetails.value =
-                false;
+            gamingController.streamMorphButtons[buttonType].isFocused(false);
           },
           child: InkWell(
             onTap: () async {
@@ -1148,7 +1199,7 @@ class Widgets {
             child: Wrap(
               children: [
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: Duration(milliseconds: 111),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
                       color: (mainController.isDark.value)
@@ -1164,8 +1215,10 @@ class Widgets {
                               colors:
                                   mainController.streamGradientList[buttonType])
                           : null,
-                      boxShadow: !gamingController
-                              .streamMorphButtons[buttonType].isClicked.value
+                      boxShadow: gamingController.streamMorphButtons[buttonType]
+                                  .isFocused.value &&
+                              !gamingController.streamMorphButtons[buttonType]
+                                  .isClicked.value
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
@@ -1196,7 +1249,7 @@ class Widgets {
                           ? gamingController
                               .streamMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 150),
+                      duration: Duration(milliseconds: 111),
                       child: gamingController
                               .streamMorphButtons[buttonType].showDetails.value
                           ? (mainController.isDark.value)
@@ -1220,6 +1273,7 @@ class Widgets {
     );
   }
 
+  // social morph button
   static Widget socialMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
@@ -1232,14 +1286,12 @@ class Widgets {
           onEnter: (a) {
             // mainController.socialMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .12;
-            socialsController.socialMorphButtons[buttonType].showDetails.value =
-                true;
+            socialsController.socialMorphButtons[buttonType].isFocused(true);
           },
           onExit: (a) {
             // mainController.socialMorphButtons[buttonType].scale.value =
             //     MediaQuery.of(context).size.height * .10;
-            socialsController.socialMorphButtons[buttonType].showDetails.value =
-                false;
+            socialsController.socialMorphButtons[buttonType].isFocused(false);
           },
           child: InkWell(
             onTap: () async {
@@ -1261,7 +1313,7 @@ class Widgets {
             child: Wrap(
               children: [
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: Duration(milliseconds: 111),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
                       color: mainController.isDark.value
@@ -1269,13 +1321,21 @@ class Widgets {
                           : Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       gradient: (socialsController
-                              .socialMorphButtons[buttonType].showDetails.value)
+                                  .socialMorphButtons[buttonType]
+                                  .showDetails
+                                  .value ||
+                              socialsController.socialMorphButtons[buttonType]
+                                  .isFocused.value)
                           ? LinearGradient(
                               colors:
                                   mainController.socialGradientList[buttonType])
                           : null,
-                      boxShadow: !socialsController
-                              .socialMorphButtons[buttonType].isClicked.value
+                      boxShadow: socialsController
+                                  .socialMorphButtons[buttonType]
+                                  .isFocused
+                                  .value &&
+                              !socialsController.socialMorphButtons[buttonType]
+                                  .isClicked.value
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
@@ -1306,7 +1366,7 @@ class Widgets {
                           ? socialsController
                               .socialMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 150),
+                      duration: Duration(milliseconds: 111),
                       child: socialsController
                               .socialMorphButtons[buttonType].showDetails.value
                           ? mainController.isDark.value
@@ -1330,6 +1390,7 @@ class Widgets {
     );
   }
 
+  // music morph button
   static Widget musicMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
@@ -1340,15 +1401,15 @@ class Widgets {
         padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
         child: MouseRegion(
           onEnter: (a) {
-            musicController.musicMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .12;
-            musicController.musicMorphButtons[buttonType].showDetails.value =
+            // musicController.musicMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .12;
+            musicController.musicMorphButtons[buttonType].isFocused.value =
                 true;
           },
           onExit: (a) {
-            musicController.musicMorphButtons[buttonType].scale.value =
-                MediaQuery.of(context).size.height * .10;
-            musicController.musicMorphButtons[buttonType].showDetails.value =
+            // musicController.musicMorphButtons[buttonType].scale.value =
+            //     MediaQuery.of(context).size.height * .10;
+            musicController.musicMorphButtons[buttonType].isFocused.value =
                 false;
           },
           child: InkWell(
@@ -1374,21 +1435,25 @@ class Widgets {
             child: Wrap(
               children: [
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: Duration(milliseconds: 111),
                   curve: Curves.fastOutSlowIn,
                   decoration: BoxDecoration(
                       color: mainController.isDark.value
                           ? Colors.black
                           : Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      gradient: (musicController
-                              .musicMorphButtons[buttonType].showDetails.value)
+                      gradient: (musicController.musicMorphButtons[buttonType]
+                                  .showDetails.value ||
+                              musicController.musicMorphButtons[buttonType]
+                                  .isFocused.value)
                           ? LinearGradient(
                               colors:
                                   mainController.musicGradientList[buttonType])
                           : null,
-                      boxShadow: !musicController
-                              .musicMorphButtons[buttonType].isClicked.value
+                      boxShadow: musicController.musicMorphButtons[buttonType]
+                                  .isFocused.value &&
+                              !musicController
+                                  .musicMorphButtons[buttonType].isClicked.value
                           ? [
                               BoxShadow(
                                   color: Colors.grey[500]!,
@@ -1419,7 +1484,7 @@ class Widgets {
                           ? musicController
                               .musicMorphButtons[buttonType].scale.value
                           : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 150),
+                      duration: Duration(milliseconds: 111),
                       child: musicController
                               .musicMorphButtons[buttonType].showDetails.value
                           ? mainController.isDark.value
@@ -1599,30 +1664,35 @@ class Widgets {
 
   static Widget pieChart(
       BuildContext context, var dataMap, String label, var gradientList,
-      {bool isDark = false, bool isGradient = false, bool isDesktop = true}) {
+      {bool isGradient = false, bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
     // CodingController codingController = Get.find<CodingController>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: EasyPieChart(
-        key: const Key('frameworks'),
-        children: dataMap,
-        borderEdge: StrokeCap.round,
-        shouldAnimate: true,
-        centerText: 'frameworks',
-        centerStyle: AppThemeData.appThemeData.textTheme.displayMedium!,
-        pieType: PieType.crust,
-        onTap: (index) =>
-          mainController.codingController.animateToPage((index + 1),
-              duration: Duration(milliseconds: 200), curve: Curves.easeInOut)
-        ,
-        style: TextStyle(
-            color: isDark ? Colors.white : Colors.black, fontSize: 10),
-        gap: 0.8,
-        borderWidth: 35,
-        start: 0,
-        size: (isDesktop) ? 240 : 130,
+      child: Obx(
+        () => EasyPieChart(
+          showValue: false,
+          key: const Key('frameworks'),
+          children: dataMap,
+          borderEdge: StrokeCap.round,
+          shouldAnimate: true,
+          centerText: 'frameworks',
+          centerStyle: AppThemeData.appThemeData.textTheme.bodySmall!.copyWith(
+              color: mainController.isDark.value ? Colors.white : Colors.black),
+          pieType: PieType.crust,
+          onTap: (index) => mainController.codingController.animateToPage(
+              (index + 1),
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeInOut),
+          style: TextStyle(
+              color: mainController.isDark.value ? Colors.white : Colors.black,
+              fontSize: 10),
+          gap: 0.6,
+          borderWidth: 30,
+          start: 0,
+          size: (isDesktop) ? 240 : 130,
+        ),
       ),
       // PieChart(
       //   dataMap: dataMap,

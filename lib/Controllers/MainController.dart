@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_porfolio/Utils/ConstantsImages.dart';
-import 'package:my_porfolio/Models/MorphButton.dart';
-import 'package:my_porfolio/Utils/Constants.dart';
 import '../Models/ProjectCard.dart';
 
 class MainController extends GetxController {
@@ -27,7 +24,7 @@ class MainController extends GetxController {
   final PageController socialsController = PageController(
     initialPage: 0,
   );
-  RxBool isDark = false.obs;
+  RxBool isDark = true.obs;
 
   RxDouble showScrollBtn = 0.3.obs,
       scrollIndex = 0.0.obs,
