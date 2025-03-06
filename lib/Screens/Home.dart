@@ -43,28 +43,28 @@ class _HomeContainerState extends State<HomeContainer> {
                 (mainController.isDark.value) ? Colors.black : Colors.white,
             body: Row(
               children: [
-                if (sizingInformation.deviceScreenType ==
-                    DeviceScreenType.desktop)
-                  Column(
-                    children: [
-                      Expanded(
-                        child: Obx(
-                          () => Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 15),
-                              decoration: BoxDecoration(
-                                  color: mainController.isDark.value
-                                      ? Colors.grey.shade300.withOpacity(0.3)
-                                      : Colors.grey.shade300.withOpacity(0.1),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              width: 330,
-                              margin: EdgeInsets.all(10),
-                              child: Widgets.sideBar()),
-                        ),
-                      ),
-                    ],
-                  ),
+                // if (sizingInformation.deviceScreenType ==
+                //     DeviceScreenType.desktop)
+                //   Column(
+                //     children: [
+                //       Expanded(
+                //         child: Obx(
+                //           () => Container(
+                //               padding: EdgeInsets.symmetric(
+                //                   horizontal: 10, vertical: 15),
+                //               decoration: BoxDecoration(
+                //                   color: mainController.isDark.value
+                //                       ? Colors.grey.shade300.withOpacity(0.3)
+                //                       : Colors.grey.shade300.withOpacity(0.1),
+                //                   borderRadius:
+                //                       BorderRadius.all(Radius.circular(20))),
+                //               width: 330,
+                //               margin: EdgeInsets.all(10),
+                //               child: Widgets.sideBar()),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
                 Expanded(
                   child: MouseRegion(
                     onHover: _updateLocation,
@@ -126,15 +126,15 @@ class _HomeContainerState extends State<HomeContainer> {
                                       ? Axis.horizontal
                                       : Axis.vertical,
                               children: [
-                                if (sizingInformation.deviceScreenType ==
-                                    DeviceScreenType.desktop)
-                                  Screens.HomeContainer(
-                                    context: context,
-                                    mainController: mainController,
-                                    isDesktop:
-                                        sizingInformation.deviceScreenType ==
-                                            DeviceScreenType.desktop,
-                                  ),
+                                // if (sizingInformation.deviceScreenType ==
+                                //     DeviceScreenType.desktop)
+                                Screens.HomeContainer(
+                                  context: context,
+                                  mainController: mainController,
+                                  isDesktop:
+                                      sizingInformation.deviceScreenType ==
+                                          DeviceScreenType.desktop,
+                                ),
                                 Screens.CodingContainer(
                                     context: context,
                                     isDesktop:

@@ -13,57 +13,59 @@ class Screens {
       required bool isDesktop}) {
     return (isDesktop)
         ? Widgets.customShadowBox(
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 44.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'hi there!',
-                    style: AppThemeData.appThemeData.textTheme.headlineSmall!
-                        .copyWith(
-                            color: mainController.isDark.value
-                                ? Colors.white
-                                : Colors.black),
-                  ),
-                  Text(
-                    'abik vaidhya',
-                    style: AppThemeData.appThemeData.textTheme.headlineLarge!
-                        .copyWith(
-                            color: mainController.isDark.value
-                                ? Colors.white
-                                : Colors.black),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 8,
-                    width: MediaQuery.of(context).size.width / 3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Widgets.subtitleTexts(
-                                label: 'about me',
-                                id: 0,
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 44.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'hi there!',
+                      style: AppThemeData.appThemeData.textTheme.headlineSmall!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
+                    ),
+                    Text(
+                      'abik vaidhya',
+                      style: AppThemeData.appThemeData.textTheme.headlineLarge!
+                          .copyWith(
+                              color: mainController.isDark.value
+                                  ? Colors.white
+                                  : Colors.black),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 8,
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
                                 child: Widgets.subtitleTexts(
-                                  label: 'connect with me',
-                                  id: 3,
+                                  label: 'about me',
+                                  id: 0,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Expanded(
+                                child: Center(
+                                  child: Widgets.subtitleTexts(
+                                    label: 'connect with me',
+                                    id: 3,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )
@@ -91,14 +93,12 @@ class Screens {
   static Widget CodingContainer(
       {required BuildContext context, required bool isDesktop}) {
     MainController mainController = Get.find<MainController>();
-    CodingController codingController = Get.find<CodingController>();
 
     return Stack(
       children: [
         Column(
           children: [
             Expanded(
-              // flex: 3,
               child: PageView(
                 pageSnapping: isDesktop ? false : true,
                 allowImplicitScrolling: isDesktop ? false : true,
@@ -114,12 +114,12 @@ class Screens {
                   Widgets.FlutterDetails(
                     isDesktop: isDesktop,
                   ),
-                  Widgets.ReactDetails(
-                    isDesktop: isDesktop,
-                  ),
-                  Widgets.VueDetails(
-                    isDesktop: isDesktop,
-                  ),
+                  // Widgets.ReactDetails(
+                  //   isDesktop: isDesktop,
+                  // ),
+                  // Widgets.VueDetails(
+                  //   isDesktop: isDesktop,
+                  // ),
                   // if (isDesktop)
                   Widgets.ProjectDetails(isDesktop: isDesktop)
                 ],
@@ -134,14 +134,14 @@ class Screens {
                   }
 
                   // focus for morph buttons
-                  for (int i = 0; i < 3; i++) {
-                    if (mainController.codingController.page!.round() != i + 1)
-                      codingController.codingMorphButtons[i].isFocused.value =
-                          false;
-                    else
-                      codingController.codingMorphButtons[i].isFocused.value =
-                          true;
-                  }
+                  // for (int i = 0; i < 2; i++) {
+                  //   if (mainController.codingController.page!.round() != i + 1)
+                  //     codingController.codingMorphButtons[i].isFocused.value =
+                  //         false;
+                  //   else
+                  //     codingController.codingMorphButtons[i].isFocused.value =
+                  //         true;
+                  // }
 
                   mainController.codingIndex.value =
                       mainController.codingController.page!.round();
@@ -170,94 +170,68 @@ class Screens {
     MainController mainController = Get.find<MainController>();
     GamingController gamingController = Get.find<GamingController>();
 
-    return Stack(
+    return Column(
       children: [
-        Column(
-          children: [
-            Expanded(
-              child: PageView(
-                  pageSnapping: isDesktop ? false : true,
-                  allowImplicitScrolling: isDesktop ? false : true,
-                  physics:
-                      // NeverScrollableScrollPhysics(),
-                      isDesktop
-                          ? NeverScrollableScrollPhysics()
-                          : ClampingScrollPhysics(),
-                  scrollDirection:
-                      (isDesktop) ? Axis.vertical : Axis.horizontal,
-                  controller: mainController.gamingController,
-                  onPageChanged: (value) {
-                    if (mainController.gamingController.page!.round() == 1) {
-                      mainController.isGameScrollDown.value = false;
-                    } else {
-                      mainController.isGameScrollDown.value = true;
-                    }
-                  },
-                  children: [
-                    // youtube twitch discord
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: PageView(
-                              pageSnapping: isDesktop ? false : true,
-                              allowImplicitScrolling: true,
-                              scrollDirection:
-                                  (isDesktop) ? Axis.vertical : Axis.horizontal,
-                              onPageChanged: (event) {
-                                for (int i = 0; i < 3; i++) {
-                                  if (mainController.streamController.page!
-                                          .round() !=
-                                      i)
-                                    gamingController.streamMorphButtons[i]
-                                        .isFocused.value = false;
-                                  else
-                                    gamingController.streamMorphButtons[i]
-                                        .isFocused.value = true;
-                                }
+        Expanded(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: PageView(
+                    pageSnapping: isDesktop ? false : true,
+                    allowImplicitScrolling: true,
+                    scrollDirection:
+                        (isDesktop) ? Axis.vertical : Axis.horizontal,
+                    physics: isDesktop
+                        ? NeverScrollableScrollPhysics()
+                        : ClampingScrollPhysics(),
+                    onPageChanged: (event) {
+                      for (int i = 0; i < 3; i++) {
+                        if (mainController.streamController.page!.round() != i)
+                          gamingController
+                              .streamMorphButtons[i].isFocused.value = false;
+                        else
+                          gamingController
+                              .streamMorphButtons[i].isFocused.value = true;
+                      }
 
-                                mainController.gamingIndex.value =
-                                    mainController.streamController.page!
-                                        .round();
-                              },
-                              children: [
-                                Widgets.YoutubeDetails(
-                                  context: context,
-                                  isDesktop: isDesktop,
-                                ),
-                                Widgets.TwitchDetails(
-                                  context: context,
-                                  isDesktop: isDesktop,
-                                ),
-                                Widgets.DiscordDetails(
-                                  context: context,
-                                  isDesktop: isDesktop,
-                                ),
-                              ],
-                              controller: mainController.streamController,
-                            ),
-                          ),
-                          if (isDesktop)
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Widgets.streamMorphButtons(context, 0),
-                                  Widgets.streamMorphButtons(context, 1),
-                                  Widgets.streamMorphButtons(context, 2),
-                                ],
-                              ),
-                            ),
-                        ],
+                      mainController.gamingIndex.value =
+                          mainController.streamController.page!.round();
+                    },
+                    children: [
+                      Widgets.YoutubeDetails(
+                        context: context,
+                        isDesktop: isDesktop,
                       ),
+                      Widgets.TwitchDetails(
+                        context: context,
+                        isDesktop: isDesktop,
+                      ),
+                      Widgets.DiscordDetails(
+                        context: context,
+                        isDesktop: isDesktop,
+                      ),
+                    ],
+                    controller: mainController.streamController,
+                  ),
+                ),
+                if (isDesktop)
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Widgets.streamMorphButtons(context, 0),
+                        Widgets.streamMorphButtons(context, 1),
+                        Widgets.streamMorphButtons(context, 2),
+                      ],
                     ),
-                  ]),
+                  ),
+              ],
             ),
-          ],
+          ),
         ),
-        SizedBox.shrink()
       ],
     );
   }

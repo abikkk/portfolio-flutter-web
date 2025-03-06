@@ -239,8 +239,7 @@ class Widgets {
     );
   }
 
-  static Container projectCard(
-      ProjectCard project, Color iconColor) {
+  static Container projectCard(ProjectCard project, Color iconColor) {
     MainController mainController = Get.find<MainController>();
     return Container(
       margin: EdgeInsets.all(5),
@@ -419,12 +418,22 @@ class Widgets {
           if (isDesktop)
             Expanded(
               flex: 2,
-              child: Wrap(
+              child: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Widgets.codingMorphButtons(context, 0, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 1, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 2, isDesktop: isDesktop),
+                  // Widgets.codingMorphButtons(context, 0, isDesktop: isDesktop),
+                  // Widgets.codingMorphButtons(context, 1, isDesktop: isDesktop),
+                  // Widgets.codingMorphButtons(context, 2, isDesktop: isDesktop),
+                  Widgets.pieChart(
+                      context,
+                      {
+                        'flutter': 8.0,
+                        'react.js': 1.5,
+                        'vue.js': 0.5,
+                      },
+                      '',
+                      {},
+                      isDesktop: isDesktop),
                   Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
                   Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
                   Widgets.codingMorphButtons(context, 5, isDesktop: isDesktop),
@@ -466,7 +475,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      'i am currently working as a freelance flutter developer\npreviously i was involved in multiple local as well as international projects for multiple clients\nnotable examples of projects I have worked on:',
+                      'i am currently working as a freelance flutter developer\npreviously i was involved in multiple local as well as international projects for multiple clients\n\nnotable examples of projects I have worked on:',
                       maxLines: 8,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
                           .copyWith(
@@ -487,7 +496,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      '> Wholistic Minds which is available on Apple App Store as well as Google Play Store',
+                      '- Wholistic Minds which is available on Apple App Store as well as Google Play Store',
                       maxLines: 2,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
                           .copyWith(
@@ -521,7 +530,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      '> My Hotel and Home which is available on Google Play Store',
+                      '- My Hotel and Home which is available on Google Play Store',
                       maxLines: 2,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
                           .copyWith(
@@ -555,7 +564,7 @@ class Widgets {
                 Expanded(
                   child: Widgets.customShadowBox(
                     Text(
-                      '> Pokhara Food Delivery which is availabe both on Google Play Store.',
+                      '- Pokhara Food Delivery which is available both on Google Play Store.',
                       maxLines: 2,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
                           .copyWith(
@@ -735,7 +744,7 @@ class Widgets {
                       () => AnimatedSwitcher(
                         duration: Duration(milliseconds: 500),
                         child: (mainController.projectDetails.value)
-                            ? projectDetailSection( isDesktop)
+                            ? projectDetailSection(isDesktop)
                             : GridView(
                                 shrinkWrap: true,
                                 padding: EdgeInsets.all(10),
@@ -770,8 +779,7 @@ class Widgets {
     );
   }
 
-  static Padding projectDetailSection(
-      bool isDesktop) {
+  static Padding projectDetailSection(bool isDesktop) {
     MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
@@ -863,8 +871,7 @@ class Widgets {
 
 // gaming
   static Widget YoutubeDetails(
-      {required BuildContext context,
-      required bool isDesktop}) {
+      {required BuildContext context, required bool isDesktop}) {
     MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.all(44.0),
@@ -909,8 +916,7 @@ class Widgets {
   }
 
   static Widget TwitchDetails(
-      {required BuildContext context,
-      required bool isDesktop}) {
+      {required BuildContext context, required bool isDesktop}) {
     MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.all(44.0),
@@ -955,8 +961,7 @@ class Widgets {
   }
 
   static Widget DiscordDetails(
-      {required BuildContext context,
-      required bool isDesktop}) {
+      {required BuildContext context, required bool isDesktop}) {
     MainController mainController = Get.find<MainController>();
     return Padding(
       padding: const EdgeInsets.all(44.0),
@@ -1024,7 +1029,7 @@ class Widgets {
           },
           child: InkWell(
             onTap: () async {
-              if (buttonType < 3 || buttonType == 6) {
+              if (buttonType == 0 || buttonType == 6) {
                 codingController
                         .codingMorphButtons[buttonType].isClicked.value =
                     !codingController
@@ -1343,8 +1348,7 @@ class Widgets {
     );
   }
 
-  static Widget socialMorphButtons(
-      BuildContext context, int buttonType,
+  static Widget socialMorphButtons(BuildContext context, int buttonType,
       {bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
     SocialsController socialsController = Get.find<SocialsController>();
@@ -1679,8 +1683,7 @@ class Widgets {
     );
   }
 
-  static Widget codingProgressRow(
-      String label, int id, double value,
+  static Widget codingProgressRow(String label, int id, double value,
       {bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
     return Padding(
@@ -1722,18 +1725,18 @@ class Widgets {
     );
   }
 
-  static Widget pieChart(BuildContext context,
-      var dataMap, String label, var gradientList,
+  static Widget pieChart(
+      BuildContext context, var dataMap, String label, var gradientList,
       {bool isGradient = false, bool isDesktop = true}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: PieChart(
         dataMap: dataMap,
         animationDuration: Duration(milliseconds: 800),
         chartLegendSpacing: 44,
         chartRadius: (isDesktop)
-            ? MediaQuery.of(context).size.width / 7
-            : MediaQuery.of(context).size.width / 3,
+            ? MediaQuery.of(context).size.width / 8
+            : MediaQuery.of(context).size.width / 4,
         initialAngleInDegree: 0,
         chartType: ChartType.disc,
         centerText: "${label}",
@@ -1745,8 +1748,9 @@ class Widgets {
             legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
         chartValuesOptions: ChartValuesOptions(
           showChartValueBackground: true,
+          showChartValuesInPercentage: true,
           showChartValues: true,
-          showChartValuesOutside: false,
+          showChartValuesOutside: true,
           decimalPlaces: 0,
         ),
         gradientList: (isGradient) ? gradientList : null,

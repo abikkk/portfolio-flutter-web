@@ -77,21 +77,20 @@ class FloatingNavBarDesktop extends StatelessWidget {
                         // :MediaQuery.of(context).size.height / 24
                         ,
                         width:
-                            // mainController.navHovered.value == 1
-                            //     ?
-                            MediaQuery.of(context).size.width / 5.5
-                        // : MediaQuery.of(context).size.width / 6
+                            mainController.navHovered.value == 1
+                                ?
+                            MediaQuery.of(context).size.width / 3.5
+                        : MediaQuery.of(context).size.width / 6
                         ,
                         duration: Duration(milliseconds: 111),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // FloatingNavBarIcons(
-                            //   hoverID: 1,
-                            //   iconData: Icons.home_rounded,
-                            //   mainController: mainController,
-                            //   // isDesktop: true,
-                            // ),
+                            FloatingNavBarIcons(
+                              hoverID: 1,
+                              iconData: Icons.home_rounded,
+                              // isDesktop: true,
+                            ),
                             FloatingNavBarIcons(
                               hoverID: 2,
                               iconData: Icons.format_list_bulleted_rounded,

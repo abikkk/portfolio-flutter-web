@@ -10,7 +10,7 @@ class MainController extends GetxController {
   final RxInt codingIndex = 0.obs, gamingIndex = 0.obs;
 
   final PageController pageController = PageController(
-    initialPage: 1,
+    initialPage: 0,
   );
   final PageController codingController = PageController(
     initialPage: 0,
@@ -27,7 +27,7 @@ class MainController extends GetxController {
   final PageController socialsController = PageController(
     initialPage: 0,
   );
-  RxBool isDark = true.obs;
+  RxBool isDark = false.obs;
 
   RxDouble showScrollBtn = 0.3.obs,
       scrollIndex = 0.0.obs,
