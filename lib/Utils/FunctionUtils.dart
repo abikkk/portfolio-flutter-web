@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Controllers/CodingController.dart';
-import 'package:my_porfolio/Controllers/GamingController.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
-import 'package:my_porfolio/Controllers/MusicController.dart';
-import 'package:my_porfolio/Controllers/SocialsController.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // functions
@@ -142,7 +139,8 @@ class Functions {
         }
       default:
         {
-          throw '${type}';
+          if (!await launchUrl(Uri.parse(type))) throw 'Link Invalid!';
+          break;
         }
     }
   }
@@ -159,45 +157,49 @@ class Functions {
   // precache images
   static precacheImages(BuildContext context) {
     CodingController codingController = Get.find<CodingController>();
-    GamingController gamingController = Get.find<GamingController>();
-    SocialsController socialsController = Get.find<SocialsController>();
+    // GamingController gamingController = Get.find<GamingController>();
+    // SocialsController socialsController = Get.find<SocialsController>();
     // ProjectsController projectsController = Get.find<ProjectsController>();
-    MusicController musicController = Get.find<MusicController>();
+    // MusicController musicController = Get.find<MusicController>();
 
-    for (int i = 0; i < codingController.codingMorphButtons.length; i++) {
-      precacheImage(codingController.codingMorphButtons[i].image.image, context);
-      precacheImage(
-          codingController.codingMorphButtons[i].image_hovered.image, context);
-    }
-    for (int i = 0; i < codingController.codeIDEMorphButtons.length; i++) {
-      precacheImage(codingController.codeIDEMorphButtons[i].image.image, context);
-    }
-    for (int i = 0; i < gamingController.gamingMorphButtons.length; i++) {
-      precacheImage(gamingController.gamingMorphButtons[i].image.image, context);
-      precacheImage(
-          gamingController.gamingMorphButtons[i].image_hovered.image, context);
-    }
-    for (int i = 0; i < socialsController.socialMorphButtons.length; i++) {
-      precacheImage(socialsController.socialMorphButtons[i].image.image, context);
-      precacheImage(
-          socialsController.socialMorphButtons[i].image_hovered.image, context);
-    }
-    for (int i = 0; i < gamingController.streamMorphButtons.length; i++) {
-      precacheImage(gamingController.streamMorphButtons[i].image.image, context);
-      precacheImage(
-          gamingController.streamMorphButtons[i].image_hovered.image, context);
-    }
-    for (int i = 0; i < codingController.jobSocialsMorphButtons.length; i++) {
-      precacheImage(
-          codingController.jobSocialsMorphButtons[i].image.image, context);
-      precacheImage(
-          codingController.jobSocialsMorphButtons[i].image_hovered.image,
-          context);
-    }
-    for (int i = 0; i < musicController.musicMorphButtons.length; i++) {
-      precacheImage(musicController.musicMorphButtons[i].image.image, context);
-      precacheImage(
-          musicController.musicMorphButtons[i].image_hovered.image, context);
-    }
+    precacheImage(codingController.projectButton.value.image.image, context);
+    precacheImage(
+        codingController.projectButton.value.image_hovered.image, context);
+    // for (int i = 0; i < codingController.projectsButtons.length; i++) {
+    //   precacheImage(codingController.projectsButtons[i].image.image, context);
+    // precacheImage(
+    //     codingController.codingMorphButtons[i].image_hovered.image, context);
+    // }
+    // for (int i = 0; i < codingController.codeIDEMorphButtons.length; i++) {
+    //   precacheImage(codingController.codeIDEMorphButtons[i].image.image, context);
+    // }
+
+    // for (int i = 0; i < gamingController.gamingMorphButtons.length; i++) {
+    //   precacheImage(gamingController.gamingMorphButtons[i].image.image, context);
+    //   precacheImage(
+    //       gamingController.gamingMorphButtons[i].image_hovered.image, context);
+    // }
+    // for (int i = 0; i < socialsController.socialMorphButtons.length; i++) {
+    //   precacheImage(socialsController.socialMorphButtons[i].image.image, context);
+    //   precacheImage(
+    //       socialsController.socialMorphButtons[i].image_hovered.image, context);
+    // }
+    // for (int i = 0; i < gamingController.workSocialsMorphButtons.length; i++) {
+    //   precacheImage(gamingController.workSocialsMorphButtons[i].image.image, context);
+    //   precacheImage(
+    //       gamingController.workSocialsMorphButtons[i].image_hovered.image, context);
+    // }
+    // for (int i = 0; i < codingController.jobSocialsMorphButtons.length; i++) {
+    //   precacheImage(
+    //       codingController.jobSocialsMorphButtons[i].image.image, context);
+    //   precacheImage(
+    //       codingController.jobSocialsMorphButtons[i].image_hovered.image,
+    //       context);
+    // }
+    // for (int i = 0; i < musicController.musicMorphButtons.length; i++) {
+    //   precacheImage(musicController.musicMorphButtons[i].image.image, context);
+    //   precacheImage(
+    //       musicController.musicMorphButtons[i].image_hovered.image, context);
+    // }
   }
 }

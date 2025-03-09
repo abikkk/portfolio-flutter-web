@@ -1,47 +1,55 @@
+import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_porfolio/Models/MorphButton.dart';
-import 'package:my_porfolio/Utils/ConstantsImages.dart';
+import 'package:my_porfolio/Models/SocialsModel.dart';
+import 'package:my_porfolio/Utils/Constants.dart';
 
 class SocialsController extends GetxController {
-  RxList<MorphButton> socialMorphButtons = [
-    MorphButton(
-        isClicked: false.obs,
-        showDetails: false.obs,
-        isFocused: false.obs,
-        image: Image.asset(ImagesConstants.fb),
-        image_hovered: Image.asset(ImagesConstants.fb_hovered),
-        pad: 50.0.obs,
-        scale: 0.0.obs,
-        link: 'fb'.obs),
-    MorphButton(
-        isClicked: false.obs,
-        showDetails: false.obs,
-        isFocused: false.obs,
-        image: Image.asset(ImagesConstants.ig),
-        image_hovered: Image.asset(ImagesConstants.ig_hovered),
-        pad: 50.0.obs,
-        scale: 0.0.obs,
-        link: 'ig'.obs),
-    MorphButton(
-        isClicked: false.obs,
-        showDetails: false.obs,
-        isFocused: false.obs,
-        image: Image.asset(ImagesConstants.twitter),
-        image_hovered: Image.asset(ImagesConstants.twitter_hovered),
-        pad: 50.0.obs,
-        scale: 0.0.obs,
-        link: 'twitter'.obs),
-    MorphButton(
-        isClicked: false.obs,
-        showDetails: false.obs,
-        isFocused: false.obs,
-        image: Image.asset(ImagesConstants.linkd),
-        image_hovered: Image.asset(ImagesConstants.linkd_hovered),
-        pad: 50.0.obs,
-        scale: 0.0.obs,
-        link: 'linkd'.obs),
-  ].obs;
+  final firebase = FirebaseFirestore.instance;
+  RxBool gettingSocials = false.obs;
+  RxList<MorphButton> socialMorphButtons =
+      <MorphButton>[].obs; // social buttons
+  RxList<SocialsModel> socials = <SocialsModel>[].obs; // music socials
 
-  getSocials() {}
+  @override
+  onInit() {
+    super.onInit();
+    getSocials();
+  }
+
+  getSocials() async {
+    gettingSocials(true);
+    try {
+      final snapShot =
+          await firebase.collection(APIEndpoints.socials).get();
+      if (snapShot.docs.isEmpty) {
+        throw 'Empty data in ${APIEndpoints.socials} collection';
+      }
+
+      socials(snapShot.docs.map((e) => SocialsModel.fromSnapshot(e)).toList());
+    } catch (e) {
+      debugPrint('## ERROR GETTING SOCIALS: $e');
+    } finally {
+      if (socials.isNotEmpty) setGamingSocialButtons();
+      gettingSocials(false);
+    }
+  }
+
+  setGamingSocialButtons() {
+    socialMorphButtons.clear();
+    socials.forEach((e) {
+      socialMorphButtons.add(
+        MorphButton(
+            isClicked: false.obs,
+            showDetails: false.obs,
+            isFocused: false.obs,
+            image: e.image,
+            image_hovered: e.imageReversed,
+            pad: 50.0.obs,
+            scale: 0.0.obs,
+            link: e.link),
+      );
+    });
+  }
 }

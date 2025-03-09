@@ -17,113 +17,44 @@ class FloatingNavBarDesktop extends StatelessWidget {
     MainController mainController = Get.find<MainController>();
 
     return Obx(
-      () => AnimatedContainer(
-        height: MediaQuery.of(context).size.height,
-        duration: Duration(milliseconds: 111),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+      () => Positioned(
+        bottom: 0,
+        right: 0,
+        left: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // Expanded(flex: 4, child: SizedBox()),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: MouseRegion(
-                  onEnter: (event) => mainController.navHovered.value = 1,
-                  onExit: (event) => mainController.navHovered.value = 0,
-                  child: Stack(
-                    children: [
-                      // frosted glass backdrop
-                      ClipRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX:
-                                mainController.navHovered.value == 1 ? 6 : 2,
-                            sigmaY:
-                                mainController.navHovered.value == 1 ? 6 : 2,
-                          ),
-                          child: AnimatedContainer(
-                              duration: Duration(milliseconds: 111),
-                              height:
-                                  // mainController.navHovered.value == 1
-                                  //     ?
-                                  MediaQuery.of(context).size.height / 12
-                              // :MediaQuery.of(context).size.height / 24
-                              ,
-                              width:
-                                  // mainController.navHovered.value == 1
-                                  //     ?
-                                  MediaQuery.of(context).size.width / 5.5
-                              // : MediaQuery.of(context).size.width / 6,
-                              ),
-                        ),
-                      ),
-
-                      // navbar content
-                      AnimatedContainer(
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade300.withOpacity(
-                                mainController.navHovered.value == 1
-                                    ? 0.3
-                                    : 0.1),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(24))),
-                        margin: EdgeInsets.only(bottom: 30),
-                        height:
-                            // mainController.navHovered.value == 1
-                            //     ?
-                            MediaQuery.of(context).size.height / 12
-                        // :MediaQuery.of(context).size.height / 24
-                        ,
-                        width:
-                            mainController.navHovered.value == 1
-                                ?
-                            MediaQuery.of(context).size.width / 4
-                        : MediaQuery.of(context).size.width / 6.5
-                        ,
-                        duration: Duration(milliseconds: 111),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FloatingNavBarIcons(
-                              hoverID: 1,
-                              iconData: Icons.home_rounded,
-                              // isDesktop: true,
-                            ),
-                            FloatingNavBarIcons(
-                              hoverID: 2,
-                              iconData: Icons.format_list_bulleted_rounded,
-                              // isDesktop: true,
-                            ),
-                            FloatingNavBarIcons(
-                              hoverID: 3,
-                              iconData: Icons.games_rounded,
-                              // isDesktop: true,
-                            ),
-                            FloatingNavBarIcons(
-                              hoverID: 4,
-                              iconData: Icons.music_note_rounded,
-                              // isDesktop: true,
-                            ),
-                            FloatingNavBarIcons(
-                              hoverID: 5,
-                              iconData: Icons.person_rounded,
-                              // isDesktop: true,
-                            ),
-                            // FloatingNavBarIcons(
-                            //     hoverID: 6,
-                            //     iconData: Icons.email_rounded,
-                            //     mainController: mainController),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+            MouseRegion(
+              onEnter: (event) => mainController.navHovered.value = 1,
+              onExit: (event) => mainController.navHovered.value = 0,
+              child: AnimatedContainer(
+                padding: EdgeInsets.symmetric(
+                    horizontal: mainController.navHovered.value == 1 ? 44 : 22),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade300.withOpacity(
+                        mainController.navHovered.value == 1 ? 0.3 : 0.1),
+                    borderRadius: BorderRadius.all(Radius.circular(24))),
+                margin: EdgeInsets.only(bottom: 30),
+                height: MediaQuery.of(context).size.height / 12,
+                duration: Duration(milliseconds: 111),
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: mainController.infos.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return FloatingNavBarIcons(
+                      hoverID: index + 1,
+                      iconData: IconData(
+                          mainController.infos[index].iconCodePoint.value,
+                          fontFamily: 'MaterialIcons'),
+                    );
+                  },
                 ),
               ),
-            )
+            ),
           ],
         ),
-        // ),
       ),
     );
   }

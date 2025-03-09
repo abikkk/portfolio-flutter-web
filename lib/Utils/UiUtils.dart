@@ -7,9 +7,12 @@ import 'package:my_porfolio/Controllers/CodingController.dart';
 import 'package:my_porfolio/Controllers/GamingController.dart';
 import 'package:my_porfolio/Controllers/MainController.dart';
 import 'package:my_porfolio/Controllers/MusicController.dart';
+import 'package:my_porfolio/Controllers/ProjectsController.dart';
 import 'package:my_porfolio/Controllers/SocialsController.dart';
-import 'package:my_porfolio/Models/ProjectCard.dart';
+import 'package:my_porfolio/Models/MorphButton.dart';
+import 'package:my_porfolio/Models/ProjectModel.dart';
 import 'package:my_porfolio/Utils/AppThemeData.dart';
+import 'package:my_porfolio/Utils/Constants.dart';
 import 'package:my_porfolio/Utils/FunctionUtils.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -106,7 +109,7 @@ class Widgets {
     );
   }
 
-  static Container projectCard(ProjectCard project, Color iconColor) {
+  static Container projectCard(ProjectModel project, Color iconColor) {
     MainController mainController = Get.find<MainController>();
     return Container(
       margin: EdgeInsets.all(5),
@@ -193,8 +196,6 @@ class Widgets {
             duration: Duration(milliseconds: 111),
             style: !((id == 0)
                     ? mainController.subtitle_1.value
-                    // : (id == 1)
-                    //     ? mainController.subtitle_2.value
                     : mainController.subtitle_2.value)
                 ? AppThemeData.appThemeData.textTheme.displaySmall!.copyWith(
                     color: mainController.isDark.value
@@ -205,7 +206,6 @@ class Widgets {
                         ? Colors.white
                         : Colors.black),
             child: GestureDetector(
-              // hoverColor: Colors.transparent,
               onTap: () {
                 Functions.navigate(id + 2, mainController.pageController);
               },
@@ -238,23 +238,136 @@ class Widgets {
   static Widget CodingIntroDetails(
       {required BuildContext context, required bool isDesktop}) {
     MainController mainController = Get.find<MainController>();
+    CodingController codingController = Get.find<CodingController>();
 
     return Padding(
-      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20.0),
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 2,
+      padding: EdgeInsets.symmetric(horizontal: (isDesktop) ? 44.0 : 20.0),
+      child: (mainController.infos.isEmpty)
+          ? SizedBox.shrink()
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 40,
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Widgets.customShadowBox(
+                          Text(
+                            mainController.infos[1].label.value,
+                            style: AppThemeData
+                                .appThemeData.textTheme.headlineMedium!
+                                .copyWith(
+                                    color: mainController.isDark.value
+                                        ? Colors.white
+                                        : Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Widgets.customShadowBox(
+                            Text(
+                              mainController.infos[1].description.value,
+                              softWrap: true,
+                              style: AppThemeData
+                                  .appThemeData.textTheme.bodyMedium!
+                                  .copyWith(
+                                      color: mainController.isDark.value
+                                          ? Colors.white
+                                          : Colors.black),
+                              maxLines: 4,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Widgets.customShadowBox(
+                            Text(
+                              mainController.infos[1].subTitle1.value,
+                              softWrap: true,
+                              style: AppThemeData
+                                  .appThemeData.textTheme.bodyMedium!
+                                  .copyWith(
+                                      color: mainController.isDark.value
+                                          ? Colors.white
+                                          : Colors.black),
+                              maxLines: 4,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Widgets.customShadowBox(
+                            Text(
+                              mainController.infos[1].subTitle2.value,
+                              softWrap: true,
+                              style: AppThemeData
+                                  .appThemeData.textTheme.bodyMedium!
+                                  .copyWith(
+                                      color: mainController.isDark.value
+                                          ? Colors.white
+                                          : Colors.black),
+                              maxLines: 4,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                if (isDesktop)
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .2,
+                    child: Row(
+                      spacing: 40,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Widgets.pieChart(context,
+                            isDesktop: isDesktop, label: 'frameworks'),
+                        Widgets.workSocialsMorphButtons(context,
+                            isDesktop: isDesktop),
+                        Obx(
+                          () => morphButton(context, callBack: () {
+                            Functions.navigate(
+                                3, mainController.codingController);
+                            debugPrint('?>>');
+                          }, buttonModel: codingController.projectButton.value),
+                        )
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+    );
+  }
+
+  static Widget FrameworksDetails({required bool isDesktop}) {
+    MainController mainController = Get.find<MainController>();
+    CodingController codingController = Get.find<CodingController>();
+
+    return (codingController.frameworks.isNotEmpty &&
+            codingController.frameworkIndex.value > -1)
+        ? Padding(
+            padding: const EdgeInsets.all(44.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 10,
               children: [
                 Row(
                   children: [
                     Widgets.customShadowBox(
                       Text(
-                        'about me',
+                        codingController
+                            .frameworks[codingController.frameworkIndex.value]
+                            .label,
                         style: AppThemeData
                             .appThemeData.textTheme.headlineMedium!
                             .copyWith(
@@ -265,330 +378,98 @@ class Widgets {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Widgets.customShadowBox(
-                        Text(
-                          'i am a flutter developer\ni have experiences with frontend mobile application development for 4+ years now\ni also have experience on GitHub/GitLab, Figma, Firebase, Slack/JIRA, etc',
-                          softWrap: true,
-                          style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                              .copyWith(
-                                  color: mainController.isDark.value
-                                      ? Colors.white
-                                      : Colors.black),
-                          maxLines: 4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          if (isDesktop)
-            Expanded(
-              flex: 3,
-              child: Row(
-                // spacing: 40,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Widgets.pieChart(
-                      context,
-                      [
-                        PieData(value: 8, color: Colors.blue),
-                        PieData(value: 1.5, color: Colors.blueAccent),
-                        PieData(value: 0.5, color: Colors.green),
-                        // 'flutter': 8.0,
-                        // 'react.js': 1.5,
-                        // 'vue.js': 0.5,
-                      ],
-                      '',
-                      {},
-                      isDesktop: isDesktop),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Widgets.codingMorphButtons(context, 3, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 4, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 5, isDesktop: isDesktop),
-                  Widgets.codingMorphButtons(context, 6, isDesktop: isDesktop),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  static Widget FlutterDetails({required bool isDesktop}) {
-    MainController mainController = Get.find<MainController>();
-
-    return Padding(
-      padding: const EdgeInsets.all(44.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Widgets.customShadowBox(
-                Text(
-                  'flutter',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
-                      .copyWith(
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      'i am currently working as a freelance flutter developer\npreviously i was involved in multiple local as well as international projects for multiple clients\n\nnotable examples of projects I have worked on:',
-                      maxLines: 8,
-                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                          .copyWith(
-                              color: mainController.isDark.value
-                                  ? Colors.white
-                                  : Colors.black),
-                      softWrap: true,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      '- Wholistic Minds which is available on Apple App Store as well as Google Play Store',
-                      maxLines: 2,
-                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                          .copyWith(
-                              color: mainController.isDark.value
-                                  ? Colors.white
-                                  : Colors.black),
-                      softWrap: true,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Widgets.customShadowBox(
-                  GestureDetector(
-                      onTap: () {
-                        Functions.openLink('wm');
-                      },
-                      child: Icon(Icons.link,
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black)),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      '- My Hotel and Home which is available on Google Play Store',
-                      maxLines: 2,
-                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                          .copyWith(
-                              color: mainController.isDark.value
-                                  ? Colors.white
-                                  : Colors.black),
-                      softWrap: true,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Widgets.customShadowBox(
-                  GestureDetector(
-                      onTap: () {
-                        Functions.openLink('hnh');
-                      },
-                      child: Icon(Icons.link,
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black)),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      '- Pokhara Food Delivery which is available both on Google Play Store.',
-                      maxLines: 2,
-                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                          .copyWith(
-                              color: mainController.isDark.value
-                                  ? Colors.white
-                                  : Colors.black),
-                      softWrap: true,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Widgets.customShadowBox(
-                  GestureDetector(
-                      onTap: () {
-                        Functions.openLink('pfd');
-                      },
-                      child: Icon(Icons.link,
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black)),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  static Widget ReactDetails({required bool isDesktop}) {
-    MainController mainController = Get.find<MainController>();
-    return Padding(
-      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Widgets.customShadowBox(
-                Text(
-                  'react.js',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
-                      .copyWith(
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Widgets.customShadowBox(
-                        Text(
-                          'i worked as a freelancer for 8 months. my projects ranges as follows:',
-                          softWrap: true,
-                          style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                              .copyWith(
-                                  color: mainController.isDark.value
-                                      ? Colors.white
-                                      : Colors.black),
-                          maxLines: 4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Row(
+                    children: [
+                      Expanded(
                         child: Widgets.customShadowBox(
-                      Text(
-                        ' - portfolio websites\n - cafe website\n - e-commerce\n - warehouse/inventory management',
-                        softWrap: true,
-                        style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                            .copyWith(
-                                color: mainController.isDark.value
-                                    ? Colors.white
-                                    : Colors.black),
-                        maxLines: 8,
+                          Text(
+                            codingController
+                                .frameworks[
+                                    codingController.frameworkIndex.value]
+                                .description,
+                            maxLines: 8,
+                            style: AppThemeData
+                                .appThemeData.textTheme.bodyMedium!
+                                .copyWith(
+                                    color: mainController.isDark.value
+                                        ? Colors.white
+                                        : Colors.black),
+                            softWrap: true,
+                          ),
+                        ),
                       ),
-                    )),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  static Widget VueDetails({required bool isDesktop}) {
-    MainController mainController = Get.find<MainController>();
-    return Padding(
-      padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Widgets.customShadowBox(
-                Text(
-                  'vue.js',
-                  style: AppThemeData.appThemeData.textTheme.headlineMedium!
-                      .copyWith(
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Widgets.customShadowBox(
-                    Text(
-                      'i worked as an intern for a private company in Pokhara as their junior frontend developer for 6 months. i was involved in development of employee record management system and attendance management system. i have my own portfolio website under development as well.',
-                      maxLines: 8,
-                      style: AppThemeData.appThemeData.textTheme.bodyMedium!
-                          .copyWith(
-                              color: mainController.isDark.value
-                                  ? Colors.white
-                                  : Colors.black),
-                      softWrap: true,
-                    ),
+                    ],
                   ),
                 ),
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: codingController.frameworkProjects.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Widgets.customShadowBox(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                codingController.frameworkProjects[index].label,
+                                style: AppThemeData
+                                    .appThemeData.textTheme.bodyMedium!
+                                    .copyWith(
+                                        color: mainController.isDark.value
+                                            ? Colors.white
+                                            : Colors.black),
+                                softWrap: true,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              if (codingController
+                                  .frameworkProjects[index].link.isNotEmpty)
+                                GestureDetector(
+                                    onTap: () {
+                                      Functions.openLink(codingController
+                                          .frameworkProjects[index].link);
+                                    },
+                                    child: Icon(Icons.link,
+                                        color: mainController.isDark.value
+                                            ? Colors.white
+                                            : Colors.black))
+                            ],
+                          ),
+                          Text(
+                            codingController
+                                .frameworkProjects[index].description,
+                            maxLines: 2,
+                            style: AppThemeData
+                                .appThemeData.textTheme.bodySmall!
+                                .copyWith(
+                                    color: mainController.isDark.value
+                                        ? Colors.white
+                                        : Colors.black),
+                            softWrap: true,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: 20,
+                    );
+                  },
+                ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : SizedBox.shrink();
   }
 
-  static Widget ProjectDetails({required bool isDesktop}) {
-    CodingController codingController = Get.find<CodingController>();
+  static Widget projectDetails({required bool isDesktop}) {
     MainController mainController = Get.find<MainController>();
+    ProjectsController projectsController = Get.find<ProjectsController>();
 
     return Padding(
       padding: EdgeInsets.all((isDesktop) ? 44.0 : 20),
@@ -609,45 +490,38 @@ class Widgets {
               ),
             ],
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Obx(
-                      () => AnimatedSwitcher(
-                        duration: Duration(milliseconds: 500),
-                        child: (mainController.projectDetails.value)
-                            ? projectDetailSection(isDesktop)
-                            : GridView(
-                                shrinkWrap: true,
-                                padding: EdgeInsets.all(10),
-                                keyboardDismissBehavior:
-                                    ScrollViewKeyboardDismissBehavior.onDrag,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: (isDesktop) ? 8 : 2),
-                                children: [
-                                  for (ProjectCard project
-                                      in codingController.projects)
-                                    Widgets.projectCard(
-                                        project,
-                                        project.devLang.value == 'vue'
-                                            ? Colors.green
-                                            : project.devLang.value == 'react'
-                                                ? Color.fromARGB(
-                                                    255, 3, 117, 248)
-                                                : Color.fromARGB(
-                                                    255, 9, 74, 187))
-                                ],
-                              ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Obx(
+                  () => AnimatedSwitcher(
+                    duration: Duration(milliseconds: 500),
+                    child: (mainController.projectDetails.value)
+                        ? projectDetailSection(isDesktop)
+                        : GridView(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.all(10),
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: (isDesktop) ? 8 : 2),
+                            children: [
+                              for (ProjectModel project
+                                  in projectsController.projects)
+                                Widgets.projectCard(
+                                    project,
+                                    project.devLang.value == 'vue'
+                                        ? Colors.green
+                                        : project.devLang.value == 'react'
+                                            ? Color.fromARGB(255, 3, 117, 248)
+                                            : Color.fromARGB(255, 9, 74, 187))
+                            ],
+                          ),
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),
@@ -657,13 +531,16 @@ class Widgets {
   static Padding projectDetailSection(bool isDesktop) {
     MainController mainController = Get.find<MainController>();
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.all(20.0),
       child: customShadowBox(
         Obx(
           () => Column(
+            spacing: 20,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
+                spacing: 20,
                 children: [
                   GestureDetector(
                       onTap: () {
@@ -676,29 +553,22 @@ class Widgets {
                             ? Colors.white
                             : Colors.black,
                       )),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        mainController.selectedProject.label.value,
-                        style: AppThemeData.appThemeData.textTheme.displayLarge!
-                            .copyWith(
-                          color: mainController.isDark.value
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
+                  Text(
+                    mainController.selectedProject.label.value,
+                    style: AppThemeData.appThemeData.textTheme.displayLarge!
+                        .copyWith(
+                      color: mainController.isDark.value
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 30,
               ),
               Row(
                 children: [
                   Expanded(
                     child: Text(
-                      mainController.selectedProject.details.value,
+                      mainController.selectedProject.description.value,
                       softWrap: true,
                       style: AppThemeData.appThemeData.textTheme.bodyMedium!
                           .copyWith(
@@ -710,9 +580,6 @@ class Widgets {
                     ),
                   )
                 ],
-              ),
-              SizedBox(
-                height: 10,
               ),
               Row(
                 children: [
@@ -740,9 +607,6 @@ class Widgets {
                     ),
                   )
                 ],
-              ),
-              SizedBox(
-                height: 10,
               ),
               Row(
                 children: [
@@ -791,7 +655,7 @@ class Widgets {
         children: [
           Row(
             children: [
-              Widgets.StreamLinkButtons(
+              Widgets.streamLinkButtons(
                 0,
                 'youtube',
               ),
@@ -818,9 +682,9 @@ class Widgets {
               ],
             ),
           ),
-          (isDesktop)
-              ? SizedBox()
-              : Widgets.streamMorphButtons(context, 0, isDesktop: false)
+          // (isDesktop)
+          //     ? SizedBox()
+          //     : Widgets.gamingSocialsMorphButtons(context, 0, isDesktop: false)
         ],
       ),
     );
@@ -836,7 +700,7 @@ class Widgets {
         children: [
           Row(
             children: [
-              Widgets.StreamLinkButtons(
+              Widgets.streamLinkButtons(
                 1,
                 'twitch',
               ),
@@ -863,9 +727,9 @@ class Widgets {
               ],
             ),
           ),
-          (isDesktop)
-              ? SizedBox()
-              : Widgets.streamMorphButtons(context, 1, isDesktop: false)
+          // (isDesktop)
+          //     ? SizedBox()
+          //     : Widgets.gamingSocialsMorphButtons(context, 1, isDesktop: false)
         ],
       ),
     );
@@ -881,7 +745,7 @@ class Widgets {
         children: [
           Row(
             children: [
-              Widgets.StreamLinkButtons(
+              Widgets.streamLinkButtons(
                 2,
                 'discord',
               ),
@@ -908,607 +772,194 @@ class Widgets {
               ],
             ),
           ),
-          (isDesktop)
-              ? SizedBox()
-              : Widgets.streamMorphButtons(context, 2, isDesktop: false)
+          // (isDesktop)
+          //     ? SizedBox()
+          //     : Widgets.gamingSocialsMorphButtons(context, 2, isDesktop: false)
         ],
       ),
     );
   }
 
-// coding morph button
-  static Widget codingMorphButtons(BuildContext context, int buttonType,
-      {bool isDesktop = true}) {
+  // morph button
+  static Widget morphButton(BuildContext context,
+      {required MorphButton buttonModel,
+      bool isDesktop = true,
+      VoidCallback? callBack}) {
     MainController mainController = Get.find<MainController>();
+
+    return AnimatedContainer(
+      height: MediaQuery.of(context).size.height * .20,
+      width: MediaQuery.of(context).size.height * .20,
+      duration: Duration(milliseconds: 111),
+      curve: Curves.easeIn,
+      decoration: BoxDecoration(
+          color: (mainController.isDark.value) ? Colors.black : Colors.white,
+          gradient:
+              (buttonModel.showDetails.value || buttonModel.isFocused.value)
+                  ? LinearGradient(colors: mainController.skillsGradientList[0])
+                  : null,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: buttonModel.isFocused.value && !buttonModel.isClicked.value
+              ? [
+                  BoxShadow(
+                      color: Colors.grey[500]!,
+                      offset: (mainController.isDark.value)
+                          ? Offset(2, 2)
+                          : Offset(4, 4),
+                      blurRadius: mainController.isDark.value ? 5 : 15,
+                      spreadRadius: 1),
+                  BoxShadow(
+                      color: Colors.white,
+                      offset: (mainController.isDark.value)
+                          ? Offset(-2, -2)
+                          : Offset(-4, -4),
+                      blurRadius: mainController.isDark.value ? 5 : 15,
+                      spreadRadius: 1)
+                ]
+              : null),
+      padding: EdgeInsets.all((isDesktop) ? 15 : 5),
+      child: MouseRegion(
+        onEnter: (a) => buttonModel.isFocused.value = true,
+        onExit: (a) => buttonModel.isFocused.value = false,
+        child: GestureDetector(
+          onTap: () async {
+            if (callBack == null)
+              Functions.openLink(buttonModel.link);
+            else
+              callBack();
+          },
+          child: AnimatedContainer(
+            curve: Curves.easeIn,
+            width: MediaQuery.of(context).size.height * .20,
+            height: MediaQuery.of(context).size.height * .20,
+            duration: Duration(milliseconds: 111),
+            padding: EdgeInsets.all(buttonModel.pad.value),
+            child: buttonModel.showDetails.value
+                ? (mainController.isDark.value)
+                    ? buttonModel.image_hovered
+                    : buttonModel.image
+                : (mainController.isDark.value)
+                    ? buttonModel.image_hovered
+                    : buttonModel.image,
+          ),
+        ),
+      ),
+    );
+  }
+
+// coding morph buttons
+  static Widget workSocialsMorphButtons(BuildContext context,
+      {bool isDesktop = true}) {
     CodingController codingController = Get.find<CodingController>();
 
-    return Obx(
-      () => Padding(
-        padding: EdgeInsets.all((isDesktop) ? 15 : 5),
-        child: MouseRegion(
-          onEnter: (a) {
-            // mainController.codingMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .12;
-            codingController.codingMorphButtons[buttonType].isFocused.value =
-                true;
-          },
-          onExit: (a) {
-            // mainController.codingMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .10;
-            codingController.codingMorphButtons[buttonType].isFocused.value =
-                false;
-          },
-          child: InkWell(
-            onTap: () async {
-              if (buttonType == 0 || buttonType == 6) {
-                codingController
-                        .codingMorphButtons[buttonType].isClicked.value =
-                    !codingController
-                        .codingMorphButtons[buttonType].isClicked.value;
-
-                mainController.codingController.animateToPage((buttonType + 1),
-                    duration: Duration(milliseconds: 200),
-                    curve: Curves.easeInOut);
-
-                // delay
-                Future.delayed(const Duration(milliseconds: 150), () {
-                  codingController
-                          .codingMorphButtons[buttonType].isClicked.value =
-                      !codingController
-                          .codingMorphButtons[buttonType].isClicked.value;
-                });
-              } else {
-                Functions.openLink(
-                    codingController.codingMorphButtons[buttonType].link.value);
-              }
-            },
-            child: Wrap(
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 111),
-                  curve: Curves.easeIn,
-                  decoration: BoxDecoration(
-                      color: (mainController.isDark.value)
-                          ? Colors.black
-                          : Colors.white,
-                      gradient: (codingController.codingMorphButtons[buttonType]
-                                  .showDetails.value ||
-                              codingController.codingMorphButtons[buttonType]
-                                  .isFocused.value)
-                          ? LinearGradient(
-                              colors:
-                                  // (mainController.isDark.value)
-                                  //     ? [
-                                  //         Color.fromRGBO(166, 166, 166, 1.0),
-                                  //         Color.fromRGBO(122, 122, 122, 1.0),
-                                  //       ]
-                                  //     :
-                                  mainController.skillsGradientList[buttonType])
-                          : null,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: codingController.codingMorphButtons[buttonType]
-                                  .isFocused.value &&
-                              !codingController.codingMorphButtons[buttonType]
-                                  .isClicked.value
-                          ? [
-                              BoxShadow(
-                                  color: Colors.grey[500]!,
-                                  offset: (mainController.isDark.value)
-                                      ? Offset(2, 2)
-                                      : Offset(4, 4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1),
-                              BoxShadow(
-                                  color: Colors.white,
-                                  offset: (mainController.isDark.value)
-                                      ? Offset(-2, -2)
-                                      : Offset(-4, -4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1)
-                            ]
-                          : null),
-                  child: Padding(
-                    padding: EdgeInsets.all(codingController
-                        .codingMorphButtons[buttonType].pad.value),
-                    child: AnimatedContainer(
-                      curve: Curves.easeIn,
-                      height: codingController
-                                  .codingMorphButtons[buttonType].scale.value !=
-                              0.0
-                          ? codingController
-                              .codingMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 111),
-                      child: codingController
-                              .codingMorphButtons[buttonType].showDetails.value
-                          ? (mainController.isDark.value)
-                              ? codingController
-                                  .codingMorphButtons[buttonType].image_hovered
-                              : codingController
-                                  .codingMorphButtons[buttonType].image
-                          : (mainController.isDark.value)
-                              ? codingController
-                                  .codingMorphButtons[buttonType].image_hovered
-                              : codingController
-                                  .codingMorphButtons[buttonType].image,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    if (codingController.jobSocialsMorphButtons.isNotEmpty)
+      return ListView.separated(
+        shrinkWrap: true,
+        scrollDirection: isDesktop ? Axis.horizontal : Axis.vertical,
+        itemCount: codingController.jobSocialsMorphButtons.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Obx(
+            () => morphButton(context,
+                buttonModel: codingController.jobSocialsMorphButtons[index]),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return (isDesktop)
+              ? SizedBox(
+                  width: 20,
+                )
+              : SizedBox(
+                  height: 20,
+                );
+        },
+      );
+    else {
+      return SizedBox.shrink();
+    }
   }
 
-  // gaming morph button
-  static Widget gamingMorphButtons(BuildContext context, int buttonType) {
-    MainController mainController = Get.find<MainController>();
-    GamingController gamingController = Get.find<GamingController>();
-
-    return Obx(
-      () => Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: MouseRegion(
-          onEnter: (a) {
-            // mainController.gamingMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .12;
-            gamingController.gamingMorphButtons[buttonType].isFocused.value =
-                true;
-          },
-          onExit: (a) {
-            // mainController.gamingMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .10;
-            gamingController.gamingMorphButtons[buttonType].isFocused.value =
-                false;
-          },
-          child: InkWell(
-            onTap: () async {
-              gamingController.gamingMorphButtons[buttonType].isClicked.value =
-                  !gamingController
-                      .gamingMorphButtons[buttonType].isClicked.value;
-
-              // mainController.gamingController.animateToPage(buttonType + 1,
-              //     duration: Duration(milliseconds: 200),
-              //     curve: Curves.easeInOut);
-
-              // delay
-              Future.delayed(const Duration(milliseconds: 150), () {
-                gamingController
-                        .gamingMorphButtons[buttonType].isClicked.value =
-                    !gamingController
-                        .gamingMorphButtons[buttonType].isClicked.value;
-
-                Functions.openLink(
-                    gamingController.gamingMorphButtons[buttonType].link.value);
-              });
-            },
-            child: Wrap(
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 111),
-                  curve: Curves.fastOutSlowIn,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: (gamingController.gamingMorphButtons[buttonType]
-                                  .showDetails.value ||
-                              gamingController.gamingMorphButtons[buttonType]
-                                  .isFocused.value)
-                          ? LinearGradient(
-                              colors:
-                                  mainController.gameGradientList[buttonType])
-                          : null,
-                      boxShadow: gamingController.gamingMorphButtons[buttonType]
-                                  .isFocused.value &&
-                              !gamingController.gamingMorphButtons[buttonType]
-                                  .isClicked.value
-                          ? [
-                              BoxShadow(
-                                  color: Colors.grey[500]!,
-                                  offset: Offset(4, 4),
-                                  blurRadius: 15,
-                                  spreadRadius: 1),
-                              BoxShadow(
-                                  color: Colors.white,
-                                  offset: Offset(-4, -4),
-                                  blurRadius: 15,
-                                  spreadRadius: 1)
-                            ]
-                          : null),
-                  child: Padding(
-                    padding: EdgeInsets.all(gamingController
-                        .gamingMorphButtons[buttonType].pad.value),
-                    child: AnimatedContainer(
-                      curve: Curves.easeIn,
-                      height: gamingController
-                                  .gamingMorphButtons[buttonType].scale.value !=
-                              0.0
-                          ? gamingController
-                              .gamingMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 111),
-                      child: gamingController
-                              .gamingMorphButtons[buttonType].showDetails.value
-                          ? gamingController
-                              .gamingMorphButtons[buttonType].image_hovered
-                          : gamingController
-                              .gamingMorphButtons[buttonType].image,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // stream morph button
-  static Widget streamMorphButtons(BuildContext context, int buttonType,
-      {bool isDesktop = true, bool isSocials = false}) {
-    MainController mainController = Get.find<MainController>();
-    GamingController gamingController = Get.find<GamingController>();
-
-    return Obx(
-      () => Padding(
-        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
-        child: MouseRegion(
-          onEnter: (a) {
-            // mainController.streamMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .12;
-            gamingController.streamMorphButtons[buttonType].isFocused(true);
-          },
-          onExit: (a) {
-            // mainController.streamMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .10;
-            gamingController.streamMorphButtons[buttonType].isFocused(false);
-          },
-          child: InkWell(
-            onTap: () async {
-              if (!isSocials) {
-                gamingController
-                        .streamMorphButtons[buttonType].isClicked.value =
-                    !gamingController
-                        .streamMorphButtons[buttonType].isClicked.value;
-
-                // delay
-                Future.delayed(const Duration(milliseconds: 150), () {
-                  gamingController
-                          .streamMorphButtons[buttonType].isClicked.value =
-                      !gamingController
-                          .streamMorphButtons[buttonType].isClicked.value;
-
-                  if (isDesktop)
-                    mainController.streamController.animateToPage(buttonType,
-                        duration: Duration(milliseconds: 200),
-                        curve: Curves.easeInOut);
-                  else
-                    Functions.openLink(gamingController
-                        .streamMorphButtons[buttonType].link.value);
-                });
-              } else {
-                Functions.openLink(
-                    gamingController.streamMorphButtons[buttonType].link.value);
-              }
-            },
-            child: Wrap(
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 111),
-                  curve: Curves.fastOutSlowIn,
-                  decoration: BoxDecoration(
-                      color: (mainController.isDark.value)
-                          ? Colors.black
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: (gamingController.streamMorphButtons[buttonType]
-                                  .showDetails.value ||
-                              gamingController.streamMorphButtons[buttonType]
-                                      .isFocused.value &&
-                                  isDesktop)
-                          ? LinearGradient(
-                              colors:
-                                  mainController.streamGradientList[buttonType])
-                          : null,
-                      boxShadow: gamingController.streamMorphButtons[buttonType]
-                                  .isFocused.value &&
-                              !gamingController.streamMorphButtons[buttonType]
-                                  .isClicked.value
-                          ? [
-                              BoxShadow(
-                                  color: Colors.grey[500]!,
-                                  offset: mainController.isDark.value
-                                      ? Offset(2, 2)
-                                      : Offset(4, 4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1),
-                              BoxShadow(
-                                  color: Colors.white,
-                                  offset: mainController.isDark.value
-                                      ? Offset(-2, -2)
-                                      : Offset(-4, -4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1)
-                            ]
-                          : null),
-                  child: Padding(
-                    padding: EdgeInsets.all(gamingController
-                        .streamMorphButtons[buttonType].pad.value),
-                    child: AnimatedContainer(
-                      curve: Curves.easeIn,
-                      height: gamingController
-                                  .streamMorphButtons[buttonType].scale.value !=
-                              0.0
-                          ? gamingController
-                              .streamMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 111),
-                      child: gamingController
-                              .streamMorphButtons[buttonType].showDetails.value
-                          ? (mainController.isDark.value)
-                              ? gamingController
-                                  .streamMorphButtons[buttonType].image
-                              : gamingController
-                                  .streamMorphButtons[buttonType].image_hovered
-                          : (mainController.isDark.value)
-                              ? gamingController
-                                  .streamMorphButtons[buttonType].image_hovered
-                              : gamingController
-                                  .streamMorphButtons[buttonType].image,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // social morph button
-  static Widget socialMorphButtons(BuildContext context, int buttonType,
+  // gaming social morph buttons
+  static Widget gamingSocialsMorphButtons(BuildContext context,
       {bool isDesktop = true}) {
-    MainController mainController = Get.find<MainController>();
+    GamingController gamingController = Get.find<GamingController>();
+
+    if (gamingController.gamingSocialsMorphButtons.isNotEmpty)
+      return ListView.separated(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: gamingController.gamingSocialsMorphButtons.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Obx(
+            () => morphButton(context,
+                buttonModel: gamingController.gamingSocialsMorphButtons[index]),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width: 20,
+          );
+        },
+      );
+    else {
+      return SizedBox.shrink();
+    }
+  }
+
+  // social morph buttons
+  static Widget socialMorphButtons(BuildContext context,
+      {bool isDesktop = true}) {
     SocialsController socialsController = Get.find<SocialsController>();
 
-    return Obx(
-      () => Padding(
-        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
-        child: MouseRegion(
-          onEnter: (a) {
-            // mainController.socialMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .12;
-            socialsController.socialMorphButtons[buttonType].isFocused(true);
-          },
-          onExit: (a) {
-            // mainController.socialMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .10;
-            socialsController.socialMorphButtons[buttonType].isFocused(false);
-          },
-          child: InkWell(
-            onTap: () async {
-              socialsController.socialMorphButtons[buttonType].isClicked.value =
-                  !socialsController
-                      .socialMorphButtons[buttonType].isClicked.value;
-
-              // delay
-              Future.delayed(const Duration(milliseconds: 150), () {
-                socialsController
-                        .socialMorphButtons[buttonType].isClicked.value =
-                    !socialsController
-                        .socialMorphButtons[buttonType].isClicked.value;
-
-                Functions.openLink(socialsController
-                    .socialMorphButtons[buttonType].link.value);
-              });
-            },
-            child: Wrap(
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 111),
-                  curve: Curves.fastOutSlowIn,
-                  decoration: BoxDecoration(
-                      color: mainController.isDark.value
-                          ? Colors.black
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: (socialsController
-                                  .socialMorphButtons[buttonType]
-                                  .showDetails
-                                  .value ||
-                              socialsController.socialMorphButtons[buttonType]
-                                  .isFocused.value)
-                          ? LinearGradient(
-                              colors:
-                                  mainController.socialGradientList[buttonType])
-                          : null,
-                      boxShadow: socialsController
-                                  .socialMorphButtons[buttonType]
-                                  .isFocused
-                                  .value &&
-                              !socialsController.socialMorphButtons[buttonType]
-                                  .isClicked.value
-                          ? [
-                              BoxShadow(
-                                  color: Colors.grey[500]!,
-                                  offset: mainController.isDark.value
-                                      ? Offset(2, 2)
-                                      : Offset(4, 4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1),
-                              BoxShadow(
-                                  color: Colors.white,
-                                  offset: mainController.isDark.value
-                                      ? Offset(-2, -2)
-                                      : Offset(-4, -4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1)
-                            ]
-                          : null),
-                  child: Padding(
-                    padding: EdgeInsets.all(socialsController
-                        .socialMorphButtons[buttonType].pad.value),
-                    child: AnimatedContainer(
-                      curve: Curves.easeIn,
-                      height: socialsController
-                                  .socialMorphButtons[buttonType].scale.value !=
-                              0.0
-                          ? socialsController
-                              .socialMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 111),
-                      child: socialsController
-                              .socialMorphButtons[buttonType].showDetails.value
-                          ? mainController.isDark.value
-                              ? socialsController
-                                  .socialMorphButtons[buttonType].image
-                              : socialsController
-                                  .socialMorphButtons[buttonType].image_hovered
-                          : mainController.isDark.value
-                              ? socialsController
-                                  .socialMorphButtons[buttonType].image_hovered
-                              : socialsController
-                                  .socialMorphButtons[buttonType].image,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    if (socialsController.socialMorphButtons.isNotEmpty)
+      return ListView.separated(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: socialsController.socialMorphButtons.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Obx(
+            () => morphButton(context,
+                buttonModel: socialsController.socialMorphButtons[index]),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width: 20,
+          );
+        },
+      );
+    else {
+      return SizedBox.shrink();
+    }
   }
 
-  // music morph button
-  static Widget musicMorphButtons(BuildContext context, int buttonType,
+  // music morph buttons
+  static Widget musicMorphButtons(BuildContext context,
       {bool isDesktop = true}) {
-    MainController mainController = Get.find<MainController>();
     MusicController musicController = Get.find<MusicController>();
 
-    return Obx(
-      () => Padding(
-        padding: EdgeInsets.all((isDesktop) ? 15.0 : 5),
-        child: MouseRegion(
-          onEnter: (a) {
-            // musicController.musicMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .12;
-            musicController.musicMorphButtons[buttonType].isFocused.value =
-                true;
-          },
-          onExit: (a) {
-            // musicController.musicMorphButtons[buttonType].scale.value =
-            //     MediaQuery.of(context).size.height * .10;
-            musicController.musicMorphButtons[buttonType].isFocused.value =
-                false;
-          },
-          child: InkWell(
-            onTap: () async {
-              musicController.musicMorphButtons[buttonType].isClicked.value =
-                  !musicController
-                      .musicMorphButtons[buttonType].isClicked.value;
-
-              // mainController.musicController.animateToPage(buttonType + 1,
-              //     duration: Duration(milliseconds: 200),
-              //     curve: Curves.easeInOut);
-
-              // delay
-              Future.delayed(const Duration(milliseconds: 150), () {
-                musicController.musicMorphButtons[buttonType].isClicked.value =
-                    !musicController
-                        .musicMorphButtons[buttonType].isClicked.value;
-
-                Functions.openLink(
-                    musicController.musicMorphButtons[buttonType].link.value);
-              });
-            },
-            child: Wrap(
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 111),
-                  curve: Curves.fastOutSlowIn,
-                  decoration: BoxDecoration(
-                      color: mainController.isDark.value
-                          ? Colors.black
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: (musicController.musicMorphButtons[buttonType]
-                                  .showDetails.value ||
-                              musicController.musicMorphButtons[buttonType]
-                                  .isFocused.value)
-                          ? LinearGradient(
-                              colors:
-                                  mainController.musicGradientList[buttonType])
-                          : null,
-                      boxShadow: musicController.musicMorphButtons[buttonType]
-                                  .isFocused.value &&
-                              !musicController
-                                  .musicMorphButtons[buttonType].isClicked.value
-                          ? [
-                              BoxShadow(
-                                  color: Colors.grey[500]!,
-                                  offset: mainController.isDark.value
-                                      ? Offset(2, 2)
-                                      : Offset(4, 4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1),
-                              BoxShadow(
-                                  color: Colors.white,
-                                  offset: mainController.isDark.value
-                                      ? Offset(-2, -2)
-                                      : Offset(-4, -4),
-                                  blurRadius:
-                                      mainController.isDark.value ? 5 : 15,
-                                  spreadRadius: 1)
-                            ]
-                          : null),
-                  child: Padding(
-                    padding: EdgeInsets.all(musicController
-                        .musicMorphButtons[buttonType].pad.value),
-                    child: AnimatedContainer(
-                      curve: Curves.easeIn,
-                      height: musicController
-                                  .musicMorphButtons[buttonType].scale.value !=
-                              0.0
-                          ? musicController
-                              .musicMorphButtons[buttonType].scale.value
-                          : MediaQuery.of(context).size.height * .10,
-                      duration: Duration(milliseconds: 111),
-                      child: musicController
-                              .musicMorphButtons[buttonType].showDetails.value
-                          ? mainController.isDark.value
-                              ? musicController
-                                  .musicMorphButtons[buttonType].image
-                              : musicController
-                                  .musicMorphButtons[buttonType].image_hovered
-                          : mainController.isDark.value
-                              ? musicController
-                                  .musicMorphButtons[buttonType].image_hovered
-                              : musicController
-                                  .musicMorphButtons[buttonType].image,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    if (musicController.musicMorphButtons.isNotEmpty)
+      return ListView.separated(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: musicController.musicMorphButtons.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Obx(
+            () => morphButton(context,
+                buttonModel: musicController.musicMorphButtons[index]),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width: 20,
+          );
+        },
+      );
+    else {
+      return SizedBox.shrink();
+    }
   }
 
-  static Widget StreamLinkButtons(
+  static Widget streamLinkButtons(
     int id,
     String label,
   ) {
@@ -1620,105 +1071,79 @@ class Widgets {
     );
   }
 
-  // static Widget codingProgressRow(String label, int id, double value,
-  //     {bool isDesktop = true}) {
-  //   MainController mainController = Get.find<MainController>();
-  //   return Padding(
-  //     padding: EdgeInsets.symmetric(vertical: (isDesktop) ? 10.0 : 5.0),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           child: Align(
-  //               alignment: Alignment.centerRight,
-  //               child: Text(
-  //                 '${label} usage : ',
-  //                 style: (isDesktop)
-  //                     ? null
-  //                     : AppThemeData.appThemeData.textTheme.bodySmall,
-  //               )),
-  //         ),
-  //         Expanded(
-  //           flex: 2,
-  //           child: Padding(
-  //             padding: const EdgeInsets.only(top: 12.0),
-  //             child: FAProgressBar(
-  //               direction: Axis.horizontal,
-  //               verticalDirection: VerticalDirection.down,
-  //               size: 24,
-  //               backgroundColor:
-  //                   AppThemeData.appThemeData.primaryColor.withOpacity(0.2),
-  //               animatedDuration: Duration(milliseconds: 300),
-  //               currentValue: value,
-  //               formatValueFixed: 0,
-  //               // displayText: '%',
-  //               progressGradient:
-  //                   LinearGradient(colors: mainController.ideGradientList[id]),
-  //             ),
-  //           ),
-  //         ),
-  //         Text(' (${value}%)')
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  static Widget pieChart(
-      BuildContext context, var dataMap, String label, var gradientList,
-      {bool isGradient = false, bool isDesktop = true}) {
+  // pie chart
+  static Widget pieChart(BuildContext context,
+      {String label = 'frameworks', bool isDesktop = true}) {
     MainController mainController = Get.find<MainController>();
-    // CodingController codingController = Get.find<CodingController>();
+    CodingController codingController = Get.find<CodingController>();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: Obx(
-        () => EasyPieChart(
-          showValue: false,
-          key: const Key('frameworks'),
-          children: dataMap,
-          borderEdge: StrokeCap.round,
-          shouldAnimate: true,
-          centerText: 'frameworks',
-          centerStyle: AppThemeData.appThemeData.textTheme.bodySmall!.copyWith(
-              color: mainController.isDark.value ? Colors.white : Colors.black),
-          pieType: PieType.crust,
-          onTap: (index) => mainController.codingController.animateToPage(
-              (index + 1),
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeInOut),
-          style: TextStyle(
-              color: mainController.isDark.value ? Colors.white : Colors.black,
-              fontSize: 10),
-          gap: 0.6,
-          borderWidth: 30,
-          start: 0,
-          size: (isDesktop) ? 240 : 130,
+    if (codingController.frameworks.isNotEmpty) {
+      List<PieData> dataMap = [];
+      for (var e in codingController.frameworks) {
+        dataMap.add(PieData(
+            value: e.value, color: Color(int.parse('0xff' + e.hexValue))));
+      }
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: Obx(
+          () => Row(
+            children: [
+              SizedBox(
+                width: 100,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: codingController.frameworks.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      spacing: 5,
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          color: dataMap[index].color,
+                          size: 10,
+                        ),
+                        Text(
+                          codingController.frameworks[index].label,
+                          style: AppThemeData.appThemeData.textTheme.bodySmall!,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              EasyPieChart(
+                showValue: false,
+                key: Key(label),
+                children: dataMap,
+                borderEdge: StrokeCap.square,
+                shouldAnimate: false,
+                pieType: PieType.fill,
+                onTap: (index) async {
+                  codingController
+                      .frameworkIndex(index); // set selected framework index
+
+                  await codingController.getFrameworkWiseProjects(
+                      frameworkId: codingController.frameworks[index]
+                          .label); // get projects for selected framework
+
+                  mainController.codingController.animateToPage(1,
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInOut);
+                },
+                style: AppThemeData.appThemeData.textTheme.bodySmall!
+                    .copyWith(color: Colors.white),
+                gap: 0,
+                borderWidth: 10,
+                start: 0,
+                size: (isDesktop) ? 240 : 130,
+              ),
+            ],
+          ),
         ),
-      ),
-      // PieChart(
-      //   dataMap: dataMap,
-      //   animationDuration: Duration(milliseconds: 800),
-      //   chartLegendSpacing: 44,
-      //   chartRadius: (isDesktop)
-      //       ? MediaQuery.of(context).size.width / 8
-      //       : MediaQuery.of(context).size.width / 4,
-      //   initialAngleInDegree: 0,
-      //   chartType: ChartType.disc,
-      //   centerText: "${label}",
-      //   legendOptions: LegendOptions(
-      //       showLegendsInRow: false,
-      //       legendPosition: LegendPosition.left,
-      //       showLegends: true,
-      //       legendShape: BoxShape.circle,
-      //       legendTextStyle: AppThemeData.appThemeData.textTheme.bodySmall!),
-      //   chartValuesOptions: ChartValuesOptions(
-      //     showChartValueBackground: true,
-      //     showChartValuesInPercentage: true,
-      //     showChartValues: true,
-      //     showChartValuesOutside: true,
-      //     decimalPlaces: 0,
-      //   ),
-      //   gradientList: (isGradient) ? gradientList : null,
-      // ),
-    );
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 }

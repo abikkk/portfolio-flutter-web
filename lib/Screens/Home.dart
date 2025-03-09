@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:my_porfolio/Utils/ScreenUtils.dart';
+import 'package:my_porfolio/Screens/CodingScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/CodingScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/GamingScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/InfoScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/MusicScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/SocialScreen.dart';
+import 'package:my_porfolio/Screens/InfoScreen.dart';
 import 'package:my_porfolio/Utils/UiUtils.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../Controllers/MainController.dart';
@@ -68,106 +74,80 @@ class _HomeContainerState extends State<HomeContainer> {
                                     }
                                     return false;
                                   },
-                                  child: Stack(
-                                    children: [
-                                      // site content
-                                      PageView(
-                                        onPageChanged: (value) {
-                                          if (mainController.codingIndex.value >
-                                                  0 &&
-                                              sizingInformation
-                                                      .deviceScreenType ==
-                                                  DeviceScreenType.desktop) {
-                                            Functions.navigate(
-                                              mainController.codingIndex.value +
-                                                  1,
-                                              mainController.codingController,
-                                            );
-                                          }
+                                  child: PageView(
+                                    onPageChanged: (value) {
+                                      if (mainController.codingIndex.value >
+                                              0 &&
+                                          sizingInformation.deviceScreenType ==
+                                              DeviceScreenType.desktop) {
+                                        Functions.navigate(
+                                          mainController.codingIndex.value + 1,
+                                          mainController.codingController,
+                                        );
+                                      }
 
-                                          if (mainController.gamingIndex.value >
-                                                  0 &&
-                                              sizingInformation
-                                                      .deviceScreenType ==
-                                                  DeviceScreenType.desktop) {
-                                            Functions.navigate(
-                                              mainController.gamingIndex.value +
-                                                  1,
-                                              mainController.streamController,
-                                            );
-                                          }
-                                        },
-                                        physics: sizingInformation
-                                                    .deviceScreenType ==
+                                      if (mainController.gamingIndex.value >
+                                              0 &&
+                                          sizingInformation.deviceScreenType ==
+                                              DeviceScreenType.desktop) {
+                                        Functions.navigate(
+                                          mainController.gamingIndex.value + 1,
+                                          mainController.streamController,
+                                        );
+                                      }
+                                    },
+                                    physics:
+                                        sizingInformation.deviceScreenType ==
                                                 DeviceScreenType.mobile
                                             ? ClampingScrollPhysics()
                                             : NeverScrollableScrollPhysics(),
-                                        pageSnapping: sizingInformation
-                                                    .deviceScreenType ==
+                                    pageSnapping:
+                                        sizingInformation.deviceScreenType ==
                                                 DeviceScreenType.mobile
                                             ? true
                                             : true,
-                                        // pageSnapping: false,
-                                        allowImplicitScrolling:
-                                            sizingInformation
-                                                        .deviceScreenType ==
-                                                    DeviceScreenType.desktop
-                                                ? true
-                                                : false,
-                                        scrollDirection: sizingInformation
-                                                    .deviceScreenType ==
+                                    // pageSnapping: false,
+                                    allowImplicitScrolling:
+                                        sizingInformation.deviceScreenType ==
+                                                DeviceScreenType.desktop
+                                            ? true
+                                            : false,
+                                    scrollDirection:
+                                        sizingInformation.deviceScreenType ==
                                                 DeviceScreenType.desktop
                                             ? Axis.horizontal
                                             : Axis.vertical,
-                                        children: [
-                                          // if (sizingInformation.deviceScreenType ==
-                                          //     DeviceScreenType.desktop)
-                                          Screens.HomeContainer(
-                                            context: context,
-                                            mainController: mainController,
-                                            isDesktop: sizingInformation
-                                                    .deviceScreenType ==
-                                                DeviceScreenType.desktop,
-                                          ),
-                                          Screens.CodingContainer(
-                                              context: context,
-                                              isDesktop: sizingInformation
-                                                      .deviceScreenType ==
-                                                  DeviceScreenType.desktop),
-                                          Screens.GamingContainer(
-                                              context: context,
-                                              isDesktop: sizingInformation
-                                                      .deviceScreenType ==
-                                                  DeviceScreenType.desktop),
-                                          Screens.MusicContainer(
-                                            context: context,
-                                            mainController: mainController,
-                                            isDesktop: sizingInformation
-                                                    .deviceScreenType ==
-                                                DeviceScreenType.desktop,
-                                          ),
-                                          Screens.SocialsContainer(
-                                            context: context,
-                                            mainController: mainController,
-                                            isDesktop: sizingInformation
-                                                    .deviceScreenType ==
-                                                DeviceScreenType.desktop,
-                                          ),
-                                        ],
-                                        controller:
-                                            mainController.pageController,
+                                    children: [
+                                      InfoScreen(),
+                                      CodingScreen(
+                                          isDesktop: sizingInformation
+                                                  .deviceScreenType ==
+                                              DeviceScreenType.desktop),
+                                      GamingScreen(
+                                          isDesktop: sizingInformation
+                                                  .deviceScreenType ==
+                                              DeviceScreenType.desktop),
+                                      MusicScreen(
+                                        isDesktop: sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.desktop,
                                       ),
-
-                                      // floating nav bar
-                                      if (sizingInformation.deviceScreenType ==
-                                          DeviceScreenType.desktop)
-                                        FloatingNavBarDesktop(),
+                                      SocialScreen(
+                                        isDesktop: sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.desktop,
+                                      ),
                                     ],
+                                    controller: mainController.pageController,
                                   ),
                                 ),
                               ),
                             )
-                          : Expanded(child: Screens.mobileLayout(context)),
+                          : Expanded(
+                              child: PageView(children: [
+                              MobileInfoScreen(),
+                              MobileCodingScreen(),
+                            ])),
                     ],
                   ),
                 ),
@@ -179,8 +159,8 @@ class _HomeContainerState extends State<HomeContainer> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0, right: 10),
                       child: IconButton(
-                        onPressed: () =>
-                            mainController.isDark(!mainController.isDark.value),
+                        onPressed: () => mainController.saveDarkModeState(
+                            state: !mainController.isDark.value),
                         icon: mainController.isDark.value
                             ? Icon(Icons.light_mode)
                             : Icon(Icons.dark_mode),
@@ -190,7 +170,12 @@ class _HomeContainerState extends State<HomeContainer> {
                       ),
                     ),
                   ],
-                )
+                ),
+
+                // floating nav bar
+                if (sizingInformation.deviceScreenType ==
+                    DeviceScreenType.desktop)
+                  FloatingNavBarDesktop(),
               ],
             ),
             floatingActionButton:
