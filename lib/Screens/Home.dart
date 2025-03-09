@@ -1,134 +1,190 @@
 import 'package:flutter/material.dart';
-import 'package:my_porfolio/Screens/Gallery.dart';
-import 'package:my_porfolio/Screens/Coding.dart';
-import 'package:my_porfolio/Screens/Contact.dart';
-import 'package:my_porfolio/Screens/Gaming.dart';
-import 'package:my_porfolio/Screens/Head.dart';
-import 'package:my_porfolio/Screens/Music.dart';
-import 'package:my_porfolio/Screens/Socials.dart';
+import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+import 'package:my_porfolio/Screens/CodingScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/CodingScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/GamingScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/InfoScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/MusicScreen.dart';
+import 'package:my_porfolio/Screens/Desktop/SocialScreen.dart';
+import 'package:my_porfolio/Screens/InfoScreen.dart';
+import 'package:my_porfolio/Utils/UiUtils.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import '../Controllers/MainController.dart';
+import '../Utils/FloatingNavBar.dart';
+import '../Utils/FunctionUtils.dart';
 
 class HomeContainer extends StatefulWidget {
-  const HomeContainer({Key? key}) : super(key: key);
+  HomeContainer({Key? key}) : super(key: key);
 
   @override
-  _HomeContainerState createState() => _HomeContainerState();
+  State<HomeContainer> createState() => _HomeContainerState();
 }
 
 class _HomeContainerState extends State<HomeContainer> {
-  double bgTop = 0, headerTop = 0;
-  int _navIndex = 0;
-  List<Widget> _pages = [
-    HomeScreen(),
-    CodingScreen(),
-    GamingScreen(),
-    MusicScreen(),
-    // GalleryScreen(),
-    SocialsContainer(),
-    ContactContainer()
-  ];
+  final MainController mainController = Get.find<MainController>();
+
+  double bg = 0.0;
+
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Functions.precacheImages(context); // pre-load images
+  }
+
+// fetches mouse pointer location
+  void _updateLocation(PointerEvent details) {
+    mainController.cursorX.value = details.position.dx;
+    mainController.cursorY.value = details.position.dy;
   }
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
         builder: (BuildContext context, SizingInformation sizingInformation) {
-      if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
-        print('>> Device is a desktop.');
-        return SafeArea(
-          child: Scaffold(
-            bottomNavigationBar: NavigationBar(
-              height: MediaQuery.of(context).size.height * 0.1,
-              backgroundColor: Colors.white.withOpacity(0.05),
-              animationDuration: Duration(milliseconds: 150),
-              selectedIndex: _navIndex,
-              onDestinationSelected: (int newIndex) {
-                setState(() {
-                  _navIndex = newIndex;
-                });
-              },
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
-              destinations: [
-                NavigationDestination(
-                    selectedIcon: Icon(Icons.home_rounded),
-                    icon: Icon(Icons.home_outlined),
-                    label: 'home'),
-                NavigationDestination(
-                    selectedIcon: Icon(Icons.list_rounded),
-                    icon: Icon(Icons.list_outlined),
-                    label: 'coding'),
-                NavigationDestination(
-                    selectedIcon: Icon(Icons.games_rounded),
-                    icon: Icon(Icons.games_outlined),
-                    label: 'gaming'),
-                NavigationDestination(
-                    selectedIcon: Icon(Icons.music_note_rounded),
-                    icon: Icon(Icons.music_note_outlined),
-                    label: 'music'),
-                NavigationDestination(
-                    selectedIcon: Icon(Icons.person_rounded),
-                    icon: Icon(Icons.person_outline),
-                    label: 'socials'),
-                NavigationDestination(
-                    selectedIcon: Icon(Icons.email_rounded),
-                    icon: Icon(Icons.email_outlined),
-                    label: 'contact me')
+      return SafeArea(
+        child: Obx(
+          () => Scaffold(
+            backgroundColor:
+                (mainController.isDark.value) ? Colors.black : Colors.white,
+            body: Stack(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Row(
+                    children: [
+                      (sizingInformation.deviceScreenType ==
+                              DeviceScreenType.desktop)
+                          ? Expanded(
+                              child: MouseRegion(
+                                onHover: _updateLocation,
+                                child: NotificationListener<
+                                    UserScrollNotification>(
+                                  onNotification: (notification) {
+                                    if (notification.direction ==
+                                            ScrollDirection.forward &&
+                                        sizingInformation.deviceScreenType !=
+                                            DeviceScreenType.desktop &&
+                                        (mainController.pageController.page !=
+                                                null &&
+                                            mainController.pageController.page!
+                                                    .round() >
+                                                0)) {
+                                      mainController.scrollBtn.value = 1.0;
+                                    }
+                                    return false;
+                                  },
+                                  child: PageView(
+                                    onPageChanged: (value) {
+                                      if (mainController.codingIndex.value >
+                                              0 &&
+                                          sizingInformation.deviceScreenType ==
+                                              DeviceScreenType.desktop) {
+                                        Functions.navigate(
+                                          mainController.codingIndex.value + 1,
+                                          mainController.codingController,
+                                        );
+                                      }
+
+                                      if (mainController.gamingIndex.value >
+                                              0 &&
+                                          sizingInformation.deviceScreenType ==
+                                              DeviceScreenType.desktop) {
+                                        Functions.navigate(
+                                          mainController.gamingIndex.value + 1,
+                                          mainController.streamController,
+                                        );
+                                      }
+                                    },
+                                    physics:
+                                        sizingInformation.deviceScreenType ==
+                                                DeviceScreenType.mobile
+                                            ? ClampingScrollPhysics()
+                                            : NeverScrollableScrollPhysics(),
+                                    pageSnapping:
+                                        sizingInformation.deviceScreenType ==
+                                                DeviceScreenType.mobile
+                                            ? true
+                                            : true,
+                                    // pageSnapping: false,
+                                    allowImplicitScrolling:
+                                        sizingInformation.deviceScreenType ==
+                                                DeviceScreenType.desktop
+                                            ? true
+                                            : false,
+                                    scrollDirection:
+                                        sizingInformation.deviceScreenType ==
+                                                DeviceScreenType.desktop
+                                            ? Axis.horizontal
+                                            : Axis.vertical,
+                                    children: [
+                                      InfoScreen(),
+                                      CodingScreen(
+                                          isDesktop: sizingInformation
+                                                  .deviceScreenType ==
+                                              DeviceScreenType.desktop),
+                                      GamingScreen(
+                                          isDesktop: sizingInformation
+                                                  .deviceScreenType ==
+                                              DeviceScreenType.desktop),
+                                      MusicScreen(
+                                        isDesktop: sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.desktop,
+                                      ),
+                                      SocialScreen(
+                                        isDesktop: sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.desktop,
+                                      ),
+                                    ],
+                                    controller: mainController.pageController,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Expanded(
+                              child: PageView(children: [
+                              MobileInfoScreen(),
+                              MobileCodingScreen(),
+                            ])),
+                    ],
+                  ),
+                ),
+
+                // dark-light theme toggle
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, right: 10),
+                      child: IconButton(
+                        onPressed: () => mainController.saveDarkModeState(
+                            state: !mainController.isDark.value),
+                        icon: mainController.isDark.value
+                            ? Icon(Icons.light_mode)
+                            : Icon(Icons.dark_mode),
+                        color: mainController.isDark.value
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+
+                // floating nav bar
+                if (sizingInformation.deviceScreenType ==
+                    DeviceScreenType.desktop)
+                  FloatingNavBarDesktop(),
               ],
             ),
-            body: SingleChildScrollView(
-              child: ResponsiveBuilder(
-                builder: (BuildContext context,
-                    SizingInformation sizingInformation) {
-                  if (sizingInformation.deviceScreenType ==
-                      DeviceScreenType.desktop) {
-                    print('>> Device is a desktop.');
-                  } else if (sizingInformation.deviceScreenType ==
-                      DeviceScreenType.tablet) {
-                    print('>> Device is a tablet.');
-                  } else if (sizingInformation.deviceScreenType ==
-                      DeviceScreenType.watch) {
-                    print('>> Device is a watch.');
-                  } else if (sizingInformation.deviceScreenType ==
-                      DeviceScreenType.mobile) {
-                    print('>> Device is a watch.');
-                  }
-                  return Center(
-                    child: _pages[_navIndex],
-                  );
-                },
-              ),
-            ),
+            floatingActionButton:
+                (sizingInformation.deviceScreenType != DeviceScreenType.desktop)
+                    ? Widgets.scrollButton()
+                    : null,
           ),
-        );
-      } else if (sizingInformation.deviceScreenType ==
-          DeviceScreenType.tablet) {
-        print('>> Device is a tablet.');
-        return SingleChildScrollView(
-          child: Container(
-              color: Colors.yellow, child: Center(child: Text('tablet'))),
-        );
-      } else if (sizingInformation.deviceScreenType ==
-          DeviceScreenType.mobile) {
-        print('>> Device is a phone.');
-        return SingleChildScrollView(
-          child:
-              Container(color: Colors.red, child: Center(child: Text('phone'))),
-        );
-      } else if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {
-        print('>> Device is a watch.');
-        return SingleChildScrollView(
-          child: Container(
-              color: Colors.pink,
-              child: Center(
-                  child: Text("Sorry, probably won't work on you rdevice!"))),
-        );
-      } else
-        return Text("hello world!");
+        ),
+      );
     });
   }
 }
